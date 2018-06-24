@@ -1,0 +1,743 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <title>Języki skryptowe Python</title>
+
+  <meta name="description" content="Języki skryptowe Python">
+
+   <meta name="author" content="Wykład 1" /> 
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="stylesheet" href="../reveal.js/css/reveal.css">
+
+      <link rel="stylesheet" href="../reveal.js/css/theme/white.css" id="theme">
+  
+      <link rel="stylesheet" href="../template/monokai_mod.css">
+  
+  <link rel="stylesheet" href="../template/extra.css">
+
+  <script>
+    document.write('<link rel="stylesheet" href="../reveal.js/css/print/' +
+      (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') +
+      '.css" type="text/css" media="print">');
+  </script>
+
+  <script src="../template/snap.svg-min.js"></script>
+  <script src="../template/plotly-latest.min.js"></script>
+
+  <!--[if lt IE 9]>
+  <script src="../reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+
+  
+
+</head>
+
+<body>
+
+  
+
+  <div class="reveal">
+
+    <div class="slides">
+
+      <section>
+        <h1>Języki skryptowe Python</h1>
+         <h3>Wykład 1</h3> 
+        <p>
+          <h4></h4>
+        </p>
+      </section>
+
+       <div class="footer">
+<p>Sterowanie: spacja + shift-spacja || page down + page up || strzałki || esc</p>
+</div>
+<section id="section" class="level1">
+<h1></h1>
+<section id="dane-kontaktowe" class="level2">
+<h2>Dane kontaktowe</h2>
+<hr />
+<ul>
+<li>Tomasz Golan</li>
+<li>pokój: <strong>438</strong></li>
+<li>email: <a href="mailto:tomasz.golan@uwr.edu.pl">tomasz.golan@uwr.edu.pl</a></li>
+<li>konsultacje:
+<ul>
+<li>tba</li>
+<li>tba</li>
+</ul></li>
+</ul>
+</section>
+<section id="program" class="level2">
+<h2>Program</h2>
+<hr />
+<ul>
+<li>wprowadzenie</li>
+<li>podstawowe typy danych i operatory</li>
+<li>wyrażenia warunkowe i pętle</li>
+<li>funkcje i moduły</li>
+<li>struktury danych</li>
+<li>klasy i obiekty</li>
+<li>operacje wejścia/wyjścia</li>
+<li>obsługa wyjątków</li>
+</ul>
+</section>
+<section id="materiały-do-wykładów" class="level2">
+<h2>Materiały do wykładów</h2>
+<hr />
+<ul>
+<li>wykłady z poprzednich lat: <a href="https://tomaszgolan.github.io/js-python/">2016</a>, <a href="https://github.com/TomaszGolan/js-python">2017</a></li>
+<li>dokumentacja: <a href="https://docs.python.org/3/">https://www.python.org/</a></li>
+</ul>
+<hr />
+<ul>
+<li><a href="http://www.greenteapress.com/thinkpython/">A. B. Downey, J. Elkner, C. Meyers, “Think Python. How to Think Like a Computer Scientist”</a></li>
+<li><a href="http://www.diveintopython.net/">M. Pilgrim, “Dive into Python”</a></li>
+<li><a href="https://python.swaroopch.com/">Swaroop CH &quot;A Byte of Python&quot;</a> (<a href="http://python.edu.pl/byteofpython/">tłumaczenie</a>)</li>
+</ul>
+</section>
+<section id="zaliczenie" class="level2">
+<h2>Zaliczenie</h2>
+<hr />
+<ul>
+<li>ćwiczenia: listy zadań + kolokwia</li>
+<li>wykład: egzamin praktyczny</li>
+</ul>
+</section>
+</section>
+<section id="section-1" class="level1">
+<h1></h1>
+<section id="python" class="level2">
+<h2>Python</h2>
+<hr />
+<blockquote>
+<p>Python is powerful... and fast; <br> plays well with others; <br> runs everywhere; <br> is friendly &amp; easy to learn; <br> is Open.</p>
+</blockquote>
+<p><a href="https://www.python.org/about/">źródło: python.org</a></p>
+</section>
+<section id="python-1" class="level2">
+<h2>Python</h2>
+<hr />
+<ul>
+<li>otwarte oprogramowanie (<em>open source</em>)</li>
+<li>przenośny
+<ul>
+<li>Linux, Mac OS - prawdopodobnie już jest</li>
+<li>Windows - instalator ze strony <a href="https://www.python.org">python.org</a></li>
+<li>Anaconda (wszystkie systemy) - <a href="https://www.anaconda.com/download/">anaconda.com</a></li>
+</ul></li>
+<li>zwięzły i elegancki (prawie jak pseudokod)</li>
+<li>automatyczne zarządzanie pamięcią (<em>garbage collection</em>)</li>
+<li>bogata bilbioteka standardowa i niezliczona ilość bibliotek zewnętrznych</li>
+<li>struktury wysokiego poziomu</li>
+</ul>
+</section>
+<section id="hello-world" class="level2">
+<h2>Hello World!</h2>
+<hr />
+<div class="left">
+<p>C++</p>
+<pre><code>#include &lt;iostream&gt;
+
+int main() {
+    std::cout &lt;&lt; &quot;Hello World!&quot;;
+}</code></pre>
+</div>
+<div class="right">
+<p>Java</p>
+<pre><code>public class Hello {
+    public static void main(String []args) {
+        System.out.println(&quot;Hello World!&quot;);
+    }
+}</code></pre>
+</div>
+<p>Python</p>
+<pre><code>print(&quot;Hello World!&quot;)</code></pre>
+</section>
+<section id="zastosowanie" class="level2">
+<h2>Zastosowanie</h2>
+<hr />
+<ul>
+<li>internet: Yahoo, Google, ...</li>
+<li>gry: Battlefield 2, Civilization 4, ...</li>
+<li>grafika: Walt Disney, Blender 3D, ...</li>
+<li>finanse: Altis Investment Management, Bellco Credit Union, ...</li>
+<li>nauka: NASA, Los Alamos National Laboratory, ...</li>
+<li>interfejs programistyczny aplikacji (<em>Application Programming Interface = API</em>): Google, Amazon, Facebook, Youtube, ...</li>
+</ul>
+</section>
+</section>
+<section id="section-2" class="level1">
+<h1></h1>
+<section id="python-2-vs-python-3" class="level2">
+<h2>Python 2 vs Python 3</h2>
+<hr />
+<blockquote>
+<p><em>Short version: Python 2.x is legacy, Python 3.x is the present and future of the language</em></p>
+</blockquote>
+<p><a href="https://wiki.python.org/moin/Python2orPython3">żródło: wiki.python.org</a></p>
+<ul>
+<li>Python 3 jest gotowy, jednak nie wszystkie zewnętrzne biblioteki są już z nim kompatybilne</li>
+</ul>
+</section>
+<section id="python-2-vs-python-3-1" class="level2">
+<h2>Python 2 vs Python 3</h2>
+<hr />
+<p>Niektóre zmiany są kosmetyczne</p>
+<pre><code># Python 2
+
+print &quot;Hello World!&quot;
+
+# Python 3
+
+print(&quot;Hello World!&quot;)</code></pre>
+</section>
+<section id="python-2-vs-python-3-2" class="level2">
+<h2>Python 2 vs Python 3</h2>
+<hr />
+<p>Niektóre niebezpieczne</p>
+<pre><code># Python 2
+
+3 / 2.0 = 1.5
+3 / 2   = 1
+
+# Python 3
+
+3 / 2.0 = 1.5
+3 / 2   = 1.5
+3 // 2  = 1</code></pre>
+</section>
+<section id="python-2-vs-python-3-3" class="level2">
+<h2>Python 2 vs Python 3</h2>
+<hr />
+<ul>
+<li>A niektóre gruntowne: iteratory</li>
+<li>Niektóre elementy Pythona 3 można zaimportować w Pythonie 2</li>
+</ul>
+<pre><code>Python 2.7.12 (default, Jul  1 2016, 15:12:24) 
+[GCC 5.4.0 20160609] on linux2
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; 3 / 2
+1
+&gt;&gt;&gt; from __future__ import division
+&gt;&gt;&gt; 3 / 2
+1.5
+&gt;&gt;&gt; </code></pre>
+<p><strong>Na wykładzie omawiany będzie Python 3</strong></p>
+</section>
+</section>
+<section id="section-3" class="level1">
+<h1></h1>
+<section id="tryby" class="level2">
+<h2>Tryby</h2>
+<hr />
+<ul>
+<li>Wywołanie polecenia <code>python</code> (lub <code>python3</code>) uruchamia tryb interaktywny Pythona</li>
+</ul>
+<pre><code>$ python
+Python 3.6.1 |Anaconda custom (64-bit)| (default, May 11 2017, 13:09:58) 
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)] on linux
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; </code></pre>
+<ul>
+<li>Wywołanie polecenia <code>python nazwa_skryptu.py</code> wykonuje skrypt</li>
+</ul>
+</section>
+<section id="tryb-interaktywny" class="level2">
+<h2>Tryb interaktywny</h2>
+<hr />
+<pre><code>$ python
+Python 3.5.2 |Anaconda custom (64-bit)| (default, Jul  2 2016, 17:53:06) 
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)] on linux
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; oceny_uwr = {2.0: &quot;niedostateczny&quot;, 3.0: &quot;dostateczny&quot;,
+...              3.5: &quot;dostateczny plus&quot;, 4.0: &quot;dobry&quot;,
+...              4.5: &quot;dobry plus&quot;, 5.0: &quot;bardzo dobry&quot;}
+&gt;&gt;&gt; for ocena in sorted(oceny_uwr, reverse=True):
+...     print(ocena, oceny_uwr[ocena])
+... 
+5.0 bardzo dobry
+4.5 dobry plus
+4.0 dobry
+3.5 dostateczny plus
+3.0 dostateczny
+2.0 niedostateczny
+&gt;&gt;&gt; </code></pre>
+</section>
+<section id="tryb-skryptowy" class="level2">
+<h2>Tryb skryptowy</h2>
+<hr />
+<pre><code>$ cat skala_ocen.py  # drukuje zawartość pliku skala_ocen.py
+
+oceny_uwr = {2.0: &quot;niedostateczny&quot;, 3.0: &quot;dostateczny&quot;,
+             3.5: &quot;dostateczny plus&quot;, 4.0: &quot;dobry&quot;,
+             4.5: &quot;dobry plus&quot;, 5.0: &quot;bardzo dobry&quot;}
+
+for ocena in sorted(oceny_uwr, reverse=True):
+    print(ocena, oceny_uwr[ocena])</code></pre>
+<pre><code>$ python skala_ocen.py  # uruchamia skala_ocen.py
+
+5.0 bardzo dobry
+4.5 dobry plus
+4.0 dobry
+3.5 dostateczny plus
+3.0 dostateczny
+2.0 niedostateczny</code></pre>
+</section>
+<section id="dygresja-shebang-hashbang" class="level2">
+<h2>Dygresja: shebang / hashbang</h2>
+<hr />
+<ul>
+<li><p>W systemach uniksopodobnych można zadać intepreter, który ma być użyty do wykonania skryptu korzystając z <code>#!</code> (shebang lub hashbang)</p></li>
+<li><p>Podając pełną ścieżkę do intepretera, np. <code>#!/usr/bin/python</code></p></li>
+<li><p>lub korzystając z definicji zmiennej środowiskowej <code>PATH</code>, np. <code>#!/usr/bin/env python</code></p></li>
+</ul>
+</section>
+<section id="tryb-skryptowy-ii" class="level2">
+<h2>Tryb skryptowy II</h2>
+<hr />
+<pre><code>$ cat skala_ocen.py  # drukuje zawartość pliku skala_ocen.py
+
+#!/usr/bin/env python
+
+oceny_uwr = {2.0: &quot;niedostateczny&quot;, 3.0: &quot;dostateczny&quot;,
+             3.5: &quot;dostateczny plus&quot;, 4.0: &quot;dobry&quot;,
+             4.5: &quot;dobry plus&quot;, 5.0: &quot;bardzo dobry&quot;}
+
+for ocena in sorted(oceny_uwr, reverse=True):
+    print(ocena, oceny_uwr[ocena])</code></pre>
+<pre><code>$ ./skala_ocen.py  # uruchamia skala_ocen.py
+
+5.0 bardzo dobry
+4.5 dobry plus
+4.0 dobry
+3.5 dostateczny plus
+3.0 dostateczny
+2.0 niedostateczny</code></pre>
+</section>
+<section id="notatniki-jupyter" class="level2">
+<h2>Notatniki Jupyter</h2>
+<hr />
+<figure>
+<img src="../img/jupyter.png" />
+</figure>
+</section>
+</section>
+<section id="section-4" class="level1">
+<h1></h1>
+<section id="dygresja-czytelność-kodu" class="level2">
+<h2>Dygresja: czytelność kodu</h2>
+<hr />
+<ul>
+<li>przejrzysty kod</li>
+<li>zrozumiałe nazwy zmiennych</li>
+<li>komentarzy nigdy za wiele (ale w granicach zdrowego rozsądku)</li>
+<li>dzielenie linii nie boli</li>
+<li>konsekwencja w konwencji</li>
+<li>najlepiej trzymać się standardu PEP 8: https://www.python.org/dev/peps/pep-0008/</li>
+<li>ale bez przesady - przede wszystkim kod ma być czytelny</li>
+</ul>
+</section>
+<section id="czytelność-kodu-przykład-i" class="level2">
+<h2>Czytelność kodu: przykład I</h2>
+<hr />
+<pre><code>import random
+
+# skala ocen obowiązująca na Uniwersytecie Wrocławskim
+oceny_uwr = {2.0: &quot;niedostateczny&quot;, 3.0: &quot;dostateczny&quot;,
+             3.5: &quot;dostateczny plus&quot;, 4.0: &quot;dobry&quot;,
+             4.5: &quot;dobry plus&quot;, 5.0: &quot;bardzo dobry&quot;}
+
+# lista studentów uczęszczających na zajęcia z Pythona
+lista_studentow = [&quot;Kasia&quot;, &quot;Basia&quot;, &quot;Józek&quot;, &quot;Marek&quot;]
+
+# przez lenistwo prowadzącego oceny wystawiane losowo
+for student in lista_studentow:
+    # losowa ocena
+    ocena = random.choice(list(oceny_uwr))
+    # przypisanie oceny
+    print(student, &quot; -&gt; &quot;, oceny_uwr[ocena])</code></pre>
+</section>
+<section id="czytelność-kodu-przykład-ii" class="level2">
+<h2>Czytelność kodu: przykład II</h2>
+<hr />
+<ul>
+<li><p>Wynik działania poniższego kodu będzie identyczny</p></li>
+<li><p>Ale czy jest on równie czytelny?</p></li>
+</ul>
+<pre><code>import random
+o = {2.0: &quot;niedostateczny&quot;, 3.0: &quot;dostateczny&quot;, 3.5: &quot;dostateczny plus&quot;, 4.0: &quot;dobry&quot;, 4.5: &quot;dobry plus&quot;, 5.0: &quot;bardzo dobry&quot;}
+s = [&quot;Kasia&quot;, \
+     &quot;Basia&quot;, &quot;Józek&quot;,
+     &quot;Marek&quot;]
+for i in range(len(s)): x = random.randint(2, len(o) - 1); print(s[i], &quot; -&gt; &quot;, o[x])</code></pre>
+</section>
+</section>
+<section id="section-5" class="level1">
+<h1></h1>
+<section id="podstawowe-typy-danych" class="level2">
+<h2>Podstawowe typy danych</h2>
+<hr />
+<ul>
+<li>typ całkowity (<code>int</code>)</li>
+<li>typ zmiennoprzecinkowy (<code>float</code>)</li>
+<li>typ zespolony (<code>complex</code>)</li>
+<li>typ tekstowy (<code>str</code>)</li>
+</ul>
+</section>
+<section id="typowanie-dynamiczne" class="level2">
+<h2>Typowanie dynamiczne</h2>
+<hr />
+<pre><code># [zmienna] [operator przypisania] [wartość]
+x = 1
+y = 1.0
+z = 1j
+
+# drukuj typy zmiennych x, y i z (oddzielone przecinkiem)
+print(type(x), type(y), type(z), sep=&quot;, &quot;)</code></pre>
+<pre><code>&lt;class &#39;int&#39;&gt;, &lt;class &#39;float&#39;&gt;, &lt;class &#39;complex&#39;&gt;</code></pre>
+<hr />
+<pre><code>x = y # przypisz zmiennej x wartość zmiennej y
+type(x)</code></pre>
+<pre><code>&lt;class &#39;float&#39;&gt;</code></pre>
+</section>
+<section id="zmienne-w-pamięci-operacyjnej" class="level2">
+<h2>Zmienne w pamięci operacyjnej</h2>
+<hr />
+<ul>
+<li>każda zmienna przechowywana jest w pamięci operacyjnej w postaci bitowej</li>
+<li><strong>bit</strong> (<em>binary digit</em>) - dwa równie prawdopodobne stany: <span class="math inline">\(\{0, 1\}\)</span></li>
+<li>najmniejszym adresowalnym &quot;fragmentem&quot; pamięci jest bajt</li>
+<li><strong>bajt</strong> (<em>byte</em>): 1B = 8b (1 bajt = 8 bitów)</li>
+</ul>
+</section>
+<section id="dygresja-konwencja-kilo-mega-..." class="level2">
+<h2>Dygresja: konwencja kilo, mega, ...</h2>
+<hr />
+<ul>
+<li>&quot;myląca&quot; konwencja informatyków:
+<ul>
+<li>1KB = 1024B</li>
+<li>1MB = 1024KB = 1024 * 1024B = 1048576B</li>
+<li>1GB = 1024MB = 1073741824B</li>
+</ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Binary_prefix">przedrostki binarne</a>: kibi, mebi, gibi... nie do końca się przyjęły</li>
+</ul>
+</section>
+<section id="system-dziesiętny" class="level2">
+<h2>System dziesiętny</h2>
+<hr />
+<p><span class="math display">\[a_n...a_2a_1a_0 = \sum\limits_{i = 0}^{n} a_i \cdot 10^{i}\]</span></p>
+<p>gdzie <span class="math inline">\(a_i \in \{0,...,9\}\)</span>, np.</p>
+<p><span class="math display">\[438 = 4 \cdot 10^2 + 3 \cdot 10^1 + 8 \cdot 10^0\]</span></p>
+</section>
+<section id="system-dwójkowy-binarny" class="level2">
+<h2>System dwójkowy (binarny)</h2>
+<hr />
+<p><span class="math display">\[a_n...a_2a_1a_0 = \sum\limits_{i = 0}^n a_i \cdot 2^i\]</span></p>
+<p>gdzie <span class="math inline">\(a_i \in \{0,1\}\)</span>, np.</p>
+<p><span class="math display">\[110110110_2 = 1 \cdot 2^8 + 1 \cdot 2^7 + \cdots 0 \cdot 2^0 = 438\]</span></p>
+</section>
+<section id="w-pamięci" class="level2">
+<h2>438 w pamięci</h2>
+<hr />
+<ul>
+<li>bajt jest najmniejszym adresowalnym &quot;fragmentem&quot; pamięci</li>
+<li>stąd <span class="math inline">\(438 = 110110110_2\)</span> zajmie co najmniej 2B = 16b (a nie 9 bitów)</li>
+</ul>
+<figure>
+<img src="../img/438_binary.svg" />
+</figure>
+</section>
+<section id="dygresja-int-long-int-w-c" class="level2">
+<h2>Dygresja: int (long int) w C++</h2>
+<hr />
+<ul>
+<li>zajmuje 32 bity</li>
+<li>stąd <code>438 = 00000000 00000000 00000001 10110110</code></li>
+<li>limit bez znaku: <span class="math inline">\((0, 2^{32} - 1) = (0, 4294967295)\)</span></li>
+<li>limit ze znakiem: <span class="math inline">\((-2^{31} - 1, 2^{31} - 1) = (-2147483647, 2147483647)\)</span></li>
+<li>w C++ występują również: char (8 bitów), short int (8 bitów), long long int (64 bity)</li>
+</ul>
+</section>
+<section id="czas-uniksowy" class="level2">
+<h2>Czas uniksowy</h2>
+<hr />
+<ul>
+<li>liczba sekund od epoki Uniksa (01.01.1970 UTC)</li>
+<li>32-bitowa liczba ze znakiem</li>
+<li>2147483647 sekund minie 19 stycznia 2038 o godz. 03:14:07 UTC</li>
+<li>ciekawostka: iPhone 1970 bug</li>
+</ul>
+<blockquote>
+<p>Manually changing the date to May 1970 or earlier can prevent your iOS device from turning on after a restart.</p>
+</blockquote>
+</section>
+<section id="limit-pamięci" class="level2">
+<h2>Limit pamięci</h2>
+<hr />
+<p>Architektura 32-bitowa dysponuje <span class="math inline">\(2^{32}\)</span> adresami</p>
+<pre><code>B = 1          # bajt
+KB = 1024 * B  # kilobajt
+MB = 1024 * KB # megabajt
+
+2**32 / MB     # = 4096.0</code></pre>
+<ul>
+<li>stąd limit pamięci operacyjnej w systemach 32-bitowych to ok. 4GB</li>
+<li>co często daje limit na pamięć RAM rzędu 3GB (bo karta graficzna)</li>
+</ul>
+</section>
+</section>
+<section id="section-6" class="level1">
+<h1></h1>
+<section id="podstawowe-operacje-na-liczbach" class="level2">
+<h2>Podstawowe operacje na liczbach</h2>
+<hr />
+<p>Wszystkie podstawowe operacje na liczbach są zdefiniowane dla każdego wbudowanego typu liczbowego</p>
+<pre><code>2 + 2    # wynik = 4   (liczba całkowita)
+2 + 2.0  # wynik = 4.0 (liczba zmiennoprzecinkowa)</code></pre>
+<p>Istnieją również funkcje wbudowane, np.</p>
+<pre><code>abs(-10)  # wynik = 10 (moduł)
+pow(2, 3) # wynik = 8  (potęga)
+...</code></pre>
+</section>
+<section id="moduły" class="level2">
+<h2>Moduły</h2>
+<hr />
+<ul>
+<li><p>Python posiada bogatą bibliotekę standardową</p></li>
+<li><p>Moduły można dołączyć za pośrednictwem słowa kluczowego <code>import</code></p></li>
+</ul>
+<pre><code>import [nazwa modułu]                       # importuje cały moduł
+from [nazwa modułu] import [nazwa funkcji]  # importuje pojedynczą funkcję
+from [nazwa modułu] import *                # importuje (prawie) wszysto</code></pre>
+<p>Więcej o modułach na kolejnych wykładach</p>
+</section>
+<section id="moduł-math" class="level2">
+<h2>Moduł <code>math</code></h2>
+<hr />
+<pre><code>import math # import [moduł]
+
+dir(math)   # lista dostępnych funkcji</code></pre>
+<pre><code>[&#39;__doc__&#39;,
+&#39;__file__&#39;,
+&#39;__loader__&#39;,
+&#39;__name__&#39;,
+&#39;__package__&#39;,
+&#39;__spec__&#39;,
+&#39;acos&#39;,
+&#39;acosh&#39;,
+&#39;asin&#39;,
+&#39;asinh&#39;,
+&#39;atan&#39;,
+&#39;atan2&#39;,
+&#39;atanh&#39;,
+&#39;ceil&#39;,
+&#39;copysign&#39;,
+&#39;cos&#39;,
+&#39;cosh&#39;,
+&#39;degrees&#39;,
+&#39;e&#39;,
+&#39;erf&#39;,
+&#39;erfc&#39;,
+&#39;exp&#39;,
+&#39;expm1&#39;,
+&#39;fabs&#39;,
+&#39;factorial&#39;,
+&#39;floor&#39;,
+&#39;fmod&#39;,
+&#39;frexp&#39;,
+&#39;fsum&#39;,
+&#39;gamma&#39;,
+&#39;gcd&#39;,
+&#39;hypot&#39;,
+&#39;inf&#39;,
+&#39;isclose&#39;,
+&#39;isfinite&#39;,
+&#39;isinf&#39;,
+&#39;isnan&#39;,
+&#39;ldexp&#39;,
+&#39;lgamma&#39;,
+&#39;log&#39;,
+&#39;log10&#39;,
+&#39;log1p&#39;,
+&#39;log2&#39;,
+&#39;modf&#39;,
+&#39;nan&#39;,
+&#39;pi&#39;,
+&#39;pow&#39;,
+&#39;radians&#39;,
+&#39;sin&#39;,
+&#39;sinh&#39;,
+&#39;sqrt&#39;,
+&#39;tan&#39;,
+&#39;tanh&#39;,
+&#39;trunc&#39;]</code></pre>
+</section>
+<section id="dokumentacja" class="level2">
+<h2>Dokumentacja</h2>
+<hr />
+<pre><code># zwróć uwagę na [moduł].[funkcja]
+help(math.floor)  # dokumentacja funkcji floor z math</code></pre>
+<pre><code>Help on built-in function floor in module math:
+
+floor(...)
+    floor(x)
+    
+    Return the floor of x as an Integral.
+    This is the largest integer &lt;= x.</code></pre>
+</section>
+<section id="moduł-cmath" class="level2">
+<h2>Moduł <code>cmath</code></h2>
+<hr />
+<p>Moduł <code>cmath</code> - podobny zestaw funkcji, ale dla liczb zespolonych</p>
+<pre><code>import cmath # biblioteka standardowa dla liczb zespolonych
+
+dir(cmath)   # porównaj z dir(math)</code></pre>
+<pre><code>[&#39;__doc__&#39;,
+    &#39;__file__&#39;,
+    &#39;__loader__&#39;,
+    &#39;__name__&#39;,
+    &#39;__package__&#39;,
+    &#39;__spec__&#39;,
+    &#39;acos&#39;,
+    &#39;acosh&#39;,
+    &#39;asin&#39;,
+    &#39;asinh&#39;,
+    &#39;atan&#39;,
+    &#39;atanh&#39;,
+    &#39;cos&#39;,
+    &#39;cosh&#39;,
+    &#39;e&#39;,
+    &#39;exp&#39;,
+    &#39;isclose&#39;,
+    &#39;isfinite&#39;,
+    &#39;isinf&#39;,
+    &#39;isnan&#39;,
+    &#39;log&#39;,
+    &#39;log10&#39;,
+    &#39;phase&#39;,
+    &#39;pi&#39;,
+    &#39;polar&#39;,
+    &#39;rect&#39;,
+    &#39;sin&#39;,
+    &#39;sinh&#39;,
+    &#39;sqrt&#39;,
+    &#39;tan&#39;,
+    &#39;tanh&#39;]</code></pre>
+</section>
+<section id="dostęp-do-funkcji" class="level2">
+<h2>Dostęp do funkcji</h2>
+<hr />
+<pre><code>import math
+import cmath
+
+math.acos(...)   # wywoła funkcję acos z math
+cmath.acos(...)  # wywoła funkcję acos z cmath</code></pre>
+</section>
+<section id="alternatywne-importowanie" class="level2">
+<h2>Alternatywne importowanie</h2>
+<hr />
+<p>W niektórych sytuacjach wygodnie jest zaimportować tylko wybrane funkcje z danego modułu</p>
+<pre><code>from math import acos, cos
+
+acos(...)
+cos(...)</code></pre>
+<p>W takiej sytuacji wywołujemy je bezpośrednio</p>
+<p>(bez <code>[moduł].[funkcja]</code>)</p>
+</section>
+<section id="alternatywne-importowanie-uwaga" class="level2">
+<h2>Alternatywne importowanie: uwaga</h2>
+<hr />
+<p>Jednak trzeba to robić ostrożnie, żeby nie nadpisać zdefiniowanej lub zaimportowanej wcześniej funkcji o tej samej nazwie</p>
+<pre><code>from math import acos, cos
+from cmath import acos
+
+cos(...)   # wywoła cos z math
+acos(...)  # wywoła acos z cmath!</code></pre>
+</section>
+</section>
+    </div>
+
+    <script src="../reveal.js/lib/js/head.min.js"></script>
+    <script src="../reveal.js/js/reveal.js"></script>
+
+    <script>
+
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        slideNumber: true,
+        width: 1280,
+        height: 720,
+
+                  theme: Reveal.getQueryHash().theme || 'white',
+        
+                  transition: Reveal.getQueryHash().transition || 'convex',
+        
+                  transitionSpeed: Reveal.getQueryHash().transitionSpeed || 'fast',
+        
+        dependencies: [{
+            src: '../reveal.js/lib/js/classList.js',
+            condition: function() {
+              return !document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/markdown/showdown.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          }, {
+            src: '../reveal.js/plugin/markdown/markdown.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          }, {
+            src: '../reveal.js/plugin/highlight/highlight.js',
+            async: true,
+            callback: function() {
+              hljs.initHighlightingOnLoad();
+            }
+          }, {
+            src: '../reveal.js/plugin/zoom-js/zoom.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/notes/notes.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/math/math.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          },
+          // { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+    </script>
+
+    <script>
+    // displayed upon load, hides when slide changes
+      Reveal.addEventListener('slidechanged', function(event) {
+        document.querySelector('.reveal .footer').style.display = 'none';
+      });
+   </script>
+
+</body>
+
+</html>

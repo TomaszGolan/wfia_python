@@ -1,0 +1,30 @@
+.right {
+  float: right;
+  width: 49%;
+}
+
+.left {
+  float: left;
+  width: 49%;
+}
+
+hr {
+  clear: both;
+}
+
+.reveal .footer {
+  width: 100%;
+  position: absolute;
+  bottom: 1em;
+  left: 1em;
+  font-size: 0.4em;
+  color: #555;
+  background-color: #eee;
+  text-align: center;
+  padding-left: 0.5em;
+}
+
+.reveal section img { 
+  border: none;
+  outline: none;
+}
