@@ -18,4 +18,4 @@ Wykłady dla studentów Wydziału Fizyki i Astronomii z "Języki skryptowe - Pyt
 
 ## Listy
 
-tba
+* Lista 1: [markdown](listy/lista_01.md), [pdf](listy/lista_01.pdf)

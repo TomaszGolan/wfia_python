@@ -529,7 +529,7 @@ Więcej o modułach na kolejnych wykładach
 ---
 
 ```
-import math # import [moduł]
+import math
 
 dir(math)   # lista dostępnych funkcji
 ```
@@ -597,6 +597,7 @@ dir(math)   # lista dostępnych funkcji
 
 ```
 # zwróć uwagę na [moduł].[funkcja]
+
 help(math.floor)  # dokumentacja funkcji floor z math
 ```
 
@@ -617,7 +618,7 @@ floor(...)
 Moduł `cmath` - podobny zestaw funkcji, ale dla liczb zespolonych
 
 ```
-import cmath # biblioteka standardowa dla liczb zespolonych
+import cmath
 
 dir(cmath)   # porównaj z dir(math)
 ```
