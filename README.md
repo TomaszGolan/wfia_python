@@ -10,7 +10,7 @@ Wykłady dla studentów Wydziału Fizyki i Astronomii z "Języki skryptowe - Pyt
 
 ## Wykłady
 
-*  [Wykład 1](https://tomaszgolan.github.io/wfia_python/wfia_python/html/python_w01.html)
+*  [Wykład 1](https://tomaszgolan.github.io/wfia_python/html/python_w01.html)
 
     * Wprowadzenie
     * Podstawowe typy danych
