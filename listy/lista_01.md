@@ -109,29 +109,17 @@ Powtórz to samo w Pythonie 3. Korzystając z dowolnych źródeł (innych niż p
 
 ## Zadanie 6 (1 pkt)
 
-Korzystając z wbudowanej dokumentacji znajdź funkcję, która wyznacza licznik i mianownik ułamka zwykłego dowolnej liczby zmiennoprzecinkowej. *Wskazówka: `help(float)`*
-
-Przetestuj jej działanie na kilku dowolnych przykładach.
-
-Przetestuj jej działanie na `math.pi`. Czy jesteś w stanie to wyjaśnić ($\pi$ jest niewymierna)? Jeśli nie, to zapoznaj się z np. [https://pl.wikipedia.org/wiki/Liczba_zmiennoprzecinkowa](https://pl.wikipedia.org/wiki/Liczba_zmiennoprzecinkowa) i sprawdź `sys.float_info`
-
-Wykonaj następujące obliczenia i wyjaśnij otrzymany wynik:
-
-```py
->>> x = sys.float_info.max
->>> x
->>> 2 * x
-```
-
-Wyjaśnij wynik dodawania:
-
-```py
->>> print(0.1 + 0.2)
-```
+Wyjaśnij znaczenie zmiennej `_` w trybie interaktywnym i zademonstruj jej działanie na dowolnym przykładzie.
 
 ---
 
 ## Zadanie 7 (1 pkt)
+
+Niech $a = 3$ i $b = 4$ będą długościami boków trójkąta, a $\alpha = 47^0$ kątem mędzy nimi. Wyznacz pole trójkąta. *Wskazówka: wykorzystaj implementację funkcji trygonometrycznych z biblioteki `math`.*
+
+---
+
+## Zadanie 8 (2 pkt)
 
 Korzystając z funkcji *sys.getsizeof* sprawdź, ile pamięci zajmuje:
 
@@ -157,7 +145,31 @@ Wyjaśnij rozmiar *True* i *False*.
 
 ---
 
-## Zadanie 8 (1 pkt)
+## Zadanie 9 (3 pkt)
+
+Korzystając z wbudowanej dokumentacji znajdź funkcję, która wyznacza licznik i mianownik ułamka zwykłego dowolnej liczby zmiennoprzecinkowej. *Wskazówka: `help(float)`*
+
+Przetestuj jej działanie na kilku dowolnych przykładach.
+
+Przetestuj jej działanie na `math.pi`. Czy jesteś w stanie to wyjaśnić ($\pi$ jest niewymierna)? Jeśli nie, to zapoznaj się z np. [https://pl.wikipedia.org/wiki/Liczba_zmiennoprzecinkowa](https://pl.wikipedia.org/wiki/Liczba_zmiennoprzecinkowa) i sprawdź `sys.float_info`
+
+Wykonaj następujące obliczenia i wyjaśnij otrzymany wynik:
+
+```py
+>>> x = sys.float_info.max
+>>> x
+>>> 2 * x
+```
+
+Wyjaśnij wynik dodawania:
+
+```py
+>>> print(0.1 + 0.2)
+```
+
+---
+
+## Zadanie 10 (3 pkt)
 
 Zapoznaj się z dokumentacją funkcji wbudowanej `id` (np. `help(id)`) i operatora `is` (np. [https://docs.python.org/3.6/reference/expressions.html#is](https://docs.python.org/3.6/reference/expressions.html#is)). Następnie wykonaj:
 
@@ -176,15 +188,3 @@ Zapoznaj się z dokumentacją funkcji wbudowanej `id` (np. `help(id)`) i operato
 ```
 
 Wyjaśnij otrzymane wyniki.
-
----
-
-## Zadanie 9 (1 pkt)
-
-Wyjaśnij znaczenie zmiennej `_` w trybie interaktywnym i zademonstruj jej działanie na dowolnym przykładzie.
-
----
-
-## Zadanie 10 (1 pkt)
-
-Niech $a = 3$ i $b = 4$ będą długościami boków trójkąta, a $\alpha = 47^0$ kątem mędzy nimi. Wyznacz pole trójkąta. *Wskazówka: wykorzystaj implementację funkcji trygonometrycznych z biblioteki `math`.*
