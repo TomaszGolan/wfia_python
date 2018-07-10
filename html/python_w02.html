@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <title>Języki skryptowe Python</title>
+
+  <meta name="description" content="Języki skryptowe Python">
+
+   <meta name="author" content="Wykład 2" /> 
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="stylesheet" href="../reveal.js/css/reveal.css">
+
+      <link rel="stylesheet" href="../reveal.js/css/theme/white.css" id="theme">
+  
+      <link rel="stylesheet" href="../template/github.css">
+  
+  <link rel="stylesheet" href="../template/extra.css">
+
+  <script>
+    document.write('<link rel="stylesheet" href="../reveal.js/css/print/' +
+      (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') +
+      '.css" type="text/css" media="print">');
+  </script>
+
+  <script src="../template/snap.svg-min.js"></script>
+  <script src="../template/plotly-latest.min.js"></script>
+
+  <!--[if lt IE 9]>
+  <script src="../reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+
+  
+
+</head>
+
+<body>
+
+  
+
+  <div class="reveal">
+
+    <div class="slides">
+
+      <section>
+        <h1>Języki skryptowe Python</h1>
+         <h3>Wykład 2</h3> 
+        <p>
+          <h4></h4>
+        </p>
+      </section>
+
+       <div class="footer">
+<p>Sterowanie: spacja + shift-spacja || page down + page up || strzałki || esc</p>
+</div>
+<section id="section" class="level1">
+<h1></h1>
+<section id="sekwencyjne-typy-danych" class="level2">
+<h2>Sekwencyjne typy danych</h2>
+<hr />
+<ul>
+<li>Na ostatnim wykładzie wprowadzone zostały liczbowe typy danych: <code>int</code>, <code>float</code> i <code>complex</code></li>
+</ul>
+<pre><code># [zmienna] [operator przypisania] [wartość]
+# typowanie dynamiczne
+
+n = 10  # liczba całkowita
+x = 1.5 # liczba zmiennoprzecinkowa
+c = 2j  # liczba zespolona</code></pre>
+<ul>
+<li>Dzisiaj omówione zostaną podstawowe typy sekwencyjne: <code>str</code>, <code>list</code>, <code>tuple</code> i <code>range</code></li>
+</ul>
+</section>
+<section id="typ-tekstowy" class="level2">
+<h2>Typ tekstowy</h2>
+<hr />
+<ul>
+<li><p>Typ tekstowy (<code>str</code>, <em>string</em>) przechowuje ciąg znaków</p>
+<pre><code>s = &quot;Python&quot;
+print(type(s))</code></pre>
+<pre><code>&lt;class &#39;str&#39;&gt;</code></pre></li>
+<li>Python 3 używa domyślnie kodowania <em>unicode</em> dla typu <em>str</em></li>
+<li><p>Dzięki czemu mamy polskie znaki od ręki</p></li>
+</ul>
+</section>
+<section id="typ-tekstowy-z-i-bez-unicode" class="level2">
+<h2>Typ tekstowy z i bez <em>unicode</em></h2>
+<hr />
+<div class="left">
+<p>Python 3 (z <em>unicode</em>)</p>
+<pre><code>Python 3.5.2 |Anaconda 4.2.0 (64-bit)| (default, Jul  2 2016, 17:53:06) 
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)] on linux
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; s = &quot;zażółć gęślą jaźń&quot;
+&gt;&gt;&gt; s
+&#39;zażółć gęślą jaźń&#39;
+&gt;&gt;&gt; </code></pre>
+</div>
+<div class="right">
+<p>Python 2 (bez <em>unicode</em>)</p>
+<pre><code>Python 2.7.12 (default, Jul  1 2016, 15:12:24) 
+[GCC 5.4.0 20160609] on linux2
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; s = &quot;zażółć gęślą jaźń&quot;
+&gt;&gt;&gt; s
+&#39;za\xc5\xbc\xc3\xb3\xc5\x82\xc4\x87 g\xc4\x99\xc5\x9bl\xc4\x85 ja\xc5\xba\xc5\x84&#39;
+&gt;&gt;&gt; </code></pre>
+</div>
+</section>
+<section id="typ-tekstowy-1" class="level2">
+<h2>Typ tekstowy</h2>
+<hr />
+<ul>
+<li><p>Literał łańcuchowy można wprowadzić przez:</p>
+<ul>
+<li><p>pojedynczy cudzysłów</p>
+<pre><code>s = &#39;zażółć gęślą jaźń&#39;</code></pre></li>
+<li><p>podwójny cudzysłów</p>
+<pre><code>s = &quot;zażółć gęślą jaźń&quot;</code></pre></li>
+<li><p>potrójny cudzysłów</p>
+<pre><code>s = &#39;&#39;&#39;zażółć gęślą jaźń&#39;&#39;&#39;
+s = &quot;&quot;&quot;zażółć gęślą jaźń&quot;&quot;&quot;</code></pre></li>
+</ul></li>
+</ul>
+</section>
+<section id="cudzysłów-w-tekście" class="level2">
+<h2>Cudzysłów w tekście</h2>
+<hr />
+<ul>
+<li><p>Jeśli <code>str</code> otwieramy <code>&quot;</code>, to ten sam znak kończy ciągn znaków, stąd np.</p>
+<pre><code>print(&quot;Ala powiedziała: &quot;Mam kota.&quot; ...&quot;)  # cudzysłów kończy literał</code></pre></li>
+<li><p>zwróci błąd:</p>
+<pre><code>  File &quot;&lt;stdin&gt;&quot;, line 1
+print(&quot;Ala powiedziała: &quot;Mam kota.&quot; ...&quot;) 
+                           ^
+SyntaxError: invalid syntax</code></pre></li>
+</ul>
+</section>
+<section id="cudzysłów-w-tekście-1" class="level2">
+<h2>Cudzysłów w tekście</h2>
+<hr />
+<ul>
+<li><p>Ale można wykorzystać kombinację <code>&quot;</code> i <code>'</code>, np.</p>
+<pre><code>print(&#39;Ala powiedziała: &quot;Mam kota.&quot; ...&#39;)</code></pre></li>
+<li><p>wydrukuje na ekranie:</p>
+<pre><code>Ala powiedziała: &quot;Mam kota.&quot; ...</code></pre></li>
+</ul>
+</section>
+<section id="znak-ucieczki" class="level2">
+<h2>Znak ucieczki</h2>
+<hr />
+<ul>
+<li>zmienia interpretację znaku</li>
+<li><p>w Pythonie (i prawie zawsze) jest to <code>\</code></p>
+<pre><code>print(&quot;Ala powiedziała: \&quot;Mam kota.\&quot; ...&quot;)</code></pre></li>
+<li><p>wydrukuje na ekranie:</p>
+<pre><code>Ala powiedziała: &quot;Mam kota.&quot; ...</code></pre></li>
+</ul>
+</section>
+<section id="wybrane-sekewncje-specjalne" class="level2">
+<h2>Wybrane sekewncje specjalne</h2>
+<hr />
+<ul>
+<li><code>\n</code> - nowa linia</li>
+<li><code>\t</code> - tabulacja</li>
+<li><code>\r</code> - powrót kursora</li>
+<li><code>\v</code> - pionowa tabulacja</li>
+</ul>
+</section>
+<section id="przykład" class="level2">
+<h2>Przykład</h2>
+<hr />
+<pre><code>print(&quot;\\n wstawia nową linię.\nNowa linia.\n\tNowa linia z tabulacją!&quot;)</code></pre>
+<p>wydrukuje na ekranie (zwróć uwagę na <code>\\n</code>)</p>
+<pre><code>\n wstawia nową linię.
+Nowa linia.
+    Nowa linia z tabulacją!</code></pre>
+</section>
+<section id="długie-łańcuchy" class="level2">
+<h2>Długie łańcuchy</h2>
+<hr />
+<ul>
+<li>Długie ciągi znaków można przechowywać w jednej linii</li>
+<li>Jednak upośledza to czytelność kodu</li>
+</ul>
+<pre><code>tekst = &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. Etiam pellentesque aliquet tellus. Phasellus pharetra nulla ac diam. Quisque semper justo at risus. Donec venenatis, turpis vel hendrerit interdum, dui ligula ultricies purus, sed posuere libero dui id orci. Nam congue, pede vitae dapibus aliquet, elit magna vulputate arcu, vel tempus metus leo non est. Etiam sit amet lectus quis est congue mollis. Phasellus congue lacus eget neque. Phasellus ornare, ante vitae consectetuer consequat, purus sapien ultricies dolor, et mollis pede metus eget nisi. Praesent sodales velit quis augue. Cras suscipit, urna at aliquam rhoncus, urna quam viverra nisi, in interdum massa nibh nec erat.&quot;
+
+print(tekst)</code></pre>
+<pre><code>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. Etiam pellentesque aliquet tellus. Phasellus pharetra nulla ac diam. Quisque semper justo at risus. Donec venenatis, turpis vel hendrerit interdum, dui ligula ultricies purus, sed posuere libero dui id orci. Nam congue, pede vitae dapibus aliquet, elit magna vulputate arcu, vel tempus metus leo non est. Etiam sit amet lectus quis est congue mollis. Phasellus congue lacus eget neque. Phasellus ornare, ante vitae consectetuer consequat, purus sapien ultricies dolor, et mollis pede metus eget nisi. Praesent sodales velit quis augue. Cras suscipit, urna at aliquam rhoncus, urna quam viverra nisi, in interdum massa nibh nec erat.</code></pre>
+</section>
+<section id="długie-łańcuchy-1" class="level2">
+<h2>Długie łańcuchy</h2>
+<hr />
+<ul>
+<li>Tekst można dowolnie <em>łamać</em> korzystając z <code>\</code></li>
+<li>Ale uwaga na dodatkowe spacje</li>
+</ul>
+<pre><code>tekst = &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nibh \
+         augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. \
+         Etiam pellentesque aliquet tellus. Phasellus pharetra nulla ac diam.&quot;
+
+print(tekst)</code></pre>
+<pre><code>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nibh          augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem.          Etiam pellentesque aliquet tellus. Phasellus pharetra nulla ac diam.</code></pre>
+</section>
+<section id="długie-łańcuchy-2" class="level2">
+<h2>Długie łańcuchy</h2>
+<hr />
+<ul>
+<li>Problemu można uniknąć zamykając każdą linię w cudzysłowie</li>
+</ul>
+<pre><code>tekst = &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nibh &quot; \
+        &quot;augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. &quot; \
+        &quot;Etiam pellentesque aliquet tellus. Phasellus pharetra nulla ac diam.&quot;
+
+print(tekst)</code></pre>
+<pre><code>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. Etiam pellentesque aliquet tellus. Phasellus pharetra nulla ac diam.</code></pre>
+</section>
+<section id="długie-łańcuchy-3" class="level2">
+<h2>Długie łańcuchy</h2>
+<hr />
+<ul>
+<li>Jeśli chcemy, aby wydrukowany tekst też był <em>złamany</em>, to korzystamy z <code>\n</code></li>
+</ul>
+<pre><code>tekst = &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nibh\n&quot; \
+        &quot;augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem.\n&quot; \
+        &quot;Etiam pellentesque aliquet tellus. Phasellus pharetra nulla ac diam.&quot;
+
+print(tekst)</code></pre>
+<pre><code>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nibh
+augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem.
+Etiam pellentesque aliquet tellus. Phasellus pharetra nulla ac diam.</code></pre>
+</section>
+<section id="długie-łańcuchy-4" class="level2">
+<h2>Długie łańcuchy</h2>
+<hr />
+<ul>
+<li>lub korzystamy z potrójnego cudzysłowu (uwaga na spacje w nowych liniach)</li>
+</ul>
+<pre><code>tekst = &quot;&quot;&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nibh
+augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem.
+Etiam pellentesque aliquet tellus. Phasellus pharetra nulla ac diam.&quot;&quot;&quot;
+
+print(tekst)</code></pre>
+<pre><code>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nibh
+augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem.
+Etiam pellentesque aliquet tellus. Phasellus pharetra nulla ac diam.</code></pre>
+</section>
+</section>
+<section id="section-1" class="level1">
+<h1></h1>
+<section id="indeksowanie-sekwencji" class="level2">
+<h2>Indeksowanie sekwencji</h2>
+<hr />
+</section>
+</section>
+    </div>
+
+    <script src="../reveal.js/lib/js/head.min.js"></script>
+    <script src="../reveal.js/js/reveal.js"></script>
+
+    <script>
+
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        slideNumber: true,
+        width: 1280,
+        height: 720,
+
+                  theme: Reveal.getQueryHash().theme || 'white',
+        
+                  transition: Reveal.getQueryHash().transition || 'convex',
+        
+                  transitionSpeed: Reveal.getQueryHash().transitionSpeed || 'fast',
+        
+        dependencies: [{
+            src: '../reveal.js/lib/js/classList.js',
+            condition: function() {
+              return !document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/markdown/showdown.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          }, {
+            src: '../reveal.js/plugin/markdown/markdown.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          }, {
+            src: '../reveal.js/plugin/highlight/highlight.js',
+            async: true,
+            callback: function() {
+              hljs.initHighlightingOnLoad();
+            }
+          }, {
+            src: '../reveal.js/plugin/zoom-js/zoom.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/notes/notes.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/math/math.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          },
+          // { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+    </script>
+
+    <script>
+    // displayed upon load, hides when slide changes
+      Reveal.addEventListener('slidechanged', function(event) {
+        document.querySelector('.reveal .footer').style.display = 'none';
+      });
+   </script>
+
+</body>
+
+</html>
