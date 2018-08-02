@@ -258,6 +258,93 @@ Etiam pellentesque aliquet tellus. Phasellus pharetra nulla ac diam.</code></pre
 <section id="indeksowanie-sekwencji" class="level2">
 <h2>Indeksowanie sekwencji</h2>
 <hr />
+<ul>
+<li>Dostęp do elementów sekwencji odbywa się za pomocą operatora <code>[]</code></li>
+<li>Indeksowanie zaczyna się od <code>0</code> a kończy na <code>n-1</code>, gdzie <code>n</code> - długość ciągu</li>
+</ul>
+<pre><code>s = &quot;Python&quot;
+
+s[0]       # pierwszy znak      -&gt; P
+s[1]       # druki znak         -&gt; y
+
+n = len(s) # długość łańcucha s -&gt; 6
+
+s[n-1]     # ostatni znak       -&gt; n</code></pre>
+</section>
+<section id="indexerror" class="level2">
+<h2>IndexError</h2>
+<hr />
+<ul>
+<li>Próba dostępu do elementu poza zakresem zakończy się błędem</li>
+</ul>
+<pre><code>&gt;&gt;&gt; s = &quot;Python&quot;
+&gt;&gt;&gt; n = len(s)
+&gt;&gt;&gt; s[n]
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+IndexError: string index out of range
+&gt;&gt;&gt; </code></pre>
+</section>
+<section id="wycinki" class="level2">
+<h2>Wycinki</h2>
+<hr />
+<ul>
+<li>Wycinki umożliwiają dostęp do fragmentu ciągu</li>
+<li><code>zmienna[i:j]</code> zwróci elementy od <code>i</code> (włącznie) do <code>j</code></li>
+</ul>
+<pre><code>s = &quot;Python&quot;
+
+s[2:4]  # elementy od 2 do 3 -&gt; th</code></pre>
+</section>
+<section id="domyślne-granice-przedziału" class="level2">
+<h2>Domyślne granice przedziału</h2>
+<hr />
+<ul>
+<li>Jeśli brzeg przedziału nie zostanie podany, intepreter przyjmie odpowiednio początek lub koniec ciągu</li>
+</ul>
+<pre><code>s = &quot;Python&quot;
+
+s[2:]  # od 3-go do końca        -&gt; thon
+s[:2]  # od początku do drugiego -&gt; Py
+s[:]   # od początku do końca    -&gt; Python</code></pre>
+</section>
+<section id="uwaga-brak-indexerror-dla-wycinków" class="level2">
+<h2>Uwaga: brak IndexError dla wycinków</h2>
+<hr />
+<ul>
+<li>W przypadku wycinków można wyjść z indeksem poza zakres</li>
+</ul>
+<pre><code>s = &quot;Python&quot;
+
+s[0:1000]  # od początku do końca -&gt; Python</code></pre>
+</section>
+<section id="wycinki-z-krokiem" class="level2">
+<h2>Wycinki z krokiem</h2>
+<hr />
+<ul>
+<li>Możliwy jest również dostęp do co <code>k</code>-tego elementu podzbioru</li>
+<li><code>zmienna[i:j:k]</code> zwróci co <code>k</code>-ty element z przedziału <code>[i, j)</code></li>
+</ul>
+<pre><code>s = &quot;0123456789&quot;
+
+s[2:8:2]  # od 3-go do 7-go, co drugi      -&gt; 246
+
+s[2::3]   # od 3-go do końca, co trzeci    -&gt; 258
+
+s[::2]    # od początku do końca, co drugi -&gt; 02468</code></pre>
+</section>
+<section id="indeksy-ujemne" class="level2">
+<h2>Indeksy ujemne</h2>
+<hr />
+<ul>
+<li>Indeks <code>−k</code> oznacza <code>n−k</code>, gdzie <code>n</code> - długość łańcucha</li>
+</ul>
+<pre><code>s = &quot;Python&quot;
+
+s[-1]   # 6 - 1 = 5, ostatni znak -&gt; n
+s[-2]   # 6 - 2 = 4, przedostatni -&gt; o
+s[-2:]  # dwa ostanie             -&gt; on
+s[:-2]  # oprócz dwóch ostatnich  -&gt; Pyth</code></pre>
 </section>
 </section>
     </div>

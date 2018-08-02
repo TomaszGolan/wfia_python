@@ -258,3 +258,105 @@ Etiam pellentesque aliquet tellus. Phasellus pharetra nulla ac diam.
 
 ---
 
+* Dostęp do elementów sekwencji odbywa się za pomocą operatora `[]`
+* Indeksowanie zaczyna się od `0` a kończy na `n-1`, gdzie `n` - długość ciągu
+
+```
+s = "Python"
+
+s[0]       # pierwszy znak      -> P
+s[1]       # druki znak         -> y
+
+n = len(s) # długość łańcucha s -> 6
+
+s[n-1]     # ostatni znak       -> n
+```
+
+## IndexError
+
+---
+
+* Próba dostępu do elementu poza zakresem zakończy się błędem
+
+```
+>>> s = "Python"
+>>> n = len(s)
+>>> s[n]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IndexError: string index out of range
+>>> 
+```
+
+## Wycinki
+
+---
+
+* Wycinki umożliwiają dostęp do fragmentu ciągu
+* `zmienna[i:j]` zwróci elementy od `i` (włącznie) do `j`
+
+```
+s = "Python"
+
+s[2:4]  # elementy od 2 do 3 -> th
+```
+
+## Domyślne granice przedziału
+
+---
+
+* Jeśli brzeg przedziału nie zostanie podany, intepreter przyjmie odpowiednio początek lub koniec ciągu
+
+```
+s = "Python"
+
+s[2:]  # od 3-go do końca        -> thon
+s[:2]  # od początku do drugiego -> Py
+s[:]   # od początku do końca    -> Python
+```
+
+## Uwaga: brak IndexError dla wycinków
+
+---
+
+* W przypadku wycinków można wyjść z indeksem poza zakres
+
+```
+s = "Python"
+
+s[0:1000]  # od początku do końca -> Python
+```
+
+## Wycinki z krokiem
+
+---
+
+* Możliwy jest również dostęp do co `k`-tego elementu podzbioru
+* `zmienna[i:j:k]` zwróci co `k`-ty element z przedziału `[i, j)`
+
+```
+s = "0123456789"
+
+s[2:8:2]  # od 3-go do 7-go, co drugi      -> 246
+
+s[2::3]   # od 3-go do końca, co trzeci    -> 258
+
+s[::2]    # od początku do końca, co drugi -> 02468
+```
+
+## Indeksy ujemne
+
+---
+
+* Indeks `−k` oznacza `n−k`, gdzie `n` - długość łańcucha
+
+```
+s = "Python"
+
+s[-1]   # 6 - 1 = 5, ostatni znak -> n
+s[-2]   # 6 - 2 = 4, przedostatni -> o
+s[-2:]  # dwa ostanie             -> on
+s[:-2]  # oprócz dwóch ostatnich  -> Pyth
+```
+
+
