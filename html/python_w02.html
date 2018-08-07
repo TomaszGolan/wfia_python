@@ -347,6 +347,687 @@ s[-2:]  # dwa ostanie             -&gt; on
 s[:-2]  # oprócz dwóch ostatnich  -&gt; Pyth</code></pre>
 </section>
 </section>
+<section id="section-2" class="level1">
+<h1></h1>
+<section id="dygresja-klasy" class="level2">
+<h2>Dygresja: klasy</h2>
+<hr />
+<ul>
+<li>więcej o klasach będzie na dalszych wykładach</li>
+<li>klasa definuje obiekt</li>
+<li>przypisując wartość zmiennej tworzymy obiekt danej klasy</li>
+</ul>
+<pre><code>n = 10  # tworzymy obiekt klasy int</code></pre>
+</section>
+<section id="dygresja-metody" class="level2">
+<h2>Dygresja: metody</h2>
+<hr />
+<ul>
+<li>klasa może posiadać zmienne i metody (czyli funkcje działające na obiekt)</li>
+</ul>
+<pre><code>x = 1.0  # tworzymy obiekt klasy float
+
+# metody/zmienne klasy wywołujemy .
+x.is_integer() # [obiekt].metoda</code></pre>
+<pre><code>True</code></pre>
+</section>
+<section id="dygresja-dokumentacja" class="level2">
+<h2>Dygresja: dokumentacja</h2>
+<hr />
+<pre><code>&gt;&gt;&gt; help(str)
+Help on class str in module builtins:
+
+class str(object)
+ |  str(object=&#39;&#39;) -&gt; str
+ |  str(bytes_or_buffer[, encoding[, errors]]) -&gt; str
+ |  
+ |  Create a new string object from the given object. If encoding or
+ |  errors is specified, then the object must expose a data buffer
+ |  that will be decoded using the given encoding and error handler.
+ |  Otherwise, returns the result of object.__str__() (if defined)
+ |  or repr(object).
+ |  encoding defaults to sys.getdefaultencoding().
+ |  errors defaults to &#39;strict&#39;.
+ |  
+ |  Methods defined here:
+ |  
+ |  __add__(self, value, /)
+ |      Return self+value.
+ |  
+ |  __contains__(self, key, /)
+ |      Return key in self.
+ |  
+ |  __eq__(self, value, /)
+ |      Return self==value.
+ |  
+ |  __format__(...)
+ |      S.__format__(format_spec) -&gt; str
+ |      
+ |      Return a formatted version of S as described by format_spec.
+ |  
+ |  __ge__(self, value, /)
+ |      Return self&gt;=value.
+ |  
+ |  __getattribute__(self, name, /)
+ |      Return getattr(self, name).
+ |  
+ |  __getitem__(self, key, /)
+ |      Return self[key].
+ |  
+ |  __getnewargs__(...)
+ |  
+ |  __gt__(self, value, /)
+ |      Return self&gt;value.
+ |  
+ |  __hash__(self, /)
+ |      Return hash(self).
+ |  
+ |  __iter__(self, /)
+ |      Implement iter(self).
+ |  
+ |  __le__(self, value, /)
+ |      Return self&lt;=value.
+ |  
+ |  __len__(self, /)
+ |      Return len(self).
+ |  
+ |  __lt__(self, value, /)
+ |      Return self&lt;value.
+ |  
+ |  __mod__(self, value, /)
+ |      Return self%value.
+ |  
+ |  __mul__(self, value, /)
+ |      Return self*value.n
+ |  
+ |  __ne__(self, value, /)
+ |      Return self!=value.
+ |  
+ |  __new__(*args, **kwargs) from builtins.type
+ |      Create and return a new object.  See help(type) for accurate signature.
+ |  
+ |  __repr__(self, /)
+ |      Return repr(self).
+ |  
+ |  __rmod__(self, value, /)
+ |      Return value%self.
+ |  
+ |  __rmul__(self, value, /)
+ |      Return self*value.
+ |  
+ |  __sizeof__(...)
+ |      S.__sizeof__() -&gt; size of S in memory, in bytes
+ |  
+ |  __str__(self, /)
+ |      Return str(self).
+ |  
+ |  capitalize(...)
+ |      S.capitalize() -&gt; str
+ |      
+ |      Return a capitalized version of S, i.e. make the first character
+ |      have upper case and the rest lower case.
+ |  
+ |  casefold(...)
+ |      S.casefold() -&gt; str
+ |      
+ |      Return a version of S suitable for caseless comparisons.
+ |  
+ |  center(...)
+ |      S.center(width[, fillchar]) -&gt; str
+ |      
+ |      Return S centered in a string of length width. Padding is
+ |      done using the specified fill character (default is a space)
+ |  
+ |  count(...)
+ |      S.count(sub[, start[, end]]) -&gt; int
+ |      
+ |      Return the number of non-overlapping occurrences of substring sub in
+ |      string S[start:end].  Optional arguments start and end are
+ |      interpreted as in slice notation.
+ |  
+ |  encode(...)
+ |      S.encode(encoding=&#39;utf-8&#39;, errors=&#39;strict&#39;) -&gt; bytes
+ |      
+ |      Encode S using the codec registered for encoding. Default encoding
+ |      is &#39;utf-8&#39;. errors may be given to set a different error
+ |      handling scheme. Default is &#39;strict&#39; meaning that encoding errors raise
+ |      a UnicodeEncodeError. Other possible values are &#39;ignore&#39;, &#39;replace&#39; and
+ |      &#39;xmlcharrefreplace&#39; as well as any other name registered with
+ |      codecs.register_error that can handle UnicodeEncodeErrors.
+ |  
+ |  endswith(...)
+ |      S.endswith(suffix[, start[, end]]) -&gt; bool
+ |      
+ |      Return True if S ends with the specified suffix, False otherwise.
+ |      With optional start, test S beginning at that position.
+ |      With optional end, stop comparing S at that position.
+ |      suffix can also be a tuple of strings to try.
+ |  
+ |  expandtabs(...)
+ |      S.expandtabs(tabsize=8) -&gt; str
+ |      
+ |      Return a copy of S where all tab characters are expanded using spaces.
+ |      If tabsize is not given, a tab size of 8 characters is assumed.
+ |  
+ |  find(...)
+ |      S.find(sub[, start[, end]]) -&gt; int
+ |      
+ |      Return the lowest index in S where substring sub is found,
+ |      such that sub is contained within S[start:end].  Optional
+ |      arguments start and end are interpreted as in slice notation.
+ |      
+ |      Return -1 on failure.
+ |  
+ |  format(...)
+ |      S.format(*args, **kwargs) -&gt; str
+ |      
+ |      Return a formatted version of S, using substitutions from args and kwargs.
+ |      The substitutions are identified by braces (&#39;{&#39; and &#39;}&#39;).
+ |  
+ |  format_map(...)
+ |      S.format_map(mapping) -&gt; str
+ |      
+ |      Return a formatted version of S, using substitutions from mapping.
+ |      The substitutions are identified by braces (&#39;{&#39; and &#39;}&#39;).
+ |  
+ |  index(...)
+ |      S.index(sub[, start[, end]]) -&gt; int
+ |      
+ |      Return the lowest index in S where substring sub is found, 
+ |      such that sub is contained within S[start:end].  Optional
+ |      arguments start and end are interpreted as in slice notation.
+ |      
+ |      Raises ValueError when the substring is not found.
+ |  
+ |  isalnum(...)
+ |      S.isalnum() -&gt; bool
+ |      
+ |      Return True if all characters in S are alphanumeric
+ |      and there is at least one character in S, False otherwise.
+ |  
+ |  isalpha(...)
+ |      S.isalpha() -&gt; bool
+ |      
+ |      Return True if all characters in S are alphabetic
+ |      and there is at least one character in S, False otherwise.
+ |  
+ |  isdecimal(...)
+ |      S.isdecimal() -&gt; bool
+ |      
+ |      Return True if there are only decimal characters in S,
+ |      False otherwise.
+ |  
+ |  isdigit(...)
+ |      S.isdigit() -&gt; bool
+ |      
+ |      Return True if all characters in S are digits
+ |      and there is at least one character in S, False otherwise.
+ |  
+ |  isidentifier(...)
+ |      S.isidentifier() -&gt; bool
+ |      
+ |      Return True if S is a valid identifier according
+ |      to the language definition.
+ |      
+ |      Use keyword.iskeyword() to test for reserved identifiers
+ |      such as &quot;def&quot; and &quot;class&quot;.
+ |  
+ |  islower(...)
+ |      S.islower() -&gt; bool
+ |      
+ |      Return True if all cased characters in S are lowercase and there is
+ |      at least one cased character in S, False otherwise.
+ |  
+ |  isnumeric(...)
+ |      S.isnumeric() -&gt; bool
+ |      
+ |      Return True if there are only numeric characters in S,
+ |      False otherwise.
+ |  
+ |  isprintable(...)
+ |      S.isprintable() -&gt; bool
+ |      
+ |      Return True if all characters in S are considered
+ |      printable in repr() or S is empty, False otherwise.
+ |  
+ |  isspace(...)
+ |      S.isspace() -&gt; bool
+ |      
+ |      Return True if all characters in S are whitespace
+ |      and there is at least one character in S, False otherwise.
+ |  
+ |  istitle(...)
+ |      S.istitle() -&gt; bool
+ |      
+ |      Return True if S is a titlecased string and there is at least one
+ |      character in S, i.e. upper- and titlecase characters may only
+ |      follow uncased characters and lowercase characters only cased ones.
+ |      Return False otherwise.
+ |  
+ |  isupper(...)
+ |      S.isupper() -&gt; bool
+ |      
+ |      Return True if all cased characters in S are uppercase and there is
+ |      at least one cased character in S, False otherwise.
+ |  
+ |  join(...)
+ |      S.join(iterable) -&gt; str
+ |      
+ |      Return a string which is the concatenation of the strings in the
+ |      iterable.  The separator between elements is S.
+ |  
+ |  ljust(...)
+ |      S.ljust(width[, fillchar]) -&gt; str
+ |      
+ |      Return S left-justified in a Unicode string of length width. Padding is
+ |      done using the specified fill character (default is a space).
+ |  
+ |  lower(...)
+ |      S.lower() -&gt; str
+ |      
+ |      Return a copy of the string S converted to lowercase.
+ |  
+ |  lstrip(...)
+ |      S.lstrip([chars]) -&gt; str
+ |      
+ |      Return a copy of the string S with leading whitespace removed.
+ |      If chars is given and not None, remove characters in chars instead.
+ |  
+ |  partition(...)
+ |      S.partition(sep) -&gt; (head, sep, tail)
+ |      
+ |      Search for the separator sep in S, and return the part before it,
+ |      the separator itself, and the part after it.  If the separator is not
+ |      found, return S and two empty strings.
+ |  
+ |  replace(...)
+ |      S.replace(old, new[, count]) -&gt; str
+ |      
+ |      Return a copy of S with all occurrences of substring
+ |      old replaced by new.  If the optional argument count is
+ |      given, only the first count occurrences are replaced.
+ |  
+ |  rfind(...)
+ |      S.rfind(sub[, start[, end]]) -&gt; int
+ |      
+ |      Return the highest index in S where substring sub is found,
+ |      such that sub is contained within S[start:end].  Optional
+ |      arguments start and end are interpreted as in slice notation.
+ |      
+ |      Return -1 on failure.
+ |  
+ |  rindex(...)
+ |      S.rindex(sub[, start[, end]]) -&gt; int
+ |      
+ |      Return the highest index in S where substring sub is found,
+ |      such that sub is contained within S[start:end].  Optional
+ |      arguments start and end are interpreted as in slice notation.
+ |      
+ |      Raises ValueError when the substring is not found.
+ |  
+ |  rjust(...)
+ |      S.rjust(width[, fillchar]) -&gt; str
+ |      
+ |      Return S right-justified in a string of length width. Padding is
+ |      done using the specified fill character (default is a space).
+ |  
+ |  rpartition(...)
+ |      S.rpartition(sep) -&gt; (head, sep, tail)
+ |      
+ |      Search for the separator sep in S, starting at the end of S, and return
+ |      the part before it, the separator itself, and the part after it.  If the
+ |      separator is not found, return two empty strings and S.
+ |  
+ |  rsplit(...)
+ |      S.rsplit(sep=None, maxsplit=-1) -&gt; list of strings
+ |      
+ |      Return a list of the words in S, using sep as the
+ |      delimiter string, starting at the end of the string and
+ |      working to the front.  If maxsplit is given, at most maxsplit
+ |      splits are done. If sep is not specified, any whitespace string
+ |      is a separator.
+ |  
+ |  rstrip(...)
+ |      S.rstrip([chars]) -&gt; str
+ |      
+ |      Return a copy of the string S with trailing whitespace removed.
+ |      If chars is given and not None, remove characters in chars instead.
+ |  
+ |  split(...)
+ |      S.split(sep=None, maxsplit=-1) -&gt; list of strings
+ |      
+ |      Return a list of the words in S, using sep as the
+ |      delimiter string.  If maxsplit is given, at most maxsplit
+ |      splits are done. If sep is not specified or is None, any
+ |      whitespace string is a separator and empty strings are
+ |      removed from the result.
+ |  
+ |  splitlines(...)
+ |      S.splitlines([keepends]) -&gt; list of strings
+ |      
+ |      Return a list of the lines in S, breaking at line boundaries.
+ |      Line breaks are not included in the resulting list unless keepends
+ |      is given and true.
+ |  
+ |  startswith(...)
+ |      S.startswith(prefix[, start[, end]]) -&gt; bool
+ |      
+ |      Return True if S starts with the specified prefix, False otherwise.
+ |      With optional start, test S beginning at that position.
+ |      With optional end, stop comparing S at that position.
+ |      prefix can also be a tuple of strings to try.
+ |  
+ |  strip(...)
+ |      S.strip([chars]) -&gt; str
+ |      
+ |      Return a copy of the string S with leading and trailing
+ |      whitespace removed.
+ |      If chars is given and not None, remove characters in chars instead.
+ |  
+ |  swapcase(...)
+ |      S.swapcase() -&gt; str
+ |      
+ |      Return a copy of S with uppercase characters converted to lowercase
+ |      and vice versa.
+ |  
+ |  title(...)
+ |      S.title() -&gt; str
+ |      
+ |      Return a titlecased version of S, i.e. words start with title case
+ |      characters, all remaining cased characters have lower case.
+ |  
+ |  translate(...)
+ |      S.translate(table) -&gt; str
+ |      
+ |      Return a copy of the string S in which each character has been mapped
+ |      through the given translation table. The table must implement
+ |      lookup/indexing via __getitem__, for instance a dictionary or list,
+ |      mapping Unicode ordinals to Unicode ordinals, strings, or None. If
+ |      this operation raises LookupError, the character is left untouched.
+ |      Characters mapped to None are deleted.
+ |  
+ |  upper(...)
+ |      S.upper() -&gt; str
+ |      
+ |      Return a copy of S converted to uppercase.
+ |  
+ |  zfill(...)
+ |      S.zfill(width) -&gt; str
+ |      
+ |      Pad a numeric string S with zeros on the left, to fill a field
+ |      of the specified width. The string S is never truncated.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Static methods defined here:
+ |  
+ |  maketrans(x, y=None, z=None, /)
+ |      Return a translation table usable for str.translate().
+ |      
+ |      If there is only one argument, it must be a dictionary mapping Unicode
+ |      ordinals (integers) or characters to Unicode ordinals, strings or None.
+ |      Character keys will be then converted to ordinals.
+ |      If there are two arguments, they must be strings of equal length, and
+ |      in the resulting dictionary, each character in x will be mapped to the
+ |      character at the same position in y. If there is a third argument, it
+ |      must be a string, whose characters will be mapped to None in the result.
+(END)</code></pre>
+</section>
+<section id="dygresja-przykład" class="level2">
+<h2>Dygresja: przykład</h2>
+<hr />
+<pre><code>&gt;&gt;&gt; help(str.replace)
+Help on method_descriptor:
+
+replace(...)
+    S.replace(old, new[, count]) -&gt; str
+    
+    Return a copy of S with all occurrences of substring
+    old replaced by new.  If the optional argument count is
+    given, only the first count occurrences are replaced.</code></pre>
+<pre><code>s = &quot;Python&quot;
+
+s.replace(&#39;yt&#39;, &#39;yyyyyt&#39;) # [obiekt].metoda</code></pre>
+<pre><code>&#39;Pyyyyython&#39;</code></pre>
+</section>
+</section>
+<section id="section-3" class="level1">
+<h1></h1>
+<section id="lista-list" class="level2">
+<h2>Lista (<code>list</code>)</h2>
+<hr />
+<ul>
+<li>sekwencja zmiennych dowolnego typu</li>
+<li>dynamiczny rozmiar</li>
+<li>inicjowana jest:
+<ul>
+<li>nawiasy kwadratowe</li>
+<li>jawnie list([iterable]) (czyli konstruktor klasy list)</li>
+<li>lista składana (list comprehension)</li>
+</ul></li>
+</ul>
+</section>
+<section id="lista-przez" class="level2">
+<h2>Lista przez []</h2>
+<hr />
+<pre><code>lista = [1, 2, &#39;a&#39;, &quot;Python&quot;]  # 4-elementowa listę obiektów typu str i int</code></pre>
+<pre><code>len(lista)  # długość listy</code></pre>
+<pre><code>4</code></pre>
+<pre><code>lista[0]  # pierwszy element listy</code></pre>
+<pre><code>1</code></pre>
+<pre><code>lista[-1][0]  # pierwszy element ostatniego elementu listy</code></pre>
+<pre><code>&#39;P&#39;</code></pre>
+</section>
+<section id="lista-przez-konstruktor" class="level2">
+<h2>Lista przez konstruktor</h2>
+<hr />
+<pre><code>lista = list([1,2,3])  # bez sensu, ale można</code></pre>
+<pre><code>[1, 2, 3]</code></pre>
+<pre><code>lista = list(&quot;Python&quot;)  # można stworzyć listę ze string</code></pre>
+<pre><code>[&#39;P&#39;, &#39;y&#39;, &#39;t&#39;, &#39;h&#39;, &#39;o&#39;, &#39;n&#39;]</code></pre>
+<pre><code>lista = list(1)  # ale już nie z int</code></pre>
+<pre><code>---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+&lt;ipython-input-28-5b92e1b521a9&gt; in &lt;module&gt;()
+----&gt; 1 lista = list(1) # ale już nie z int
+
+
+TypeError: &#39;int&#39; object is not iterable</code></pre>
+</section>
+<section id="lista-składana" class="level2">
+<h2>Lista składana</h2>
+<hr />
+<pre><code>cyfry = [&quot;jeden&quot;, &quot;dwa&quot;, &quot;trzy&quot;]  # definiujemy listę
+
+# [wartość] dla [obiektu] z [listy]
+# pętle zostaną szerzej omówione na kolejnych wykładach
+dlugosc = [len(cyfra) for cyfra in cyfry]</code></pre>
+<pre><code>[5, 3, 4]</code></pre>
+<pre><code>cyfry = [&quot;jeden&quot;, &quot;dwa&quot;, &quot;trzy&quot;]  # definiujemy listę
+
+# [wartość] dla [obiektu] z [listy] jeśli [warunek]
+# warunki zostaną szerzej omówione pod koniec wykładu
+dlugosc = [len(cyfra) for cyfra in cyfry if cyfra != &#39;dwa&#39;]</code></pre>
+<pre><code>[5, 4]</code></pre>
+</section>
+<section id="lista-jako-rezultat-funkcji" class="level2">
+<h2>Lista jako rezultat funkcji</h2>
+<hr />
+<pre><code>&gt;&gt;&gt; help(str.split)
+
+Help on method_descriptor:
+
+split(...)
+    S.split(sep=None, maxsplit=-1) -&gt; list of strings
+
+    Return a list of the words in S, using sep as the
+    delimiter string.  If maxsplit is given, at most maxsplit
+    splits are done. If sep is not specified or is None, any
+    whitespace string is a separator and empty strings are
+    removed from the result.</code></pre>
+<pre><code>(&quot;Python is awesome, fast, and friendly!&quot;).split()</code></pre>
+<pre><code>[&#39;Python&#39;, &#39;is&#39;, &#39;awesome,&#39;, &#39;fast,&#39;, &#39;and&#39;, &#39;friendly!&#39;]</code></pre>
+</section>
+</section>
+<section id="section-4" class="level1">
+<h1></h1>
+<section id="krotka-tuple" class="level2">
+<h2>Krotka (<code>tuple</code>)</h2>
+<hr />
+<ul>
+<li>sekwencja zmiennych dowolnego typu</li>
+<li>stały rozmiar</li>
+<li>inicjowana jest:
+<ul>
+<li>nawiasy okrągłe</li>
+<li>ciąg elementów oddzielonych przecinkiem</li>
+<li>jawnie tuple([iterable])</li>
+</ul></li>
+</ul>
+</section>
+<section id="krotka---przykłady" class="level2">
+<h2>Krotka - przykłady</h2>
+<hr />
+<pre><code>krotka = (1, 2, 3, &quot;Python&quot;)  # jak lista, ale () zamiast []</code></pre>
+<pre><code>(1, 2, 3, &#39;Python&#39;)</code></pre>
+<pre><code>krotka = 1, 2, 3, &quot;Python&quot;  # brak nawiasów = tuple</code></pre>
+<pre><code>(1, 2, 3, &#39;Python&#39;)</code></pre>
+<pre><code>lista = list(&quot;Python&quot;)  # lista ze stringa
+
+krotka = tuple(lista)   # krotka z listy
+
+print(lista)
+print(krotka)</code></pre>
+<pre><code>[&#39;P&#39;, &#39;y&#39;, &#39;t&#39;, &#39;h&#39;, &#39;o&#39;, &#39;n&#39;]
+(&#39;P&#39;, &#39;y&#39;, &#39;t&#39;, &#39;h&#39;, &#39;o&#39;, &#39;n&#39;)</code></pre>
+</section>
+<section id="krotka-vs-lista" class="level2">
+<h2>Krotka vs lista</h2>
+<hr />
+<ul>
+<li>krotka ma stały rozmiar a lista jest dynamiczna</li>
+<li>krotka jest &quot;niezmienna&quot; (<em>immutable</em>) w przeciwieństwie do listy (<em>mutable</em>)</li>
+<li>więcej o <em>mutable</em> vs <em>immutable</em> na kolejnym wykładzie</li>
+<li>jeśli sekwencja obiektów jest stała w czasie działania programu, lepiej używać krotek
+<ul>
+<li>szybsze</li>
+<li>bezpieczniejsze</li>
+<li>mogą być kluczami w słowniku (o słownikach na kolejnych wykładach)</li>
+</ul></li>
+</ul>
+</section>
+<section id="krotka-jest-stała" class="level2">
+<h2>Krotka jest stała</h2>
+<hr />
+<pre><code>lista = [1, 2, 3]
+
+lista[0] = 2  # pierwszy element listy -&gt; 2</code></pre>
+<pre><code>[2, 2, 3]</code></pre>
+<pre><code>krotka = (1, 2, 3)
+
+krotka[0] = 2  # operacja niedozwolona dla krotek</code></pre>
+<pre><code>---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+&lt;ipython-input-38-9a057d2d95b0&gt; in &lt;module&gt;()
+      1 krotka = (1, 2, 3)
+      2 
+----&gt; 3 krotka[0] = 2
+
+
+TypeError: &#39;tuple&#39; object does not support item assignment</code></pre>
+</section>
+</section>
+<section id="section-5" class="level1">
+<h1></h1>
+<section id="range" class="level2">
+<h2><code>range</code></h2>
+<hr />
+<ul>
+<li>uwaga: w Pythonie 2 <code>range()</code> jest funkcją wbudowaną; w Pythonie 3 jest to typ danych (klasa)</li>
+<li>reprezentuje (niezmienniczą) sekwencję liczb</li>
+<li>zajmuje mniej pamięci niż <code>list</code> lub <code>tuple</code> (przechowuje tylko informację o początku, końcu i kroku)</li>
+</ul>
+</section>
+<section id="range-przykład" class="level2">
+<h2><code>range</code>: przykład</h2>
+<hr />
+<pre><code>x = range(10)  # od 0 do 10
+
+print(x)  # w Pythonie 2 zobaczylibyśmy [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code></pre>
+<pre><code>range(0, 10)</code></pre>
+<pre><code>print(list(x))  # zrzutujemy na listę, żeby wydrukować</code></pre>
+<pre><code>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code></pre>
+<pre><code>x[0] = 1  # range jest immutable</code></pre>
+<pre><code>---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+&lt;ipython-input-41-3a9de573c036&gt; in &lt;module&gt;()
+----&gt; 1 x[0] = 1 # range jest immutable
+
+
+TypeError: &#39;range&#39; object does not support item assignment</code></pre>
+</section>
+<section id="range-z-krokiem" class="level2">
+<h2><code>range</code> z krokiem</h2>
+<hr />
+<pre><code>cyfry = range(0, 10)       # range(początek = 0, koniec) 
+parzyste = range(2, 10, 2) # range(początek, koniec, krok)
+nieparzyste = range(1, 10, 2)
+
+print(list(cyfry))
+print(list(parzyste))
+print(list(nieparzyste))</code></pre>
+<pre><code>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[2, 4, 6, 8]
+[1, 3, 5, 7, 9]</code></pre>
+</section>
+</section>
+<section id="section-6" class="level1">
+<h1></h1>
+<section id="sekwencyjne-typy-danych-podsumowanie" class="level2">
+<h2>Sekwencyjne typy danych: podsumowanie</h2>
+<hr />
+<ul>
+<li><code>list</code> - dynamiczny ciąg zmiennych dowolnego typu</li>
+<li><code>tuple</code> - niezmienniczy ciąg zmiennych dowolnego typu</li>
+<li><code>range</code> - niezmienniczy ciąg liczba całkowitych</li>
+<li><code>str</code> - niezmienniczy ciąg znaków</li>
+<li>(dla kompletności) są jeszcze binarne sekwencyjne typy danych: <code>bytes</code>, <code>bytearray</code>, <code>memoryview</code></li>
+</ul>
+</section>
+<section id="operacje-na-sekwencjach" class="level2">
+<h2>Operacje na sekwencjach</h2>
+<hr />
+<pre><code>&quot;y&quot; in &quot;Python&quot;        # True
+
+&quot;p&quot; not in &quot;Python&quot;    # True
+
+[1, 2, 3] + [4, 5, 6]  # [1, 2, 3, 4, 5, 6]
+
+&#39;-&#39; * 10               # &#39;----------&#39;
+
+(1, 2, 3) * 2          # (1, 2, 3, 1, 2, 3)</code></pre>
+</section>
+<section id="funkcje-wbudowane" class="level2">
+<h2>Funkcje wbudowane</h2>
+<hr />
+<pre><code>len([1,2,-3])  # liczba elementów -&gt; 3
+
+min([1,2,-3])  # minimum          -&gt; -3
+
+max(&quot;Python&quot;)  # maximum          -&gt; &#39;y&#39;</code></pre>
+</section>
+<section id="wybrane-metody" class="level2">
+<h2>Wybrane metody</h2>
+<hr />
+<pre><code>
+</code></pre>
+</section>
+</section>
     </div>
 
     <script src="../reveal.js/lib/js/head.min.js"></script>
