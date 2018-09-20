@@ -108,21 +108,21 @@ Wyjaśnij znaczenie zmiennej `_` w trybie interaktywnym i zademonstruj jej dzia�
 
 ---
 
-## Zadanie 7 (1 pkt)
+## Zadanie 7 (2 pkt)
 
-Niech $a = 3$ i $b = 4$ będą długościami boków trójkąta, a $\alpha = 47^0$ kątem mędzy nimi. Wyznacz pole trójkąta. *Wskazówka: wykorzystaj implementację funkcji trygonometrycznych z biblioteki `math`.*
+Niech $a = 3$ i $b = 4$ będą długościami boków trójkąta, a $\alpha = 47^0$ kątem między nimi. Wyznacz pole trójkąta. *Wskazówka: wykorzystaj implementację funkcji trygonometrycznych z biblioteki `math`.*
 
 ---
 
 ## Zadanie 8 (2 pkt)
 
-Korzystając z funkcji *sys.getsizeof* sprawdź, ile pamięci zajmuje:
+Korzystając z funkcji `sys.getsizeof` sprawdź, ile pamięci zajmuje:
 
 * `0`
 * `2**100`
 * `2**1000`
 
-Sprawdź, ile pamięci zajmują: `True` i `False`. Czy jest to wynik, którego się spodziewałaś/-eś?
+Typ logiczny (`bool`) może przyjąć jedną z dwóch wartości: `True` i `False`. Sprawdź, ile pamięci zajmują: `True` i `False`. Czy jest to wynik, którego się spodziewałaś/-eś?
 
 Zapoznaj się z dokumentacją funkcji `isinstance`.
 
@@ -140,7 +140,24 @@ Wyjaśnij rozmiar *True* i *False*.
 
 ---
 
-## Zadanie 9 (3 pkt)
+## Zadanie 9 (2 pkt)
+
+Zapoznaj się z dokumentacją funkcji wbudowanej `id` (np. `help(id)`). Następnie wykonaj:
+
+```py
+>>> a = 1
+>>> b = 1
+>>> c = 2
+>>> print(id(a), id(b), id(c))
+>>> b = 2
+>>> print(id(a), id(b), id(c))
+```
+
+Wyjaśnij otrzymane wyniki.
+
+---
+
+## Zadanie 10 (3 pkt)
 
 Korzystając z wbudowanej dokumentacji znajdź funkcję, która wyznacza licznik i mianownik ułamka zwykłego dowolnej liczby zmiennoprzecinkowej. *Wskazówka: `help(float)`*
 
@@ -161,25 +178,3 @@ Wyjaśnij wynik dodawania:
 ```py
 >>> print(0.1 + 0.2)
 ```
-
----
-
-## Zadanie 10 (3 pkt)
-
-Zapoznaj się z dokumentacją funkcji wbudowanej `id` (np. `help(id)`) i operatora `is` (np. [https://docs.python.org/3.6/reference/expressions.html#is](https://docs.python.org/3.6/reference/expressions.html#is)). Następnie wykonaj:
-
-```py
->>> a = 1
->>> b = 1
->>> a == b
->>> a is b
-```
-
-```py
->>> a = [1, 2, 3]
->>> b = [1, 2, 3]
->>> a == b
->>> a is b
-```
-
-Wyjaśnij otrzymane wyniki.
