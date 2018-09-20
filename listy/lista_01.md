@@ -1,10 +1,5 @@
 # Lista 1
 
-```
- I termin oddania (100% punktów): tba
-II termin oddania ( 50% punktów): tba
-```
-
 > Każde zadanie (oprócz 0) należy umieścić w osobnym pliku `imie.nazwisko.XX.YY.txt` gdzie `XX` to numer listy a `YY` numer zadania. W pliku tekstowym musi się znaleźć odpowiedni fragment kodu skopiowany z intepretera oraz odpowiedzi na zadane pytania.
 
 ---
