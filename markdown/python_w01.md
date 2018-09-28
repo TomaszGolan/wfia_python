@@ -48,8 +48,8 @@ Sterowanie: spacja + shift-spacja || page down + page up || strzałki || esc
 
 ---
 
-* ćwiczenia: listy zadań + kolokwia
-* wykład: egzamin praktyczny
+* ćwiczenia: listy zadań + wejściówki + kolokwia
+* wykład: egzamin
 
 #
 

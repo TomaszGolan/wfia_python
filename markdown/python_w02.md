@@ -922,7 +922,7 @@ dlugosc = [len(cyfra) for cyfra in cyfry]
 cyfry = ["jeden", "dwa", "trzy"]  # definiujemy listę
 
 # [wartość] dla [obiektu] z [listy] jeśli [warunek]
-# warunki zostaną szerzej omówione pod koniec wykładu
+# warunki zostaną szerzej omówione na kolejnych wykładach
 dlugosc = [len(cyfra) for cyfra in cyfry if cyfra != 'dwa']
 ```
 
