@@ -15,8 +15,8 @@ Sterowanie: spacja + shift-spacja || page down + page up || strzałki || esc
 * pokój: **438**
 * email: <tomasz.golan@uwr.edu.pl>
 * konsultacje:
-    * tba
-    * tba
+    * Czwartek 15:30-16:30
+    * Piątek 11:30-12:30
 
 ## Program
 
