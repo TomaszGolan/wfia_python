@@ -1146,7 +1146,7 @@ print(list(nieparzyste))
 (1, 2, 3) * 2          # (1, 2, 3, 1, 2, 3)
 ```
 
-## Funkcje wbudowane
+## Funkcje wbudowane i metody
 
 ---
 
@@ -1158,11 +1158,43 @@ min([1,2,-3])  # minimum          -> -3
 max("Python")  # maximum          -> 'y'
 ```
 
+```
+[1, 2, 3, 2, 4, 2].count(2)  # liczba wystąpień     -> 3
+
+[1, 2, 3, 2, 4, 2].index(2)  # pierwsze wystapienie -> 1
+```
+
 ## Operacje na sekwencjach zmiennych
 
 ---
 
 ```
+lista = [1, 2, 3]
 
+lista[1] = 4          # -> [1, 4, 3]
+
+lista[1:2] = [5, 6]   # -> [1, 5, 6, 3]
+
+del lista[1:3]        # -> [1, 6, 3]
+
+lista.append(7)       # -> [1, 6, 3, 7]
+
+lista.extend([8, 9])  # -> [1, 6, 3, 7, 8, 9]
 
 ```
+
+#
+
+## Podsumowanie
+
+---
+
+* `str` jest podstawowym typem zmiennej to przechowywania tekstu
+
+* `list` jest sekwencją zmiennych dowolnego typu
+
+* `tuple` jest *stałą listą*
+
+* `range` jest ciągiem arytmetycznym
+
+* Na kolejnym wykładzie przedstawione zostaną podstawy programowania strukturalnego.
