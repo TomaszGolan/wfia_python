@@ -37,10 +37,10 @@ Wykłady dla studentów Wydziału Fizyki i Astronomii z "Języki skryptowe - Pyt
         *  db+: x >= 0.8
         *   db: x >= 0.7
         * dst+: x >= 0.6
-        *  dst: x >- 0.5
+        *  dst: x >= 0.5
 
 * Na początku każdych zajęć (poza pierwszymi i ostatnimi) odbędzie się krótka kartkówa, zwana dalej wejściówką. Dotyczyć będzie zagadnień z ostatniej listy zadań. Na koniec semestru wystawiona jest zbiorcza ocena za wszystkie wejściówki (wg takich samych reguł jak w przypadku list zadań).
 
-* Odbędzie się N kolokwiów, gdzie N należy do zbioru {0, 1, 2}. Każde kolokwium zostanie zapowiedziane z co najmniej dwutygodniowym wyprzedzeniem. Na koniec semestru wystawiona jest zbiorcza ocena za wszystkie kolokwia (średnia arytmetyczna).
+* Odbędzie się N kolokwiów, gdzie N należy do zbioru {1, 2}. Każde kolokwium zostanie zapowiedziane z co najmniej dwutygodniowym wyprzedzeniem. Na koniec semestru wystawiona jest zbiorcza ocena za wszystkie kolokwia (średnia arytmetyczna).
 
 * Końcowa ocena wyznaczana jest jako średnia arytmetyczna trzech opisanych wyżej ocen.
