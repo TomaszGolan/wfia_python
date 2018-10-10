@@ -15,10 +15,17 @@ Wykłady dla studentów Wydziału Fizyki i Astronomii z "Języki skryptowe - Pyt
     * Wprowadzenie
     * Podstawowe typy danych
     * Operacje na liczbach
+    
+*  [Wykład 2](https://tomaszgolan.github.io/wfia_python/html/python_w02.html)
+
+    * Sekwencyjne typy danych
+        
 
 ## Listy
 
 * Lista 1: [markdown](listy/lista_01.md), [pdf](listy/lista_01.pdf)
+
+* Lista 2: [markdown](listy/lista_02.md), [pdf](listy/lista_02.pdf)
 
 ---
 
