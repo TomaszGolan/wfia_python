@@ -1,0 +1,870 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <title>Języki skryptowe Python</title>
+
+  <meta name="description" content="Języki skryptowe Python">
+
+   <meta name="author" content="Wykład 3" /> 
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="stylesheet" href="../reveal.js/css/reveal.css">
+
+      <link rel="stylesheet" href="../reveal.js/css/theme/white.css" id="theme">
+  
+      <link rel="stylesheet" href="../template/github.css">
+  
+  <link rel="stylesheet" href="../template/extra.css">
+
+  <script>
+    document.write('<link rel="stylesheet" href="../reveal.js/css/print/' +
+      (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') +
+      '.css" type="text/css" media="print">');
+  </script>
+
+  <script src="../template/snap.svg-min.js"></script>
+  <script src="../template/plotly-latest.min.js"></script>
+
+  <!--[if lt IE 9]>
+  <script src="../reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+
+  
+
+</head>
+
+<body>
+
+  
+
+  <div class="reveal">
+
+    <div class="slides">
+
+      <section>
+        <h1>Języki skryptowe Python</h1>
+         <h3>Wykład 3</h3> 
+        <p>
+          <h4></h4>
+        </p>
+      </section>
+
+       <div class="footer">
+<p>Sterowanie: spacja + shift-spacja || page down + page up || strzałki || esc</p>
+</div>
+<section id="section" class="level1">
+<h1></h1>
+<section id="typ-logiczny-boolowski-boolean" class="level2">
+<h2>Typ logiczny (boolowski, <em>boolean</em>)</h2>
+<hr />
+<ul>
+<li>przyjmuje wartości: prawda lub fałsz</li>
+<li>w Pythonie następujące wartości są utożsamiane z fałszem:
+<ul>
+<li><code>False</code></li>
+<li><code>None</code></li>
+<li>zero dowolnego typu <code>(0, 0.0, 0j)</code></li>
+<li>pusta sekwencja <code>''</code>, <code>()</code>, <code>[]</code> lub mapowanie <code>{}</code></li>
+</ul></li>
+<li>pozostałe wartości uznawane są za prawdę</li>
+</ul>
+</section>
+<section id="operacje-logiczne" class="level2">
+<h2>Operacje logiczne</h2>
+<hr />
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Operacja</th>
+<th style="text-align: center;">Wynik</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">x or y</td>
+<td style="text-align: center;">jeśli x jest fałszem, to y, inaczej x</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">x and y</td>
+<td style="text-align: center;">jeśli x jest fałszem, to x, inaczej y</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">not x</td>
+<td style="text-align: center;">jeśli x jest fałszem, to True, inaczej False</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="operacje-logiczne---or" class="level2">
+<h2>Operacje logiczne - <code>or</code></h2>
+<hr />
+<pre><code>print(&quot;0 or 0 -&gt; &quot; + str(0 or 0))
+print(&quot;1 or 0 -&gt; &quot; + str(1 or 0))
+print(&quot;0 or 1 -&gt; &quot; + str(0 or 1))
+print(&quot;1 or 1 -&gt; &quot; + str(1 or 1))</code></pre>
+<pre><code>0 or 0 -&gt; 0
+1 or 0 -&gt; 1
+0 or 1 -&gt; 1
+1 or 1 -&gt; 1</code></pre>
+</section>
+<section id="operacje-logiczne---and" class="level2">
+<h2>Operacje logiczne - <code>and</code></h2>
+<hr />
+<pre><code>print(&quot;0 and 0 -&gt; &quot; + str(0 and 0))
+print(&quot;1 and 0 -&gt; &quot; + str(1 and 0))
+print(&quot;0 and 1 -&gt; &quot; + str(0 and 1))
+print(&quot;1 and 1 -&gt; &quot; + str(1 and 1))</code></pre>
+<pre><code>0 or 0 -&gt; 0
+1 or 0 -&gt; 0
+0 or 1 -&gt; 0
+1 or 1 -&gt; 1</code></pre>
+</section>
+<section id="operacje-logiczne---not" class="level2">
+<h2>Operacje logiczne - <code>not</code></h2>
+<hr />
+<pre><code>not True</code></pre>
+<pre><code>False</code></pre>
+<pre><code>not False</code></pre>
+<pre><code>True</code></pre>
+</section>
+<section id="dygresja---słowa-kluczowe-zastrzeżone" class="level2">
+<h2>Dygresja - słowa kluczowe / zastrzeżone</h2>
+<hr />
+<pre><code>x = 1     # zmiennej x przypisz wartość 1
+y = 2     # zmiennej y przypisz wartość 2
+False = 3 # zmiennej False przypusz wartość 3</code></pre>
+<pre><code>False = 3 # zmiennej False przypusz wartość 3
+SyntaxError: can&#39;t assign to keyword</code></pre>
+<pre><code>import keyword
+print(keyword.kwlist)  # lista słów kluczowych w Pythonie</code></pre>
+<pre><code>[&#39;False&#39;, &#39;None&#39;, &#39;True&#39;, &#39;and&#39;, &#39;as&#39;, &#39;assert&#39;, &#39;break&#39;, &#39;class&#39;, &#39;continue&#39;, &#39;def&#39;, &#39;del&#39;, &#39;elif&#39;, &#39;else&#39;, &#39;except&#39;, &#39;finally&#39;, &#39;for&#39;, &#39;from&#39;, &#39;global&#39;, &#39;if&#39;, &#39;import&#39;, &#39;in&#39;, &#39;is&#39;, &#39;lambda&#39;, &#39;nonlocal&#39;, &#39;not&#39;, &#39;or&#39;, &#39;pass&#39;, &#39;raise&#39;, &#39;return&#39;, &#39;try&#39;, &#39;while&#39;, &#39;with&#39;, &#39;yield&#39;]</code></pre>
+</section>
+<section id="dygresja---niedozwolone-nazwy-zmiennych" class="level2">
+<h2>Dygresja - niedozwolone nazwy zmiennych</h2>
+<hr />
+<ul>
+<li>słowa kluczowe</li>
+<li>zaczynające się od cyfry</li>
+<li>zawierające polskie znaki</li>
+<li>zawierające cokolwiek innego niż litery, cyfry i <code>_</code></li>
+</ul>
+</section>
+<section id="porównania" class="level2">
+<h2>Porównania</h2>
+<hr />
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">==</td>
+<td style="text-align: center;">równe</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">!=</td>
+<td style="text-align: center;">różne</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">&lt;</td>
+<td style="text-align: center;">mniejsze</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">&gt;</td>
+<td style="text-align: center;">większe</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">&lt;=</td>
+<td style="text-align: center;">mniejsze lub równe</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">&gt;=</td>
+<td style="text-align: center;">większe lub równe</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">is</td>
+<td style="text-align: center;">ten sam identyfikator</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">is not</td>
+<td style="text-align: center;">inny identyfikator</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="porównania-1" class="level2">
+<h2>Porównania</h2>
+<hr />
+<pre><code>1 &gt; 0  # większy niż</code></pre>
+<pre><code>True</code></pre>
+<pre><code>&quot;Prowadzący&quot; &gt; &quot;Student&quot;  # znak po znaku</code></pre>
+<pre><code>False</code></pre>
+<pre><code>&quot;prowadzący&quot; &gt; &quot;Student&quot;  # wielkość ma znaczenie</code></pre>
+<pre><code>True</code></pre>
+<pre><code>&quot;prowadzący&quot; &gt; &quot;2 studentów&quot;  # litera &gt; cyfra</code></pre>
+<pre><code>True</code></pre>
+</section>
+</section>
+<section id="section-1" class="level1">
+<h1></h1>
+<section id="paradygmaty-programowania" class="level2">
+<h2>Paradygmaty programowania</h2>
+<hr />
+<ul>
+<li><p>w Pythonie możliwe jest:</p>
+<ul>
+<li>programowanie strukturalne (typowe dla Fortran, C)</li>
+<li>programowanie obiektowe (typowe dla C++, Java)</li>
+<li>programowanie funkcyjne (typowe dla Lisp, Haskell)</li>
+</ul></li>
+</ul>
+</section>
+<section id="programowanie-strukturalne" class="level2">
+<h2>Programowanie strukturalne</h2>
+<hr />
+<ul>
+<li><p>trzy struktury sterujące:</p>
+<ul>
+<li><em>sekwencja</em> - wykonanie instrukcji w zadanej kolejności</li>
+<li><em>wybór</em> - wykonanie instrukcji w zależności od stanu</li>
+<li><em>iteracja</em> - wykonywanie instrukcji dopóki (nie)spełniony jest warunek</li>
+</ul></li>
+</ul>
+<p><img src="../img/js-python_w03_22_0.svg" /></p>
+</section>
+<section id="instrukcja-blokowa" class="level2">
+<h2>Instrukcja blokowa</h2>
+<hr />
+<ul>
+<li>wydzielona część kodu źródłowego (traktowana jak pojedyncza instrukcja)</li>
+<li>w C++ wykorzystuje się klamry</li>
+</ul>
+<pre><code>int x = 0;
+
+{
+    int y = 10; // zmienna lokalna
+    x = y + 2;
+}
+
+cout &lt;&lt; x; // OK
+cout &lt;&lt; y; // ERROR: nieznana zmienna</code></pre>
+</section>
+<section id="składnia-pythona" class="level2">
+<h2>Składnia Pythona</h2>
+<hr />
+<ul>
+<li>instrukcje blokowe wprowadza się za pomocą wcięć</li>
+</ul>
+<pre><code>// przykład C++
+double bezpieczne_dzielenie (int a, int b)
+{
+    if (b != 0) return a / b;
+    else return 0;
+}</code></pre>
+<pre><code># przykład Python
+def bezpieczne_dzielenie (a, b):
+    if b != 0:
+        return a / b
+    else:
+        return 0</code></pre>
+</section>
+<section id="wcięcia" class="level2">
+<h2>Wcięcia</h2>
+<hr />
+<ul>
+<li>spacje (zalecane) lub tabulacje</li>
+<li>w Pythonie 3 nie wolno mieszać (w Pythonie 2 się nie zaleca)</li>
+<li>najczęściej wcięce = 4 spacje (czytelność)</li>
+<li>wiele edytorów umożliwia zamianę <em>tab</em> na spacje</li>
+</ul>
+</section>
+</section>
+<section id="section-2" class="level1">
+<h1></h1>
+<section id="instrukcja-warunkowa-if" class="level2">
+<h2>Instrukcja warunkowa <code>if</code></h2>
+<hr />
+<ul>
+<li>wykonaj instrukcje, jeśli spełniony jest warunek</li>
+</ul>
+<pre><code>if warunek: # zwróć uwagę na :
+    instrukcja1
+    instrukcja2
+    ...</code></pre>
+<p>przykład:</p>
+<pre><code>if 2 &gt; 1:
+    print(&quot;2 jest większe od 1&quot;)</code></pre>
+<pre><code>2 jest większe od 1</code></pre>
+</section>
+<section id="instrukcja-warunkowa-if-else" class="level2">
+<h2>Instrukcja warunkowa <code>if else</code></h2>
+<hr />
+<ul>
+<li>wykonaj instrukcje, jeśli spełniony jest warunek, lub wykonaj inne</li>
+</ul>
+<pre><code>if warunek:
+    instrukcja1
+    instrukcja2
+    ...
+else:
+    instrukcja3
+    instrukcja4
+    ...</code></pre>
+<p>przykład:</p>
+<pre><code>if 2 &gt; 3:
+    print(&quot;2 jest większe od 3&quot;)
+else:
+    print(&quot;2 nie jest większe od 3&quot;)</code></pre>
+<pre><code>2 nie jest większe od 3</code></pre>
+</section>
+<section id="instrukcja-warunkowa-if-elif-else" class="level2">
+<h2>Instrukcja warunkowa <code>if elif else</code></h2>
+<hr />
+<ul>
+<li>wykonaj jeśli, lub wykonaj jeśli, …, lub wykonaj</li>
+</ul>
+<pre><code>if warunek1:
+    instrukcja1
+    instrukcja2
+    ...
+elif warunek2:
+    instrukcja3
+    instrukcja4
+    ...
+.
+.
+.
+else:
+    instrukcja5
+    instrukcja6</code></pre>
+</section>
+<section id="instrukcja-warunkowa-if-elif-else---przykład" class="level2">
+<h2>Instrukcja warunkowa <code>if elif else</code> - przykład</h2>
+<hr />
+<pre><code>if 2 &gt; 3:
+    print(&quot;2 jest większe od 3&quot;)
+elif 2 == 3:
+    print(&quot;2 jest równe 3&quot;)
+else:
+    print(&quot;2 jest mniejsze od 3&quot;)</code></pre>
+<pre><code>2 jest mniejsze od 3</code></pre>
+</section>
+<section id="przykład-zastosowania-instrukcji-warunkowej" class="level2">
+<h2>Przykład zastosowania instrukcji warunkowej</h2>
+<hr />
+<pre><code>print(&quot;Podaj liczbę:&quot;, end=&#39; &#39;)
+
+raw_x = input()  # pobierz stringa z wejścia standardowego
+x = eval(raw_x)  # zinterpretuj jako wyrażenie Pythona
+
+# x % 2 zwraca resztę z dzielenia
+# każda wartość != 0 jest traktowana jako prawda
+if x % 2:
+    print(&quot;Podana liczba jest nieparzysta.&quot;)
+else:
+    print(&quot;Podana liczba jest parzysta.&quot;)</code></pre>
+<pre><code>Podaj liczbę: 2
+Podana liczba jest parzysta.</code></pre>
+</section>
+</section>
+<section id="section-3" class="level1">
+<h1></h1>
+<section id="dygresja-input-vs-raw_input" class="level2">
+<h2>Dygresja: <code>input</code> vs <code>raw_input</code></h2>
+<hr />
+<ul>
+<li><p>w Pythonie 2</p>
+<ul>
+<li><code>raw_input</code> pobiera “surowego” stringa</li>
+<li><code>input</code> dodatkowo go parsuje</li>
+</ul></li>
+<li><p>w Pythonie 3</p>
+<ul>
+<li><code>input</code> pobiera “surowego” stringa</li>
+<li><code>eval(input)</code> odtworzy zachowanie <code>input</code> z Pythona 2</li>
+</ul></li>
+</ul>
+</section>
+<section id="dygresja-input-i-eval" class="level2">
+<h2>Dygresja: <code>input</code> i <code>eval</code></h2>
+<hr />
+<pre><code>help(input)</code></pre>
+<pre><code>Help on method raw_input in module ipykernel.kernelbase:
+
+raw_input(prompt=&#39;&#39;) method of ipykernel.ipkernel.IPythonKernel instance
+    Forward raw_input to frontends
+    
+    Raises
+    ------
+    StdinNotImplentedError if active frontend doesn&#39;t support stdin.</code></pre>
+<pre><code>type(input())  # pobiera wejście jako string</code></pre>
+<pre><code>2
+str</code></pre>
+</section>
+<section id="dygresja-input-i-eval-1" class="level2">
+<h2>Dygresja: <code>input</code> i <code>eval</code></h2>
+<hr />
+<pre><code>help(eval)</code></pre>
+<pre><code>Help on built-in function eval in module builtins:
+
+eval(source, globals=None, locals=None, /)
+    Evaluate the given source in the context of globals and locals.
+    
+    The source may be a string representing a Python expression
+    or a code object as returned by compile().
+    The globals must be a dictionary and locals can be any mapping,
+    defaulting to the current globals and locals.
+    If only globals is given, locals defaults to it.</code></pre>
+<pre><code>type(eval(input()))  # parsuje wejście jako komendę</code></pre>
+<pre><code>2
+int</code></pre>
+</section>
+</section>
+<section id="section-4" class="level1">
+<h1></h1>
+<section id="iteratory" class="level2">
+<h2>Iteratory</h2>
+<hr />
+<ul>
+<li>iterator wskazuje element sekwencji oraz umożliwia dostęp do następnego</li>
+</ul>
+<pre><code>help(iter)</code></pre>
+<pre><code>Help on built-in function iter in module builtins:
+
+iter(...)
+    iter(iterable) -&gt; iterator
+    iter(callable, sentinel) -&gt; iterator
+    
+    Get an iterator from an object.  In the first form, the argument must
+    supply its own iterator, or be a sequence.
+    In the second form, the callable is called until it returns the sentinel.</code></pre>
+</section>
+<section id="iteriterable" class="level2">
+<h2><code>iter(iterable)</code></h2>
+<hr />
+<pre><code>lista = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]  # zwykła lista
+
+it = iter(lista)  # iterator listy (wskazuje na początek)
+
+print(next(it))  # zwraca 1 element i przesuwa &quot;wskaźnik&quot;
+print(next(it))  # zwraca 2 element i przesuwa &quot;wskaźnik&quot;
+print(next(it))  # zwraca 3 element i przesuwa &quot;wskaźnik&quot;
+print(next(it))  # zwraca 4 element i przesuwa &quot;wskaźnik&quot;</code></pre>
+<pre><code>a
+b
+c
+d</code></pre>
+</section>
+<section id="itercallable-sentinel" class="level2">
+<h2><code>iter(callable, sentinel)</code></h2>
+<hr />
+<pre><code>i = 0
+
+# funkcje omówimy w przyszłości
+def funkcja():
+    &quot;&quot;&quot;Z każdym wywołaniem zwraca kolejną liczbę całkowitą.&quot;&quot;&quot;
+    global i  # użyj globalnej zmiennej i
+    i += 1    # zwiększ
+    return i  # i zwróć
+
+# kolejne wartości zwracane przez funkcję
+# iterowane aż zwróci 4
+it = iter(funkcja, 4)
+
+print(next(it))
+print(next(it))
+print(next(it))
+# print(next(it)) # StopIteration</code></pre>
+<pre><code>1
+2
+3</code></pre>
+</section>
+<section id="pętla-for" class="level2">
+<h2>Pętla <code>for</code></h2>
+<hr />
+<ul>
+<li>pętla po sekwencji</li>
+<li>np. w Pascalu pętla po (arytmetycznym) ciągu liczb</li>
+<li>np. w C++ obie możliwości</li>
+</ul>
+<pre><code>// przykład w C++
+for (unsigned int i = 0; i &lt; N; i++)
+{
+    // wykonaj coś na i-tym elemencie
+}
+
+for (auto it = v.begin(); it != v.end(); ++it)
+{
+    // wykonaj coś na iteratorze it
+}</code></pre>
+</section>
+<section id="for-po-liście" class="level2">
+<h2><code>for</code> po liście</h2>
+<hr />
+<pre><code>lista = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]
+
+for element in lista:  # pętla po liście, w każdym kroku
+    print(element)     # element zmienia swoją wartość</code></pre>
+<pre><code>a
+b
+c
+d</code></pre>
+</section>
+<section id="for-krok-po-kroku" class="level2">
+<h2><code>for</code> “krok po kroku”</h2>
+<hr />
+<pre><code>lista = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]
+
+it = iter(lista)
+
+element = next(it)
+print(element)
+element = next(it)
+print(element)
+element = next(it)
+print(element)
+element = next(it)
+print(element)</code></pre>
+<pre><code>a
+b
+c
+d</code></pre>
+</section>
+<section id="for-i-next" class="level2">
+<h2><code>for</code> i <code>next</code></h2>
+<hr />
+<pre><code>lista = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]
+
+it = iter(lista)
+
+# pętla po iteratorze it
+# wewnątrz &quot;ręcznie&quot; wywołujemy next()
+for i in it:
+    print(&quot;i = &quot; + str(i))
+    print(&quot;next(it) = &quot; + str(next(it)))</code></pre>
+<pre><code>i = a         # pierwszy obieg pętli, pierwszy print
+next(it) = b  # pierwszy obieg pętli, drugi print, iterator przesunięty
+i = c         # w drugim obiegu pętli iterator wskazuje już na trzeci element
+next(it) = d  # pętla po czterech elementach kończy się w dwóch obiegach</code></pre>
+</section>
+<section id="for-po-wycinkach" class="level2">
+<h2><code>for</code> po wycinkach</h2>
+<hr />
+<pre><code>lista = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]
+
+for element in lista[-2:]:
+    print(element, end=&#39; &#39;)</code></pre>
+<pre><code>c d </code></pre>
+<pre><code>for i in range(10)[::2]:
+    print(i, end=&#39; &#39;)</code></pre>
+<pre><code>0 2 4 6 8 </code></pre>
+</section>
+<section id="for-po-krotce" class="level2">
+<h2><code>for</code> po krotce</h2>
+<hr />
+<pre><code>krotka = (&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;)
+
+for element in krotka:  # pętla po krotce
+    print(element)      # działa jak po liście</code></pre>
+<pre><code>a
+b
+c
+d</code></pre>
+</section>
+<section id="for-po-stringu" class="level2">
+<h2><code>for</code> po stringu</h2>
+<hr />
+<pre><code>slowo = &quot;Python&quot;
+
+for litera in slowo:  # pętla po stringu
+    print(litera)     # iteruje po literach</code></pre>
+<pre><code>P
+y
+t
+h
+o
+n</code></pre>
+</section>
+<section id="for-po-range" class="level2">
+<h2><code>for</code> po range</h2>
+<hr />
+<pre><code>for liczba in range(5):  # pętla po range
+    print(liczba)        # &quot;odpowiednik&quot; for (i = 0; ...)</code></pre>
+<pre><code>0
+1
+2
+3
+4</code></pre>
+</section>
+<section id="zagnieżdzona-pętla" class="level2">
+<h2>Zagnieżdzona pętla</h2>
+<hr />
+<pre><code># sekwencja sekwencji
+slowa = [&#39;Ala&#39;, &#39;Ma&#39;, &#39;Kota&#39;]
+
+for slowo in slowa:             # pętla po słowach
+    for litera in slowo:        # pętla po literach w kolejnych słowach
+        print(litera, end=&#39; &#39;)
+    
+    print()</code></pre>
+<pre><code>A l a 
+M a 
+K o t a </code></pre>
+</section>
+</section>
+<section id="section-5" class="level1">
+<h1></h1>
+<section id="pętla-while" class="level2">
+<h2>Pętla <code>while</code></h2>
+<hr />
+<ul>
+<li>wykonuj blok instrukcji dopóki warunek jest spełniony</li>
+</ul>
+<pre><code>while warunek:
+    instrukcje</code></pre>
+<p>przykład:</p>
+<pre><code>i = 0
+
+while i &lt; 5:  # wykonuj dopóki i &lt; 5
+    i += 1    # bez tego mamy nieskończoną pętlę
+    print(i, end=&#39; &#39;)</code></pre>
+<pre><code>1 2 3 4 5 </code></pre>
+</section>
+<section id="while---przykład" class="level2">
+<h2><code>while</code> - przykład</h2>
+<hr />
+<ul>
+<li>Dzięki instrukcji sterującej <code>if</code> możemy sprawdzić, czy podano takie dane, jakich oczekujemy</li>
+</ul>
+<pre><code>n = input(&quot;Podaj liczbę całkowitą: &quot;)
+
+if n.isdigit():
+    print(&quot;Twoja liczba to:&quot;, n)
+else:
+    print(n, &quot;nie jest liczbą całkowitą...&quot;)</code></pre>
+<pre><code>Podaj liczbę całkowitą: 23
+Twoja liczba to: 23</code></pre>
+</section>
+<section id="while---przykład-1" class="level2">
+<h2><code>while</code> - przykład</h2>
+<hr />
+<ul>
+<li>Wykorzystując pętlę <code>while</code> możemy wymusić, aby podano takie dane, jakich oczekujemy</li>
+</ul>
+<pre><code>n = input(&quot;Podaj liczbę całkowitą: &quot;)
+
+while not n.isdigit():
+    n = input(&quot;Spróbuj jeszcze raz: &quot;)
+    
+print(&quot;Twoja liczba to:&quot;, n)</code></pre>
+<pre><code>Podaj liczbę całkowitą: a
+Spróbuj jeszcze raz: 2
+Twoja liczba to: 2</code></pre>
+</section>
+<section id="while---nieskończona-pętla" class="level2">
+<h2><code>while</code> - nieskończona pętla</h2>
+<hr />
+<ul>
+<li>Korzystając z pętli <code>while</code> należy zachować ostrożność - łatwo stworzyć nieskończoną pętlę</li>
+</ul>
+<pre><code>i = 1
+
+while i != 10:
+    i += 2</code></pre>
+</section>
+</section>
+<section id="section-6" class="level1">
+<h1></h1>
+<section id="dodatkowe-instrukcje-sterujące" class="level2">
+<h2>Dodatkowe instrukcje sterujące</h2>
+<hr />
+<ul>
+<li><code>break</code> - przerwij pętlę</li>
+<li><code>continue</code> - przerwij obecną iterację</li>
+<li><code>pass</code> - nie rób nic</li>
+<li><code>else</code> - wykonuj jeśli pętla zakończyła się inaczej niż <em>break</em></li>
+</ul>
+</section>
+<section id="break" class="level2">
+<h2><code>break</code></h2>
+<hr />
+<pre><code>for i in range(10):  # drukuj liczby z range(10)
+    print(i, end=&#39; &#39;)
+    if i &gt; 5:        # przerwij pętlę jeśli i &gt; 5
+        break</code></pre>
+<pre><code>0 1 2 3 4 5 6 </code></pre>
+<pre><code>i = 0
+
+while True:    # wykonuj w niekończoność
+    print(i, end=&#39; &#39;)
+    if i &gt; 5:  # przerwij pętlę jeśli i &gt; 5
+        break
+    i += 1     # bez tego byłaby nieskończona pętla zer </code></pre>
+<pre><code>0 1 2 3 4 5 6 </code></pre>
+</section>
+<section id="continue" class="level2">
+<h2><code>continue</code></h2>
+<hr />
+<pre><code>for i in range(10):
+    if i % 2:     # jeśli i jest nieparzyste
+        continue  # pomiń
+    print(i, end=&#39; &#39;)</code></pre>
+<pre><code>0 2 4 6 8 </code></pre>
+<p>znowu uwaga na nieskończone <code>while</code></p>
+<pre><code>i = 0
+
+# pętla wydrukuje 0 i utknie na 1
+while i &lt; 10: 
+    if i % 2:
+        continue
+    print(i, end=&#39; &#39;)
+    i += 1</code></pre>
+</section>
+<section id="pass" class="level2">
+<h2><code>pass</code></h2>
+<hr />
+<pre><code>for i in range(10):
+    if i % 2:    # jeśli i jest nieparzyste
+        pass     # nie rób nic
+    else:        # w innej sytuacji drukuj
+        print(i, end=&#39; &#39;)</code></pre>
+<pre><code>0 2 4 6 8 </code></pre>
+<pre><code>i = 0
+
+# w praktyce napisalibyśmy: if not i % 2: print...
+while i &lt; 10:
+    if i % 2:
+        pass
+    else:
+        print(i, end=&#39; &#39;)
+    i += 1</code></pre>
+<pre><code>0 2 4 6 8 </code></pre>
+</section>
+<section id="else" class="level2">
+<h2><code>else</code></h2>
+<hr />
+<pre><code>for i in range(10):
+    if i &lt; 5:  # drukuj mniejsze od 5
+        print(i, end=&#39; &#39;)
+    else:      # dla pozosyałych nie rób nic
+        pass
+else:  # wykonaj po zakończeniu pętli
+    print(&quot;Koniec pętli.&quot;)</code></pre>
+<pre><code>0 1 2 3 4 Koniec pętli.</code></pre>
+<pre><code>for i in range(10):
+    if i &lt; 5:  # drukuj mniejsze od 5
+        print(i, end=&#39; &#39;)
+    else:      # przerwij pętlę
+        break
+else:  # pętla nie doszła do końca przez break
+    print(&quot;Koniec pętli.&quot;)</code></pre>
+<pre><code>0 1 2 3 4</code></pre>
+</section>
+</section>
+<section id="section-7" class="level1">
+<h1></h1>
+<section id="przykład-na-koniec" class="level2">
+<h2>Przykład na koniec</h2>
+<hr />
+<ul>
+<li>Prześledź kolejność wykonywania instrukcji na stronie: <a href="http://pythontutor.com/visualize.html" class="uri">http://pythontutor.com/visualize.html</a></li>
+</ul>
+<pre><code>for element in (1, 2, 3, 4.0, &quot;python&quot;):
+    # jeśli string to drukuj litera po literze
+    if type(element) is str:
+        for litera in element:
+            print(litera)
+    # jeśli liczba całkowita
+    # to drukuj wszystkie liczby naturalne &lt;= x
+    elif type(element) is int:
+        while element &gt; 0:
+            print(element)
+            element -= 1
+    # w przeciwnym wypadku nie rób nic
+    else:
+        continue
+    
+    print()</code></pre>
+</section>
+</section>
+    </div>
+
+    <script src="../reveal.js/lib/js/head.min.js"></script>
+    <script src="../reveal.js/js/reveal.js"></script>
+
+    <script>
+
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        slideNumber: true,
+        width: 1280,
+        height: 720,
+
+                  theme: Reveal.getQueryHash().theme || 'white',
+        
+                  transition: Reveal.getQueryHash().transition || 'convex',
+        
+                  transitionSpeed: Reveal.getQueryHash().transitionSpeed || 'fast',
+        
+        dependencies: [{
+            src: '../reveal.js/lib/js/classList.js',
+            condition: function() {
+              return !document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/markdown/showdown.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          }, {
+            src: '../reveal.js/plugin/markdown/markdown.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          }, {
+            src: '../reveal.js/plugin/highlight/highlight.js',
+            async: true,
+            callback: function() {
+              hljs.initHighlightingOnLoad();
+            }
+          }, {
+            src: '../reveal.js/plugin/zoom-js/zoom.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/notes/notes.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/math/math.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          },
+          // { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+    </script>
+
+    <script>
+    // displayed upon load, hides when slide changes
+      Reveal.addEventListener('slidechanged', function(event) {
+        document.querySelector('.reveal .footer').style.display = 'none';
+      });
+   </script>
+
+</body>
+
+</html>

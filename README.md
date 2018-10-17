@@ -20,6 +20,11 @@ Wykłady dla studentów Wydziału Fizyki i Astronomii z "Języki skryptowe - Pyt
 
     * Sekwencyjne typy danych
         
+*  [Wykład 3](https://tomaszgolan.github.io/wfia_python/html/python_w03.html)
+
+    * typ logiczny / operacje logiczne
+    * intrukcje warunkowe
+    * pętle
 
 ## Listy
 
