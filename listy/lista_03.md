@@ -92,7 +92,7 @@ Napisz skrypt, który:
 
 ---
 
-## Zadanie 6 (4 pkt)
+## Zadanie 5 (4 pkt)
 
 Napisz program, który pobierze od użytkownika liczbę naturalną $N$. Program powinien pytać do skutku, aż zostaną podane prawidłowe dane.
 
