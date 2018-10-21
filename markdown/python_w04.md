@@ -540,3 +540,396 @@ for i, (student, oceny) in enumerate(zip(studenci, dziennik)):
 3. Marek: [5, 3]          => srednia = 4.0
 4. Józek: [3, 2, 2, 2, 2] => srednia = 2.2
 ```
+
+#
+
+## Słownik (`dict`)
+
+---
+
+* mapuje obiekty hashowalne (*hashable*) w dowolne obiekty, czyli: *klucz: wartość*
+    * *klucz* - stały hash
+    * *wartość* - dowolny obiekt
+* np. krotka może być kluczem, ale lista już nie
+* słowniki tworzymy umieszczając oddzielone przecinkiem pary *key: value* w nawiasach klamrowych, np.
+
+
+```py
+# student: numer indeksu
+slownik = {"Kasia": 7236, "Basia": 5286, "Marek": 9807, "Darek": 7738}
+
+print(slownik)
+```
+
+```bash
+{'Kasia': 7236, 'Basia': 5286, 'Darek': 7738, 'Marek': 9807}
+```
+
+## Słownik przez konstruktor
+
+---
+
+```py
+# {key1: value1, key2: value2...}
+a = {"jeden": 1, "dwa": 2, "trzy": 3}
+
+# dict(key1=value1, key2=value2...)
+b = dict(jeden=1, dwa=2, trzy=3) 
+
+# dict([(key1, value1), (key2, value2)...])
+c = dict(zip(["jeden", "dwa", "trzy"], [1, 2, 3]))
+
+# dict(słownik)
+d = dict(a)
+
+a == b == c == d
+```
+
+```bash
+True
+```
+
+## Słownik - dostęp do wartości
+
+---
+
+```py
+# student: numer indeksu
+slownik = {"Kasia": 7236, "Basia": 5286, "Marek": 9807, "Darek": 7738}
+
+slownik["Kasia"]  # dostęp -> dict[key]
+```
+
+```
+7236
+```
+
+```py
+slownik[0]  # słownik nie jest uporządkowany
+```
+
+```bash
+---------------------------------------------------------------------------
+
+KeyError                                  Traceback (most recent call last)
+
+<ipython-input-4-8f2cb9210d58> in <module>()
+----> 1 slownik[0] # słownik nie jest uporządkowany
+
+
+KeyError: 0
+```
+
+## Słowniki - *KeyError*
+
+---
+
+```py
+# student: numer indeksu
+slownik = {"Kasia": 7236, "Basia": 5286, "Marek": 9807, "Darek": 7738}
+
+print(slownik["Kasia"])  # Kasia jest w słowniku -> OK
+print(slownik["Ania"])   # Ani nie ma -> KeyError
+```
+
+```
+7236
+---------------------------------------------------------------------------
+
+KeyError                                  Traceback (most recent call last)
+
+<ipython-input-5-7f55cd27f397> in <module>()
+        3 
+        4 print(slownik["Kasia"]) # Kasia jest w słowniku -> OK
+----> 5 print(slownik["Ania"])  # Ani nie ma -> KeyError
+
+
+KeyError: 'Ania'
+```
+
+## Słowniki - `get`
+
+---
+
+
+```py
+# student: numer indeksu
+slownik = {"Kasia": 7236, "Basia": 5286, "Marek": 9807, "Darek": 7738}
+
+print(slownik.get("Kasia"))       # Kasia jest w słowniku -> OK
+print(slownik.get("Ania"))        # Ani nie ma -> default = None
+print(slownik.get("Ania", 1234))  # Ani nie ma -> default = 1234
+```
+
+```bash
+7236
+None
+1234
+```
+
+```py
+# czemu domyślnie None?
+if slownik.get("Ania"):
+    print(slownik["Ania"])
+else:
+    print("Brak studenta.")
+
+# lub prościej: `print(slownik.get("Ania") or "Brak studenta.")`
+```
+
+```bash
+Brak studenta.
+```
+
+## Słownik - klucze i wartości
+
+---
+
+
+```py
+# student: numer indeksu
+slownik = {"Kasia": 7236, "Basia": 5286, "Marek": 9807, "Darek": 7738}
+```
+
+```py
+slownik.keys()    # lista kluczy
+```
+
+```bash
+dict_keys(['Kasia', 'Basia', 'Darek', 'Marek'])
+```
+
+```py
+slownik.values()  # lista wartości
+```
+
+```bash
+dict_values([7236, 5286, 7738, 9807])
+```
+
+```py
+slownik.items()   # lista par
+```
+
+```bash
+dict_items([('Kasia', 7236), ('Basia', 5286), ('Darek', 7738), ('Marek', 9807)])
+```
+
+
+## Słownik - Python 2 vs 3
+
+---
+
+- w Pythonie 2: `dict.keys()`, `dict.values()` i `dict.items()` zwracają listy (czyli dopuszczalne jest np. `dict.keys()[0]`)
+- w Pythonie 3:
+
+
+```py
+import collections # for Iterable
+
+# student: numer indeksu
+slownik = {"Kasia": 7236, "Basia": 5286, "Marek": 9807, "Darek": 7738}
+
+# slownik.keys()[0] # TypeError: 'dict_keys' object does not support indexing
+
+isinstance(slownik.keys(), list)
+```
+
+```bash
+False
+```
+
+```py
+isinstance(slownik, collections.Iterable)  # pętla po keys() -> OK
+```
+
+```bash
+True
+```
+
+## Słownik - modyfikacja kluczy
+
+---
+
+```py
+# student: numer indeksu
+slownik = {"Kasia": 7236, "Basia": 5286, "Marek": 9807, "Darek": 7738}
+
+slownik["Kasia"] = 1234  # dict[key] = value
+
+print(slownik)
+```
+
+```
+{'Kasia': 1234, 'Basia': 5286, 'Darek': 7738, 'Marek': 9807}
+```
+
+```py
+slownik["Kasia"] += 1    # analogicznie do listy: list[index]
+
+print(slownik)
+```
+
+```bash
+{'Kasia': 1235, 'Basia': 5286, 'Darek': 7738, 'Marek': 9807}
+```
+
+## Słownik - usuwanie kluczy
+
+---
+
+```python
+# student: numer indeksu
+slownik = {"Kasia": 7236, "Basia": 5286, "Marek": 9807, "Darek": 7738}
+
+del slownik["Marek"]  # del dict[key] -> usuń klucz
+
+print(slownik)
+```
+
+```bash
+{'Kasia': 7236, 'Basia': 5286, 'Darek': 7738}
+```
+
+
+```py
+slownik.clear()  # wyczyść słownik
+ 
+print(slownik)
+```
+
+```bash
+{}
+```
+
+## Słownik - dodawanie kluczy
+
+---
+
+
+```py
+slownik = {"Kasia": 7236, "Basia": 5286, "Marek": 9807, "Darek": 7738}
+
+slownik["Ania"] = 3384  # jeśli jest to zmień, jeśli nie ma to dodaj
+print(slownik)
+```
+
+```bash
+{'Kasia': 7236, 'Ania': 3384, 'Basia': 5286, 'Darek': 7738, 'Marek': 9807}
+```
+
+```py
+nowi_studenci = {"Romek": 3343, "Basia": 8573}
+
+slownik.update(nowi_studenci)  # "dodaj/scal" słowniki
+print(slownik)                 # zwróć uwagę na Basię
+```
+
+```bash
+{'Basia': 8573, 'Romek': 3343, 'Darek': 7738, 'Kasia': 7236, 'Ania': 3384, 'Marek': 9807}
+```
+
+```py
+slownik.update(Józek=2276)
+print(slownik)
+```
+
+```bash
+{'Basia': 8573, 'Romek': 3343, 'Darek': 7738, 'Józek': 2276, 'Kasia': 7236, 'Ania': 3384, 'Marek': 9807}
+```
+
+## Pętla po słowniku
+
+---
+
+```py
+# student: numer indeksu
+slownik = {"Kasia": 7236, "Basia": 5286, "Marek": 9807, "Darek": 7738}
+
+for student in slownik.keys():          # pętla po kluczach
+    print(student, end=' ')
+```
+
+```bash
+Kasia Basia Darek Marek 
+```
+
+```py
+for index in slownik.values():          # pętla po wartościach
+    print(index, end=' ')
+```
+
+```bash
+7236 5286 7738 9807 
+```
+
+```py
+for student, index in slownik.items():  # pętla po (klucz, wartość)
+    print(student, index)
+```
+
+```bash
+Kasia 7236
+Basia 5286
+Darek 7738
+Marek 9807
+```
+
+## Przykład - tworzenie słownika
+
+---
+
+
+```py
+studenci = {}  # stwórz pusty słownik
+
+while True:
+    # pobierz imię studenta
+    student = input("Imię: ")
+    # przerwij jeśli puste
+    if not student: break  # niezalecane, ale możliwe w jednej linii
+    # pobierz numer indeksu
+    index = input("Nr indeksu: ")
+    # aktualizuj słownik
+    studenci.update({student: index})
+    
+print(studenci)
+```
+
+```bash
+Imię: Kasia
+Nr indeksu: 1234
+Imię: Jasiu
+Nr indeksu: 0987
+Imię: 
+{'Kasia': '1234', 'Jasiu': '0987'}
+```
+
+## Słownik w słowniku
+
+---
+
+```python
+Kasia = {"Wiek": 20, "Wzrost": 190, "Waga": 70}
+Marek = {"Wiek": 22, "Wzrost": 180, "Waga": 80}
+
+# klucz musi być hashowalny
+# wartością może być dowolny obieky, np. słownik
+studenci = {"Kasia": Kasia, "Marek": Marek}
+
+# wydrukuj w pętli wszystkich studentów i ich atrybuty
+for imie, wlasnosci in studenci.items():
+    print("{student} ma {wiek} lat, "
+          "{wzrost} cm wzrostu "
+          "i waży {waga} kg.".format(
+            student=imie,
+            wiek=studenci[imie]["Wiek"],
+            wzrost=studenci[imie]["Wzrost"],
+            waga=studenci[imie]["Waga"])
+          )
+```
+
+```bash
+Kasia ma 20 lat, 190 cm wzrostu i waży 70 kg.
+Marek ma 22 lat, 180 cm wzrostu i waży 80 kg.
+```
