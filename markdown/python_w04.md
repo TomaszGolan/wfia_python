@@ -237,8 +237,10 @@ print(*zipped)
 x = [1, 2, 3]
 y = [4, 5, 6]
 
+# pakujemy rozpakowaną paczkę
 x_copy, y_copy = zip(*zip(x, y))
 
+# i otrzymujemy znowu te same listy
 x == list(x_copy) and y == list(y_copy)
 ```
 
@@ -247,13 +249,294 @@ True
 ```
 
 ```py
-print(list(zip(x,y)))
-print(*zip(x,y))
-print(list(zip(*zip(x, y))))
+# jak to działa krok po kroku
+print(list(zip(x,y)))         # lista par i-tych elementów
+print(*zip(x,y))              # rozpakowana lista
+print(list(zip(*zip(x, y))))  # parujemy i-te elementy
 ```
 
 ```bash
 [(1, 4), (2, 5), (3, 6)]
 (1, 4) (2, 5) (3, 6)
 [(1, 2, 3), (4, 5, 6)]
+```
+
+## Pętla *for* z indeksami
+
+---
+
+```py
+lista = ['a', 'b', 'c']
+```
+
+```py
+# pętla po indeksach od 0 do N-1
+for i in range(len(lista)):
+    print(str(i+1) + '.', lista[i])
+```
+
+```py
+# pętla po spakowanych indeksach i elementach listy
+for i, element in zip(range(len(lista)), lista):
+    print(str(i+1) + '.', element)
+```
+
+```py
+# pętla po spakowanych indeksach i elementach listy z użyciem enumerate
+for i, element in enumerate(lista):
+    print(str(i+1) + '.', element)
+```
+
+```
+1. a
+2. b
+3. c
+```
+
+#
+
+## Formatowanie tekstu
+
+---
+
+```py
+help(print)
+```
+
+```bash
+Help on built-in function print in module builtins:
+
+print(...)
+    print(value, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
+    
+    Prints the values to a stream, or to sys.stdout by default.
+    Optional keyword arguments:
+    file:  a file-like object (stream); defaults to the current sys.stdout.
+    sep:   string inserted between values, default a space.
+    end:   string appended after the last value, default a newline.
+    flush: whether to forcibly flush the stream.
+```    
+
+
+## *sep* i *end*
+
+---
+
+
+```py
+a, b, c = 1, 2, 3
+
+print(a, b, c)           # domyślnym separatorem jest spacja
+```
+
+```bash
+1 2 3
+```
+
+```py
+print(a, b, c, sep='_')  # ale można go zmiennić
+```
+
+```bash
+1_2_3
+```
+
+```py
+# domyślnie print kończy sekwencję nową linią, ale można to zmienić
+print(a, b, c, sep="...", end=" koniec")
+```
+
+```
+1...2...3 koniec
+```
+
+## *format* - podstawy
+
+---
+
+```py
+x = 2
+
+print("x jest równe " + str(x))  # skuteczne, ale mało wygodne
+```
+
+```bash
+x jest równe 2
+```
+
+```py
+x = 2
+
+# klasa string ma metodę format
+print("x jest równe {}".format(x))
+```
+
+```bash
+x jest równe 2
+```
+
+```py
+# która w miejsce {} wstawia kolejne argumenty
+print("x jest równe {}, a x**2 = {}".format(x, x**2))
+```
+
+```bash
+x jest równe 2, a x**2 = 4
+```
+
+## *format* - kolejność
+
+---
+
+```py
+x = 2
+y = 2.5
+z = "trzy"
+
+# domyślnie pod {} wstawiane są kolejne argument format
+print("x, y, z = {}, {}, {}".format(x, y, z))
+```
+
+```bash
+x, y, z = 2, 2.5, trzy
+```
+
+```py
+# ale kolejność można zmienić
+print("x, y, z = {2}, {0}, {1}".format(x, y, z))
+```
+
+```bash
+x, y, z = trzy, 2, 2.5
+```
+
+## *format* - deklaracja typu
+
+---
+
+
+```py
+x = 1234567890
+y = 1234567890.1234567890
+z = "Python"
+
+# z reguły nie ma potrzeby jawnej deklaracji typu
+print("x, y, z = {}, {}, {}".format(x, y, z))
+```
+
+```bash
+x, y, z = 1234567890, 1234567890.1234567, Python
+```
+
+
+```py
+# ale można to zrobić: d - int; f - float; s - str
+print("x, y, z = {:d}, {:f}, {:s}".format(x, y, z))
+```
+
+```bash
+x, y, z = 1234567890, 1234567890.123457, Python
+```
+
+
+```py
+# e - wygodny format dla dużych liczb: XeY = X * 10^Y
+print("x, y, z = {:f}, {:e}, {}".format(x, y, z))
+```
+
+```bash
+x, y, z = 1234567890.000000, 1.234568e+09, Python
+```
+
+## *format* - dokładność
+
+---
+
+
+```py
+from math import pi
+
+print("pi = {}".format(pi))
+```
+
+```bash
+pi = 3.141592653589793
+```
+
+```py
+# ograniczamy się do dwóch liczb po przecinku
+print("pi = {:.2f}".format(pi))
+```
+
+```bash
+pi = 3.14
+```
+
+```python
+# ograniczamy się do 50 liczb po przecinku
+# zwróć uwagę na zera na końcu
+print("pi = {:.50f}".format(pi))
+```
+
+```bash
+pi = 3.14159265358979311599796346854418516159057617187500
+```
+
+## *format*  - keyword arguments
+
+---
+
+
+```py
+# żeby się nie pogubić, warto "tagować" kolejne argumenty
+print("{student} otrzymał {ocena}".format(student="Jan Nowak", ocena=5))
+```
+
+```bash
+Jan Nowak otrzymał 5
+```
+
+```py
+# wtedy kolejność nie ma znaczenia
+print("{student} otrzymał {ocena}".format(ocena=5, student="Jan Nowak"))
+```
+
+```bash
+Jan Nowak otrzymał 5
+```
+
+## 
+
+```py
+# lista studentów
+studenci = ["Kasia", "Basia", "Marek", "Józek"]
+# każdy element odpowiada liście ocen danego studenta
+dziennik = [[3, 4, 5], [], [5, 3], [3, 2, 2, 2, 2]]
+
+# [znak]^N -> centruj w szerokości N wypełniając [znakiem]
+print("{:-^42}".format("OCENY"), end="\n\n")
+
+# enumerate zwraca dwa obiekty: index i parę: (student, oceny)
+for i, (student, oceny) in enumerate(zip(studenci, dziennik)):
+    # policz średnią; chyba że brak ocen
+    if len(oceny):
+        srednia = sum(oceny) / len(oceny)
+    else:
+        srednia = 0
+
+    # {oceny:<15} działa jak ljust; {oceny:>15} działa jak rjust
+    print("{index}. {imie}: {oceny:<15} => srednia = {srednia:.1f}"
+          .format(index=i+1,
+                  imie=student,
+                  oceny=str(oceny),
+                  srednia=srednia))
+```
+
+```bash
+------------------OCENY-------------------
+
+1. Kasia: [3, 4, 5]       => srednia = 4.0
+2. Basia: []              => srednia = 0.0
+3. Marek: [5, 3]          => srednia = 4.0
+4. Józek: [3, 2, 2, 2, 2] => srednia = 2.2
 ```

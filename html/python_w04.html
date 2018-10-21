@@ -20,7 +20,7 @@
 
       <link rel="stylesheet" href="../reveal.js/css/theme/white.css" id="theme">
   
-      <link rel="stylesheet" href="../template/github.css">
+      <link rel="stylesheet" href="../template/github-gist.css">
   
   <link rel="stylesheet" href="../template/extra.css">
 
@@ -191,16 +191,171 @@ zipped <span class="op">=</span> <span class="bu">zip</span>(x, y)  <span class=
 <div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">x <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]
 y <span class="op">=</span> [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]
 
+<span class="co"># pakujemy rozpakowaną paczkę</span>
 x_copy, y_copy <span class="op">=</span> <span class="bu">zip</span>(<span class="op">*</span><span class="bu">zip</span>(x, y))
 
+<span class="co"># i otrzymujemy znowu te same listy</span>
 x <span class="op">==</span> <span class="bu">list</span>(x_copy) <span class="kw">and</span> y <span class="op">==</span> <span class="bu">list</span>(y_copy)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">True</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="bu">print</span>(<span class="bu">list</span>(<span class="bu">zip</span>(x,y)))
-<span class="bu">print</span>(<span class="op">*</span><span class="bu">zip</span>(x,y))
-<span class="bu">print</span>(<span class="bu">list</span>(<span class="bu">zip</span>(<span class="op">*</span><span class="bu">zip</span>(x, y))))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="co"># jak to działa krok po kroku</span>
+<span class="bu">print</span>(<span class="bu">list</span>(<span class="bu">zip</span>(x,y)))         <span class="co"># lista par i-tych elementów</span>
+<span class="bu">print</span>(<span class="op">*</span><span class="bu">zip</span>(x,y))              <span class="co"># rozpakowana lista</span>
+<span class="bu">print</span>(<span class="bu">list</span>(<span class="bu">zip</span>(<span class="op">*</span><span class="bu">zip</span>(x, y))))  <span class="co"># parujemy i-te elementy</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="kw">(</span><span class="ex">1</span>, 4<span class="kw">)</span>, <span class="kw">(</span><span class="ex">2</span>, 5<span class="kw">)</span>, <span class="kw">(</span><span class="ex">3</span>, 6<span class="kw">)</span>]
 <span class="kw">(</span><span class="ex">1</span>, 4<span class="kw">)</span> <span class="kw">(</span><span class="ex">2</span>, 5<span class="kw">)</span> <span class="kw">(</span><span class="ex">3</span>, 6<span class="kw">)</span>
 [<span class="kw">(</span><span class="ex">1</span>, 2, 3<span class="kw">)</span>, <span class="kw">(</span><span class="ex">4</span>, 5, 6<span class="kw">)</span>]</code></pre></div>
+</section>
+<section id="pętla-for-z-indeksami" class="level2">
+<h2>Pętla <em>for</em> z indeksami</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">lista <span class="op">=</span> [<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="co"># pętla po indeksach od 0 do N-1</span>
+<span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(lista)):
+    <span class="bu">print</span>(<span class="bu">str</span>(i<span class="op">+</span><span class="dv">1</span>) <span class="op">+</span> <span class="st">&#39;.&#39;</span>, lista[i])</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="co"># pętla po spakowanych indeksach i elementach listy</span>
+<span class="cf">for</span> i, element <span class="kw">in</span> <span class="bu">zip</span>(<span class="bu">range</span>(<span class="bu">len</span>(lista)), lista):
+    <span class="bu">print</span>(<span class="bu">str</span>(i<span class="op">+</span><span class="dv">1</span>) <span class="op">+</span> <span class="st">&#39;.&#39;</span>, element)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="co"># pętla po spakowanych indeksach i elementach listy z użyciem enumerate</span>
+<span class="cf">for</span> i, element <span class="kw">in</span> <span class="bu">enumerate</span>(lista):
+    <span class="bu">print</span>(<span class="bu">str</span>(i<span class="op">+</span><span class="dv">1</span>) <span class="op">+</span> <span class="st">&#39;.&#39;</span>, element)</code></pre></div>
+<pre><code>1. a
+2. b
+3. c</code></pre>
+</section>
+</section>
+<section id="section-2" class="level1">
+<h1></h1>
+<section id="formatowanie-tekstu" class="level2">
+<h2>Formatowanie tekstu</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="bu">help</span>(<span class="bu">print</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Help</span> on built-in function print in module builtins:
+
+<span class="ex">print</span>(...)
+    <span class="ex">print</span>(value, ..., sep=<span class="st">&#39; &#39;</span>, end=<span class="st">&#39;\n&#39;</span>, file=sys.stdout, flush=False)
+    
+    <span class="ex">Prints</span> the values to a stream, or to sys.stdout by default.
+    <span class="ex">Optional</span> keyword arguments:
+    <span class="ex">file</span>:  a file-like object (stream); <span class="ex">defaults</span> to the current sys.stdout.
+    <span class="ex">sep</span>:   string inserted between values, default a space.
+    <span class="ex">end</span>:   string appended after the last value, default a newline.
+    <span class="ex">flush</span>: whether to forcibly flush the stream.</code></pre></div>
+</section>
+<section id="sep-i-end" class="level2">
+<h2><em>sep</em> i <em>end</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">a, b, c <span class="op">=</span> <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>
+
+<span class="bu">print</span>(a, b, c)           <span class="co"># domyślnym separatorem jest spacja</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">1</span> 2 3</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="bu">print</span>(a, b, c, sep<span class="op">=</span><span class="st">&#39;_&#39;</span>)  <span class="co"># ale można go zmiennić</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">1_2_3</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="co"># domyślnie print kończy sekwencję nową linią, ale można to zmienić</span>
+<span class="bu">print</span>(a, b, c, sep<span class="op">=</span><span class="st">&quot;...&quot;</span>, end<span class="op">=</span><span class="st">&quot; koniec&quot;</span>)</code></pre></div>
+<pre><code>1...2...3 koniec</code></pre>
+</section>
+<section id="format---podstawy" class="level2">
+<h2><em>format</em> - podstawy</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">x <span class="op">=</span> <span class="dv">2</span>
+
+<span class="bu">print</span>(<span class="st">&quot;x jest równe &quot;</span> <span class="op">+</span> <span class="bu">str</span>(x))  <span class="co"># skuteczne, ale mało wygodne</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">x</span> jest równe 2</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">x <span class="op">=</span> <span class="dv">2</span>
+
+<span class="co"># klasa string ma metodę format</span>
+<span class="bu">print</span>(<span class="st">&quot;x jest równe </span><span class="sc">{}</span><span class="st">&quot;</span>.<span class="bu">format</span>(x))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">x</span> jest równe 2</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="co"># która w miejsce {} wstawia kolejne argumenty</span>
+<span class="bu">print</span>(<span class="st">&quot;x jest równe </span><span class="sc">{}</span><span class="st">, a x**2 = </span><span class="sc">{}</span><span class="st">&quot;</span>.<span class="bu">format</span>(x, x<span class="op">**</span><span class="dv">2</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">x</span> jest równe 2, a x**2 = 4</code></pre></div>
+</section>
+<section id="format---kolejność" class="level2">
+<h2><em>format</em> - kolejność</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">x <span class="op">=</span> <span class="dv">2</span>
+y <span class="op">=</span> <span class="fl">2.5</span>
+z <span class="op">=</span> <span class="st">&quot;trzy&quot;</span>
+
+<span class="co"># domyślnie pod {} wstawiane są kolejne argument format</span>
+<span class="bu">print</span>(<span class="st">&quot;x, y, z = </span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">&quot;</span>.<span class="bu">format</span>(x, y, z))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">x</span>, y, z = 2, 2.5, trzy</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="co"># ale kolejność można zmienić</span>
+<span class="bu">print</span>(<span class="st">&quot;x, y, z = </span><span class="sc">{2}</span><span class="st">, </span><span class="sc">{0}</span><span class="st">, </span><span class="sc">{1}</span><span class="st">&quot;</span>.<span class="bu">format</span>(x, y, z))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">x</span>, y, z = trzy, 2, 2.5</code></pre></div>
+</section>
+<section id="format---deklaracja-typu" class="level2">
+<h2><em>format</em> - deklaracja typu</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">x <span class="op">=</span> <span class="dv">1234567890</span>
+y <span class="op">=</span> <span class="fl">1234567890.1234567890</span>
+z <span class="op">=</span> <span class="st">&quot;Python&quot;</span>
+
+<span class="co"># z reguły nie ma potrzeby jawnej deklaracji typu</span>
+<span class="bu">print</span>(<span class="st">&quot;x, y, z = </span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">&quot;</span>.<span class="bu">format</span>(x, y, z))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">x</span>, y, z = 1234567890, 1234567890.1234567, Python</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="co"># ale można to zrobić: d - int; f - float; s - str</span>
+<span class="bu">print</span>(<span class="st">&quot;x, y, z = </span><span class="sc">{:d}</span><span class="st">, </span><span class="sc">{:f}</span><span class="st">, </span><span class="sc">{:s}</span><span class="st">&quot;</span>.<span class="bu">format</span>(x, y, z))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">x</span>, y, z = 1234567890, 1234567890.123457, Python</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="co"># e - wygodny format dla dużych liczb: XeY = X * 10^Y</span>
+<span class="bu">print</span>(<span class="st">&quot;x, y, z = </span><span class="sc">{:f}</span><span class="st">, </span><span class="sc">{:e}</span><span class="st">, </span><span class="sc">{}</span><span class="st">&quot;</span>.<span class="bu">format</span>(x, y, z))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">x</span>, y, z = 1234567890.000000, 1.234568e+09, Python</code></pre></div>
+</section>
+<section id="format---dokładność" class="level2">
+<h2><em>format</em> - dokładność</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="im">from</span> math <span class="im">import</span> pi
+
+<span class="bu">print</span>(<span class="st">&quot;pi = </span><span class="sc">{}</span><span class="st">&quot;</span>.<span class="bu">format</span>(pi))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">pi</span> = 3.141592653589793</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="co"># ograniczamy się do dwóch liczb po przecinku</span>
+<span class="bu">print</span>(<span class="st">&quot;pi = </span><span class="sc">{:.2f}</span><span class="st">&quot;</span>.<span class="bu">format</span>(pi))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">pi</span> = 3.14</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># ograniczamy się do 50 liczb po przecinku</span>
+<span class="co"># zwróć uwagę na zera na końcu</span>
+<span class="bu">print</span>(<span class="st">&quot;pi = </span><span class="sc">{:.50f}</span><span class="st">&quot;</span>.<span class="bu">format</span>(pi))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">pi</span> = 3.14159265358979311599796346854418516159057617187500</code></pre></div>
+</section>
+<section id="format---keyword-arguments" class="level2">
+<h2><em>format</em> - keyword arguments</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="co"># żeby się nie pogubić, warto &quot;tagować&quot; kolejne argumenty</span>
+<span class="bu">print</span>(<span class="st">&quot;</span><span class="sc">{student}</span><span class="st"> otrzymał </span><span class="sc">{ocena}</span><span class="st">&quot;</span>.<span class="bu">format</span>(student<span class="op">=</span><span class="st">&quot;Jan Nowak&quot;</span>, ocena<span class="op">=</span><span class="dv">5</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Jan</span> Nowak otrzymał 5</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="co"># wtedy kolejność nie ma znaczenia</span>
+<span class="bu">print</span>(<span class="st">&quot;</span><span class="sc">{student}</span><span class="st"> otrzymał </span><span class="sc">{ocena}</span><span class="st">&quot;</span>.<span class="bu">format</span>(ocena<span class="op">=</span><span class="dv">5</span>, student<span class="op">=</span><span class="st">&quot;Jan Nowak&quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Jan</span> Nowak otrzymał 5</code></pre></div>
+</section>
+<section id="section-3" class="level2">
+<h2></h2>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="co"># lista studentów</span>
+studenci <span class="op">=</span> [<span class="st">&quot;Kasia&quot;</span>, <span class="st">&quot;Basia&quot;</span>, <span class="st">&quot;Marek&quot;</span>, <span class="st">&quot;Józek&quot;]</span>
+<span class="st"># każdy element odpowiada liście ocen danego studenta</span>
+<span class="st">dziennik = [[3, 4, 5], [], [5, 3], [3, 2, 2, 2, 2]]</span>
+
+<span class="st"># [znak]^N -&gt; centruj w szerokości N wypełniając [znakiem]</span>
+<span class="st">print(&quot;</span>{:<span class="op">-^</span><span class="dv">42</span>}<span class="st">&quot;.format(&quot;</span>OCENY<span class="st">&quot;), end=&quot;</span><span class="op">\</span>n<span class="op">\</span>n<span class="st">&quot;)</span>
+
+<span class="st"># enumerate zwraca dwa obiekty: index i parę: (student, oceny)</span>
+<span class="st">for i, (student, oceny) in enumerate(zip(studenci, dziennik)):</span>
+<span class="st">    # policz średnią; chyba że brak ocen</span>
+<span class="st">    if len(oceny):</span>
+<span class="st">        srednia = sum(oceny) / len(oceny)</span>
+<span class="st">    else:</span>
+<span class="st">        srednia = 0</span>
+
+<span class="st">    # </span><span class="sc">{oceny:&lt;15}</span><span class="st"> działa jak ljust; </span><span class="sc">{oceny:&gt;15}</span><span class="st"> działa jak rjust</span>
+<span class="st">    print(&quot;</span>{index}. {imie}: {oceny:<span class="op">&lt;</span><span class="dv">15</span>} <span class="op">=&gt;</span> srednia <span class="op">=</span> {srednia:.1f}<span class="st">&quot;</span>
+<span class="st">          .format(index=i+1,</span>
+<span class="st">                  imie=student,</span>
+<span class="st">                  oceny=str(oceny),</span>
+<span class="st">                  srednia=srednia))</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">------------------OCENY-------------------</span>
+
+<span class="ex">1.</span> Kasia: [3, 4, 5]       =<span class="op">&gt;</span> srednia = 4.0
+<span class="ex">2.</span> Basia: []              =<span class="op">&gt;</span> srednia = 0.0
+<span class="ex">3.</span> Marek: [5, 3]          =<span class="op">&gt;</span> srednia = 4.0
+<span class="ex">4.</span> Józek: [3, 2, 2, 2, 2] =<span class="op">&gt;</span> srednia = 2.2</code></pre></div>
 </section>
 </section>
     </div>
