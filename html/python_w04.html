@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <title>Języki skryptowe Python</title>
+
+  <meta name="description" content="Języki skryptowe Python">
+
+   <meta name="author" content="Wykład 4" /> 
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="stylesheet" href="../reveal.js/css/reveal.css">
+
+      <link rel="stylesheet" href="../reveal.js/css/theme/white.css" id="theme">
+  
+      <link rel="stylesheet" href="../template/github.css">
+  
+  <link rel="stylesheet" href="../template/extra.css">
+
+  <script>
+    document.write('<link rel="stylesheet" href="../reveal.js/css/print/' +
+      (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') +
+      '.css" type="text/css" media="print">');
+  </script>
+
+  <script src="../template/snap.svg-min.js"></script>
+  <script src="../template/plotly-latest.min.js"></script>
+
+  <!--[if lt IE 9]>
+  <script src="../reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+
+  
+
+</head>
+
+<body>
+
+  
+
+  <div class="reveal">
+
+    <div class="slides">
+
+      <section>
+        <h1>Języki skryptowe Python</h1>
+         <h3>Wykład 4</h3> 
+        <p>
+          <h4></h4>
+        </p>
+      </section>
+
+       <div class="footer">
+<p>Sterowanie: spacja + shift-spacja || page down + page up || strzałki || esc</p>
+</div>
+<section id="section" class="level1">
+<h1></h1>
+<section id="typy-mutowalne-mutable-i-niemutowalne-immutable" class="level2">
+<h2>Typy mutowalne (<em>mutable</em>) i niemutowalne (<em>immutable</em>)</h2>
+<hr />
+<ul>
+<li>typy liczbowe (&quot;niemutowalne&quot;): <code>int</code>, <code>float</code>, <code>complex</code></li>
+<li>typy sekwencyjne (&quot;mutowalne&quot;): <code>list</code></li>
+<li>typy sekwencyjne (&quot;niemutowalne&quot;): <code>tuple</code>, <code>range</code>, <code>str</code></li>
+</ul>
+</section>
+<section id="id-zmiennych" class="level2">
+<h2><code>id</code> zmiennych</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">x <span class="op">=</span> <span class="dv">2</span>  <span class="co"># tworzymy niemutowalną zmienną</span>
+<span class="bu">id</span>(x)  <span class="co"># i sprawdzamy jej id</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">140685772794432</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">x <span class="op">=</span> <span class="dv">3</span>  <span class="co"># przypisanie nowej wartości </span>
+<span class="bu">id</span>(x)  <span class="co"># tworzy nowy obiekt (z nowym id)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">140685772794464</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">x <span class="op">=</span> [<span class="dv">2</span>]  <span class="co"># tworzymy mutowalną zmienną </span>
+<span class="bu">id</span>(x)    <span class="co"># i sprawdzamy jej id</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">140685552461384</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">x[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">3</span>  <span class="co"># wartość wskazywana przez zmienną jest modyfikowana</span>
+<span class="bu">id</span>(x)     <span class="co"># ale jej id pozostaje stałe (uwaga: id(x[0]) będzie inne!)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">140685552461384</span></code></pre></div>
+</section>
+<section id="konsekwencje" class="level2">
+<h2>Konsekwencje</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">x <span class="op">=</span> <span class="dv">2</span>  <span class="co"># uwtórz obiekt typu int</span>
+y <span class="op">=</span> x  <span class="co"># y wskazuje na to samo co x</span>
+y <span class="op">=</span> <span class="dv">5</span>  <span class="co"># zmieniam y - nowe miejsce w pamięci</span>
+
+<span class="bu">print</span>(x)  <span class="co"># x dalej wskazuje na 2</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">2</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">x <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]  <span class="co"># utwórz obiekt typu list</span>
+y <span class="op">=</span> x          <span class="co"># y wskazuje na to samo co x</span>
+
+<span class="bu">print</span>(<span class="bu">id</span>(x), <span class="bu">id</span>(y))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">140684962055816</span> 140684962055816</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">y[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">4</span>  <span class="co"># modyfikuję y</span>
+
+<span class="bu">print</span>(x)  <span class="co"># a zmienia się x...</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="ex">4</span>, 2, 3]</code></pre></div>
+</section>
+<section id="funkcja-copy" class="level2">
+<h2>Funkcja <code>copy</code></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">x <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]  <span class="co"># utwórz obiekt typu list</span>
+y <span class="op">=</span> x.copy()   <span class="co"># stwórz kopię tego obiektu</span>
+
+<span class="bu">print</span>(<span class="bu">id</span>(x), <span class="bu">id</span>(y))  <span class="co"># teraz są to dwa różne obiekty</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">140685552556616</span> 140685552460232</code></pre></div>
+</section>
+</section>
+<section id="section-1" class="level1">
+<h1></h1>
+<section id="odpakowywanie-unzip" class="level2">
+<h2>&quot;Odpakowywanie&quot; (<em>unzip</em>)</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">lista <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>]
+
+a, b <span class="op">=</span> lista  <span class="co"># a = lista[0], b = lista[1]</span>
+
+<span class="bu">print</span>(a, b)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">1</span> 2</code></pre></div>
+<p>przykład: zamiana zmiennych</p>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">a, b <span class="op">=</span> b, a  <span class="co"># a, b = tuple(b, a)</span>
+
+<span class="bu">print</span>(a, b)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">2</span> 1</code></pre></div>
+<p>dla porównania przykład zamiany zmiennych w C++</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">a = a + b - (b = a);</code></pre></div>
+</section>
+<section id="splat-czyli-tzw.-asterisk" class="level2">
+<h2><em>splat</em>, czyli tzw. <em>asterisk</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">x <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]
+
+<span class="co"># print(arg1, arg2, arg3, ..., +opcje)</span>
+
+<span class="bu">print</span>(x)                 <span class="co"># drukuje listę (1 argument)</span>
+<span class="bu">print</span>(<span class="op">*</span>x)                <span class="co"># drukuje &quot;rozpakowaną&quot; listę (3 argumenty)</span>
+<span class="bu">print</span>(x[<span class="dv">0</span>], x[<span class="dv">1</span>], x[<span class="dv">2</span>])  <span class="co"># równoważny zapis</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="ex">1</span>, 2, 3]
+<span class="ex">1</span> 2 3
+<span class="ex">1</span> 2 3</code></pre></div>
+</section>
+<section id="unzip-i-splat" class="level2">
+<h2><em>unzip</em> i <em>splat</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">lista <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]
+
+<span class="co"># a, b = lista  # ValueError: too many values to unpack (expected 2)</span>
+
+a, <span class="op">*</span>b <span class="op">=</span> lista  <span class="co"># a = lista[0], b = reszta</span>
+
+<span class="bu">print</span>(a, b)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">1</span> [2, 3, 4, 5]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">lista <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]
+
+a, <span class="op">*</span>b, c <span class="op">=</span> lista  <span class="co"># a, b[0], b[1], b[2], c</span>
+
+<span class="bu">print</span>(a, b, c)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">1</span> [2, 3, 4] 5</code></pre></div>
+</section>
+<section id="pakowanie-zip" class="level2">
+<h2>&quot;Pakowanie&quot; (<em>zip</em>)</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">x <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]
+y <span class="op">=</span> [<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>]
+
+zipped <span class="op">=</span> <span class="bu">zip</span>(x, y)  <span class="co"># pary (x[i], y[i])</span>
+
+<span class="bu">print</span>(<span class="op">*</span>zipped)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">(</span><span class="ex">1</span>, <span class="st">&#39;a&#39;</span><span class="kw">)</span> <span class="kw">(</span><span class="ex">2</span>, <span class="st">&#39;b&#39;</span><span class="kw">)</span> <span class="kw">(</span><span class="ex">3</span>, <span class="st">&#39;c&#39;</span><span class="kw">)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">x <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]
+y <span class="op">=</span> [<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>]  <span class="co"># długość nie ma znaczenia</span>
+
+zipped <span class="op">=</span> <span class="bu">zip</span>(x, y)  <span class="co"># pary (x[i], y[i])</span>
+
+<span class="bu">print</span>(<span class="op">*</span>zipped)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">(</span><span class="ex">1</span>, <span class="st">&#39;a&#39;</span><span class="kw">)</span> <span class="kw">(</span><span class="ex">2</span>, <span class="st">&#39;b&#39;</span><span class="kw">)</span> <span class="kw">(</span><span class="ex">3</span>, <span class="st">&#39;c&#39;</span><span class="kw">)</span></code></pre></div>
+</section>
+<section id="zip-unzip---test" class="level2">
+<h2><em>zip</em> / <em>unzip</em> - test</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">x <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]
+y <span class="op">=</span> [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]
+
+x_copy, y_copy <span class="op">=</span> <span class="bu">zip</span>(<span class="op">*</span><span class="bu">zip</span>(x, y))
+
+x <span class="op">==</span> <span class="bu">list</span>(x_copy) <span class="kw">and</span> y <span class="op">==</span> <span class="bu">list</span>(y_copy)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">True</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="bu">print</span>(<span class="bu">list</span>(<span class="bu">zip</span>(x,y)))
+<span class="bu">print</span>(<span class="op">*</span><span class="bu">zip</span>(x,y))
+<span class="bu">print</span>(<span class="bu">list</span>(<span class="bu">zip</span>(<span class="op">*</span><span class="bu">zip</span>(x, y))))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="kw">(</span><span class="ex">1</span>, 4<span class="kw">)</span>, <span class="kw">(</span><span class="ex">2</span>, 5<span class="kw">)</span>, <span class="kw">(</span><span class="ex">3</span>, 6<span class="kw">)</span>]
+<span class="kw">(</span><span class="ex">1</span>, 4<span class="kw">)</span> <span class="kw">(</span><span class="ex">2</span>, 5<span class="kw">)</span> <span class="kw">(</span><span class="ex">3</span>, 6<span class="kw">)</span>
+[<span class="kw">(</span><span class="ex">1</span>, 2, 3<span class="kw">)</span>, <span class="kw">(</span><span class="ex">4</span>, 5, 6<span class="kw">)</span>]</code></pre></div>
+</section>
+</section>
+    </div>
+
+    <script src="../reveal.js/lib/js/head.min.js"></script>
+    <script src="../reveal.js/js/reveal.js"></script>
+
+    <script>
+
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        slideNumber: true,
+        width: 1280,
+        height: 720,
+
+                  theme: Reveal.getQueryHash().theme || 'white',
+        
+                  transition: Reveal.getQueryHash().transition || 'convex',
+        
+                  transitionSpeed: Reveal.getQueryHash().transitionSpeed || 'fast',
+        
+        dependencies: [{
+            src: '../reveal.js/lib/js/classList.js',
+            condition: function() {
+              return !document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/markdown/showdown.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          }, {
+            src: '../reveal.js/plugin/markdown/markdown.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          }, {
+            src: '../reveal.js/plugin/highlight/highlight.js',
+            async: true,
+            callback: function() {
+              hljs.initHighlightingOnLoad();
+            }
+          }, {
+            src: '../reveal.js/plugin/zoom-js/zoom.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/notes/notes.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/math/math.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          },
+          // { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+    </script>
+
+    <script>
+    // displayed upon load, hides when slide changes
+      Reveal.addEventListener('slidechanged', function(event) {
+        document.querySelector('.reveal .footer').style.display = 'none';
+      });
+   </script>
+
+</body>
+
+</html>
