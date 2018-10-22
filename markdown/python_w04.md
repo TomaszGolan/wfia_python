@@ -541,6 +541,19 @@ for i, (student, oceny) in enumerate(zip(studenci, dziennik)):
 4. Józek: [3, 2, 2, 2, 2] => srednia = 2.2
 ```
 
+## *format* - nowa składnia 
+
+---
+
+* Od wersji 3.6 możliwe jest korzystanie z nowej składni
+
+```py
+x = 1
+y = 2
+
+# równoważne: `print("x = {}, y = {}".format(x, y))`
+print(f"x = {x}, y = {y}")
+```
 #
 
 ## Słownik (`dict`)
@@ -932,4 +945,33 @@ for imie, wlasnosci in studenci.items():
 ```bash
 Kasia ma 20 lat, 190 cm wzrostu i waży 70 kg.
 Marek ma 22 lat, 180 cm wzrostu i waży 80 kg.
+```
+
+## *dict comprehension*
+
+---
+
+```py
+# przypomnienie: lista składana
+lista = [x**2 for x in range(10)]
+# krotka składana (bez `*` i `,` - generator, będzie na kolejnych wykładach)
+krotka = *(x**2 for x in range(10)),
+
+print(lista, krotka, sep='\n')
+```
+
+```bash
+[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+(0, 1, 4, 9, 16, 25, 36, 49, 64, 81)
+```
+
+```py
+# analogicznie można tworzyć słownik
+slownik = {x: x**2 for x in range(10)}
+
+print(slownik)
+```
+
+```bash
+{0: 0, 1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64, 9: 81}
 ```

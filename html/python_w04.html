@@ -357,6 +357,18 @@ studenci <span class="op">=</span> [<span class="st">&quot;Kasia&quot;</span>, <
 <span class="ex">3.</span> Marek: [5, 3]          =<span class="op">&gt;</span> srednia = 4.0
 <span class="ex">4.</span> Józek: [3, 2, 2, 2, 2] =<span class="op">&gt;</span> srednia = 2.2</code></pre></div>
 </section>
+<section id="format---nowa-składnia" class="level2">
+<h2><em>format</em> - nowa składnia</h2>
+<hr />
+<ul>
+<li>Od wersji 3.6 możliwe jest korzystanie z nowej składni</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">x <span class="op">=</span> <span class="dv">1</span>
+y <span class="op">=</span> <span class="dv">2</span>
+
+<span class="co"># równoważne: `print(&quot;x = {}, y = {}&quot;.format(x, y))`</span>
+<span class="bu">print</span>(<span class="ss">f&quot;x = </span><span class="sc">{x}</span><span class="ss">, y = </span><span class="sc">{y}</span><span class="ss">&quot;</span>)</code></pre></div>
+</section>
 </section>
 <section id="section-4" class="level1">
 <h1></h1>
@@ -599,6 +611,23 @@ studenci <span class="op">=</span> {<span class="st">&quot;Kasia&quot;</span>: K
           )</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Kasia</span> ma 20 lat, 190 cm wzrostu i waży 70 kg.
 <span class="ex">Marek</span> ma 22 lat, 180 cm wzrostu i waży 80 kg.</code></pre></div>
+</section>
+<section id="dict-comprehension" class="level2">
+<h2><em>dict comprehension</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="co"># przypomnienie: lista składana</span>
+lista <span class="op">=</span> [x<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>)]
+<span class="co"># krotka składana (bez `*` i `,` - generator, będzie na kolejnych wykładach)</span>
+krotka <span class="op">=</span> <span class="op">*</span>(x<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>)),
+
+<span class="bu">print</span>(lista, krotka, sep<span class="op">=</span><span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="ex">0</span>, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+<span class="kw">(</span><span class="ex">0</span>, 1, 4, 9, 16, 25, 36, 49, 64, 81<span class="kw">)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="co"># analogicznie można tworzyć słownik</span>
+slownik <span class="op">=</span> {x: x<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>)}
+
+<span class="bu">print</span>(slownik)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">{<span class="ex">0</span>: 0, 1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64, 9: 81}</code></pre></div>
 </section>
 </section>
     </div>
