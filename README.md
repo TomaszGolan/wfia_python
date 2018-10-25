@@ -26,6 +26,12 @@ Wykłady dla studentów Wydziału Fizyki i Astronomii z "Języki skryptowe - Pyt
     * intrukcje warunkowe
     * pętle
 
+*  [Wykład 4](https://tomaszgolan.github.io/wfia_python/html/python_w04.html)
+
+    * zip / unzip
+    * formatowanie tekstu
+    * słowniki
+
 ## Listy
 
 * Lista 1: [markdown](listy/lista_01.md), [pdf](listy/lista_01.pdf)
