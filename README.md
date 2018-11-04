@@ -32,6 +32,13 @@ Wykłady dla studentów Wydziału Fizyki i Astronomii z "Języki skryptowe - Pyt
     * formatowanie tekstu
     * słowniki
 
+*  [Wykład 5](https://tomaszgolan.github.io/wfia_python/html/python_w05.html)
+
+    * funkcje
+    * "mutowalne" i "niemutowalne" argumenty funkcji
+    * pozycyjne i kluczowe argumenty funkcji
+  
+
 ## Listy
 
 * Lista 1: [markdown](listy/lista_01.md), [pdf](listy/lista_01.pdf)
