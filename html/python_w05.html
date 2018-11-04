@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <title>Języki skryptowe Python</title>
+
+  <meta name="description" content="Języki skryptowe Python">
+
+   <meta name="author" content="Wykład 5" /> 
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="stylesheet" href="../reveal.js/css/reveal.css">
+
+      <link rel="stylesheet" href="../reveal.js/css/theme/white.css" id="theme">
+  
+      <link rel="stylesheet" href="../template/a11y-light.css">
+  
+  <link rel="stylesheet" href="../template/extra.css">
+
+  <script>
+    document.write('<link rel="stylesheet" href="../reveal.js/css/print/' +
+      (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') +
+      '.css" type="text/css" media="print">');
+  </script>
+
+  <script src="../template/snap.svg-min.js"></script>
+  <script src="../template/plotly-latest.min.js"></script>
+
+  <!--[if lt IE 9]>
+  <script src="../reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+
+  
+
+</head>
+
+<body>
+
+  
+
+  <div class="reveal">
+
+    <div class="slides">
+
+      <section>
+        <h1>Języki skryptowe Python</h1>
+         <h3>Wykład 5</h3> 
+        <p>
+          <h4></h4>
+        </p>
+      </section>
+
+       <div class="footer">
+<p>Sterowanie: spacja + shift-spacja || page down + page up || strzałki || esc</p>
+</div>
+<section id="section" class="level1">
+<h1></h1>
+<section id="funkcje" class="level2">
+<h2>Funkcje</h2>
+<hr />
+<ul>
+<li>funkcje (w programowaniu) to “wywoływalne bloki instrukcji”</li>
+<li>mogą (ale nie muszą) przyjmować argumenty</li>
+<li>mogą (ale nie muszą) zwracać obiekt</li>
+<li>raz napisana funkcja może być wykorzystywana wiele razy</li>
+<li>zwiększają czytelność kodu</li>
+<li>łatwiejsze debugowanie</li>
+</ul>
+</section>
+<section id="definiowanie-funkcji" class="level2">
+<h2>Definiowanie funkcji</h2>
+<hr />
+<div class="sourceCode" id="cb1"><pre class="sourceCode py"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">def</span> nazwa_funkcji(argumenty):</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">    instrukcje</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">    ...</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">    <span class="cf">return</span> obiekt</a></code></pre></div>
+<ol type="1">
+<li>słowo kluczowe <em>def</em></li>
+<li>nazwa funkcji</li>
+<li>lista argumentów (opcjonalnie)</li>
+<li>dwukropek</li>
+<li>(wcięte) instrukcje</li>
+<li>słowo kluczowe <em>return</em> (opcjonalnie)</li>
+</ol>
+</section>
+<section id="funkcja-hello-world" class="level2">
+<h2>Funkcja “Hello World”</h2>
+<hr />
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">def</span> hello():  <span class="co"># brak argumentów</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">    <span class="bu">print</span>(<span class="st">&quot;Hello World!&quot;</span>)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">    <span class="co"># nic nie zwraca</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">    </a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">hello()  <span class="co"># wywołanie funkcji</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="ex">Hello</span> World!</a></code></pre></div>
+</section>
+<section id="argumenty-funkcji" class="level2">
+<h2>Argumenty funkcji</h2>
+<hr />
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># funkcja dzialanie przyjmuje trzy argumenty a, b i c</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co"># następnie zwraca wyrażenie a + b - c</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="kw">def</span> dzialanie(a, b, c):</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">    <span class="cf">return</span> a <span class="op">+</span> b <span class="op">-</span> c</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb5-1" data-line-number="1">dzialanie(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)  <span class="co"># zwróci 1 + 2 - 3</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="ex">0</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb7-1" data-line-number="1">x <span class="op">=</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">y <span class="op">=</span> <span class="dv">2</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co"># c = 2*x + 3*y</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">dzialanie(x, y, <span class="dv">2</span><span class="op">*</span>x <span class="op">+</span> <span class="dv">3</span><span class="op">*</span>y)  <span class="co"># zwróci 1 + 2 - 2*1 - 3*2 </span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="ex">-5</span></a></code></pre></div>
+</section>
+<section id="przykład" class="level2">
+<h2>Przykład</h2>
+<hr />
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">def</span> pobierz(komunikat):  <span class="co"># funkcja przyjmuje jeden argument</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">    user_input <span class="op">=</span> <span class="bu">input</span>(komunikat.ljust(<span class="dv">20</span>))</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">    <span class="cf">return</span> user_input    <span class="co"># zwraca dane użytkownika</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co"># raz zdefiniowaną funkcję możemy wykorzystać wielokrotnie</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6">imie <span class="op">=</span> pobierz(<span class="st">&quot;Jak masz na imię?&quot;</span>)  <span class="co"># komunikat = &quot;Jak masz na imię?&quot;</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7">wiek <span class="op">=</span> pobierz(<span class="st">&quot;Ile masz lat?&quot;</span>)      <span class="co"># komunikat = &quot;Ile masz lat?&quot;</span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="bu">print</span>(imie, wiek)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="ex">Jak</span> masz na imię?   Józek</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="ex">Ile</span> masz lat?       20</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="ex">J</span>ózek 20</a></code></pre></div>
+</section>
+<section id="argumenty-ze-słowem-kluczowym" class="level2">
+<h2>Argumenty ze słowem kluczowym</h2>
+<hr />
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co"># funkcja dzialanie przyjmuje trzy argumenty a, b i c</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co"># następnie zwraca wyrażenie a + b - c</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="kw">def</span> dzialanie(a, b, c):</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">    <span class="cf">return</span> a <span class="op">+</span> b <span class="op">-</span> c</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode py"><code class="sourceCode python"><a class="sourceLine" id="cb12-1" data-line-number="1">dzialanie(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)        <span class="co"># 3 argumenty pozycyjne</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="ex">0</span></a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb14-1" data-line-number="1">dzialanie(a<span class="op">=</span><span class="dv">1</span>, b<span class="op">=</span><span class="dv">2</span>, c<span class="op">=</span><span class="dv">3</span>)  <span class="co"># 3 argumenty kluczowe</span></a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="ex">0</span></a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb16-1" data-line-number="1">dzialanie(b<span class="op">=</span><span class="dv">2</span>, c<span class="op">=</span><span class="dv">3</span>, a<span class="op">=</span><span class="dv">1</span>)  <span class="co"># kolejność nieważna dla argumentów kluczowych</span></a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="ex">0</span></a></code></pre></div>
+</section>
+<section id="mieszanie-argumentów" class="level2">
+<h2>Mieszanie argumentów</h2>
+<hr />
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="co"># funkcja dzialanie przyjmuje trzy argumenty a, b i c</span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="co"># następnie zwraca wyrażenie a + b - c</span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="kw">def</span> dzialanie(a, b, c):</a>
+<a class="sourceLine" id="cb18-4" data-line-number="4">    <span class="cf">return</span> a <span class="op">+</span> b <span class="op">-</span> c</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb19-1" data-line-number="1">dzialanie(<span class="dv">1</span>, c <span class="op">=</span> <span class="dv">3</span>, b <span class="op">=</span> <span class="dv">2</span>)  <span class="co"># jeden pozycyjny, dwa kluczowe</span></a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="ex">0</span></a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb21-1" data-line-number="1">dzialanie(a <span class="op">=</span> <span class="dv">1</span>, b <span class="op">=</span> <span class="dv">2</span>, <span class="dv">3</span>)  <span class="co"># najpierw pozycyjne, potem kluczowe!</span></a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="ex">File</span> <span class="st">&quot;&lt;ipython-input-38-60286ad5b769&gt;&quot;</span>, line 1</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"> <span class="ex">dzialanie</span>(a = 1, b = 2, 3) <span class="co"># najpierw pozycyjne, potem kluczowe!</span></a>
+<a class="sourceLine" id="cb22-3" data-line-number="3">                               ^</a>
+<a class="sourceLine" id="cb22-4" data-line-number="4"><span class="ex">SyntaxError</span>: positional argument follows keyword argument</a></code></pre></div>
+</section>
+<section id="domyślne-wartości-argumentów" class="level2">
+<h2>Domyślne wartości argumentów</h2>
+<hr />
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">def</span> pobierz(komunikat):            <span class="co"># funkcja przyjmuje jeden argument</span></a>
+<a class="sourceLine" id="cb23-2" data-line-number="2">    user_input <span class="op">=</span> <span class="bu">input</span>(komunikat)  <span class="co"># pobiera dane od użytkownika</span></a>
+<a class="sourceLine" id="cb23-3" data-line-number="3">    <span class="cf">return</span> user_input              <span class="co"># i je zwraca</span></a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb24-1" data-line-number="1">x <span class="op">=</span> pobierz() <span class="co"># funkcja oczekuje argumentu &quot;komunikat&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="ex">---------------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="ex">TypeError</span>                                 Traceback (most recent call last)</a>
+<a class="sourceLine" id="cb25-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb25-4" data-line-number="4"><span class="op">&lt;</span><span class="ex">ipython-input-40-6184fdb92a47</span><span class="op">&gt;</span> in <span class="op">&lt;</span>module<span class="op">&gt;()</span></a>
+<a class="sourceLine" id="cb25-5" data-line-number="5"><span class="ex">----</span><span class="op">&gt;</span> 1 x = pobierz() <span class="co"># funkcja oczekuje argumentu &quot;komunikat&quot;</span></a>
+<a class="sourceLine" id="cb25-6" data-line-number="6">    </a>
+<a class="sourceLine" id="cb25-7" data-line-number="7"><span class="ex">TypeError</span>: pobierz() <span class="ex">missing</span> 1 required positional argument: <span class="st">&#39;komunikat&#39;</span></a></code></pre></div>
+</section>
+<section id="domyślne-wartości-argumentów-1" class="level2">
+<h2>Domyślne wartości argumentów</h2>
+<hr />
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">def</span> pobierz(komunikat<span class="op">=</span><span class="st">&#39;&gt; &#39;</span>):       <span class="co"># domyślna wartość = &quot;&gt; &quot;</span></a>
+<a class="sourceLine" id="cb26-2" data-line-number="2">    user_input <span class="op">=</span> <span class="bu">input</span>(komunikat)  <span class="co"># pobiera dane od użytkownika</span></a>
+<a class="sourceLine" id="cb26-3" data-line-number="3">    <span class="cf">return</span> user_input              <span class="co"># i je zwraca</span></a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb27-1" data-line-number="1">x <span class="op">=</span> pobierz()  <span class="co"># brak argumentu -&gt; domyślna wartość</span></a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="op">&gt;</span> </a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb29-1" data-line-number="1">x <span class="op">=</span> pobierz(<span class="st">&quot;Napisz coś: &quot;</span>)  <span class="co"># nadpisanie wartości domyślne</span></a></code></pre></div>
+<pre><code>Napisz coś: </code></pre>
+</section>
+<section id="domyślne-wartości-argumentów-2" class="level2">
+<h2>Domyślne wartości argumentów</h2>
+<hr />
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="co"># dwa ostatnie argumenty mają wartości domyślne</span></a>
+<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="kw">def</span> dzialanie(a, b<span class="op">=</span><span class="dv">2</span>, c<span class="op">=</span><span class="dv">3</span>):</a>
+<a class="sourceLine" id="cb31-3" data-line-number="3">    <span class="cf">return</span> a <span class="op">+</span> b <span class="op">-</span> c</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb32-1" data-line-number="1">dzialanie(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) <span class="op">==</span> dzialanie(<span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="ex">True</span></a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="co"># argumenty bez wartości domyślnych nie mogą występować po tych</span></a>
+<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="co"># które wartości domyśne posiadają</span></a>
+<a class="sourceLine" id="cb34-3" data-line-number="3"><span class="kw">def</span> dzialanie(a<span class="op">=</span><span class="dv">1</span>, b, c):</a>
+<a class="sourceLine" id="cb34-4" data-line-number="4">    <span class="cf">return</span> a <span class="op">+</span> b <span class="op">-</span> c</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="ex">File</span> <span class="st">&quot;&lt;ipython-input-46-21b67a48022e&gt;&quot;</span>, line 4</a>
+<a class="sourceLine" id="cb35-2" data-line-number="2"> <span class="ex">def</span> dzialanie(a=1, b, c)<span class="bu">:</span></a>
+<a class="sourceLine" id="cb35-3" data-line-number="3">                     ^</a>
+<a class="sourceLine" id="cb35-4" data-line-number="4"><span class="ex">SyntaxError</span>: non-default argument follows default argument</a></code></pre></div>
+</section>
+</section>
+<section id="section-1" class="level1">
+<h1></h1>
+<section id="argumenty-niemutowalne" class="level2">
+<h2>Argumenty “niemutowalne”</h2>
+<hr />
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw">def</span> zwieksz(x):</a>
+<a class="sourceLine" id="cb36-2" data-line-number="2">    <span class="bu">print</span>(<span class="st">&quot;wewnątrz funkcji (przed) id(x) =&quot;</span>, <span class="bu">id</span>(x))</a>
+<a class="sourceLine" id="cb36-3" data-line-number="3">    x <span class="op">+=</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb36-4" data-line-number="4">    <span class="bu">print</span>(<span class="st">&quot;wewnątrz funkcji (po) id(x)=&quot;</span>, <span class="bu">id</span>(x))</a>
+<a class="sourceLine" id="cb36-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb36-6" data-line-number="6">x <span class="op">=</span> <span class="dv">0</span>  <span class="co"># zmienna x wskazuje na dany obszar pamięci</span></a>
+<a class="sourceLine" id="cb36-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb36-8" data-line-number="8"><span class="bu">print</span>(<span class="st">&quot;Przed zwiększeniem x =&quot;</span>, x)</a>
+<a class="sourceLine" id="cb36-9" data-line-number="9"><span class="bu">print</span>(<span class="st">&quot;id(x) = &quot;</span>, <span class="bu">id</span>(x))</a>
+<a class="sourceLine" id="cb36-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb36-11" data-line-number="11">zwieksz(x)</a>
+<a class="sourceLine" id="cb36-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb36-13" data-line-number="13"><span class="bu">print</span>(<span class="st">&quot;id(x) = &quot;</span>, <span class="bu">id</span>(x))</a>
+<a class="sourceLine" id="cb36-14" data-line-number="14"><span class="bu">print</span>(<span class="st">&quot;Po zwiększeniu x =&quot;</span>, x)</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="ex">Przed</span> zwiększeniem x = 0</a>
+<a class="sourceLine" id="cb37-2" data-line-number="2"><span class="fu">id</span>(x) =  <span class="ex">140266666990080</span></a>
+<a class="sourceLine" id="cb37-3" data-line-number="3"><span class="ex">wewn</span>ątrz funkcji (przed) <span class="fu">id</span>(x) = <span class="ex">140266666990080</span></a>
+<a class="sourceLine" id="cb37-4" data-line-number="4"><span class="ex">wewn</span>ątrz funkcji (po) <span class="fu">id</span>(x)= <span class="ex">140266666990112</span></a>
+<a class="sourceLine" id="cb37-5" data-line-number="5"><span class="fu">id</span>(x) =  <span class="ex">140266666990080</span></a>
+<a class="sourceLine" id="cb37-6" data-line-number="6"><span class="ex">Po</span> zwiększeniu x = 0</a></code></pre></div>
+</section>
+<section id="argumenty-mutowalne" class="level2">
+<h2>Argumenty “mutowalne”</h2>
+<hr />
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">def</span> zwieksz(x):</a>
+<a class="sourceLine" id="cb38-2" data-line-number="2">    <span class="bu">print</span>(<span class="st">&quot;wewnątrz funkcji (przed) id(x) =&quot;</span>, <span class="bu">id</span>(x))</a>
+<a class="sourceLine" id="cb38-3" data-line-number="3">    x[<span class="dv">0</span>] <span class="op">+=</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb38-4" data-line-number="4">    <span class="bu">print</span>(<span class="st">&quot;wewnątrz funkcji (po) id(x) () =&quot;</span>, <span class="bu">id</span>(x))</a>
+<a class="sourceLine" id="cb38-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb38-6" data-line-number="6">x <span class="op">=</span> [<span class="dv">0</span>]  <span class="co"># zmienna x wskazuje na dany obszar pamięci</span></a>
+<a class="sourceLine" id="cb38-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb38-8" data-line-number="8"><span class="bu">print</span>(<span class="st">&quot;Przed zwiększeniem x =&quot;</span>, x)</a>
+<a class="sourceLine" id="cb38-9" data-line-number="9"><span class="bu">print</span>(<span class="st">&quot;id(x) = &quot;</span>, <span class="bu">id</span>(x))</a>
+<a class="sourceLine" id="cb38-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb38-11" data-line-number="11">zwieksz(x)</a>
+<a class="sourceLine" id="cb38-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb38-13" data-line-number="13"><span class="bu">print</span>(<span class="st">&quot;id(x) = &quot;</span>, <span class="bu">id</span>(x))</a>
+<a class="sourceLine" id="cb38-14" data-line-number="14"><span class="bu">print</span>(<span class="st">&quot;Po zwiększeniu x =&quot;</span>, x)</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="ex">Przed</span> zwiększeniem x = [0]</a>
+<a class="sourceLine" id="cb39-2" data-line-number="2"><span class="fu">id</span>(x) =  <span class="ex">140266455152520</span></a>
+<a class="sourceLine" id="cb39-3" data-line-number="3"><span class="ex">wewn</span>ątrz funkcji (przed) <span class="fu">id</span>(x) = <span class="ex">140266455152520</span></a>
+<a class="sourceLine" id="cb39-4" data-line-number="4"><span class="ex">wewn</span>ątrz funkcji (po) <span class="fu">id</span>(x) <span class="kw">()</span> = <span class="ex">140266455152520</span></a>
+<a class="sourceLine" id="cb39-5" data-line-number="5"><span class="fu">id</span>(x) =  <span class="ex">140266455152520</span></a>
+<a class="sourceLine" id="cb39-6" data-line-number="6"><span class="ex">Po</span> zwiększeniu x = [1]</a></code></pre></div>
+</section>
+<section id="mutowalna-wartość-domyślna" class="level2">
+<h2>“Mutowalna” wartość domyślna</h2>
+<hr />
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="co"># wartość domyślna jest inicjowana tylko raz</span></a>
+<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="kw">def</span> update(N, L <span class="op">=</span> []):</a>
+<a class="sourceLine" id="cb40-3" data-line-number="3">    L.append(N)</a>
+<a class="sourceLine" id="cb40-4" data-line-number="4">    <span class="cf">return</span> L</a>
+<a class="sourceLine" id="cb40-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb40-6" data-line-number="6"><span class="bu">print</span>(update(<span class="dv">1</span>))  <span class="co"># L wskazuje na obszar w pamięci</span></a>
+<a class="sourceLine" id="cb40-7" data-line-number="7"><span class="bu">print</span>(update(<span class="dv">2</span>))  <span class="co"># i tak już zostaje</span></a>
+<a class="sourceLine" id="cb40-8" data-line-number="8"><span class="bu">print</span>(update(<span class="dv">3</span>))  <span class="co"># dla każdego kolejnego wywołania</span></a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb41-1" data-line-number="1">[<span class="ex">1</span>]</a>
+<a class="sourceLine" id="cb41-2" data-line-number="2">[<span class="ex">1</span>, 2]</a>
+<a class="sourceLine" id="cb41-3" data-line-number="3">[<span class="ex">1</span>, 2, 3]</a></code></pre></div>
+</section>
+<section id="obejście-problemu" class="level2">
+<h2>Obejście problemu</h2>
+<hr />
+<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="co"># jeśli chcemy, aby wywołanie update bez argumentu L iniciowało nową listę</span></a>
+<a class="sourceLine" id="cb42-2" data-line-number="2"><span class="co"># musimy to zrobić &quot;ręcznie&quot;</span></a>
+<a class="sourceLine" id="cb42-3" data-line-number="3"><span class="kw">def</span> update(N, L <span class="op">=</span> <span class="va">None</span>):</a>
+<a class="sourceLine" id="cb42-4" data-line-number="4">    <span class="cf">if</span> <span class="kw">not</span> L:</a>
+<a class="sourceLine" id="cb42-5" data-line-number="5">        L <span class="op">=</span> []</a>
+<a class="sourceLine" id="cb42-6" data-line-number="6">    L.append(N)</a>
+<a class="sourceLine" id="cb42-7" data-line-number="7">    <span class="cf">return</span> L</a>
+<a class="sourceLine" id="cb42-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb42-9" data-line-number="9"><span class="bu">print</span>(update(<span class="dv">1</span>))  <span class="co"># z każdym wywołaniem funkcji</span></a>
+<a class="sourceLine" id="cb42-10" data-line-number="10"><span class="bu">print</span>(update(<span class="dv">2</span>))  <span class="co"># tworzona jest nowa lista</span></a>
+<a class="sourceLine" id="cb42-11" data-line-number="11"><span class="bu">print</span>(update(<span class="dv">3</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb43-1" data-line-number="1">[<span class="ex">1</span>]</a>
+<a class="sourceLine" id="cb43-2" data-line-number="2">[<span class="ex">2</span>]</a>
+<a class="sourceLine" id="cb43-3" data-line-number="3">[<span class="ex">3</span>]</a></code></pre></div>
+</section>
+</section>
+<section id="section-2" class="level1">
+<h1></h1>
+<section id="dowolna-liczba-argumentów-pozycyjnych" class="level2">
+<h2>Dowolna liczba argumentów (pozycyjnych)</h2>
+<hr />
+<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="co"># funkcja przyjmuje dwa &quot;normalne&quot; argumenty; z pozostałych powstanie krotka</span></a>
+<a class="sourceLine" id="cb44-2" data-line-number="2"><span class="kw">def</span> funkcja(arg1, arg2, <span class="op">*</span>args):</a>
+<a class="sourceLine" id="cb44-3" data-line-number="3">    <span class="bu">print</span>(arg1, arg2, args)</a>
+<a class="sourceLine" id="cb44-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb44-5" data-line-number="5">funkcja(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>, <span class="st">&#39;e&#39;</span>, <span class="st">&#39;f&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="ex">a</span> b (<span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>, <span class="st">&#39;e&#39;</span>, <span class="st">&#39;f&#39;</span>)</a></code></pre></div>
+</section>
+<section id="args-i-key" class="level2">
+<h2>*args i key</h2>
+<hr />
+<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="co"># po *args mogą występować tylko argumenty kluczowe</span></a>
+<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="co"># mogą (ale nie muszą) mieć wartości domyślne</span></a>
+<a class="sourceLine" id="cb46-3" data-line-number="3"><span class="kw">def</span> funkcja(arg1, <span class="op">*</span>args, kwarg1, kwarg2<span class="op">=</span><span class="st">&quot;key&quot;</span>):</a>
+<a class="sourceLine" id="cb46-4" data-line-number="4">    <span class="bu">print</span>(<span class="st">&quot;arg1 =&quot;</span>, arg1)</a>
+<a class="sourceLine" id="cb46-5" data-line-number="5">    <span class="bu">print</span>(<span class="st">&quot;*args =&quot;</span>, args)</a>
+<a class="sourceLine" id="cb46-6" data-line-number="6">    <span class="bu">print</span>(<span class="st">&quot;kwarg1 =&quot;</span>, kwarg1)</a>
+<a class="sourceLine" id="cb46-7" data-line-number="7">    <span class="bu">print</span>(<span class="st">&quot;kwarg2 =&quot;</span>, kwarg2)</a>
+<a class="sourceLine" id="cb46-8" data-line-number="8">    </a>
+<a class="sourceLine" id="cb46-9" data-line-number="9">funkcja(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>, kwarg1<span class="op">=</span><span class="st">&quot;argument kluczowy&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="ex">arg1</span> = a</a>
+<a class="sourceLine" id="cb47-2" data-line-number="2"><span class="ex">*args</span> = (<span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>)</a>
+<a class="sourceLine" id="cb47-3" data-line-number="3"><span class="ex">kwarg1</span> = argument kluczowy</a>
+<a class="sourceLine" id="cb47-4" data-line-number="4"><span class="ex">kwarg2</span> = key</a></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb48-1" data-line-number="1">funkcja(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="ex">...</span>    </a>
+<a class="sourceLine" id="cb49-2" data-line-number="2"><span class="ex">TypeError</span>: funkcja() <span class="ex">missing</span> 1 required keyword-only argument: <span class="st">&#39;kwarg1&#39;</span></a></code></pre></div>
+</section>
+<section id="przykład-1" class="level2">
+<h2>Przykład</h2>
+<hr />
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="co"># średnia z dowolnej liczby argumentów</span></a>
+<a class="sourceLine" id="cb50-2" data-line-number="2"><span class="kw">def</span> srednia(<span class="op">*</span>args):</a>
+<a class="sourceLine" id="cb50-3" data-line-number="3">    <span class="cf">if</span> <span class="kw">not</span> args:  <span class="co"># brak argumentów -&gt; 0</span></a>
+<a class="sourceLine" id="cb50-4" data-line-number="4">        <span class="cf">return</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb50-5" data-line-number="5">    <span class="cf">return</span> <span class="bu">sum</span>(args) <span class="op">/</span> <span class="bu">len</span>(args)</a></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb51-1" data-line-number="1">srednia()</a></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="ex">0</span></a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb53-1" data-line-number="1">srednia(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="ex">2.5</span></a></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb55-1" data-line-number="1">srednia(<span class="op">*</span><span class="bu">range</span>(<span class="dv">100</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="ex">49.5</span></a></code></pre></div>
+</section>
+</section>
+<section id="section-3" class="level1">
+<h1></h1>
+<section id="dowolna-liczba-argumentów-kluczowych" class="level2">
+<h2>Dowolna liczba argumentów (kluczowych)</h2>
+<hr />
+<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb57-1" data-line-number="1"><span class="co"># *args -&gt; krotka argumentów pozycyjnych</span></a>
+<a class="sourceLine" id="cb57-2" data-line-number="2"><span class="co"># **kwargs -&gt; słownik argumentów kluczowych</span></a>
+<a class="sourceLine" id="cb57-3" data-line-number="3"><span class="kw">def</span> funkcja(<span class="op">**</span>kwargs):</a>
+<a class="sourceLine" id="cb57-4" data-line-number="4">    <span class="cf">for</span> key, value <span class="kw">in</span> kwargs.items():</a>
+<a class="sourceLine" id="cb57-5" data-line-number="5">        <span class="bu">print</span>(key, value, <span class="bu">type</span>(value))</a></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb58-1" data-line-number="1">funkcja(imie<span class="op">=</span><span class="st">&quot;Jan&quot;</span>, nazwisko<span class="op">=</span><span class="st">&quot;Kowalski&quot;</span>, wiek<span class="op">=</span><span class="dv">25</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb59-1" data-line-number="1"><span class="ex">imie</span> Jan <span class="op">&lt;</span>class <span class="st">&#39;str&#39;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb59-2" data-line-number="2"><span class="ex">wiek</span> 25 <span class="op">&lt;</span>class <span class="st">&#39;int&#39;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb59-3" data-line-number="3"><span class="ex">nazwisko</span> Kowalski <span class="op">&lt;</span>class <span class="st">&#39;str&#39;</span><span class="op">&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb60-1" data-line-number="1">funkcja(<span class="st">&quot;Jan&quot;</span>, <span class="st">&quot;Kowalski&quot;</span>, <span class="dv">25</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb61-1" data-line-number="1"><span class="ex">...</span>    </a>
+<a class="sourceLine" id="cb61-2" data-line-number="2"><span class="ex">TypeError</span>: funkcja() <span class="ex">takes</span> 0 positional arguments but 3 were given</a></code></pre></div>
+</section>
+<section id="forsowanie-argumentów-kluczowych" class="level2">
+<h2>Forsowanie argumentów kluczowych</h2>
+<hr />
+<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="co"># zwróć sumę a i b; jeśli flaga==True zwróć 0</span></a>
+<a class="sourceLine" id="cb62-2" data-line-number="2"><span class="kw">def</span> moja_suma(a, b, flaga<span class="op">=</span><span class="va">False</span>):</a>
+<a class="sourceLine" id="cb62-3" data-line-number="3">    <span class="cf">if</span> flaga:</a>
+<a class="sourceLine" id="cb62-4" data-line-number="4">        <span class="cf">return</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb62-5" data-line-number="5">    <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb62-6" data-line-number="6">        <span class="cf">return</span> a <span class="op">+</span> b</a></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb63-1" data-line-number="1">moja_suma(<span class="dv">1</span>, <span class="dv">2</span>)     <span class="co"># dla dwóch argumentów działa OK</span></a></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="ex">3</span></a></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb65-1" data-line-number="1">moja_suma(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)  <span class="co"># flaga == 3</span></a></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="ex">0</span></a></code></pre></div>
+</section>
+<section id="forsowanie-argumentów-kluczowych-1" class="level2">
+<h2>Forsowanie argumentów kluczowych</h2>
+<hr />
+<div class="sourceCode" id="cb67"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb67-1" data-line-number="1"><span class="co"># zwróć sumę a i b; jeśli flaga==True zwróć 0</span></a>
+<a class="sourceLine" id="cb67-2" data-line-number="2"><span class="co"># *args wymusza, aby flaga byłą argumentem kluczowym</span></a>
+<a class="sourceLine" id="cb67-3" data-line-number="3"><span class="kw">def</span> moja_suma(a, b, <span class="op">*</span>args, flaga<span class="op">=</span><span class="va">False</span>):    </a>
+<a class="sourceLine" id="cb67-4" data-line-number="4">    <span class="cf">if</span> flaga:</a>
+<a class="sourceLine" id="cb67-5" data-line-number="5">        <span class="cf">return</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb67-6" data-line-number="6">    <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb67-7" data-line-number="7">        <span class="cf">return</span> a <span class="op">+</span> b</a></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb68-1" data-line-number="1">moja_suma(<span class="dv">1</span>, <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb69-1" data-line-number="1"><span class="ex">3</span></a></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb70-1" data-line-number="1">moja_suma(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)  <span class="co"># args=(3)</span></a></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb71-1" data-line-number="1"><span class="ex">3</span></a></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb72-1" data-line-number="1">moja_suma(<span class="dv">1</span>, <span class="dv">2</span>, flaga<span class="op">=</span><span class="va">True</span>)</a></code></pre></div>
+<pre><code>0</code></pre>
+</section>
+<section id="forsowanie-argumentów-kluczowych-2" class="level2">
+<h2>Forsowanie argumentów kluczowych</h2>
+<hr />
+<div class="sourceCode" id="cb74"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb74-1" data-line-number="1"><span class="co"># zwróć sumę a i b; jeśli flaga==True zwróć 0</span></a>
+<a class="sourceLine" id="cb74-2" data-line-number="2"><span class="kw">def</span> moja_suma(a, b, <span class="op">*</span>, flaga<span class="op">=</span><span class="va">False</span>):    </a>
+<a class="sourceLine" id="cb74-3" data-line-number="3">    <span class="cf">if</span> flaga:</a>
+<a class="sourceLine" id="cb74-4" data-line-number="4">        <span class="cf">return</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb74-5" data-line-number="5">    <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb74-6" data-line-number="6">        <span class="cf">return</span> a <span class="op">+</span> b</a></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb75-1" data-line-number="1">moja_suma(<span class="dv">1</span>, <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb76-1" data-line-number="1"><span class="ex">3</span></a></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb77-1" data-line-number="1">moja_suma(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)  <span class="co"># nadmiarowy argument wywołuje błąd</span></a></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb78-1" data-line-number="1"><span class="ex">...</span></a>
+<a class="sourceLine" id="cb78-2" data-line-number="2"><span class="ex">TypeError</span>: moja_suma() <span class="ex">takes</span> 2 positional arguments but 3 were given</a></code></pre></div>
+</section>
+<section id="przykład-2" class="level2">
+<h2>Przykład</h2>
+<hr />
+<div class="sourceCode" id="cb79"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb79-1" data-line-number="1"><span class="kw">def</span> create_car(marka, model, <span class="op">**</span>options):</a>
+<a class="sourceLine" id="cb79-2" data-line-number="2">    <span class="bu">print</span>(marka, model)</a>
+<a class="sourceLine" id="cb79-3" data-line-number="3">    <span class="cf">for</span> opcja, wartosc <span class="kw">in</span> options.items():</a>
+<a class="sourceLine" id="cb79-4" data-line-number="4">        <span class="bu">print</span>(<span class="st">&quot;  </span><span class="sc">{}</span><span class="st">: </span><span class="sc">{}</span><span class="st">&quot;</span>.<span class="bu">format</span>(opcja, wartosc))</a></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb80-1" data-line-number="1">create_car(<span class="st">&quot;Fiat&quot;</span>, <span class="st">&quot;126p&quot;</span>, kolor<span class="op">=</span><span class="st">&quot;czarny&quot;</span>, rocznik<span class="op">=</span><span class="dv">1980</span>)</a>
+<a class="sourceLine" id="cb80-2" data-line-number="2">create_car(<span class="st">&quot;Ford&quot;</span>, <span class="st">&quot;Mustang&quot;</span>, kolor<span class="op">=</span><span class="st">&quot;różowy&quot;, moc=&quot;</span>200KM<span class="st">&quot;, skrzynia=&quot;</span>manualna<span class="st">&quot;)</span></a></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb81-1" data-line-number="1"><span class="ex">Fiat</span> 126p</a>
+<a class="sourceLine" id="cb81-2" data-line-number="2">    <span class="ex">kolor</span>: czarny</a>
+<a class="sourceLine" id="cb81-3" data-line-number="3">    <span class="ex">rocznik</span>: 1980</a>
+<a class="sourceLine" id="cb81-4" data-line-number="4"><span class="ex">Ford</span> Mustang</a>
+<a class="sourceLine" id="cb81-5" data-line-number="5">    <span class="ex">moc</span>: 200KM</a>
+<a class="sourceLine" id="cb81-6" data-line-number="6">    <span class="ex">kolor</span>: różowy</a>
+<a class="sourceLine" id="cb81-7" data-line-number="7">    <span class="ex">skrzynia</span>: manualna</a></code></pre></div>
+</section>
+<section id="argumenty-ze-słownika" class="level2">
+<h2>Argumenty ze słownika</h2>
+<hr />
+<div class="sourceCode" id="cb82"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb82-1" data-line-number="1"><span class="kw">def</span> create_car(marka, model, <span class="op">**</span>options):</a>
+<a class="sourceLine" id="cb82-2" data-line-number="2">    <span class="bu">print</span>(marka, model)</a>
+<a class="sourceLine" id="cb82-3" data-line-number="3">    <span class="cf">for</span> opcja, wartosc <span class="kw">in</span> options.items():</a>
+<a class="sourceLine" id="cb82-4" data-line-number="4">        <span class="bu">print</span>(<span class="st">&quot;  </span><span class="sc">{}</span><span class="st">: </span><span class="sc">{}</span><span class="st">&quot;</span>.<span class="bu">format</span>(opcja, wartosc))</a>
+<a class="sourceLine" id="cb82-5" data-line-number="5">        </a>
+<a class="sourceLine" id="cb82-6" data-line-number="6">ford_mustang <span class="op">=</span> {<span class="st">&quot;kolor&quot;</span>: <span class="st">&quot;różowy&quot;, &quot;</span>moc<span class="st">&quot;: &quot;</span>200KM<span class="st">&quot;, &quot;</span>skrzynia<span class="st">&quot;: &quot;</span>manualna<span class="st">&quot;}</span></a>
+<a class="sourceLine" id="cb82-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb82-8" data-line-number="8"><span class="st"># **dict jako argument -&gt; rozpakuj slownik</span></a>
+<a class="sourceLine" id="cb82-9" data-line-number="9"><span class="st">create_car(&quot;</span>Ford<span class="st">&quot;, &quot;</span>Mustang<span class="st">&quot;, **ford_mustang)</span></a></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb83-1" data-line-number="1"><span class="ex">Ford</span> Mustang</a>
+<a class="sourceLine" id="cb83-2" data-line-number="2">    <span class="ex">moc</span>: 200KM</a>
+<a class="sourceLine" id="cb83-3" data-line-number="3">    <span class="ex">kolor</span>: różowy</a>
+<a class="sourceLine" id="cb83-4" data-line-number="4">    <span class="ex">skrzynia</span>: manualna</a></code></pre></div>
+</section>
+</section>
+<section id="section-4" class="level1">
+<h1></h1>
+<section id="funkcja-jako-rezultat-funkcji" class="level2">
+<h2>Funkcja jako rezultat funkcji</h2>
+<hr />
+<div class="sourceCode" id="cb84"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb84-1" data-line-number="1"><span class="kw">def</span> kwadrat(x):</a>
+<a class="sourceLine" id="cb84-2" data-line-number="2">    <span class="bu">print</span>(<span class="st">&quot;kwadrat(</span><span class="sc">{}</span><span class="st">)&quot;</span>.<span class="bu">format</span>(x))</a>
+<a class="sourceLine" id="cb84-3" data-line-number="3">    <span class="cf">return</span> x<span class="op">*</span>x</a>
+<a class="sourceLine" id="cb84-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb84-5" data-line-number="5"><span class="kw">def</span> kwadrat_sumy(a, b):</a>
+<a class="sourceLine" id="cb84-6" data-line-number="6">    <span class="bu">print</span>(<span class="st">&quot;kwadrat_sumy(</span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">)&quot;</span>.<span class="bu">format</span>(a, b))</a>
+<a class="sourceLine" id="cb84-7" data-line-number="7">    <span class="cf">return</span> kwadrat(a <span class="op">+</span> b)  <span class="co"># return może zwrócić inną funkcję</span></a>
+<a class="sourceLine" id="cb84-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb84-9" data-line-number="9">wynik <span class="op">=</span> kwadrat_sumy(<span class="dv">2</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb84-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb84-11" data-line-number="11"><span class="bu">print</span>(<span class="st">&quot;wynik =&quot;</span>, wynik)</a></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb85-1" data-line-number="1"><span class="ex">kwadrat_sumy</span>(2, 3)</a>
+<a class="sourceLine" id="cb85-2" data-line-number="2"><span class="ex">kwadrat</span>(5)</a>
+<a class="sourceLine" id="cb85-3" data-line-number="3"><span class="ex">wynik</span> = 25</a></code></pre></div>
+</section>
+<section id="wynik-funkcji-jako-argument-funkcji" class="level2">
+<h2>Wynik funkcji jako argument funkcji</h2>
+<hr />
+<div class="sourceCode" id="cb86"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="kw">def</span> kwadrat(x):</a>
+<a class="sourceLine" id="cb86-2" data-line-number="2">    <span class="bu">print</span>(<span class="st">&quot;kwadrat(</span><span class="sc">{}</span><span class="st">)&quot;</span>.<span class="bu">format</span>(x))</a>
+<a class="sourceLine" id="cb86-3" data-line-number="3">    <span class="cf">return</span> x<span class="op">*</span>x</a>
+<a class="sourceLine" id="cb86-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb86-5" data-line-number="5"><span class="kw">def</span> suma(a, b):</a>
+<a class="sourceLine" id="cb86-6" data-line-number="6">    <span class="bu">print</span>(<span class="st">&quot;suma(</span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">)&quot;</span>.<span class="bu">format</span>(a, b))</a>
+<a class="sourceLine" id="cb86-7" data-line-number="7">    <span class="cf">return</span> a <span class="op">+</span> b</a>
+<a class="sourceLine" id="cb86-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb86-9" data-line-number="9"><span class="kw">def</span> kwadrat_sumy(a, b):</a>
+<a class="sourceLine" id="cb86-10" data-line-number="10">    <span class="bu">print</span>(<span class="st">&quot;kwadrat_sumy(</span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">)&quot;</span>.<span class="bu">format</span>(a, b))</a>
+<a class="sourceLine" id="cb86-11" data-line-number="11">    <span class="cf">return</span> kwadrat(suma(a, b))  <span class="co"># wynik funkcji jest argumentem</span></a>
+<a class="sourceLine" id="cb86-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb86-13" data-line-number="13">wynik <span class="op">=</span> kwadrat_sumy(<span class="dv">2</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb86-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb86-15" data-line-number="15"><span class="bu">print</span>(<span class="st">&quot;wynik =&quot;</span>, wynik)</a></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb87-1" data-line-number="1"><span class="ex">kwadrat_sumy</span>(2, 3)</a>
+<a class="sourceLine" id="cb87-2" data-line-number="2"><span class="ex">suma</span>(2, 3)</a>
+<a class="sourceLine" id="cb87-3" data-line-number="3"><span class="ex">kwadrat</span>(5)</a>
+<a class="sourceLine" id="cb87-4" data-line-number="4"><span class="ex">wynik</span> = 25</a></code></pre></div>
+</section>
+<section id="funkcja-jako-argument-funkcji" class="level2">
+<h2>Funkcja jako argument funkcji</h2>
+<hr />
+<div class="sourceCode" id="cb88"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb88-1" data-line-number="1"><span class="kw">def</span> kwadrat(x):</a>
+<a class="sourceLine" id="cb88-2" data-line-number="2">    <span class="bu">print</span>(<span class="st">&quot;kwadrat(</span><span class="sc">{}</span><span class="st">)&quot;</span>.<span class="bu">format</span>(x))</a>
+<a class="sourceLine" id="cb88-3" data-line-number="3">    <span class="cf">return</span> x<span class="op">*</span>x</a>
+<a class="sourceLine" id="cb88-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb88-5" data-line-number="5"><span class="kw">def</span> suma(a, b):</a>
+<a class="sourceLine" id="cb88-6" data-line-number="6">    <span class="bu">print</span>(<span class="st">&quot;suma(</span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">)&quot;</span>.<span class="bu">format</span>(a, b))</a>
+<a class="sourceLine" id="cb88-7" data-line-number="7">    <span class="cf">return</span> a <span class="op">+</span> b</a>
+<a class="sourceLine" id="cb88-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb88-9" data-line-number="9"><span class="kw">def</span> kwadrat_sumy(a, b, f1, f2):</a>
+<a class="sourceLine" id="cb88-10" data-line-number="10">    <span class="bu">print</span>(<span class="st">&quot;kwadrat_sumy(</span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">)&quot;</span>.<span class="bu">format</span>(a, b, f1, f2))</a>
+<a class="sourceLine" id="cb88-11" data-line-number="11">    <span class="cf">return</span> f2(f1(a, b))</a>
+<a class="sourceLine" id="cb88-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb88-13" data-line-number="13">wynik <span class="op">=</span> kwadrat_sumy(<span class="dv">2</span>, <span class="dv">3</span>, suma, kwadrat)  <span class="co"># funkcja jest argumentem</span></a>
+<a class="sourceLine" id="cb88-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb88-15" data-line-number="15"><span class="bu">print</span>(<span class="st">&quot;wynik =&quot;</span>, wynik)</a></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb89-1" data-line-number="1"><span class="ex">kwadrat_sumy</span>(2, 3, <span class="op">&lt;</span>function suma at 0x7f9254388d08<span class="op">&gt;</span>, <span class="op">&lt;</span>function kwadrat at 0x7f925438ed90<span class="op">&gt;</span>)</a>
+<a class="sourceLine" id="cb89-2" data-line-number="2"><span class="ex">suma</span>(2, 3)</a>
+<a class="sourceLine" id="cb89-3" data-line-number="3"><span class="ex">kwadrat</span>(5)</a>
+<a class="sourceLine" id="cb89-4" data-line-number="4"><span class="ex">wynik</span> = 25</a></code></pre></div>
+</section>
+</section>
+    </div>
+
+    <script src="../reveal.js/lib/js/head.min.js"></script>
+    <script src="../reveal.js/js/reveal.js"></script>
+
+    <script>
+
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        slideNumber: true,
+        width: 1280,
+        height: 720,
+
+                  theme: Reveal.getQueryHash().theme || 'white',
+        
+                  transition: Reveal.getQueryHash().transition || 'convex',
+        
+                  transitionSpeed: Reveal.getQueryHash().transitionSpeed || 'fast',
+        
+        dependencies: [{
+            src: '../reveal.js/lib/js/classList.js',
+            condition: function() {
+              return !document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/markdown/showdown.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          }, {
+            src: '../reveal.js/plugin/markdown/markdown.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          }, {
+            src: '../reveal.js/plugin/highlight/highlight.js',
+            async: true,
+            callback: function() {
+              hljs.initHighlightingOnLoad();
+            }
+          }, {
+            src: '../reveal.js/plugin/zoom-js/zoom.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/notes/notes.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/math/math.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          },
+          // { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+    </script>
+
+    <script>
+    // displayed upon load, hides when slide changes
+      Reveal.addEventListener('slidechanged', function(event) {
+        document.querySelector('.reveal .footer').style.display = 'none';
+      });
+   </script>
+
+</body>
+
+</html>

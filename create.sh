@@ -1,8 +1,8 @@
 #!/bin/bash
 
-talk='python_w04'    # name of source file in markdown fodler
+talk='python_w05'    # name of source file in markdown fodler
 theme='white'        # beige | black | blood | league | moon | night | serif | simple | sky | solarized | white
-hs='github-gist'     # highlight style from template folder (leave blank to use default = zenburn)
+hs='a11y-light'        # highlight style from template folder (leave blank to use default = zenburn)
 transition='convex'  # none | fade | slide | convex | concave | zoom
 speed='fast'         # default | slow | fast
 
