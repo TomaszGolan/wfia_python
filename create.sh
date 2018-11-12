@@ -1,6 +1,6 @@
 #!/bin/bash
 
-talk='python_w05'    # name of source file in markdown fodler
+talk='python_w06'    # name of source file in markdown fodler
 theme='white'        # beige | black | blood | league | moon | night | serif | simple | sky | solarized | white
 hs='a11y-light'        # highlight style from template folder (leave blank to use default = zenburn)
 transition='convex'  # none | fade | slide | convex | concave | zoom

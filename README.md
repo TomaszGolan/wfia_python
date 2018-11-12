@@ -38,6 +38,10 @@ Wykłady dla studentów Wydziału Fizyki i Astronomii z "Języki skryptowe - Pyt
     * "mutowalne" i "niemutowalne" argumenty funkcji
     * pozycyjne i kluczowe argumenty funkcji
   
+*  [Wykład 6](https://tomaszgolan.github.io/wfia_python/html/python_w06.html)
+
+    * przestrzenie nazw
+    * dokumentacja funkcji
 
 ## Listy
 

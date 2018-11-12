@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <title>Języki skryptowe Python</title>
+
+  <meta name="description" content="Języki skryptowe Python">
+
+   <meta name="author" content="Wykład 6" /> 
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="stylesheet" href="../reveal.js/css/reveal.css">
+
+      <link rel="stylesheet" href="../reveal.js/css/theme/white.css" id="theme">
+  
+      <link rel="stylesheet" href="../template/a11y-light.css">
+  
+  <link rel="stylesheet" href="../template/extra.css">
+
+  <script>
+    document.write('<link rel="stylesheet" href="../reveal.js/css/print/' +
+      (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') +
+      '.css" type="text/css" media="print">');
+  </script>
+
+  <script src="../template/snap.svg-min.js"></script>
+  <script src="../template/plotly-latest.min.js"></script>
+
+  <!--[if lt IE 9]>
+  <script src="../reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+
+  
+
+</head>
+
+<body>
+
+  
+
+  <div class="reveal">
+
+    <div class="slides">
+
+      <section>
+        <h1>Języki skryptowe Python</h1>
+         <h3>Wykład 6</h3> 
+        <p>
+          <h4></h4>
+        </p>
+      </section>
+
+       <div class="footer">
+<p>Sterowanie: spacja + shift-spacja || page down + page up || strzałki || esc</p>
+</div>
+<section id="section" class="level1">
+<h1></h1>
+<section id="nazwy-zmiennych" class="level2">
+<h2>Nazwy zmiennych</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">zmienna <span class="op">=</span> <span class="dv">10</span>              <span class="co"># zmienna wskazuje na int</span>
+
+<span class="bu">print</span>(zmienna)
+
+zmienna <span class="op">=</span> <span class="st">&quot;Hello World!&quot;</span>  <span class="co"># zmienna wskazuje na str</span>
+
+<span class="bu">print</span>(zmienna)
+
+<span class="kw">def</span> funkcja():
+    <span class="bu">print</span>(<span class="st">&quot;Jestem funkcją.&quot;</span>)
+    
+zmienna <span class="op">=</span> funkcja         <span class="co"># zmienna wskazuje na funkcje</span>
+
+zmienna()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">10</span>
+<span class="ex">Hello</span> World!
+<span class="ex">Jestem</span> funkcją.</code></pre></div>
+</section>
+<section id="niebezpieczne-nadpisania" class="level2">
+<h2>Niebezpieczne nadpisania</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> moja_nazwa():  <span class="co"># moja_nazwa wskazuje na funkcję</span>
+    <span class="bu">print</span>(<span class="st">&quot;Jestem funkcją.&quot;</span>)
+    
+<span class="kw">def</span> moja_nazwa():  <span class="co"># moja_nazwa wskazuje inną funkcję</span>
+    <span class="bu">print</span>(<span class="st">&quot;Jestem nową funkcją.&quot;</span>)
+    
+moja_nazwa()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Jestem</span> nową funkcją.</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">moja_nazwa <span class="op">=</span> <span class="dv">10</span>  <span class="co"># moja_nazwa wskazuje na int </span>
+
+moja_nazwa()     <span class="co"># TypeError: &#39;int&#39; object is not callable</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">...</span>
+<span class="ex">TypeError</span>: <span class="st">&#39;int&#39;</span> object is not callable</code></pre></div>
+</section>
+<section id="moduły---import-..." class="level2">
+<h2>Moduły - <em>import</em> ...</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> math
+
+<span class="kw">def</span> sin(x):
+    <span class="co">&quot;&quot;&quot;Zwraca x.&quot;&quot;&quot;</span>
+    <span class="cf">return</span> x</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">math.sin(math.pi <span class="op">/</span> <span class="dv">2</span>)  <span class="co"># wywołanie [moduł].[funkcja]</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">1.0</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">sin(math.pi <span class="op">/</span> <span class="dv">2</span>)  <span class="co"># wywołanie [funkcja]</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">1.5707963267948966</span></code></pre></div>
+</section>
+<section id="moduły---from-...-import-..." class="level2">
+<h2>Moduły - <em>from ... import ...</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> math <span class="im">import</span> sin
+
+<span class="kw">def</span> sin(x):       <span class="co"># nadpisuje sin z math</span>
+    <span class="co">&quot;&quot;&quot;Zwraca x.&quot;&quot;&quot;</span>
+    <span class="cf">return</span> x
+
+sin(math.pi <span class="op">/</span> <span class="dv">2</span>)  <span class="co"># wywołanie funkcji sin</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">1.5707963267948966</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> sin(x):
+    <span class="co">&quot;&quot;&quot;Zwraca x.&quot;&quot;&quot;</span>
+    <span class="cf">return</span> x
+
+<span class="im">from</span> math <span class="im">import</span> sin  <span class="co"># nadpisuje sin</span>
+
+sin(math.pi <span class="op">/</span> <span class="dv">2</span>)      <span class="co"># wywołanie math.sin</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">1.0</span></code></pre></div>
+</section>
+</section>
+<section id="section-1" class="level1">
+<h1></h1>
+<section id="przestrzenie-nazw" class="level2">
+<h2>Przestrzenie nazw</h2>
+<hr />
+<ul>
+<li>abstrakcyjna przestrzeń przechowująca nazwy</li>
+<li>np. przestrzeń nazw wbudowanych</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(<span class="bu">dir</span>(__builtin__)[<span class="op">-</span><span class="dv">72</span>:])</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="st">&#39;abs&#39;</span>, <span class="st">&#39;all&#39;</span>, <span class="st">&#39;any&#39;</span>, <span class="st">&#39;ascii&#39;</span>, <span class="st">&#39;bin&#39;</span>, <span class="st">&#39;bool&#39;</span>, <span class="st">&#39;bytearray&#39;</span>, <span class="st">&#39;bytes&#39;</span>, <span class="st">&#39;callable&#39;</span>, <span class="st">&#39;chr&#39;</span>, <span class="st">&#39;classmethod&#39;</span>, <span class="st">&#39;compile&#39;</span>, <span class="st">&#39;complex&#39;</span>, <span class="st">&#39;copyright&#39;</span>, <span class="st">&#39;credits&#39;</span>, <span class="st">&#39;delattr&#39;</span>, <span class="st">&#39;dict&#39;</span>, <span class="st">&#39;dir&#39;</span>, <span class="st">&#39;divmod&#39;</span>, <span class="st">&#39;dreload&#39;</span>, <span class="st">&#39;enumerate&#39;</span>, <span class="st">&#39;eval&#39;</span>, <span class="st">&#39;exec&#39;</span>, <span class="st">&#39;filter&#39;</span>, <span class="st">&#39;float&#39;</span>, <span class="st">&#39;format&#39;</span>, <span class="st">&#39;frozenset&#39;</span>, <span class="st">&#39;get_ipython&#39;</span>, <span class="st">&#39;getattr&#39;</span>, <span class="st">&#39;globals&#39;</span>, <span class="st">&#39;hasattr&#39;</span>, <span class="st">&#39;hash&#39;</span>, <span class="st">&#39;help&#39;</span>, <span class="st">&#39;hex&#39;</span>, <span class="st">&#39;id&#39;</span>, <span class="st">&#39;input&#39;</span>, <span class="st">&#39;int&#39;</span>, <span class="st">&#39;isinstance&#39;</span>, <span class="st">&#39;issubclass&#39;</span>, <span class="st">&#39;iter&#39;</span>, <span class="st">&#39;len&#39;</span>, <span class="st">&#39;license&#39;</span>, <span class="st">&#39;list&#39;</span>, <span class="st">&#39;locals&#39;</span>, <span class="st">&#39;map&#39;</span>, <span class="st">&#39;max&#39;</span>, <span class="st">&#39;memoryview&#39;</span>, <span class="st">&#39;min&#39;</span>, <span class="st">&#39;next&#39;</span>, <span class="st">&#39;object&#39;</span>, <span class="st">&#39;oct&#39;</span>, <span class="st">&#39;open&#39;</span>, <span class="st">&#39;ord&#39;</span>, <span class="st">&#39;pow&#39;</span>, <span class="st">&#39;print&#39;</span>, <span class="st">&#39;property&#39;</span>, <span class="st">&#39;range&#39;</span>, <span class="st">&#39;repr&#39;</span>, <span class="st">&#39;reversed&#39;</span>, <span class="st">&#39;round&#39;</span>, <span class="st">&#39;set&#39;</span>, <span class="st">&#39;setattr&#39;</span>, <span class="st">&#39;slice&#39;</span>, <span class="st">&#39;sorted&#39;</span>, <span class="st">&#39;staticmethod&#39;</span>, <span class="st">&#39;str&#39;</span>, <span class="st">&#39;sum&#39;</span>, <span class="st">&#39;super&#39;</span>, <span class="st">&#39;tuple&#39;</span>, <span class="st">&#39;type&#39;</span>, <span class="st">&#39;vars&#39;</span>, <span class="st">&#39;zip&#39;</span>]</code></pre></div>
+</section>
+<section id="uwaga-nadpisać-można-wszystko" class="level2">
+<h2>Uwaga: nadpisać można wszystko</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">slownik <span class="op">=</span> <span class="bu">dict</span>(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=</span><span class="dv">2</span>)
+
+<span class="bu">print</span>(slownik)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">{<span class="st">&#39;y&#39;</span>: <span class="ex">2</span>, <span class="st">&#39;x&#39;</span>: 1}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> <span class="bu">dict</span>(x, y):  <span class="co"># nazwy wbudowane też można nadpisać</span>
+    <span class="cf">return</span> x, y
+
+slownik <span class="op">=</span> <span class="bu">dict</span>(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=</span><span class="dv">2</span>)
+
+<span class="bu">print</span>(slownik)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">(</span><span class="ex">1</span>, 2<span class="kw">)</span></code></pre></div>
+</section>
+<section id="przestrzeń-nazw-lokalnych" class="level2">
+<h2>Przestrzeń nazw lokalnych</h2>
+<hr />
+<ul>
+<li>zmienne zdefiniowane wewnątrz funkcji (niedostępne poza nią)</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> funkcja():              <span class="co"># zmienne lokalne dostępne</span>
+    zmienna_lokalna <span class="op">=</span> <span class="dv">1</span>     <span class="co"># są tylko wewnątrz funkcji</span>
+    <span class="cf">return</span> zmienna_lokalna  <span class="co"># w której zostały zdefiniowane</span>
+
+<span class="bu">print</span>(<span class="st">&quot;zmienna_lokalna =&quot;</span>, zmienna_lokalna)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">...</span>
+<span class="ex">NameError</span>: name <span class="st">&#39;zmienna_lokalna&#39;</span> is not defined</code></pre></div>
+</section>
+<section id="przestrzeń-nazw-globalnych" class="level2">
+<h2>Przestrzeń nazw globalnych</h2>
+<hr />
+<ul>
+<li>dostępne w całym module (pliku)</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">zmienna_globalna <span class="op">=</span> <span class="st">&quot;Python&quot;</span>
+
+<span class="kw">def</span> funkcja():
+    <span class="cf">return</span> zmienna_globalna
+
+<span class="co"># wewnątrz funkcji zmienne globalne są dostępne</span>
+funkcja()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="st">&#39;Python&#39;</span></code></pre></div>
+</section>
+<section id="zmienne-lokalne-nadpisują-globalne" class="level2">
+<h2>Zmienne lokalne nadpisują globalne</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">zmienna_globalna <span class="op">=</span> <span class="st">&quot;Python&quot;</span>
+
+<span class="kw">def</span> funkcja():
+    zmienna_globalna <span class="op">=</span> <span class="st">&quot;Nowy Python&quot;</span>         <span class="co"># lokalna zmienna_globalna</span>
+    <span class="bu">print</span>(<span class="st">&quot;in funkcja:&quot;</span>, zmienna_globalna)
+
+funkcja()
+
+<span class="bu">print</span>(<span class="st">&quot;outside funkcja:&quot;</span>, zmienna_globalna)  <span class="co"># globalna bez zmian</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">in</span> <span class="ex">funkcja</span>: Nowy Python
+<span class="ex">outside</span> funkcja: Python</code></pre></div>
+</section>
+<section id="albo-global-albo-local" class="level2">
+<h2>Albo <em>global</em> albo <em>local</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">zmienna_globalna <span class="op">=</span> <span class="st">&quot;Python&quot;</span>
+
+<span class="kw">def</span> funkcja():
+    <span class="bu">print</span>(<span class="st">&quot;in funkcja:&quot;</span>, zmienna_globalna)  <span class="co"># globalna?</span>
+    zmienna_globalna <span class="op">=</span> <span class="st">&quot;Nowy Python&quot;</span>
+    <span class="bu">print</span>(<span class="st">&quot;in funkcja:&quot;</span>, zmienna_globalna)  <span class="co"># lokalna?</span>
+
+funkcja()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">...</span>
+<span class="ex">UnboundLocalError</span>: local variable <span class="st">&#39;zmienna_globalna&#39;</span> referenced before assignment</code></pre></div>
+</section>
+</section>
+<section id="section-2" class="level1">
+<h1></h1>
+<section id="kolejność-przestrzeni" class="level2">
+<h2>Kolejność przestrzeni</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">#nazwy lokalne, potem globalne, na końcu wbudowane</span>
+<span class="bu">list</span> <span class="op">=</span> <span class="bu">tuple</span>  <span class="co"># zmienna globalna nadpisuje wbudowane list</span>
+<span class="bu">dict</span> <span class="op">=</span> <span class="bu">float</span>  <span class="co"># zmienna globalna nadpisuje wbudowane dict</span>
+
+<span class="bu">print</span>(<span class="st">&quot;type(list()) =&quot;</span>, <span class="bu">type</span>(<span class="bu">list</span>()))
+<span class="bu">print</span>(<span class="st">&quot;type(dict()) =&quot;</span>, <span class="bu">type</span>(<span class="bu">dict</span>()))
+
+<span class="kw">def</span> funkcja():
+    <span class="bu">dict</span> <span class="op">=</span> <span class="bu">int</span>  <span class="co"># zmienna lokalna nadpisuje globalne dict</span>
+    <span class="bu">print</span>(<span class="st">&quot;In funkcja:&quot;</span>)
+    <span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\t</span><span class="st">type(dict()) =&quot;</span>, <span class="bu">type</span>(<span class="bu">dict</span>()))  <span class="co"># lokalna</span>
+    <span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\t</span><span class="st">type(list()) =&quot;</span>, <span class="bu">type</span>(<span class="bu">list</span>()))  <span class="co"># globalna</span>
+    <span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\t</span><span class="st">type(int()) =&quot;</span>, <span class="bu">type</span>(<span class="bu">int</span>()))    <span class="co"># wbudowana</span>
+
+funkcja()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="bu">type</span>(list()) = <span class="op">&lt;</span><span class="ex">class</span> <span class="st">&#39;tuple&#39;</span><span class="op">&gt;</span>
+<span class="bu">type</span>(dict()) = <span class="op">&lt;</span><span class="ex">class</span> <span class="st">&#39;float&#39;</span><span class="op">&gt;</span>
+<span class="ex">In</span> funkcja:
+    <span class="bu">type</span>(dict()) = <span class="op">&lt;</span><span class="ex">class</span> <span class="st">&#39;int&#39;</span><span class="op">&gt;</span>
+    <span class="bu">type</span>(list()) = <span class="op">&lt;</span><span class="ex">class</span> <span class="st">&#39;tuple&#39;</span><span class="op">&gt;</span>
+    <span class="bu">type</span>(int()) = <span class="op">&lt;</span><span class="ex">class</span> <span class="st">&#39;int&#39;</span><span class="op">&gt;</span></code></pre></div>
+</section>
+<section id="wielokrotne-zagnieżdżenie" class="level2">
+<h2>Wielokrotne zagnieżdżenie</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">a <span class="op">=</span> <span class="st">&quot;global a&quot;</span>  <span class="co"># zasięg zmiennych a, b, c</span>
+b <span class="op">=</span> <span class="st">&quot;global b&quot;</span>  <span class="co"># jest globalny</span>
+c <span class="op">=</span> <span class="st">&quot;global c&quot;</span>
+
+<span class="kw">def</span> funkcja():
+    a <span class="op">=</span> <span class="st">&quot;local a&quot;</span>  <span class="co"># lokalne a, b dostępne w funkcji</span>
+    b <span class="op">=</span> <span class="st">&quot;local b&quot;</span>  <span class="co"># i w każdym kolejnym zagnieżdzeniu</span>
+    
+    <span class="kw">def</span> funkcja_w_funkcji():
+        a <span class="op">=</span> <span class="st">&quot;local local a&quot;</span>  <span class="co"># dostępna tylko w funkcja_w_funkcji</span>
+        <span class="bu">print</span>(a, b, c, sep<span class="op">=</span><span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)
+    
+    funkcja_w_funkcji()
+    
+funkcja()  <span class="co"># od &quot;najlokalniejszej&quot; do &quot;najglobalniejszej&quot;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="bu">local</span> <span class="va">local</span> <span class="va">a</span>
+<span class="bu">local</span> <span class="va">b</span>
+<span class="ex">global</span> c</code></pre></div>
+</section>
+<section id="uwaga-na-globalne-mutowalne" class="level2">
+<h2>Uwaga na globalne mutowalne</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]
+y <span class="op">=</span> [<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>]
+
+<span class="kw">def</span> funkcja():
+    x <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]  <span class="co"># przypisanie -&gt; zmienna lokalna</span>
+    y.append(<span class="st">&#39;d&#39;</span>)     <span class="co"># modyfikacja -&gt; ciągle globalna</span>
+    
+funkcja()
+
+<span class="bu">print</span>(x, y, sep<span class="op">=</span><span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="ex">1</span>, 2, 3]
+[<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>]</code></pre></div>
+</section>
+<section id="wymuszanie-zmiennej-globalnej" class="level2">
+<h2>Wymuszanie zmiennej globalnej</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">zmienna <span class="op">=</span> <span class="st">&quot;globalna&quot;</span>
+
+<span class="kw">def</span> f():
+    <span class="kw">global</span> zmienna             <span class="co"># przypisanie nie tworzy zmiennej lokalnej</span>
+    zmienna <span class="op">=</span> <span class="st">&quot;nowa globalna&quot;</span>  <span class="co"># ale modyfikuje globalną</span>
+    
+f()
+
+<span class="bu">print</span>(zmienna)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">nowa</span> globalna</code></pre></div>
+</section>
+<section id="wymuszanie-zmiennej-nielokalnej" class="level2">
+<h2>Wymuszanie zmiennej &quot;nielokalnej&quot;</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">a <span class="op">=</span> <span class="st">&quot;global a&quot;</span>  <span class="co"># globalna</span>
+
+<span class="kw">def</span> f():
+    a <span class="op">=</span> <span class="st">&quot;local a&quot;</span>  <span class="co"># lokalna w f</span>
+    
+    <span class="kw">def</span> g():
+        a <span class="op">=</span> <span class="st">&quot;local local a&quot;</span>  <span class="co"># lokalna w g</span>
+        <span class="bu">print</span>(<span class="st">&quot;in g():&quot;</span>, a)
+        
+    g()
+        
+    <span class="bu">print</span>(<span class="st">&quot;in f():&quot;</span>, a)
+
+f()
+
+<span class="bu">print</span>(<span class="st">&quot;outside:&quot;</span>, a)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">in</span> <span class="fu">g()</span><span class="bu">:</span> local local a
+<span class="kw">in</span> <span class="fu">f()</span><span class="bu">:</span> local a
+<span class="ex">outside</span>: global a</code></pre></div>
+</section>
+<section id="wymuszanie-zmiennej-nielokalnej-1" class="level2">
+<h2>Wymuszanie zmiennej &quot;nielokalnej&quot;</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">a <span class="op">=</span> <span class="st">&quot;global a&quot;</span>  <span class="co"># globalna</span>
+
+<span class="kw">def</span> f():
+    a <span class="op">=</span> <span class="st">&quot;local a&quot;</span>  <span class="co"># lokalna w f</span>
+    
+    <span class="kw">def</span> g():
+        <span class="kw">global</span> a             <span class="co"># używaj globalnej</span>
+        a <span class="op">=</span> <span class="st">&quot;local local a&quot;</span>  <span class="co"># modyfikuje globalną</span>
+        <span class="bu">print</span>(<span class="st">&quot;in g():&quot;</span>, a)
+        
+    g()
+        
+    <span class="bu">print</span>(<span class="st">&quot;in f():&quot;</span>, a)
+
+f()
+
+<span class="bu">print</span>(<span class="st">&quot;outside:&quot;</span>, a)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">in</span> <span class="fu">g()</span><span class="bu">:</span> local local a
+<span class="kw">in</span> <span class="fu">f()</span><span class="bu">:</span> local a
+<span class="ex">outside</span>: local local a</code></pre></div>
+</section>
+<section id="wymuszanie-zmiennej-nielokalnej-2" class="level2">
+<h2>Wymuszanie zmiennej &quot;nielokalnej&quot;</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">a <span class="op">=</span> <span class="st">&quot;global a&quot;</span>  <span class="co"># globalna</span>
+
+<span class="kw">def</span> f():
+    a <span class="op">=</span> <span class="st">&quot;local a&quot;</span>  <span class="co"># lokalna w f</span>
+    
+    <span class="kw">def</span> g():
+        <span class="kw">nonlocal</span> a           <span class="co"># użyj a z poprzedniego zagnieżdżenia</span>
+        a <span class="op">=</span> <span class="st">&quot;local local a&quot;</span>  <span class="co"># modyfikuje a z f</span>
+        <span class="bu">print</span>(<span class="st">&quot;in g():&quot;</span>, a)
+        
+    g()
+        
+    <span class="bu">print</span>(<span class="st">&quot;in f():&quot;</span>, a)
+
+f()
+
+<span class="bu">print</span>(<span class="st">&quot;outside:&quot;</span>, a)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">in</span> <span class="fu">g()</span><span class="bu">:</span> local local a
+<span class="kw">in</span> <span class="fu">f()</span><span class="bu">:</span> local local a
+<span class="ex">outside</span>: global a</code></pre></div>
+</section>
+<section id="uwaga-dla-programistów-cc" class="level2">
+<h2>Uwaga dla programistów C/C++</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> funkcja(flag<span class="op">=</span><span class="va">True</span>):
+    <span class="cf">if</span> flag:    <span class="co"># zmienna zdefiniowana w bloku</span>
+        x <span class="op">=</span> <span class="dv">10</span>  <span class="co"># jest dostępna poza tym blokiem</span>
+    <span class="cf">else</span>:
+        x <span class="op">=</span> <span class="dv">20</span>
+        
+    <span class="bu">print</span>(x)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">funkcja() </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">10</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">funkcja(<span class="va">False</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">20</span></code></pre></div>
+</section>
+<section id="zasięg" class="level2">
+<h2>Zasięg</h2>
+<hr />
+<ul>
+<li>obszar dostępności danej przestrzeni nazw</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> math
+<span class="im">from</span> math <span class="im">import</span> cos
+
+a <span class="op">=</span> <span class="dv">1</span>  <span class="co"># zasięg -&gt; cały plik</span>
+
+<span class="kw">def</span> f():
+    <span class="co"># uwaga: zaleca się wszystkie importy robić na początku</span>
+    <span class="im">from</span> math <span class="im">import</span> log  <span class="co"># zasięg log(...) -&gt; funkcja</span>
+    b <span class="op">=</span> <span class="dv">2</span>                 <span class="co"># zasięg -&gt; funkcja</span>
+    c <span class="op">=</span> log(<span class="dv">3</span>) 
+    
+d <span class="op">=</span> math.sin(<span class="dv">4</span>)  <span class="co"># sin(...) poza zasięgiem [moduł].[funkcja]</span>
+e <span class="op">=</span> cos(<span class="dv">5</span>)       <span class="co"># zasięg cos(...) -&gt; cały plik</span>
+<span class="co"># f = log(6)     # NameError: name &#39;log&#39; is not defined</span></code></pre></div>
+</section>
+</section>
+<section id="section-3" class="level1">
+<h1></h1>
+<section id="dokumentacja" class="level2">
+<h2>Dokumentacja</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">help</span>(<span class="bu">help</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Help</span> on _Helper in module _sitebuiltins object:
+
+<span class="ex">class</span> _Helper(builtins.object)
+    <span class="kw">|</span>  <span class="ex">Define</span> the builtin <span class="st">&#39;help&#39;</span>.
+    <span class="kw">|</span>  
+    <span class="kw">|</span>  <span class="ex">This</span> is a wrapper around pydoc.help that provides a helpful message
+    <span class="kw">|</span>  <span class="ex">when</span> <span class="st">&#39;help&#39;</span> is typed at the Python interactive prompt.
+    <span class="kw">|</span>  
+    <span class="kw">|</span>  <span class="ex">Calling</span> help() <span class="ex">at</span> the Python prompt starts an interactive help session.
+    <span class="kw">|</span>  <span class="ex">Calling</span> help(thing) <span class="ex">prints</span> help for the python object <span class="st">&#39;thing&#39;</span>.
+    <span class="kw">|</span>  
+    <span class="kw">|</span>  <span class="ex">Methods</span> defined here:
+    <span class="kw">|</span>  
+    <span class="kw">|</span>  <span class="ex">__call__</span>(self, *args, **kwds)
+    <span class="kw">|</span>      <span class="ex">Call</span> self as a function.
+    <span class="kw">|</span>  
+    <span class="kw">|</span>  <span class="ex">__repr__</span>(self)
+    <span class="kw">|</span>      <span class="ex">Return</span> repr(self)<span class="ex">.</span>
+    <span class="kw">|</span>  
+    <span class="kw">|</span>  <span class="ex">----------------------------------------------------------------------</span>
+    <span class="kw">|</span>  <span class="ex">Data</span> descriptors defined here:
+    <span class="kw">|</span>  
+    <span class="kw">|</span>  <span class="ex">__dict__</span>
+    <span class="kw">|</span>      <span class="ex">dictionary</span> for instance variables (if defined)
+    <span class="kw">|</span>  
+    <span class="kw">|</span>  <span class="ex">__weakref__</span>
+    <span class="kw">|</span>      <span class="ex">list</span> of weak references to the object (if defined)</code></pre></div>
+</section>
+<section id="dokumentowanie-własnych-funkcji" class="level2">
+<h2>Dokumentowanie własnych funkcji</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> funkcja():
+    <span class="cf">pass</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">help</span>(funkcja)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Help</span> on function funkcja in module __main__:
+
+<span class="fu">funkcja()</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> funkcja():
+    <span class="co">&quot;&quot;&quot;To jest moja funkcja, która nic nie robi&quot;&quot;&quot;</span>
+    <span class="cf">pass</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">help</span>(funkcja)</code></pre></div>
+<pre><code>Help on function funkcja in module __main__:
+
+funkcja()
+    To jest moja funkcja, która nic nie robi</code></pre>
+</section>
+<section id="dokumentacja-pep-257" class="level2">
+<h2>Dokumentacja (PEP 257)</h2>
+<hr />
+<ul>
+<li><p>dokumentacja (czyli tzw. <em>docstring</em>) wg standardów PEP 257:</p>
+<ul>
+<li>jednolinjkowy opis</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;Mój opis&quot;&quot;&quot;</span></code></pre></div>
+<ul>
+<li>wielolinijkowy opis</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;Mój opis</span>
+
+<span class="co">więcej opisu</span>
+<span class="co">&quot;&quot;&quot;</span></code></pre></div></li>
+</ul>
+</section>
+<section id="opis" class="level2">
+<h2>Opis</h2>
+<hr />
+<ul>
+<li>opis powinien krótki i jasny (i mieć sens), np:</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">
+<span class="co"># taki opis nie ma sensu</span>
+<span class="kw">def</span> moja_funkcja(a, b):
+    <span class="co">&quot;&quot;&quot;moja_funkcja(a, b) -&gt; a + b&quot;&quot;&quot;</span>
+    <span class="cf">return</span> a <span class="op">+</span> b
+
+<span class="co"># taki jest lepszy</span>
+<span class="kw">def</span> moja_funkcja(a, b):
+    <span class="co">&quot;&quot;&quot;Zwraca sumę podanych liczb&quot;&quot;&quot;</span>
+    <span class="cf">return</span> a <span class="op">+</span> b</code></pre></div>
+</section>
+<section id="dokumentowanie-zmiennych" class="level2">
+<h2>Dokumentowanie zmiennych</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> reszta(a <span class="op">=</span> <span class="dv">0</span>, b <span class="op">=</span> <span class="dv">0</span>):
+    <span class="co">&quot;&quot;&quot;Zwraca resztę z dzielenia</span>
+<span class="co">    </span>
+<span class="co">    Keyword arguments:</span>
+<span class="co">    a -- licznik</span>
+<span class="co">    b -- mianownik</span>
+<span class="co">    &quot;&quot;&quot;</span>
+    <span class="cf">if</span> <span class="kw">not</span> b:
+        <span class="cf">return</span> <span class="dv">0</span>
+    <span class="cf">return</span> a<span class="op">%</span>b</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">help</span>(reszta)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Help</span> on function reszta in module __main__:
+
+<span class="ex">reszta</span>(a=0, b=0)
+    <span class="ex">Zwraca</span> resztę z dzielenia
+    
+    <span class="ex">Keyword</span> arguments:
+    <span class="ex">a</span> -- licznik
+    <span class="ex">b</span> -- mianownik</code></pre></div>
+</section>
+<section id="wyrażenie-lambda" class="level2">
+<h2>Wyrażenie <em>lambda</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> suma(a, b):  <span class="co"># &quot;klasyczna&quot; funkcja</span>
+    <span class="cf">return</span> a <span class="op">+</span> b</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">lsuma <span class="op">=</span> <span class="kw">lambda</span> a, b: a <span class="op">+</span> b  <span class="co"># &quot;anonimowa&quot; funkcja</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">suma(<span class="dv">1</span>, <span class="dv">2</span>)  <span class="co"># wywołujemy funkcję suma</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">3</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">lsuma(<span class="dv">1</span>, <span class="dv">2</span>) <span class="co"># wywołujemy wyrażenia lambda</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">3</span></code></pre></div>
+</section>
+<section id="wyrażenie-lambda-1" class="level2">
+<h2>Wyrażenie <em>lambda</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> wrapper(funkcja):
+    <span class="bu">print</span>(<span class="st">&quot;Wywołuję funkcję:&quot;</span>, funkcja)
+    funkcja()
+
+<span class="kw">def</span> f():
+    <span class="bu">print</span>(<span class="st">&quot;Hello World!&quot;</span>)
+    
+wrapper(f)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Wywo</span>łuję funkcję: <span class="op">&lt;</span>function f at 0x7f92543518c8<span class="op">&gt;</span>
+<span class="ex">Hello</span> World!</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">wrapper(<span class="kw">lambda</span>: <span class="bu">print</span>(<span class="st">&quot;Hello World!&quot;</span>))</code></pre></div>
+<pre class="bash0"><code>Wywołuję funkcję: &lt;function &lt;lambda&gt; at 0x7f92543517b8&gt;
+Hello World!</code></pre>
+</section>
+<section id="wyrażenie-lambda-2" class="level2">
+<h2>Wyrażenie <em>lambda</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> increase(n):
+    <span class="bu">print</span>(<span class="st">&quot;Teraz tworzę lambdę&quot;</span>)
+    <span class="cf">return</span> <span class="kw">lambda</span> x: x <span class="op">+</span> n
+
+inc2 <span class="op">=</span> increase(<span class="dv">2</span>)  <span class="co"># powiększ o 2</span>
+inc4 <span class="op">=</span> increase(<span class="dv">4</span>)  <span class="co"># inc4 = lambda x: x + 4</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Teraz</span> tworzę lambdę
+<span class="ex">Teraz</span> tworzę lambdę</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">inc2(<span class="dv">10</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">12</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">inc4(<span class="dv">10</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">14</span></code></pre></div>
+</section>
+</section>
+<section id="section-4" class="level1">
+<h1></h1>
+<section id="rekurencja" class="level2">
+<h2>Rekurencja</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">i <span class="op">=</span> <span class="dv">0</span>
+
+<span class="kw">def</span> funkcja():
+    <span class="kw">global</span> i  <span class="co"># używaj zmiennej globalnej i</span>
+    i <span class="op">+=</span> <span class="dv">1</span>
+    <span class="bu">print</span>(i, end<span class="op">=</span><span class="st">&#39; &#39;</span>)
+    <span class="cf">if</span> i <span class="op">&lt;</span> <span class="dv">10</span>:
+        <span class="cf">return</span> funkcja()  <span class="co"># wywołuje sama siebie</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">funkcja()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">1</span> 2 3 4 5 6 7 8 9 10 </code></pre></div>
+</section>
+<section id="rekurencja---silnia" class="level2">
+<h2>Rekurencja - silnia</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> silnia(n):
+    result <span class="op">=</span> <span class="dv">1</span>
+    <span class="cf">while</span> n <span class="op">&gt;</span> <span class="dv">1</span>:
+        result <span class="op">*=</span> n
+        n <span class="op">-=</span> <span class="dv">1</span>
+    <span class="cf">return</span> result</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(<span class="st">&quot;Klasycznie silnia(5) =&quot;</span>, silnia(<span class="dv">5</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Klasycznie</span> silnia(5) = <span class="ex">120</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> silnia(n):
+    <span class="cf">if</span> n <span class="op">&lt;</span> <span class="dv">2</span>:
+        <span class="cf">return</span> <span class="dv">1</span>  <span class="co"># 0! = 1, 1! = 1</span>
+    <span class="cf">return</span> n<span class="op">*</span>silnia(n <span class="op">-</span> <span class="dv">1</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(<span class="st">&quot;Rekurencyjnie silnia(5) =&quot;</span>, silnia(<span class="dv">5</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Rekurencyjnie</span> silnia(5) = <span class="ex">120</span></code></pre></div>
+</section>
+</section>
+    </div>
+
+    <script src="../reveal.js/lib/js/head.min.js"></script>
+    <script src="../reveal.js/js/reveal.js"></script>
+
+    <script>
+
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        slideNumber: true,
+        width: 1280,
+        height: 720,
+
+                  theme: Reveal.getQueryHash().theme || 'white',
+        
+                  transition: Reveal.getQueryHash().transition || 'convex',
+        
+                  transitionSpeed: Reveal.getQueryHash().transitionSpeed || 'fast',
+        
+        dependencies: [{
+            src: '../reveal.js/lib/js/classList.js',
+            condition: function() {
+              return !document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/markdown/showdown.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          }, {
+            src: '../reveal.js/plugin/markdown/markdown.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          }, {
+            src: '../reveal.js/plugin/highlight/highlight.js',
+            async: true,
+            callback: function() {
+              hljs.initHighlightingOnLoad();
+            }
+          }, {
+            src: '../reveal.js/plugin/zoom-js/zoom.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/notes/notes.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/math/math.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          },
+          // { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+    </script>
+
+    <script>
+    // displayed upon load, hides when slide changes
+      Reveal.addEventListener('slidechanged', function(event) {
+        document.querySelector('.reveal .footer').style.display = 'none';
+      });
+   </script>
+
+</body>
+
+</html>
