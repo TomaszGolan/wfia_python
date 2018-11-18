@@ -43,6 +43,11 @@ Wykłady dla studentów Wydziału Fizyki i Astronomii z "Języki skryptowe - Pyt
     * przestrzenie nazw
     * dokumentacja funkcji
 
+*  [Wykład 7](https://tomaszgolan.github.io/wfia_python/html/python_w07.html)
+
+    * tworzenie własnych modułów i paczek
+
+
 ## Listy
 
 * Lista 1: [markdown](listy/lista_01.md), [pdf](listy/lista_01.pdf)

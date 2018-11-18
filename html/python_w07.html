@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <title>Języki skryptowe Python</title>
+
+  <meta name="description" content="Języki skryptowe Python">
+
+   <meta name="author" content="Wykład 7" /> 
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="stylesheet" href="../reveal.js/css/reveal.css">
+
+      <link rel="stylesheet" href="../reveal.js/css/theme/white.css" id="theme">
+  
+      <link rel="stylesheet" href="../template/a11y-light.css">
+  
+  <link rel="stylesheet" href="../template/extra.css">
+
+  <script>
+    document.write('<link rel="stylesheet" href="../reveal.js/css/print/' +
+      (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') +
+      '.css" type="text/css" media="print">');
+  </script>
+
+  <script src="../template/snap.svg-min.js"></script>
+  <script src="../template/plotly-latest.min.js"></script>
+
+  <!--[if lt IE 9]>
+  <script src="../reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+
+  
+
+</head>
+
+<body>
+
+  
+
+  <div class="reveal">
+
+    <div class="slides">
+
+      <section>
+        <h1>Języki skryptowe Python</h1>
+         <h3>Wykład 7</h3> 
+        <p>
+          <h4></h4>
+        </p>
+      </section>
+
+       <div class="footer">
+<p>Sterowanie: spacja + shift-spacja || page down + page up || strzałki || esc</p>
+</div>
+<section id="section" class="level1">
+<h1></h1>
+<section id="własny-moduł" class="level2">
+<h2>Własny moduł</h2>
+<hr />
+<p><code>my_module.py</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;To jest mój pierwszy moduł.&quot;&quot;&quot;</span>
+
+zmienna_globalna <span class="op">=</span> <span class="st">&quot;Unikaj zmiennych globalnych!&quot;</span>
+
+<span class="kw">def</span> moja_funkcja():
+    <span class="co">&quot;&quot;&quot;Drukuje zmienną globalną.&quot;&quot;&quot;</span>
+    <span class="bu">print</span>(zmienna_globalna)
+    
+<span class="kw">def</span> inna_funkcja(word<span class="op">=</span><span class="st">&quot;&quot;</span>, n<span class="op">=</span><span class="dv">0</span>):
+    <span class="co">&quot;&quot;&quot;Drukuje word n razy.&quot;&quot;&quot;</span>
+    <span class="bu">print</span>(word <span class="op">*</span> n)</code></pre></div>
+</section>
+<section id="importowanie-własnego-modułu" class="level2">
+<h2>Importowanie własnego modułu</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> my_module
+
+my_module.zmienna_globalna</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="st">&#39;Unikaj zmiennych globalnych!&#39;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">my_module.moja_funkcja()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Unikaj</span> zmiennych globalnych!</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">my_module.inna_funkcja(<span class="st">&quot;-&quot;</span>, <span class="dv">10</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">----------</span></code></pre></div>
+</section>
+<section id="dokumentacja-modułu" class="level2">
+<h2>Dokumentacja modułu</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> my_module
+
+<span class="bu">help</span>(my_module)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Help</span> on module my_module:
+
+<span class="ex">NAME</span>
+    <span class="ex">my_module</span> - To jest mój pierwszy moduł.
+
+<span class="ex">FUNCTIONS</span>
+    <span class="ex">inna_funkcja</span>(word=<span class="st">&#39;&#39;</span>, n=0)
+        <span class="ex">Drukuje</span> word n razy.
+    
+    <span class="fu">moja_funkcja()</span>
+        <span class="ex">Drukuje</span> zmienną globalną.
+
+<span class="ex">DATA</span>
+    <span class="ex">zmienna_globalna</span> = <span class="st">&#39;Unikaj zmiennych globalnych!&#39;</span>
+
+<span class="ex">FILE</span>
+    <span class="ex">/doc/insync/scratch</span>/<span class="ex">zaj</span>ęcia/2016/języki skryptowe - python/js-python/my_module.py</code></pre></div>
+</section>
+<section id="zawartość-modułu" class="level2">
+<h2>Zawartość modułu</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> my_module
+
+<span class="bu">dir</span>(my_module)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="st">&#39;__builtins__&#39;</span>,
+    <span class="st">&#39;__cached__&#39;</span>,
+    <span class="st">&#39;__doc__&#39;</span>,
+    <span class="st">&#39;__file__&#39;</span>,
+    <span class="st">&#39;__loader__&#39;</span>,
+    <span class="st">&#39;__name__&#39;</span>,
+    <span class="st">&#39;__package__&#39;</span>,
+    <span class="st">&#39;__spec__&#39;</span>,
+    <span class="st">&#39;inna_funkcja&#39;</span>,
+    <span class="st">&#39;moja_funkcja&#39;</span>,
+    <span class="st">&#39;zmienna_globalna&#39;</span>]</code></pre></div>
+</section>
+<section id="doc-file-name-package" class="level2">
+<h2><em>doc</em>, <em>file</em>, <em>name</em>, <em>package</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(my_module.__doc__)   <span class="co"># dokumentacja modułu</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">To</span> jest mój pierwszy moduł.</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(my_module.<span class="va">__file__</span>)  <span class="co"># ścieżka do pliku źródłowego</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">/doc/insync/scratch</span>/<span class="ex">zaj</span>ęcia/2016/języki skryptowe - python/js-python/my_module.py</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(my_module.<span class="va">__name__</span>)  <span class="co"># nazwa modułu</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">my_module</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(my_module.__package__)  <span class="co"># paczka to zbiór modułów</span></code></pre></div>
+</section>
+<section id="loader-spec-cached" class="level2">
+<h2><em>loader</em>, <em>spec</em>, <em>cached</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># informacja o &quot;loaderze&quot;, który został wykorzystany do zaimportowania modułu    </span>
+<span class="bu">print</span>(my_module.__loader__)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="op">&lt;</span><span class="ex">_frozen_importlib_external.SourceFileLoader</span> object at 0x7f134aded6a0<span class="op">&gt;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(my_module.__spec__)    <span class="co"># ustalane w momencie importowanie modułu</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">ModuleSpec</span>(name=<span class="st">&#39;my_module&#39;</span>, loader=<span class="op">&lt;</span>_frozen_importlib_external.SourceFileLoader object at 0x7f134aded6a0<span class="op">&gt;</span>, origin=<span class="st">&#39;/doc/insync/scratch/zajęcia/2016/języki skryptowe - python/js-python/my_module.py&#39;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(my_module.__cached__)  <span class="co"># ścieżka do pliku .pyc</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">/doc/insync/scratch</span>/<span class="ex">zaj</span>ęcia/2016/języki skryptowe - python/js-python/__pycache__/my_module.cpython-35.pyc</code></pre></div>
+</section>
+<section id="plik-pyc" class="level2">
+<h2>Plik <em>pyc</em></h2>
+<hr />
+<ul>
+<li>plik <em>pyc</em> jest wynikiem kompilacji skryptu <em>py</em> do kodu bajtowego</li>
+<li>przyp. kod masyznowy -&gt; zrozumiały dla procesora</li>
+<li>kod bajtowy -&gt; zrozumiały dla maszyny wirtualnej / interpretera</li>
+</ul>
+</section>
+<section id="kompilowany-czy-interpretowany" class="level2">
+<h2>Kompilowany czy interpretowany?</h2>
+<hr />
+<ul>
+<li>uwaga: implementacja języka (a nie język sam w sobie) może być kompilowany lub interpretowany</li>
+</ul>
+<figure>
+<img src="../img/js-python_w06_69_0.svg" />
+</figure>
+</section>
+</section>
+<section id="section-1" class="level1">
+<h1></h1>
+<section id="skrypt-jako-zbior-definicji" class="level2">
+<h2>Skrypt jako &quot;zbior definicji&quot;</h2>
+<hr />
+<p><code>my_module.py</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;To jest mój pierwszy moduł.&quot;&quot;&quot;</span>
+
+zmienna_globalna <span class="op">=</span> <span class="st">&quot;Unikaj zmiennych globalnych!&quot;</span>
+
+<span class="kw">def</span> moja_funkcja():
+    <span class="co">&quot;&quot;&quot;Drukuje zmienną globalną.&quot;&quot;&quot;</span>
+    <span class="bu">print</span>(zmienna_globalna)
+    
+<span class="kw">def</span> inna_funkcja(word<span class="op">=</span><span class="st">&quot;&quot;</span>, n<span class="op">=</span><span class="dv">0</span>):
+    <span class="co">&quot;&quot;&quot;Drukuje word n razy.&quot;&quot;&quot;</span>
+    <span class="bu">print</span>(word <span class="op">*</span> n)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">python</span> my_module.py</code></pre></div>
+</section>
+<section id="skrypt-wykonujący-operacje" class="level2">
+<h2>Skrypt wykonujący operacje</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;To jest mój pierwszy moduł.&quot;&quot;&quot;</span>
+
+zmienna_globalna <span class="op">=</span> <span class="st">&quot;Unikaj zmiennych globalnych!&quot;</span>
+
+<span class="kw">def</span> moja_funkcja():
+    <span class="co">&quot;&quot;&quot;Drukuje zmienną globalną.&quot;&quot;&quot;</span>
+    <span class="bu">print</span>(zmienna_globalna)
+    
+<span class="kw">def</span> inna_funkcja(word<span class="op">=</span><span class="st">&quot;&quot;</span>, n<span class="op">=</span><span class="dv">0</span>):
+    <span class="co">&quot;&quot;&quot;Drukuje word n razy.&quot;&quot;&quot;</span>
+    <span class="bu">print</span>(word <span class="op">*</span> n)
+    
+inna_funkcja(<span class="st">&#39;-&#39;</span>, <span class="dv">10</span>)
+moja_funkcja()
+inna_funkcja(<span class="st">&#39;-&#39;</span>, <span class="dv">10</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">python</span> my_module.py</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">----------</span>
+<span class="ex">Unikaj</span> zmiennych globalnych!
+<span class="ex">----------</span></code></pre></div>
+</section>
+<section id="wykonywanie-podczas-importowania" class="level2">
+<h2>Wykonywanie podczas importowania</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Python</span> 3.5.2 <span class="kw">|</span><span class="ex">Anaconda</span> 4.2.0 (64-bit)<span class="kw">|</span> <span class="kw">(</span><span class="ex">default</span>, Jul  2 2016, 17:53:06<span class="kw">)</span> 
+[<span class="ex">GCC</span> 4.4.7 20120313 (Red Hat 4.4.7-1)] <span class="ex">on</span> linux
+<span class="ex">Type</span> <span class="st">&quot;help&quot;</span>, <span class="st">&quot;copyright&quot;</span>, <span class="st">&quot;credits&quot;</span> or <span class="st">&quot;license&quot;</span> for more information.
+<span class="op">&gt;&gt;&gt;</span> <span class="ex">import</span> my_module
+<span class="ex">----------</span>
+<span class="ex">Unikaj</span> zmiennych globalnych!
+<span class="ex">----------</span>
+<span class="op">&gt;&gt;&gt;</span> </code></pre></div>
+</section>
+<section id="funkcja-main" class="level2">
+<h2>&quot;Funkcja <em>main</em>&quot;</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;To jest mój pierwszy moduł.&quot;&quot;&quot;</span>
+
+zmienna_globalna <span class="op">=</span> <span class="st">&quot;Unikaj zmiennych globalnych!&quot;</span>
+
+<span class="kw">def</span> moja_funkcja():
+    <span class="co">&quot;&quot;&quot;Drukuje zmienną globalną.&quot;&quot;&quot;</span>
+    <span class="bu">print</span>(zmienna_globalna)
+    
+<span class="kw">def</span> inna_funkcja(word<span class="op">=</span><span class="st">&quot;&quot;</span>, n<span class="op">=</span><span class="dv">0</span>):
+    <span class="co">&quot;&quot;&quot;Drukuje word n razy.&quot;&quot;&quot;</span>
+    <span class="bu">print</span>(word <span class="op">*</span> n)
+
+<span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&quot;__main__&quot;</span>:
+    inna_funkcja(<span class="st">&#39;-&#39;</span>, <span class="dv">10</span>)
+    moja_funkcja()
+    inna_funkcja(<span class="st">&#39;-&#39;</span>, <span class="dv">10</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">python</span> my_module.py</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">----------</span>
+<span class="ex">Unikaj</span> zmiennych globalnych!
+<span class="ex">----------</span></code></pre></div>
+</section>
+<section id="importowanie-a-main" class="level2">
+<h2>Importowanie a <em>main</em></h2>
+<hr />
+<ul>
+<li>instrukcje w <em>main</em> nie zostaną wykonane podczas importowania (bo <code>__name__</code> = nazwa modułu)</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Python</span> 3.5.2 <span class="kw">|</span><span class="ex">Anaconda</span> 4.2.0 (64-bit)<span class="kw">|</span> <span class="kw">(</span><span class="ex">default</span>, Jul  2 2016, 17:53:06<span class="kw">)</span> 
+[<span class="ex">GCC</span> 4.4.7 20120313 (Red Hat 4.4.7-1)] <span class="ex">on</span> linux
+<span class="ex">Type</span> <span class="st">&quot;help&quot;</span>, <span class="st">&quot;copyright&quot;</span>, <span class="st">&quot;credits&quot;</span> or <span class="st">&quot;license&quot;</span> for more information.
+<span class="op">&gt;&gt;&gt;</span> <span class="ex">import</span> my_module
+<span class="op">&gt;&gt;&gt;</span> </code></pre></div>
+</section>
+</section>
+<section id="section-2" class="level1">
+<h1></h1>
+<section id="prywatność" class="level2">
+<h2>Prywatność</h2>
+<hr />
+<p><code>private.py</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">public <span class="op">=</span> <span class="st">&quot;public&quot;</span>
+<span class="co"># _ przed nazwą -&gt; from ... import * pomija</span>
+_internal <span class="op">=</span> <span class="st">&quot;internal use&quot;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> private <span class="im">import</span> <span class="op">*</span>  <span class="co"># importuj wszystko </span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(public)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="st">&#39;public&#39;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(_internal)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">...</span>    
+<span class="ex">NameError</span>: name <span class="st">&#39;_internal&#39;</span> is not defined</code></pre></div>
+</section>
+</section>
+<section id="section-3" class="level1">
+<h1></h1>
+<section id="gdzie-interpreter-szuka-modułów" class="level2">
+<h2>Gdzie interpreter szuka modułów?</h2>
+<hr />
+<ol type="1">
+<li>bieżący katalog</li>
+<li>w katalogach określonych w zmiennej środowiskowej <code>PYTHONPATH</code></li>
+<li>w katalogach określonych w trakcie instalacji (np. <code>/usr/lib/python</code>)</li>
+<li>w katalogach określonych w zmiennej <code>sys.path</code></li>
+</ol>
+</section>
+<section id="zmienne-środowiskowe" class="level2">
+<h2>Zmienne środowiskowe</h2>
+<hr />
+<ul>
+<li>zmienne powłoki systemowej</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">goran@goran-ift</span>:~$ export MOJA_ZMIENNA=<span class="st">&quot;wartość mojej zmiennej&quot;</span>
+<span class="ex">goran@goran-ift</span>:~$ echo <span class="va">$MOJA_ZMIENNA</span> 
+<span class="ex">warto</span>ść mojej zmiennej</code></pre></div>
+<ul>
+<li>część zmiennych jest inicjowana przy starcie powłoki, np</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">goran@goran-ift</span>:~$ echo <span class="va">$PATH</span>
+<span class="ex">/home/goran/soft/anaconda3</span>/bin:<span class="ex">/usr/local</span>/sbin:<span class="ex">/usr/local</span>/bin:<span class="ex">/usr</span>/sbin:<span class="ex">/usr</span>/bin:/sbin:/bin:<span class="ex">/usr</span>/games:<span class="ex">/usr/local</span>/games:<span class="ex">/snap/bin</span></code></pre></div>
+</section>
+<section id="zmienne-środowiskowe-1" class="level2">
+<h2>Zmienne środowiskowe</h2>
+<hr />
+<ul>
+<li>zmienne można aktualizować</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">goran@goran-ift</span>:~$ export PATH=/newpath/:<span class="va">$PATH</span>
+<span class="ex">goran@goran-ift</span>:~$ echo <span class="va">$PATH</span>
+<span class="ex">/newpath</span>/:<span class="ex">/home/goran/soft/anaconda3</span>/bin:<span class="ex">/usr/local</span>/sbin:<span class="ex">/usr/local</span>/bin:<span class="ex">/usr</span>/sbin:<span class="ex">/usr</span>/bin:/sbin:/bin:<span class="ex">/usr</span>/games:<span class="ex">/usr/local</span>/games:<span class="ex">/snap/bin</span></code></pre></div>
+</section>
+<section id="sys.path" class="level2">
+<h2><em>sys.path</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> sys
+
+sys.path</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="st">&#39;&#39;</span>,
+<span class="st">&#39;/home/goran/soft/anaconda3/lib/python35.zip&#39;</span>,
+<span class="st">&#39;/home/goran/soft/anaconda3/lib/python3.5&#39;</span>,
+<span class="st">&#39;/home/goran/soft/anaconda3/lib/python3.5/plat-linux&#39;</span>,
+<span class="st">&#39;/home/goran/soft/anaconda3/lib/python3.5/lib-dynload&#39;</span>,
+<span class="st">&#39;/home/goran/soft/anaconda3/lib/python3.5/site-packages&#39;</span>,
+<span class="st">&#39;/home/goran/soft/anaconda3/lib/python3.5/site-packages/Sphinx-1.4.6-py3.5.egg&#39;</span>,
+<span class="st">&#39;/home/goran/soft/anaconda3/lib/python3.5/site-packages/setuptools-27.2.0-py3.5.egg&#39;</span>,
+<span class="st">&#39;/home/goran/soft/anaconda3/lib/python3.5/site-packages/IPython/extensions&#39;</span>,
+<span class="st">&#39;/home/goran/.ipython&#39;</span>]</code></pre></div>
+</section>
+<section id="sys.path-1" class="level2">
+<h2><em>sys.path</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">sys.path.append(<span class="st">&quot;/moja/sciezka/do/modulow&quot;</span>)
+
+sys.path</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="st">&#39;&#39;</span>,
+<span class="st">&#39;/home/goran/soft/anaconda3/lib/python35.zip&#39;</span>,
+<span class="st">&#39;/home/goran/soft/anaconda3/lib/python3.5&#39;</span>,
+<span class="st">&#39;/home/goran/soft/anaconda3/lib/python3.5/plat-linux&#39;</span>,
+<span class="st">&#39;/home/goran/soft/anaconda3/lib/python3.5/lib-dynload&#39;</span>,
+<span class="st">&#39;/home/goran/soft/anaconda3/lib/python3.5/site-packages&#39;</span>,
+<span class="st">&#39;/home/goran/soft/anaconda3/lib/python3.5/site-packages/Sphinx-1.4.6-py3.5.egg&#39;</span>,
+<span class="st">&#39;/home/goran/soft/anaconda3/lib/python3.5/site-packages/setuptools-27.2.0-py3.5.egg&#39;</span>,
+<span class="st">&#39;/home/goran/soft/anaconda3/lib/python3.5/site-packages/IPython/extensions&#39;</span>,
+<span class="st">&#39;/home/goran/.ipython&#39;</span>,
+<span class="st">&#39;/moja/sciezka/do/modulow&#39;</span>]</code></pre></div>
+</section>
+<section id="moduł-poza-katalogiem-roboczym" class="level2">
+<h2>Moduł poza katalogiem roboczym</h2>
+<hr />
+<p><code>trojmian.py</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;Moduł do obsługi trómianu kwadratowego.&quot;&quot;&quot;</span>
+
+<span class="im">from</span> math <span class="im">import</span> sqrt
+
+<span class="kw">def</span> _delta(a, b, c):
+    <span class="co">&quot;&quot;&quot;Liczy wyróżnik trójmianu.&quot;&quot;&quot;</span>
+    <span class="cf">return</span> b<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">4</span><span class="op">*</span>a<span class="op">*</span>c
+
+<span class="kw">def</span> _solve(a, b, d):
+    <span class="co">&quot;&quot;&quot;Liczy miejsca zerowe.&quot;&quot;&quot;</span>
+    d <span class="op">=</span> sqrt(d)
+    <span class="cf">return</span> (<span class="op">-</span>b <span class="op">+</span> d) <span class="op">/</span> <span class="dv">2</span> <span class="op">/</span> a, (<span class="op">-</span>b <span class="op">-</span> d) <span class="op">/</span> <span class="dv">2</span> <span class="op">/</span> a
+
+<span class="kw">def</span> solution(a, b, c):
+    <span class="co">&quot;&quot;&quot;Zwraca miejsca zerowe.&quot;&quot;&quot;</span>
+    d <span class="op">=</span> _delta(a, b, c)
+    
+    <span class="cf">if</span> d <span class="op">&lt;</span> <span class="dv">0</span>:<span class="cf">return</span> <span class="va">None</span>
+    <span class="cf">elif</span> d <span class="op">==</span> <span class="dv">0</span>: <span class="cf">return</span> <span class="op">-</span>b <span class="op">/</span> <span class="dv">2</span> <span class="op">/</span> a
+    <span class="cf">else</span>: <span class="cf">return</span> _solve(a, b, d) </code></pre></div>
+</section>
+<section id="moduł-poza-katalogiem-roboczym-1" class="level2">
+<h2>Moduł poza katalogiem roboczym</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># nie ma w katalogu roboczym ani w PYTHONPATH itd</span>
+<span class="im">import</span> trojmian</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">ImportError</span>: No module named <span class="st">&#39;trojmian&#39;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> sys
+sys.path.append(<span class="st">&quot;/home/goran/&quot;</span>)  <span class="co"># dodajemy ścieżkę do sys.path</span>
+<span class="im">import</span> trojmian                  <span class="co"># teraz działa</span></code></pre></div>
+</section>
+<section id="trójmian-w-akcji" class="level2">
+<h2>Trójmian w akcji</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">help</span>(trojmian)  <span class="co"># nie ma _delta, ale jest sqrt!</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Help</span> on module trojmian:
+
+<span class="ex">NAME</span>
+    <span class="ex">trojmian</span> - Moduł do obsługi trómianu kwadratowego.
+
+<span class="ex">FUNCTIONS</span>
+    <span class="ex">solution</span>(a, b, c)
+        <span class="ex">Zwraca</span> miejsca zerowe.
+    
+    <span class="ex">sqrt</span>(...)
+        <span class="ex">sqrt</span>(x)
+        
+        <span class="ex">Return</span> the square root of x.
+
+<span class="ex">FILE</span>
+    <span class="ex">/home/goran/trojmian.py</span></code></pre></div>
+</section>
+<section id="trójmian-w-akcji-1" class="level2">
+<h2>Trójmian w akcji</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> trojmian <span class="im">import</span> <span class="op">*</span>  <span class="co"># importuj wszystko</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">solution(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>)       <span class="co"># dostęp do solution</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">-1.0</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">sqrt(<span class="dv">4</span>)                 <span class="co"># dostęp do sqrt z math!</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">2.0</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">_delta(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>)         <span class="co"># ale _delta nie została zaimportowana</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">...</span>
+<span class="ex">NameError</span>: name <span class="st">&#39;_delta&#39;</span> is not defined</code></pre></div>
+</section>
+</section>
+<section id="section-4" class="level1">
+<h1></h1>
+<section id="paczka" class="level2">
+<h2>Paczka</h2>
+<hr />
+<ul>
+<li>uporządkowany zbiór modułów</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">package_name/</span>     # top-level
+    <span class="ex">__init__.py</span>   # wymagane (może być puste)
+    <span class="ex">subpackage1/</span>
+        <span class="ex">__init__.py</span>
+        <span class="ex">module1.py</span>
+        <span class="ex">module2.py</span>
+        <span class="ex">...</span>
+    <span class="ex">subpackage2/</span>
+        <span class="ex">__init__.py</span>
+        <span class="ex">...</span></code></pre></div>
+</section>
+<section id="init.py" class="level2">
+<h2><em><strong>init</strong>.py</em></h2>
+<hr />
+<p><em>Przykład dotyczy listy 4 z poprzednich lat.</em></p>
+<p><code>listy_zadan/__init__.py</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;Inicjalizacja paczki listy_zadan&quot;&quot;&quot;</span>
+<span class="im">import</span> math  <span class="co"># można np. importować moduły</span></code></pre></div>
+<p><code>listy_zadan/lista4/__init__.py</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;Inicjalizacja podpaczki lista4&quot;&quot;&quot;</span></code></pre></div>
+</section>
+<section id="lista-4---zadanie-2" class="level2">
+<h2>Lista 4 - zadanie 2</h2>
+<hr />
+<p><code>listy_zadan/lista4/zad2.py</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;Napisz funkcję, która znajduje mniejszą liczbę z dwóch podanych.&quot;&quot;&quot;</span>
+
+<span class="kw">def</span> min2(a, b):
+    <span class="co">&quot;&quot;&quot;Zwraca mniejszą z dwóch podanych liczb.&quot;&quot;&quot;</span>
+    <span class="cf">if</span> a <span class="op">&gt;</span> b:
+        <span class="cf">return</span> b
+    <span class="cf">return</span> a</code></pre></div>
+</section>
+<section id="lista-4---zadanie-3" class="level2">
+<h2>Lista 4 - zadanie 3</h2>
+<hr />
+<p><code>listy_zadan/lista4/zad3.py</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;Napisz funkcję, która z podanych liczb (ilość dowolna) znajduje najmniejszą.&quot;&quot;&quot;</span>
+
+<span class="im">from</span> listy_zadan.lista4.zad2 <span class="im">import</span> min2
+
+<span class="kw">def</span> <span class="bu">min</span>(<span class="op">*</span>a):
+    <span class="co">&quot;&quot;&quot;Zwraca najmniejszą z podanych liczb.&quot;&quot;&quot;</span>
+    current_min <span class="op">=</span> a[<span class="dv">0</span>]
+    
+    <span class="cf">for</span> x <span class="kw">in</span> a:
+        current_min <span class="op">=</span> min2(current_min, x)
+    
+    <span class="cf">return</span> current_min</code></pre></div>
+</section>
+<section id="importowanie" class="level2">
+<h2>Importowanie</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> listy_zadan.lista4.zad2
+<span class="im">import</span> listy_zadan.lista4.zad3 <span class="im">as</span> zad3
+
+<span class="bu">print</span>(<span class="st">&quot;Zad2 =&quot;</span>, listy_zadan.lista4.zad2.min2(<span class="dv">1</span>, <span class="dv">5</span>))
+<span class="bu">print</span>(<span class="st">&quot;Zad3 =&quot;</span>, zad3.<span class="bu">min</span>(<span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">3</span>, <span class="dv">5</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Zad2</span> = 1
+<span class="ex">Zad3</span> = 2</code></pre></div>
+</section>
+</section>
+    </div>
+
+    <script src="../reveal.js/lib/js/head.min.js"></script>
+    <script src="../reveal.js/js/reveal.js"></script>
+
+    <script>
+
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        slideNumber: true,
+        width: 1280,
+        height: 720,
+
+                  theme: Reveal.getQueryHash().theme || 'white',
+        
+                  transition: Reveal.getQueryHash().transition || 'convex',
+        
+                  transitionSpeed: Reveal.getQueryHash().transitionSpeed || 'fast',
+        
+        dependencies: [{
+            src: '../reveal.js/lib/js/classList.js',
+            condition: function() {
+              return !document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/markdown/showdown.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          }, {
+            src: '../reveal.js/plugin/markdown/markdown.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          }, {
+            src: '../reveal.js/plugin/highlight/highlight.js',
+            async: true,
+            callback: function() {
+              hljs.initHighlightingOnLoad();
+            }
+          }, {
+            src: '../reveal.js/plugin/zoom-js/zoom.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/notes/notes.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/math/math.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          },
+          // { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+    </script>
+
+    <script>
+    // displayed upon load, hides when slide changes
+      Reveal.addEventListener('slidechanged', function(event) {
+        document.querySelector('.reveal .footer').style.display = 'none';
+      });
+   </script>
+
+</body>
+
+</html>
