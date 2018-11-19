@@ -36,7 +36,7 @@ Napisz program, który pobiera od użytkownika 3 liczby (długości boków trój
 
 ## Zadanie 3 (3 pkt)
 
-Korzystając z metody równego podziału (bisekcji) znajdź przybliżone miejsce zerowe funkcji: `f(x) = x**3 + 2*x*2 - 4*x - 10` w przedziale [1:3].
+Korzystając z metody równego podziału (bisekcji) znajdź przybliżone miejsce zerowe funkcji: `f(x) = x**3 + 2*x**2 - 4*x - 10` w przedziale [1:3].
 
 ---
 
