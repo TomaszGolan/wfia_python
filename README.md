@@ -49,11 +49,7 @@ Wykłady dla studentów Wydziału Fizyki i Astronomii z "Języki skryptowe - Pyt
 
 *  [Wykład 8](https://tomaszgolan.github.io/wfia_python/html/python_w08.html)
 
-    * wybrane moduły biblioteki standardowej
-        * os
-        * sys
-        * time
-        * datetime
+    * wybrane moduły biblioteki standardowej: *os*, *sys*, *time*, *datetime*
 
 ## Listy
 
