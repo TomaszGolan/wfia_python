@@ -1,0 +1,757 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <title>Języki skryptowe Python</title>
+
+  <meta name="description" content="Języki skryptowe Python">
+
+   <meta name="author" content="Wykład 8" /> 
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="stylesheet" href="../reveal.js/css/reveal.css">
+
+      <link rel="stylesheet" href="../reveal.js/css/theme/white.css" id="theme">
+  
+      <link rel="stylesheet" href="../template/a11y-light.css">
+  
+  <link rel="stylesheet" href="../template/extra.css">
+
+  <script>
+    document.write('<link rel="stylesheet" href="../reveal.js/css/print/' +
+      (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') +
+      '.css" type="text/css" media="print">');
+  </script>
+
+  <script src="../template/snap.svg-min.js"></script>
+  <script src="../template/plotly-latest.min.js"></script>
+
+  <!--[if lt IE 9]>
+  <script src="../reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+
+  
+
+</head>
+
+<body>
+
+  
+
+  <div class="reveal">
+
+    <div class="slides">
+
+      <section>
+        <h1>Języki skryptowe Python</h1>
+         <h3>Wykład 8</h3> 
+        <p>
+          <h4></h4>
+        </p>
+      </section>
+
+       <div class="footer">
+<p>Sterowanie: spacja + shift-spacja || page down + page up || strzałki || esc</p>
+</div>
+<section id="section" class="level1">
+<h1></h1>
+<section id="moduł-os" class="level2">
+<h2>Moduł <em>os</em></h2>
+<hr />
+<ul>
+<li>przenośne używanie funkcjonalności zależnych od systemu operacyjnego
+<ul>
+<li>operacje na plikach (o tym za tydzień)</li>
+<li>operacje na ścieżkach</li>
+<li>uruchamianie poleceń systemowych</li>
+<li>zarządzanie zmiennymi środowiskowymi</li>
+<li>...</li>
+</ul></li>
+</ul>
+</section>
+<section id="system-operacyjny" class="level2">
+<h2>System operacyjny</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> os
+
+<span class="co"># POSIX = Portable Operating System Interface for Unix</span>
+<span class="bu">print</span>(os.name)  <span class="co"># posix, nt, ce, java</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="st">&#39;posix&#39;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">if</span> os.name <span class="op">==</span> <span class="st">&quot;posix&quot;</span>:  <span class="co"># jeśli unix</span>
+    cmd <span class="op">=</span> <span class="st">&quot;ls&quot;</span>          <span class="co"># użyj ls</span>
+<span class="cf">elif</span> os.name <span class="op">==</span> <span class="st">&quot;nt&quot;</span>:   <span class="co"># jeśli windows</span>
+    cmd <span class="op">=</span> <span class="st">&quot;dir&quot;</span>         <span class="co"># użyj dir</span>
+    
+<span class="bu">print</span>(cmd)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">ls</span></code></pre></div>
+</section>
+<section id="katalog-roboczy" class="level2">
+<h2>Katalog roboczy</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">current_path <span class="op">=</span> os.getcwd()  <span class="co"># pwd</span>
+
+<span class="bu">print</span>(<span class="st">&quot;Katalog roboczy:&quot;</span>, current_path)
+
+new_path <span class="op">=</span> <span class="st">&quot;/home/goran&quot;</span>
+
+os.chdir(new_path)          <span class="co"># zmień katalog roboczy</span>
+
+<span class="bu">print</span>(<span class="st">&quot;Nowy katalog roboczy:&quot;</span>, os.getcwd())
+
+os.chdir(current_path)      <span class="co"># wracamy</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Katalog</span> roboczy: /doc/insync/scratch/zajęcia/2016/języki skryptowe - python/js-python
+<span class="ex">Nowy</span> katalog roboczy: /home/goran</code></pre></div>
+</section>
+<section id="zawartość-katalogu" class="level2">
+<h2>Zawartość katalogu</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(os.listdir(<span class="st">&quot;/usr/&quot;</span>))  <span class="co"># lista plików i katalogów</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="st">&#39;src&#39;</span>, <span class="st">&#39;local&#39;</span>, <span class="st">&#39;bin&#39;</span>, <span class="st">&#39;include&#39;</span>, <span class="st">&#39;sbin&#39;</span>, <span class="st">&#39;lib&#39;</span>, <span class="st">&#39;games&#39;</span>, <span class="st">&#39;share&#39;</span>, <span class="st">&#39;locale&#39;</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(os.listdir())         <span class="co"># lista plików i katalogów w pwd</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="st">&#39;my_script.py&#39;</span>,
+<span class="st">&#39;usos.py&#39;</span>,
+<span class="st">&#39;.ipynb_checkpoints&#39;</span>,
+<span class="st">&#39;js-python_w05.html&#39;</span>,
+<span class="st">&#39;js-python_w01.html&#39;</span>,
+<span class="st">&#39;js-python_l02.md&#39;</span>,
+<span class="st">&#39;test.2016_11_11_175921.log&#39;</span>,
+<span class="st">&#39;js-python_w04.ipynb&#39;</span>,
+<span class="st">&#39;js-python_w06.html&#39;</span>,
+<span class="st">&#39;README.md&#39;</span>,
+<span class="st">&#39;js-python_w03.html&#39;</span>,
+<span class="st">&#39;test.2016_11_11_175922.log&#39;</span>,
+<span class="st">&#39;js-python_l00.md&#39;</span>,
+<span class="st">&#39;iloczyn.py&#39;</span>,
+<span class="st">&#39;js-python_w04.html&#39;</span>,
+<span class="st">&#39;temp.py&#39;</span>,
+<span class="st">&#39;js-python_w03.ipynb&#39;</span>,
+<span class="st">&#39;js-python_l01.pdf&#39;</span>,
+<span class="st">&#39;js-python_w05.ipynb&#39;</span>,
+<span class="st">&#39;print_args.py&#39;</span>,
+<span class="st">&#39;src&#39;</span>,
+<span class="st">&#39;js-python_l01.md&#39;</span>,
+<span class="st">&#39;middle2.py&#39;</span>,
+<span class="st">&#39;js-python_w01.ipynb&#39;</span>,
+<span class="st">&#39;listy_zadan&#39;</span>,
+<span class="st">&#39;__pycache__&#39;</span>,
+<span class="st">&#39;dodaj_studentow.py&#39;</span>,
+<span class="st">&#39;js-python_w07.ipynb&#39;</span>,
+<span class="st">&#39;test.2016_11_11_175942.log&#39;</span>,
+<span class="st">&#39;js-python_w02.ipynb&#39;</span>,
+<span class="st">&#39;js-python_w02.html&#39;</span>,
+<span class="st">&#39;temp&#39;</span>,
+<span class="st">&#39;my_module.py&#39;</span>,
+<span class="st">&#39;js-python_w06.ipynb&#39;</span>,
+<span class="st">&#39;private.py&#39;</span>]</code></pre></div>
+</section>
+<section id="tworzenie-usuwanie-katalogów" class="level2">
+<h2>Tworzenie / usuwanie katalogów</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> check(ls, folder):
+    <span class="co">&quot;&quot;&quot;Sprawdza czy folder znajduje się na liście.&quot;&quot;&quot;</span>
+    <span class="cf">if</span> folder <span class="kw">in</span> ls:
+        <span class="bu">print</span>(<span class="st">&quot;</span><span class="sc">{}</span><span class="st"> is found.&quot;</span>.<span class="bu">format</span>(folder))
+    <span class="cf">else</span>:
+        <span class="bu">print</span>(<span class="st">&quot;</span><span class="sc">{}</span><span class="st"> not found.&quot;</span>.<span class="bu">format</span>(folder))
+
+my_folder <span class="op">=</span> <span class="st">&quot;test&quot;</span>
+
+check(os.listdir(), my_folder)
+
+os.mkdir(my_folder)  <span class="co"># stwórz katalog test</span>
+
+check(os.listdir(), my_folder)
+
+os.rmdir(my_folder)  <span class="co"># usuń katalog test</span>
+
+check(os.listdir(), my_folder)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="bu">test</span> not found.
+<span class="bu">test</span> is found.
+<span class="bu">test</span> not found.</code></pre></div>
+</section>
+<section id="tworzenie-usuwanie-plików" class="level2">
+<h2>Tworzenie / usuwanie plików</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">os.mkdir(<span class="st">&quot;my_dir&quot;</span>)  <span class="co"># stwórz katalog &quot;my_dir&quot;</span>
+
+<span class="co"># otwórz plik w trybie zapisu (więcej za tydzień)</span>
+<span class="bu">file</span> <span class="op">=</span> <span class="bu">open</span>(<span class="st">&quot;my_dir/my_file&quot;</span>, <span class="st">&#39;w&#39;</span>)
+<span class="bu">file</span>.close()
+
+<span class="bu">print</span>(os.listdir(<span class="st">&quot;my_dir&quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="st">&#39;my_file&#39;</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># nie można usunąć niepustego katalogu</span>
+os.rmdir(<span class="st">&quot;my_dir&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">OSError</span>: [Errno 39] Directory not empty: <span class="st">&#39;my_dir&#39;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">os.remove(<span class="st">&quot;my_dir/my_file&quot;</span>)  <span class="co"># usuń plik</span>
+os.rmdir(<span class="st">&quot;my_dir&quot;</span>)           <span class="co"># usuń katalog</span></code></pre></div>
+</section>
+<section id="drzewo-katalogów" class="level2">
+<h2>Drzewo katalogów</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># os.makedirs(..., exist_ok=True) -&gt; działa jak mkdir -p</span>
+os.makedirs(<span class="st">&quot;level0/level1/level2&quot;</span>)  <span class="co"># utwórz &quot;ciąg&quot; katalogów</span>
+
+<span class="bu">print</span>(os.listdir(<span class="st">&quot;level0&quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="st">&#39;level1&#39;</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(os.listdir(<span class="st">&quot;level0/level1&quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="st">&#39;level2&#39;</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># os.rmdir(&quot;level0/level1/level2&quot;)     # usunie tylko level2</span>
+os.removedirs(<span class="st">&quot;level0/level1/level2&quot;</span>)  <span class="co"># usunie wszystko</span></code></pre></div>
+</section>
+<section id="moduł-os.path" class="level2">
+<h2>Moduł <em>os.path</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> os
+
+path <span class="op">=</span> <span class="st">&quot;/my/path&quot;</span>  <span class="co"># katalog</span>
+<span class="bu">file</span> <span class="op">=</span> <span class="st">&quot;file.py&quot;</span>   <span class="co"># plik</span>
+
+<span class="bu">print</span>(os.path.join(path, <span class="bu">file</span>))              <span class="co"># tworzy pełną ścieżkę do pliku</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="st">&#39;/my/path/file.py&#39;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(os.path.split(<span class="st">&quot;/my/path/file.py&quot;</span>))     <span class="co"># zwraca (head, tail)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">(</span><span class="st">&#39;/my/path&#39;</span>, <span class="st">&#39;file.py&#39;</span><span class="kw">)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(os.path.dirname(<span class="st">&quot;/my/path/file.py&quot;</span>))   <span class="co"># zwraca split()[0]</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="st">&#39;/my/path&#39;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(os.path.basename(<span class="st">&quot;/my/path/file.py&quot;</span>))  <span class="co"># zwraca split()[1]</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="st">&#39;file.py&#39;</span></code></pre></div>
+</section>
+<section id="więcej-o-os.path" class="level2">
+<h2>Więcej o <em>os.path</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> os.path <span class="im">as</span> path
+
+<span class="bu">print</span>(path.splitext(<span class="st">&quot;/my/path/file.py&quot;</span>))  <span class="co"># wydziela rozszerzenie pliku</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">(</span><span class="st">&#39;/my/path/file&#39;</span>, <span class="st">&#39;.py&#39;</span><span class="kw">)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">my_path, my_file <span class="op">=</span> path.split(<span class="st">&quot;/my/path/file.py&quot;</span>)
+my_base, my_extn <span class="op">=</span> path.splitext(my_file)
+
+<span class="bu">print</span>(<span class="st">&quot;my_path =&quot;</span>, my_path)
+<span class="bu">print</span>(<span class="st">&quot;my_file =&quot;</span>, my_file)
+<span class="bu">print</span>(<span class="st">&quot;my_base =&quot;</span>, my_base)
+<span class="bu">print</span>(<span class="st">&quot;my_extn =&quot;</span>, my_extn)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">my_path</span> = /my/path
+<span class="ex">my_file</span> = file.py
+<span class="ex">my_base</span> = file
+<span class="ex">my_extn</span> = .py</code></pre></div>
+</section>
+<section id="zmienne-środowiskowe" class="level2">
+<h2>Zmienne środowiskowe</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(os.getenv(<span class="st">&quot;HOME&quot;</span>))   <span class="co"># pobierz wartość zmiennej środowiskowej</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="st">&#39;/home/goran&#39;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(os.environ[<span class="st">&quot;HOME&quot;</span>])  <span class="co"># environ -&gt; słownik zmiennych środowiskowych</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="st">&#39;/home/goran&#39;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># tworzenie zmiennej środowiskowej z poziomu pythona</span>
+os.environ[<span class="st">&quot;MOJA_ZMIENNA&quot;</span>] <span class="op">=</span> <span class="st">&quot;To musi być string&quot;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="bu">echo</span> <span class="va">$MOJA_ZMIENNA</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">To</span> musi być string</code></pre></div>
+</section>
+</section>
+<section id="section-1" class="level1">
+<h1></h1>
+<section id="usos" class="level2">
+<h2>USOS</h2>
+<hr />
+<p><code>usos.py</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;Uniwersytecki System Obsługi Studiów</span>
+
+<span class="co">Dane przechowywane w postaci: kierunek/rok/imie.nazwisko</span>
+<span class="co">a w pliku zapisany jest numer indeksu</span>
+<span class="co">&quot;&quot;&quot;</span>
+
+<span class="im">import</span> os
+
+<span class="co"># top-level katalog na podstawie zmiennej środowiskowej $USOS</span>
+<span class="co"># jeśli nie jest zdefiniowana -&gt; bieżący katalog</span>
+_BASE_PATH <span class="op">=</span> os.getenv(<span class="st">&quot;USOS&quot;</span>) <span class="kw">or</span> os.getcwd()</code></pre></div>
+</section>
+<section id="zmienna-środowiskowa-usos" class="level2">
+<h2>Zmienna środowiskowa USOS</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">python</span> -c <span class="st">&quot;import usos; print(usos._BASE_PATH)&quot;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">/doc/insync/scratch</span>/<span class="ex">zaj</span>ęcia/2016/języki skryptowe - python/js-python</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="bu">export</span> <span class="va">USOS=</span><span class="st">&quot;/moja/sciezka/do/bazy/danych&quot;</span>
+<span class="ex">python</span> -c <span class="st">&quot;import usos; print(usos._BASE_PATH)&quot;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">/moja/sciezka/do/bazy/danych</span></code></pre></div>
+</section>
+<section id="usos---dodawanie-studenta" class="level2">
+<h2>USOS - dodawanie studenta</h2>
+<hr />
+<p><code>usos.py</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> add_student(imie, nazwisko, indeks, kierunek, rok):
+    <span class="co">&quot;&quot;&quot;Dodaje studenta.</span>
+<span class="co">    </span>
+<span class="co">    Tworzy plik imie.nazwisko w katalogu kierunek/rok/</span>
+<span class="co">    i umieszcza w nim numer indeksu</span>
+<span class="co">    &quot;&quot;&quot;</span>
+    <span class="co"># pełna ścieżka do katalogu danego kierunku/rocznika</span>
+    path <span class="op">=</span> os.path.join(_BASE_PATH, kierunek, <span class="bu">str</span>(rok))
+    <span class="co"># imie.nazwisko</span>
+    <span class="bu">file</span> <span class="op">=</span> <span class="st">&quot;.&quot;</span>.join([imie, nazwisko])
+    <span class="co"># stwórz kierunek lub pomiń jeśli istnieje</span>
+    os.makedirs(path, exist_ok<span class="op">=</span><span class="va">True</span>)
+    <span class="co"># o plikach więcej za tydzień</span>
+    <span class="cf">with</span> <span class="bu">open</span>(os.path.join(path, <span class="bu">file</span>), <span class="st">&#39;w&#39;</span>) <span class="im">as</span> f:
+        f.write(<span class="bu">str</span>(indeks))</code></pre></div>
+</section>
+<section id="usos---przykład" class="level2">
+<h2>USOS - przykład</h2>
+<hr />
+<p><code>dodaj_studentow.py</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> usos
+<span class="im">import</span> random
+
+imiona <span class="op">=</span> [<span class="st">&quot;Kasia&quot;</span>, <span class="st">&quot;Basia&quot;</span>, <span class="st">&quot;Marek&quot;</span>, <span class="st">&quot;Darek&quot;</span>]
+nazwiska <span class="op">=</span> [<span class="st">&quot;Nowak&quot;</span>, <span class="st">&quot;Marian&quot;</span>, <span class="st">&quot;Python&quot;</span>]
+kierunki <span class="op">=</span> [<span class="st">&quot;ISSP&quot;</span>, <span class="st">&quot;Fizyka Komputerowa&quot;</span>]
+
+<span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):
+    imie <span class="op">=</span> random.choice(imiona)          <span class="co"># losowe imie</span>
+    nazwisko <span class="op">=</span> random.choice(nazwiska)    <span class="co"># losowe nazwisko</span>
+    indeks <span class="op">=</span> random.randint(<span class="dv">1000</span>, <span class="dv">9999</span>)   <span class="co"># losowy indeks</span>
+    rocznik <span class="op">=</span> random.randint(<span class="dv">2015</span>, <span class="dv">2017</span>)  <span class="co"># losowy rocznik</span>
+    kierunek <span class="op">=</span> random.choice(kierunki)    <span class="co"># losowy kierunek</span>
+    
+    usos.add_student(imie, nazwisko, indeks, kierunek, rocznik)</code></pre></div>
+</section>
+<section id="usos---wynik" class="level2">
+<h2>USOS - wynik</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="bu">export</span> <span class="va">USOS=</span>/home/goran/usos
+<span class="ex">python</span> dodaj_studentow.py
+<span class="ex">tree</span> <span class="va">$USOS</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">/home/goran/usos</span>
+├── <span class="ex">Fizyka</span> Komputerowa
+│   ├── <span class="ex">2015</span>
+│   │   └── <span class="ex">Marek.Python</span>
+│   ├── <span class="ex">2016</span>
+│   │   ├── <span class="ex">Basia.Marian</span>
+│   │   ├── <span class="ex">Kasia.Nowak</span>
+│   │   └── <span class="ex">Marek.Python</span>
+│   └── <span class="ex">2017</span>
+│       └── <span class="ex">Basia.Marian</span>
+└── <span class="ex">ISSP</span>
+    ├── <span class="ex">2015</span>
+    │   └── <span class="ex">Marek.Marian</span>
+    ├── <span class="ex">2016</span>
+    │   ├── <span class="ex">Basia.Marian</span>
+    │   ├── <span class="ex">Kasia.Nowak</span>
+    │   └── <span class="ex">Kasia.Python</span>
+    └── <span class="ex">2017</span>
+        └── <span class="ex">Basia.Nowak</span>
+
+<span class="ex">8</span> directories, 10 files</code></pre></div>
+</section>
+<section id="os.walk" class="level2">
+<h2><em>os.walk</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># os.walk &quot;podróżuje po drzewie katalogów&quot;</span>
+<span class="co"># na każdym kroku zwracając krotkę</span>
+<span class="co"># (obecny katalog, lista podkatalogów, lista plików)</span>
+<span class="cf">for</span> root, dirs, files <span class="kw">in</span> os.walk(<span class="st">&quot;/home/goran/usos&quot;</span>):
+    <span class="bu">print</span>(root, dirs, files, sep<span class="op">=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, end<span class="op">=</span><span class="st">&quot;</span><span class="ch">\n\n</span><span class="st">&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">/home/goran/usos</span>
+[<span class="st">&#39;Fizyka Komputerowa&#39;</span>, <span class="st">&#39;ISSP&#39;</span>]
+[]
+
+<span class="ex">/home/goran/usos/Fizyka</span> Komputerowa
+[<span class="st">&#39;2016&#39;</span>, <span class="st">&#39;2015&#39;</span>, <span class="st">&#39;2017&#39;</span>]
+[]
+
+<span class="ex">/home/goran/usos/Fizyka</span> Komputerowa/2016
+[]
+[<span class="st">&#39;Kasia.Nowak&#39;</span>, <span class="st">&#39;Basia.Marian&#39;</span>, <span class="st">&#39;Marek.Python&#39;</span>]
+
+<span class="ex">/home/goran/usos/Fizyka</span> Komputerowa/2015
+[]
+[<span class="st">&#39;Marek.Python&#39;</span>]
+
+<span class="ex">/home/goran/usos/Fizyka</span> Komputerowa/2017
+[]
+[<span class="st">&#39;Basia.Marian&#39;</span>]
+
+<span class="ex">/home/goran/usos/ISSP</span>
+[<span class="st">&#39;2016&#39;</span>, <span class="st">&#39;2015&#39;</span>, <span class="st">&#39;2017&#39;</span>]
+[]
+
+<span class="ex">/home/goran/usos/ISSP/2016</span>
+[]
+[<span class="st">&#39;Kasia.Python&#39;</span>, <span class="st">&#39;Kasia.Nowak&#39;</span>, <span class="st">&#39;Basia.Marian&#39;</span>]
+
+<span class="ex">/home/goran/usos/ISSP/2015</span>
+[]
+[<span class="st">&#39;Marek.Marian&#39;</span>]
+
+<span class="ex">/home/goran/usos/ISSP/2017</span>
+[]
+[<span class="st">&#39;Basia.Nowak&#39;</span>]</code></pre></div>
+</section>
+<section id="os.walk-1" class="level2">
+<h2><em>os.walk</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">for</span> root, dirs, files <span class="kw">in</span> os.walk(<span class="st">&quot;/home/goran/usos&quot;</span>):
+    <span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> files: <span class="co"># pętla po plikach w danym katalogu root</span>
+        <span class="bu">print</span>(os.path.join(root, <span class="bu">file</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">/home/goran/usos/Fizyka</span> Komputerowa/2016/Kasia.Nowak
+<span class="ex">/home/goran/usos/Fizyka</span> Komputerowa/2016/Basia.Marian
+<span class="ex">/home/goran/usos/Fizyka</span> Komputerowa/2016/Marek.Python
+<span class="ex">/home/goran/usos/Fizyka</span> Komputerowa/2015/Marek.Python
+<span class="ex">/home/goran/usos/Fizyka</span> Komputerowa/2017/Basia.Marian
+<span class="ex">/home/goran/usos/ISSP/2016/Kasia.Python</span>
+<span class="ex">/home/goran/usos/ISSP/2016/Kasia.Nowak</span>
+<span class="ex">/home/goran/usos/ISSP/2016/Basia.Marian</span>
+<span class="ex">/home/goran/usos/ISSP/2015/Marek.Marian</span>
+<span class="ex">/home/goran/usos/ISSP/2017/Basia.Nowak</span></code></pre></div>
+</section>
+<section id="moduł-glob" class="level2">
+<h2>Moduł <em>glob</em></h2>
+<hr />
+<ul>
+<li>umożliwia wykorzystanie uniksowych <em>dzikich kart</em>: <code>?</code>, <code>*</code>, <code>[]</code></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> glob
+
+<span class="bu">print</span>(glob.glob(<span class="st">&quot;*.ipynb&quot;</span>))  <span class="co"># lista plików z rozszerzeniem ipynb</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="st">&#39;js-python_w04.ipynb&#39;</span>,
+<span class="st">&#39;js-python_w03.ipynb&#39;</span>,
+<span class="st">&#39;js-python_w05.ipynb&#39;</span>,
+<span class="st">&#39;js-python_w01.ipynb&#39;</span>,
+<span class="st">&#39;js-python_w07.ipynb&#39;</span>,
+<span class="st">&#39;js-python_w02.ipynb&#39;</span>,
+<span class="st">&#39;js-python_w06.ipynb&#39;</span>]</code></pre></div>
+</section>
+<section id="więcej-o-glob" class="level2">
+<h2>Więcej o <em>glob</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># pliki z roszerzeniem html oraz</span>
+<span class="co"># pasujące do wzorca (coś)(cyfra od 0 do 3)</span>
+<span class="bu">print</span>(glob.glob(<span class="st">&quot;*[0-3].html&quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="st">&#39;js-python_w01.html&#39;</span>, <span class="st">&#39;js-python_w03.html&#39;</span>, <span class="st">&#39;js-python_w02.html&#39;</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(glob.glob(<span class="st">&quot;js-python_?02.*&quot;</span>))  <span class="co"># js-python_[znak]02.[cokolwiek]</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="st">&#39;js-python_l02.md&#39;</span>, <span class="st">&#39;js-python_w02.ipynb&#39;</span>, <span class="st">&#39;js-python_w02.html&#39;</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(glob.glob(<span class="st">&quot;js-python_?02.[mi]*&quot;</span>))  <span class="co"># js-python_[znak]02.[m lub i]cokolwiek</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="st">&#39;js-python_l02.md&#39;</span>, <span class="st">&#39;js-python_w02.ipynb&#39;</span>]</code></pre></div>
+</section>
+</section>
+<section id="section-2" class="level1">
+<h1></h1>
+<section id="moduł-sys" class="level2">
+<h2>Moduł <em>sys</em></h2>
+<hr />
+<ul>
+<li>funkcje i parametry specyficzne dla systemu operacyjnego</li>
+<li>ostatnio: ścieżka dostępu do modułów <em>sys.path</em></li>
+<li>referencje do obiektów</li>
+<li>argumenty wywołania skryptu</li>
+</ul>
+</section>
+<section id="referencje-do-obiektu" class="level2">
+<h2>Referencje do obiektu</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> sys
+
+x <span class="op">=</span> <span class="dv">1234</span>
+y <span class="op">=</span> <span class="dv">1234</span>
+z <span class="op">=</span> <span class="st">&quot;Mój tekst&quot;</span>
+
+<span class="bu">print</span>(sys.getrefcount(x))  <span class="co"># x, y i ?</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">3</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(sys.getrefcount(z))  <span class="co"># getrefcount pracuje na kopii z </span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">2</span></code></pre></div>
+</section>
+<section id="referencje-do-obiektów-mutowalnych" class="level2">
+<h2>Referencje do obiektów <em>mutowalnych</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]
+y <span class="op">=</span> x
+z <span class="op">=</span> x.copy()
+
+<span class="bu">print</span>(sys.getrefcount(x))  <span class="co"># x, y i getrefcount</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">3</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(x <span class="kw">is</span> y)  <span class="co"># x i y wskazują to samo</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">True</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(x <span class="kw">is</span> z)  <span class="co"># x i z wskazują na inne listy</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">False</span></code></pre></div>
+</section>
+<section id="argumenty" class="level2">
+<h2>Argumenty</h2>
+<hr />
+<p><code>print_args.py</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;Drukuje argumenty podane w linii komend.&quot;&quot;&quot;</span>
+
+<span class="im">import</span> sys
+
+<span class="co"># sys.argv - lista argumentów linii komend</span>
+<span class="cf">for</span> i, arg <span class="kw">in</span> <span class="bu">enumerate</span>(sys.argv):
+    <span class="bu">print</span>(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">. </span><span class="sc">{}</span><span class="st">&quot;</span>.<span class="bu">format</span>(i, arg))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">python</span> print_args.py arg1 arg2 33 <span class="st">&quot;hello world&quot;</span></code></pre></div>
+<pre><code>1. print_args.py
+2. arg1
+3. arg2
+4. 33
+5. hello world</code></pre>
+</section>
+<section id="przykład" class="level2">
+<h2>Przykład</h2>
+<hr />
+<p><code>iloczyn.py</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;Liczy iloczyn podanych argumentów.&quot;&quot;&quot;</span>
+
+<span class="im">import</span> sys
+
+<span class="cf">if</span> <span class="bu">len</span>(sys.argv) <span class="op">&lt;</span> <span class="dv">2</span>:  <span class="co"># sys.argv[0] = iloczyn.py</span>
+    <span class="bu">print</span>(<span class="st">&quot;Musisz podać co najmniej jedną liczbę .&quot;</span>)
+<span class="cf">else</span>:
+    wyrazenie <span class="op">=</span> <span class="st">&quot;*&quot;</span>.join(sys.argv[<span class="dv">1</span>:])
+    <span class="bu">print</span>(wyrazenie, <span class="st">&quot;=&quot;</span>, <span class="bu">eval</span>(wyrazenie))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">python</span> iloczyn.py</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Musisz</span> podać co najmniej jedną liczbę .</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">python</span> iloczyn.py 1 2 5 4 10 0.5</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">1*2*5*4*10*0.5</span> = 200.0</code></pre></div>
+</section>
+</section>
+<section id="section-3" class="level1">
+<h1></h1>
+<section id="moduł-time" class="level2">
+<h2>Moduł <em>time</em></h2>
+<hr />
+<ul>
+<li>operacje na czasie</li>
+<li>nie wszystkie funkcjonalności są dostępne na wszystkich platformach</li>
+<li>najczęściej wywoływane są funkcje biblioteki C o tej samej nazwie</li>
+</ul>
+</section>
+<section id="czas-uniksowy" class="level2">
+<h2>Czas uniksowy</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> time
+
+<span class="bu">print</span>(time.gmtime())   <span class="co"># Greenwhich Mean Time / czas uniwersalny</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">time.struct_time</span>(tm_year=2016, tm_mon=11, tm_mday=14, tm_hour=17, tm_min=43, tm_sec=9, tm_wday=0, tm_yday=319, tm_isdst=0)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(time.time())     <span class="co"># ile minęło sekund od epoki uniksa</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">1479145391.2862186</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(time.gmtime(<span class="dv">0</span>))  <span class="co"># eoki Uniksa</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">time.struct_time</span>(tm_year=1970, tm_mon=1, tm_mday=1, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=3, tm_yday=1, tm_isdst=0)</code></pre></div>
+</section>
+<section id="przybliżony-test" class="level2">
+<h2>Przybliżony test</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">time.time() <span class="op">/</span> <span class="dv">60</span> <span class="op">/</span> <span class="dv">60</span> <span class="op">/</span> <span class="dv">24</span> <span class="op">/</span> <span class="dv">365</span>  <span class="co"># lat</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">48.933277998481934</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(time.gmtime()[<span class="dv">0</span>] <span class="op">-</span> time.gmtime(<span class="dv">0</span>)[<span class="dv">0</span>])  <span class="co"># rok teraz - rok epoki linuksa</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">48</span></code></pre></div>
+</section>
+<section id="uniksowe-chwile-godne-uwagi" class="level2">
+<h2>Uniksowe chwile godne uwagi</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(time.gmtime(<span class="dv">1000000000</span>)[:<span class="dv">6</span>])  <span class="co"># Unix billenium</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">(</span><span class="ex">2001</span>, 9, 9, 1, 46, 40<span class="kw">)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(time.gmtime(<span class="dv">1234567890</span>)[:<span class="dv">6</span>])  <span class="co"># piątek 13-tego</span></code></pre></div>
+<pre><code>(2009, 2, 13, 23, 31, 30)</code></pre>
+<figure>
+<img src="../img/unix1234567890.gif" />
+</figure>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(time.gmtime(<span class="bn">0x7FFFFFFF</span>)[:<span class="dv">6</span>])  <span class="co"># max ze znakiem (32-bit)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">(</span><span class="ex">2038</span>, 1, 19, 3, 14, 7<span class="kw">)</span></code></pre></div>
+</section>
+<section id="czas-lokalny" class="level2">
+<h2>Czas lokalny</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(time.localtime())  <span class="co"># czas lokalny</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">time.struct_time</span>(tm_year=2016, tm_mon=11, tm_mday=14, tm_hour=18, tm_min=43, tm_sec=19, tm_wday=0, tm_yday=319, tm_isdst=0)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(time.localtime()[<span class="dv">3</span>] <span class="op">-</span> time.gmtime()[<span class="dv">3</span>])  <span class="co"># różnica Polska - GMT</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">1</span></code></pre></div>
+</section>
+<section id="czas-w-formie-czytelnej" class="level2">
+<h2>Czas w formie czytelnej</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">teraz <span class="op">=</span> time.localtime()
+
+<span class="bu">print</span>(time.strftime(<span class="st">&quot;</span><span class="sc">%c</span><span class="st">&quot;</span>, teraz))  <span class="co"># lub time.asctime(teraz)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="st">&#39;Mon Nov 14 18:43:22 2016&#39;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">dzien_tygodnia <span class="op">=</span> time.strftime(<span class="st">&quot;%A&quot;</span>, teraz)  <span class="co"># %a - skrót</span>
+
+<span class="bu">print</span>(<span class="st">&quot;Dzisiaj jest&quot;</span>, dzien_tygodnia)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Dzisiaj</span> jest Monday</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(time.strftime(<span class="st">&quot;%Y-%m-</span><span class="sc">%d</span><span class="st"> %H:%M&quot;</span>, teraz)) <span class="co"># ROK-MIESIĄC-DZIEŃ GODZINA:MINUTA</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="st">&#39;2016-11-14 18:43&#39;</span></code></pre></div>
+<ul>
+<li>pełna lista dyrektyw <a href="https://docs.python.org/3.6/library/time.html#time.strftime">tutaj</a></li>
+</ul>
+</section>
+<section id="pomiar-czasu-wall-time" class="level2">
+<h2>Pomiar czasu (<em>wall time</em>)</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> time
+
+<span class="kw">def</span> poczekalnia(n):
+    <span class="co">&quot;&quot;&quot;Czeka n sekund.&quot;&quot;&quot;</span>
+    time.sleep(n)
+    
+przed <span class="op">=</span> time.time()  <span class="co"># czas przed wywołaniem funkcji</span>
+
+poczekalnia(<span class="dv">2</span>)
+
+po <span class="op">=</span> time.time()     <span class="co"># czas po wywołaniu funkcji</span>
+
+<span class="bu">print</span>(<span class="st">&quot;Czekałem </span><span class="sc">{}</span><span class="st"> sekund.&quot;</span>.<span class="bu">format</span>(po <span class="op">-</span> przed))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Czeka</span>łem 2.002260446548462 sekund.</code></pre></div>
+</section>
+<section id="pomiar-czasu-procesora-process-time" class="level2">
+<h2>Pomiar czasu procesora (<em>process time</em>)</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> time
+
+<span class="kw">def</span> poczekalnia(n):
+    <span class="co">&quot;&quot;&quot;Czeka n sekund.&quot;&quot;&quot;</span>
+    time.sleep(n)
+    
+przed <span class="op">=</span> time.clock()  <span class="co"># czas przed wywołaniem funkcji</span>
+
+poczekalnia(<span class="dv">2</span>)
+
+po <span class="op">=</span> time.clock()     <span class="co"># czas po wywołaniu funkcji</span>
+
+<span class="bu">print</span>(<span class="st">&quot;Czekałem </span><span class="sc">{}</span><span class="st"> sekund.&quot;</span>.<span class="bu">format</span>(po <span class="op">-</span> przed))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Czeka</span>łem 0.0015890000000000626 sekund.</code></pre></div>
+</section>
+</section>
+<section id="section-4" class="level1">
+<h1></h1>
+<section id="moduł-datetime" class="level2">
+<h2>Moduł <em>datetime</em></h2>
+<hr />
+<ul>
+<li>wygodniejszy w użyciu do zarządzania czasem i datą</li>
+<li>arytmetyka czasu i daty, np.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> datetime
+
+t0 <span class="op">=</span> datetime.datetime.now()
+t1 <span class="op">=</span> datetime.datetime(<span class="dv">2017</span>, <span class="dv">2</span>, <span class="dv">4</span>)  <span class="co"># początek sesji</span>
+
+<span class="bu">print</span>(t1 <span class="op">-</span> t0)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">81</span> days, 5:16:24.258938</code></pre></div>
+</section>
+<section id="przykład-1" class="level2">
+<h2>Przykład</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">teraz <span class="op">=</span> datetime.datetime.now()
+uniks_end <span class="op">=</span> datetime.datetime(<span class="dv">2038</span>, <span class="dv">1</span>, <span class="dv">19</span>, <span class="dv">3</span>, <span class="dv">14</span>, <span class="dv">7</span>)
+
+<span class="bu">print</span>(<span class="st">&quot;teraz =&quot;</span>, teraz)
+<span class="bu">print</span>(<span class="st">&quot;rok =&quot;</span>, teraz.year)
+<span class="bu">print</span>(<span class="st">&quot;miesiąc =&quot;</span>, teraz.month)
+<span class="bu">print</span>(<span class="st">&quot;dzień =&quot;</span>, teraz.day)
+<span class="bu">print</span>(<span class="st">&quot;Do końca uniksa zostało&quot;</span>, uniks_end <span class="op">-</span> teraz)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">teraz</span> = 2016-11-14 18:43:37.185897
+<span class="ex">rok</span> = 2016
+<span class="ex">miesi</span>ąc = 11
+<span class="ex">dzie</span>ń = 14
+<span class="ex">Do</span> końca uniksa zostało 7735 days, 8:30:29.814103</code></pre></div>
+</section>
+<section id="przykład---logi" class="level2">
+<h2>Przykład - logi</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> os
+<span class="im">from</span> datetime <span class="im">import</span> datetime
+
+<span class="kw">def</span> create_log(log_path, process):
+    <span class="co">&quot;&quot;&quot;Tworzy unikatowy log.&quot;&quot;&quot;</span>
+    timestamp <span class="op">=</span> datetime.now().strftime(<span class="st">&#39;%Y_%m_</span><span class="sc">%d</span><span class="st">_%H%M%S&#39;</span>)
+    filename <span class="op">=</span> <span class="st">&quot;.&quot;</span>.join([process, timestamp, <span class="st">&quot;log&quot;</span>])
+    <span class="cf">with</span> <span class="bu">open</span>(os.path.join(log_path, filename), <span class="st">&#39;w+&#39;</span>) <span class="im">as</span> f:
+        f.write(<span class="st">&quot;Uruchomiono proces.&quot;</span>)
+
+create_log(os.getcwd(), <span class="st">&quot;test&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">ls</span> -l *.log</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">-rw-rw-r--</span> 1 goran goran 19 lis 11 17:59 test.2016_11_11_175921.log
+<span class="ex">-rw-rw-r--</span> 1 goran goran 19 lis 11 17:59 test.2016_11_11_175922.log
+<span class="ex">-rw-rw-r--</span> 1 goran goran 19 lis 11 17:59 test.2016_11_11_175942.log
+<span class="ex">-rw-rw-r--</span> 1 goran goran 19 lis 14 18:43 test.2016_11_14_184342.log</code></pre></div>
+</section>
+</section>
+    </div>
+
+    <script src="../reveal.js/lib/js/head.min.js"></script>
+    <script src="../reveal.js/js/reveal.js"></script>
+
+    <script>
+
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        slideNumber: true,
+        width: 1280,
+        height: 720,
+
+                  theme: Reveal.getQueryHash().theme || 'white',
+        
+                  transition: Reveal.getQueryHash().transition || 'convex',
+        
+                  transitionSpeed: Reveal.getQueryHash().transitionSpeed || 'fast',
+        
+        dependencies: [{
+            src: '../reveal.js/lib/js/classList.js',
+            condition: function() {
+              return !document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/markdown/showdown.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          }, {
+            src: '../reveal.js/plugin/markdown/markdown.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          }, {
+            src: '../reveal.js/plugin/highlight/highlight.js',
+            async: true,
+            callback: function() {
+              hljs.initHighlightingOnLoad();
+            }
+          }, {
+            src: '../reveal.js/plugin/zoom-js/zoom.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/notes/notes.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/math/math.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          },
+          // { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+    </script>
+
+    <script>
+    // displayed upon load, hides when slide changes
+      Reveal.addEventListener('slidechanged', function(event) {
+        document.querySelector('.reveal .footer').style.display = 'none';
+      });
+   </script>
+
+</body>
+
+</html>

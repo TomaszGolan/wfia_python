@@ -47,6 +47,10 @@ Wykłady dla studentów Wydziału Fizyki i Astronomii z "Języki skryptowe - Pyt
 
     * tworzenie własnych modułów i paczek
 
+*  [Wykład 8](https://tomaszgolan.github.io/wfia_python/html/python_w08.html)
+
+    * 
+
 
 ## Listy
 
