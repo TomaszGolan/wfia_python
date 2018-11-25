@@ -16,7 +16,7 @@ Sterowanie: spacja + shift-spacja || page down + page up || strzałki || esc
     * operacje na ścieżkach
     * uruchamianie poleceń systemowych
     * zarządzanie zmiennymi środowiskowymi
-    * ...
+    * ... 
 
 ## System operacyjny
 
