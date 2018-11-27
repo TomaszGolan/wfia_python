@@ -47,13 +47,9 @@ Napisz program, który:
 * sprawdza, czy katalog wskazywany przez `$LOG_PATH` istnieje - jeśli nie istnieje, to go tworzy
 * tworzy (jeśli nie istnieje) katalog `$LOG_PATH/YYYY-MM-DD`, gdzie `YYYY` - rok, `MM` - miesiąc, `DD` - dzień, w którym
 * co *N* sekund tworzy plik `HH-MM-SS.log`, gdzie `HH` - godzina, `MM` - minuta, `SS` - sekunda, w którym
-* umieszcza wartość zmiennej `$LOG_INFO`.
+* umieszcza `id` logu (czyli numer zapisanego w danej sesji logu).
 
-Napisz drugi program, który iniciuje `$LOG_INFO` wartością *x* i co *n* sekund zwiększa o ją o jeden.
-
-*N*, *n* i *x* pobierane z linii komend (`sys.argv`).
-
-Uruchom oba programy jednocześnie i zobacz, czy logi są generowane prawidłowo.
+*N* pobierane z linii komend (`sys.argv`).
 
 ---
 
