@@ -51,6 +51,11 @@ Wykłady dla studentów Wydziału Fizyki i Astronomii z "Języki skryptowe - Pyt
 
     * wybrane moduły biblioteki standardowej: *os*, *sys*, *time*, *datetime*
 
+*  [Wykład 9](https://tomaszgolan.github.io/wfia_python/html/python_w09.html)
+
+    * błędy i wyjątki
+    * operacje na plikach
+
 ## Listy
 
 * Lista 1: [markdown](listy/lista_01.md), [pdf](listy/lista_01.pdf)

@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <title>Języki skryptowe Python</title>
+
+  <meta name="description" content="Języki skryptowe Python">
+
+   <meta name="author" content="Wykład 9" /> 
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="stylesheet" href="../reveal.js/css/reveal.css">
+
+      <link rel="stylesheet" href="../reveal.js/css/theme/white.css" id="theme">
+  
+      <link rel="stylesheet" href="../template/a11y-light.css">
+  
+  <link rel="stylesheet" href="../template/extra.css">
+
+  <script>
+    document.write('<link rel="stylesheet" href="../reveal.js/css/print/' +
+      (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') +
+      '.css" type="text/css" media="print">');
+  </script>
+
+  <script src="../template/snap.svg-min.js"></script>
+  <script src="../template/plotly-latest.min.js"></script>
+
+  <!--[if lt IE 9]>
+  <script src="../reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+
+  
+
+</head>
+
+<body>
+
+  
+
+  <div class="reveal">
+
+    <div class="slides">
+
+      <section>
+        <h1>Języki skryptowe Python</h1>
+         <h3>Wykład 9</h3> 
+        <p>
+          <h4></h4>
+        </p>
+      </section>
+
+       <div class="footer">
+<p>Sterowanie: spacja + shift-spacja || page down + page up || strzałki || esc</p>
+</div>
+<section id="section" class="level1">
+<h1></h1>
+<section id="błędy-bug" class="level2">
+<h2>Błędy (<em>bug</em>)</h2>
+<hr />
+<blockquote>
+<p>Without requirements or design, programming is the art of adding bugs to an empty text file.</p>
+</blockquote>
+<div class="right">
+<em>Louis Srygley</em>
+</div>
+<ul>
+<li>błędy leksykalne i składniowe</li>
+<li>błędy typowania</li>
+<li>błędy semantyczne i logiczne</li>
+<li>błędy działania</li>
+<li>nieskończone obliczenia</li>
+</ul>
+</section>
+<section id="błędy-leksykalne" class="level2">
+<h2>Błędy leksykalne</h2>
+<hr />
+<ul>
+<li>pojedyncza jednostka leksykalna, której nie przewiduje definicja języka</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" data-line-number="1">x <span class="op">=</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">x<span class="op">++</span>  <span class="co"># operator ++ nie istnieje</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ex">SyntaxError</span>: invalid syntax</a></code></pre></div>
+</section>
+<section id="błędy-składniowe-syntax-error" class="level2">
+<h2>Błędy składniowe (<em>syntax error</em>)</h2>
+<hr />
+<ul>
+<li>niepoprawnie zestawione poprawne jednostki leksykalne</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="cf">if</span> <span class="va">True</span>                    <span class="co"># brakuje :</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">    <span class="bu">print</span>(<span class="st">&quot;Hello World&quot;</span>))  <span class="co"># dodatkowy )</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="ex">SyntaxError</span>: invalid syntax</a></code></pre></div>
+</section>
+<section id="błędy-typowania" class="level2">
+<h2>Błędy typowania</h2>
+<hr />
+<ul>
+<li>wyrażenie nieadekwatne do typu</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb5-1" data-line-number="1">x <span class="op">=</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">x[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">2</span>  <span class="co"># x nie jest sekwencyjnym typem danych</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="ex">TypeError</span>: <span class="st">&#39;int&#39;</span> object does not support item assignment</a></code></pre></div>
+</section>
+<section id="błędy-działania-runtime-error" class="level2">
+<h2>Błędy działania (<em>runtime error</em>)</h2>
+<hr />
+<ul>
+<li>pojawiają się w trakcie działania programu (np. odczyt z pliku, który nie istnieje)</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">def</span> iloraz(a, b):</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">    <span class="co">&quot;&quot;&quot;Zwraca a / b&quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">    <span class="cf">return</span> a <span class="op">/</span> b</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">iloraz(<span class="dv">10</span>, <span class="dv">0</span>)  <span class="co"># dzielenie przez 0</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="ex">ZeroDivisionError</span>: division by zero</a></code></pre></div>
+</section>
+<section id="błędy-semantyczne-semantic-error" class="level2">
+<h2>Błędy semantyczne (<em>semantic error</em>)</h2>
+<hr />
+<ul>
+<li>niezgodność oczekiwań ze stanem faktycznym</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">def</span> dzialanie(a, b, c):</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">    <span class="co">&quot;&quot;&quot;Zwraca iloraz a przez sumę b i c.&quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">    <span class="cf">return</span> a <span class="op">/</span> b <span class="op">+</span> c  <span class="co"># zamiast a / (b + c)</span></a></code></pre></div>
+</section>
+<section id="błędy-logiczne" class="level2">
+<h2>Błędy logiczne</h2>
+<hr />
+<ul>
+<li>program liczy nie to co trzeba (w tym też błędy semantyczne)</li>
+<li>najtrudniejsze do znalezienia</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">def</span> delta(a, b, c):</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">    <span class="co">&quot;&quot;&quot;Liczy wyróżnik trójmianu kwadratowego.&quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">    <span class="cf">return</span> b <span class="op">-</span> <span class="dv">4</span><span class="op">*</span>a<span class="op">*</span>c  <span class="co"># zamiast b*b - 4*a*c</span></a></code></pre></div>
+</section>
+<section id="nieskończone-pętle" class="level2">
+<h2>Nieskończone pętle</h2>
+<hr />
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">def</span> loop(i <span class="op">=</span> <span class="dv">0</span>):</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">    <span class="cf">while</span> i <span class="op">&lt;</span> <span class="dv">10</span>:</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">        i <span class="op">-=</span> <span class="dv">1</span>  <span class="co"># i zawsze będzie mniejsze od 10</span></a></code></pre></div>
+</section>
+<section id="najdroższy-myślnik-w-historii" class="level2">
+<h2>Najdroższy myślnik w historii</h2>
+<hr />
+<ul>
+<li>NASA (1962); Mariner 1: Floryda -&gt; Wenus</li>
+</ul>
+<blockquote>
+<p>Review Board determined that the omission of a hyphen in coded computer instructions in the data-editing program allowed transmission of incorrect guidance signals to the spacecraft.</p>
+</blockquote>
+<p><a href="http://nssdc.gsfc.nasa.gov/nmc/spacecraftDisplay.do?id=MARIN1">źródło</a></p>
+</section>
+<section id="therac-25" class="level2">
+<h2>Therac-25</h2>
+<hr />
+<ul>
+<li>maszyna do radioterapii nowotworów</li>
+<li>na skutek błędów programistycznych kilka osób zmarło na skutek napromieniowania</li>
+<li>błąd typu <em>race condition</em> - przy zbyt szybkim wprowadzaniu danych (przez operatora) parametry zabiegu nie były prawidłowo inicjowane</li>
+</ul>
+</section>
+</section>
+<section id="section-1" class="level1">
+<h1></h1>
+<section id="zapobieganie-błędom" class="level2">
+<h2>Zapobieganie błędom</h2>
+<hr />
+<ul>
+<li>pisanie czytelnego kodu</li>
+<li><em>code review</em></li>
+<li>debugowanie</li>
+</ul>
+</section>
+<section id="czytelność-kodu" class="level2">
+<h2>Czytelność kodu</h2>
+<hr />
+<ul>
+<li>zrozumiałe nazwy zmiennych (nawet kosztem długości)</li>
+<li>komentowanie kodu źródłowego, który nie jest zrozumiały od razu</li>
+<li>tworzenie dokumentacji w trakcie pisania programu</li>
+<li>opisywanie przyjętych założeń (w komentarzach i/lub dokumentacji)</li>
+</ul>
+</section>
+<section id="code-review" class="level2">
+<h2><em>Code review</em></h2>
+<hr />
+<ul>
+<li>sprawdzenie kodu przez inną osobę</li>
+</ul>
+<p><img src="../img/code_review.jpg" /></p>
+</section>
+<section id="debugowanie" class="level2">
+<h2>Debugowanie</h2>
+<hr />
+<blockquote>
+<p>If debugging is the process of removing software bugs, then programming must be the process of putting them in.</p>
+</blockquote>
+<div class="right">
+<em>Edsger Dijkstra</em>
+</div>
+<ul>
+<li>systematyczne redukowanie błędów w kodzie</li>
+<li>kontrolowane wykonanie programu</li>
+<li>debugger</li>
+</ul>
+</section>
+<section id="debug__" class="level2">
+<h2>__debug__</h2>
+<hr />
+<p><code>debug.py</code></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co"># __debug__ - wbudowana stała</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co"># równa True - jeśli uruchomione bez -O (optimize)</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="cf">if</span> <span class="va">__debug__</span>:</a>
+<a class="sourceLine" id="cb12-5" data-line-number="5">    <span class="bu">print</span>(<span class="st">&quot;Jestem w trybie debugowania.&quot;</span>)</a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb12-7" data-line-number="7">    <span class="bu">print</span>(<span class="st">&quot;Jestem w trybie normalnym.&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="ex">python</span> debug.py</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="ex">Jestem</span> w trybie debugowania.</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="ex">python</span> -O debug.py</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="ex">Jestem</span> w trybie normalnym.</a></code></pre></div>
+</section>
+<section id="przykład" class="level2">
+<h2>Przykład</h2>
+<hr />
+<p><code>fib.py</code></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co">&quot;&quot;&quot;Wyznacza pierwsze wyrazy ciągu Fibonacciego.&quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">fib <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</a>
+<a class="sourceLine" id="cb17-6" data-line-number="6">    <span class="cf">if</span> <span class="kw">not</span> <span class="va">__debug__</span>:</a>
+<a class="sourceLine" id="cb17-7" data-line-number="7">        <span class="bu">print</span>(<span class="st">&quot;i =&quot;</span>, i)</a>
+<a class="sourceLine" id="cb17-8" data-line-number="8">        <span class="bu">print</span>(<span class="st">&quot;fib =&quot;</span>, fib)</a>
+<a class="sourceLine" id="cb17-9" data-line-number="9">        <span class="bu">print</span>(<span class="st">&quot;fib[i-2] =&quot;</span>, fib[i<span class="dv">-2</span>])</a>
+<a class="sourceLine" id="cb17-10" data-line-number="10">        <span class="bu">print</span>(<span class="st">&quot;fib[i-1] =&quot;</span>, fib[i<span class="dv">-1</span>])</a>
+<a class="sourceLine" id="cb17-11" data-line-number="11">        <span class="bu">print</span>()</a>
+<a class="sourceLine" id="cb17-12" data-line-number="12">    </a>
+<a class="sourceLine" id="cb17-13" data-line-number="13">    fib.append(fib[i<span class="dv">-2</span>] <span class="op">+</span> fib[i<span class="dv">-1</span>])</a>
+<a class="sourceLine" id="cb17-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb17-15" data-line-number="15"><span class="bu">print</span>(fib)  <span class="co"># [0, 1, 1, 2, 3, 5, 8, 13, ...]</span></a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="ex">python</span> fib.py</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb19-1" data-line-number="1">[<span class="ex">0</span>, 1, 1, 1, 1, 2, 2, 2, 3, 4, 4, 5]</a></code></pre></div>
+</section>
+<section id="przykład---debug-mode" class="level2">
+<h2>Przykład - <em>debug mode</em></h2>
+<hr />
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="ex">python</span> -O fib.py</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="ex">i</span> = 0</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="ex">fib</span> = [0, 1]</a>
+<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="ex">fib</span>[i-2] = 0</a>
+<a class="sourceLine" id="cb21-4" data-line-number="4"><span class="ex">fib</span>[i-1] = 1</a>
+<a class="sourceLine" id="cb21-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb21-6" data-line-number="6"><span class="ex">i</span> = 1</a>
+<a class="sourceLine" id="cb21-7" data-line-number="7"><span class="ex">fib</span> = [0, 1, 1]</a>
+<a class="sourceLine" id="cb21-8" data-line-number="8"><span class="ex">fib</span>[i-2] = 1</a>
+<a class="sourceLine" id="cb21-9" data-line-number="9"><span class="ex">fib</span>[i-1] = 0</a>
+<a class="sourceLine" id="cb21-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb21-11" data-line-number="11"><span class="ex">i</span> = 2</a>
+<a class="sourceLine" id="cb21-12" data-line-number="12"><span class="ex">fib</span> = [0, 1, 1, 1]</a>
+<a class="sourceLine" id="cb21-13" data-line-number="13"><span class="ex">fib</span>[i-2] = 0</a>
+<a class="sourceLine" id="cb21-14" data-line-number="14"><span class="ex">fib</span>[i-1] = 1</a>
+<a class="sourceLine" id="cb21-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb21-16" data-line-number="16"><span class="ex">i</span> = 3</a>
+<a class="sourceLine" id="cb21-17" data-line-number="17"><span class="ex">fib</span> = [0, 1, 1, 1, 1]</a>
+<a class="sourceLine" id="cb21-18" data-line-number="18"><span class="ex">fib</span>[i-2] = 1</a>
+<a class="sourceLine" id="cb21-19" data-line-number="19"><span class="ex">fib</span>[i-1] = 1</a>
+<a class="sourceLine" id="cb21-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb21-21" data-line-number="21"><span class="ex">i</span> = 4</a>
+<a class="sourceLine" id="cb21-22" data-line-number="22"><span class="ex">fib</span> = [0, 1, 1, 1, 1, 2]</a>
+<a class="sourceLine" id="cb21-23" data-line-number="23"><span class="ex">fib</span>[i-2] = 1</a>
+<a class="sourceLine" id="cb21-24" data-line-number="24"><span class="ex">fib</span>[i-1] = 1</a>
+<a class="sourceLine" id="cb21-25" data-line-number="25"></a>
+<a class="sourceLine" id="cb21-26" data-line-number="26"><span class="ex">i</span> = 5</a>
+<a class="sourceLine" id="cb21-27" data-line-number="27"><span class="ex">fib</span> = [0, 1, 1, 1, 1, 2, 2]</a>
+<a class="sourceLine" id="cb21-28" data-line-number="28"><span class="ex">fib</span>[i-2] = 1</a>
+<a class="sourceLine" id="cb21-29" data-line-number="29"><span class="ex">fib</span>[i-1] = 1</a>
+<a class="sourceLine" id="cb21-30" data-line-number="30"></a>
+<a class="sourceLine" id="cb21-31" data-line-number="31"><span class="ex">i</span> = 6</a>
+<a class="sourceLine" id="cb21-32" data-line-number="32"><span class="ex">fib</span> = [0, 1, 1, 1, 1, 2, 2, 2]</a>
+<a class="sourceLine" id="cb21-33" data-line-number="33"><span class="ex">fib</span>[i-2] = 1</a>
+<a class="sourceLine" id="cb21-34" data-line-number="34"><span class="ex">fib</span>[i-1] = 2</a>
+<a class="sourceLine" id="cb21-35" data-line-number="35"></a>
+<a class="sourceLine" id="cb21-36" data-line-number="36"><span class="ex">i</span> = 7</a>
+<a class="sourceLine" id="cb21-37" data-line-number="37"><span class="ex">fib</span> = [0, 1, 1, 1, 1, 2, 2, 2, 3]</a>
+<a class="sourceLine" id="cb21-38" data-line-number="38"><span class="ex">fib</span>[i-2] = 2</a>
+<a class="sourceLine" id="cb21-39" data-line-number="39"><span class="ex">fib</span>[i-1] = 2</a>
+<a class="sourceLine" id="cb21-40" data-line-number="40"></a>
+<a class="sourceLine" id="cb21-41" data-line-number="41"><span class="ex">i</span> = 8</a>
+<a class="sourceLine" id="cb21-42" data-line-number="42"><span class="ex">fib</span> = [0, 1, 1, 1, 1, 2, 2, 2, 3, 4]</a>
+<a class="sourceLine" id="cb21-43" data-line-number="43"><span class="ex">fib</span>[i-2] = 2</a>
+<a class="sourceLine" id="cb21-44" data-line-number="44"><span class="ex">fib</span>[i-1] = 2</a>
+<a class="sourceLine" id="cb21-45" data-line-number="45"></a>
+<a class="sourceLine" id="cb21-46" data-line-number="46"><span class="ex">i</span> = 9</a>
+<a class="sourceLine" id="cb21-47" data-line-number="47"><span class="ex">fib</span> = [0, 1, 1, 1, 1, 2, 2, 2, 3, 4, 4]</a>
+<a class="sourceLine" id="cb21-48" data-line-number="48"><span class="ex">fib</span>[i-2] = 2</a>
+<a class="sourceLine" id="cb21-49" data-line-number="49"><span class="ex">fib</span>[i-1] = 3</a>
+<a class="sourceLine" id="cb21-50" data-line-number="50"></a>
+<a class="sourceLine" id="cb21-51" data-line-number="51">[<span class="ex">0</span>, 1, 1, 1, 1, 2, 2, 2, 3, 4, 4, 5]</a></code></pre></div>
+</section>
+<section id="wbudowany-debugger" class="level2">
+<h2>Wbudowany debugger</h2>
+<hr />
+<p><code>fib.py</code></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="im">import</span> pdb  <span class="co"># wbudowany debugger</span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb22-3" data-line-number="3">pdb.set_trace()  <span class="co"># zacznij debugować</span></a>
+<a class="sourceLine" id="cb22-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb22-5" data-line-number="5">fib <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb22-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb22-7" data-line-number="7"><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</a>
+<a class="sourceLine" id="cb22-8" data-line-number="8">    fib.append(fib[i<span class="dv">-2</span>] <span class="op">+</span> fib[i<span class="dv">-1</span>])</a>
+<a class="sourceLine" id="cb22-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb22-10" data-line-number="10"><span class="bu">print</span>(fib)  <span class="co"># [0, 1, 1, 2, 3, 5, 8, 13, ...]</span></a></code></pre></div>
+</section>
+<section id="pdb" class="level2">
+<h2>pdb</h2>
+<hr />
+<ul>
+<li><em>n</em> - następna instrukcja</li>
+<li><em>s</em> - wejdź w funkcję</li>
+<li><em>r</em> - wyjdź z funkcji</li>
+<li><em>p</em> - wydrukuj zmienną</li>
+<li><em>q</em> - przerwij</li>
+<li><em>enter</em> - powtórz ostatnią komendę</li>
+<li>…</li>
+</ul>
+</section>
+</section>
+<section id="section-2" class="level1">
+<h1></h1>
+<section id="wyjątki-exceptions" class="level2">
+<h2>Wyjątki (<em>exceptions</em>)</h2>
+<hr />
+<ul>
+<li>błędy działania (<em>runtime error</em>)</li>
+<li>wykryte podczas wykonywania są nazywane wyjątkami</li>
+<li>programista może decydować co robić z wyjątkami</li>
+</ul>
+</section>
+<section id="przykład---iloraz" class="level2">
+<h2>Przykład - iloraz</h2>
+<hr />
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">def</span> iloraz(a, b):</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2">    <span class="co">&quot;&quot;&quot;Zwraca a / b&quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb23-3" data-line-number="3">    <span class="cf">return</span> a <span class="op">/</span> b</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb24-1" data-line-number="1">iloraz(<span class="dv">10</span>, <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="ex">5.0</span></a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb26-1" data-line-number="1">iloraz(<span class="dv">10</span>, <span class="dv">0</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="ex">ZeroDivisionError</span>: division by zero</a></code></pre></div>
+</section>
+<section id="iloraz---zabezpiecznie-if" class="level2">
+<h2>Iloraz - zabezpiecznie <em>if</em></h2>
+<hr />
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">def</span> iloraz(a, b):</a>
+<a class="sourceLine" id="cb28-2" data-line-number="2">    <span class="co">&quot;&quot;&quot;Zwraca a / b lub zero, jeśli b = 0.&quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb28-3" data-line-number="3">    <span class="cf">if</span> b <span class="op">==</span> <span class="dv">0</span>:  <span class="co"># można tak, ale lepiej korzystać z wyjątków</span></a>
+<a class="sourceLine" id="cb28-4" data-line-number="4">        <span class="cf">return</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb28-5" data-line-number="5">    <span class="cf">return</span> a <span class="op">/</span> b</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb29-1" data-line-number="1">iloraz(<span class="dv">10</span>, <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="ex">5.0</span></a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb31-1" data-line-number="1">iloraz(<span class="dv">10</span>, <span class="dv">0</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="ex">0</span></a></code></pre></div>
+</section>
+<section id="iloraz---wyjątek" class="level2">
+<h2>Iloraz - <em>wyjątek</em></h2>
+<hr />
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">def</span> iloraz(a, b):</a>
+<a class="sourceLine" id="cb33-2" data-line-number="2">    <span class="co">&quot;&quot;&quot;Zwraca a / b lub zero, jeśli b = 0.&quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb33-3" data-line-number="3">    <span class="cf">try</span>:     <span class="co"># spróbuj</span></a>
+<a class="sourceLine" id="cb33-4" data-line-number="4">        <span class="cf">return</span> a <span class="op">/</span> b</a>
+<a class="sourceLine" id="cb33-5" data-line-number="5">    <span class="cf">except</span>:  <span class="co"># jeśli error to</span></a>
+<a class="sourceLine" id="cb33-6" data-line-number="6">        <span class="cf">return</span> <span class="dv">0</span></a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb34-1" data-line-number="1">iloraz(<span class="dv">10</span>, <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="ex">5.0</span></a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb36-1" data-line-number="1">iloraz(<span class="dv">10</span>, <span class="dv">0</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="ex">0</span></a></code></pre></div>
+</section>
+<section id="przykład---pobierz-liczbę-całkowitą" class="level2">
+<h2>Przykład - pobierz liczbę całkowitą</h2>
+<hr />
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="cf">while</span> <span class="va">True</span>:</a>
+<a class="sourceLine" id="cb38-2" data-line-number="2">    <span class="cf">try</span>:     <span class="co"># spróbuj rzutować na int</span></a>
+<a class="sourceLine" id="cb38-3" data-line-number="3">        x <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">&quot;Podaj liczbę: &quot;</span>))</a>
+<a class="sourceLine" id="cb38-4" data-line-number="4">        <span class="cf">break</span></a>
+<a class="sourceLine" id="cb38-5" data-line-number="5">    <span class="cf">except</span>:  <span class="co"># jeśli się nie uda to</span></a>
+<a class="sourceLine" id="cb38-6" data-line-number="6">        <span class="bu">print</span>(<span class="st">&quot;Spróbuj jeszcze raz.&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="ex">Podaj</span> liczbę: a</a>
+<a class="sourceLine" id="cb39-2" data-line-number="2"><span class="ex">Spr</span>óbuj jeszcze raz.</a>
+<a class="sourceLine" id="cb39-3" data-line-number="3"><span class="ex">Podaj</span> liczbę: 1</a></code></pre></div>
+</section>
+<section id="typy-wyjątków" class="level2">
+<h2>Typy wyjątków</h2>
+<hr />
+<ul>
+<li>pełna lista wbudowanych wyjątków <a href="https://docs.python.org/3/library/exceptions.html#bltin-exceptions">link</a></li>
+</ul>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="cf">while</span> <span class="va">True</span>:</a>
+<a class="sourceLine" id="cb40-2" data-line-number="2">    <span class="cf">try</span>:</a>
+<a class="sourceLine" id="cb40-3" data-line-number="3">        x <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">&quot;Podaj liczbę: &quot;</span>))</a>
+<a class="sourceLine" id="cb40-4" data-line-number="4">        <span class="cf">break</span></a>
+<a class="sourceLine" id="cb40-5" data-line-number="5">    <span class="cf">except</span> <span class="pp">ValueError</span>:  <span class="co"># jeśli błąd wartości</span></a>
+<a class="sourceLine" id="cb40-6" data-line-number="6">        <span class="bu">print</span>(<span class="st">&quot;Spróbuj jeszcze raz.&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="ex">Podaj</span> liczbę: a</a>
+<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="ex">Spr</span>óbuj jeszcze raz.</a>
+<a class="sourceLine" id="cb41-3" data-line-number="3"><span class="ex">Podaj</span> liczbę: 1</a></code></pre></div>
+</section>
+<section id="komunikat-wyjątku" class="level2">
+<h2>Komunikat wyjątku</h2>
+<hr />
+<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="cf">while</span> <span class="va">True</span>:</a>
+<a class="sourceLine" id="cb42-2" data-line-number="2">    <span class="cf">try</span>:</a>
+<a class="sourceLine" id="cb42-3" data-line-number="3">        x <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">&quot;Podaj liczbę: &quot;</span>))</a>
+<a class="sourceLine" id="cb42-4" data-line-number="4">        <span class="cf">break</span></a>
+<a class="sourceLine" id="cb42-5" data-line-number="5">    <span class="cf">except</span> <span class="pp">ValueError</span> <span class="im">as</span> err:  <span class="co"># err = komunikat błędu</span></a>
+<a class="sourceLine" id="cb42-6" data-line-number="6">        <span class="bu">print</span>(<span class="st">&quot;Spróbuj jeszcze raz, bo&quot;</span>, err)</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="ex">Podaj</span> liczbę: a</a>
+<a class="sourceLine" id="cb43-2" data-line-number="2"><span class="ex">Spr</span>óbuj jeszcze raz, bo invalid literal for int() <span class="ex">with</span> base 10: <span class="st">&#39;a&#39;</span></a>
+<a class="sourceLine" id="cb43-3" data-line-number="3"><span class="ex">Podaj</span> liczbę: 1</a></code></pre></div>
+</section>
+<section id="przykład-1" class="level2">
+<h2>Przykład</h2>
+<hr />
+<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="co"># więcej o plikach za chwilę</span></a>
+<a class="sourceLine" id="cb44-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb44-3" data-line-number="3"><span class="im">import</span> sys</a>
+<a class="sourceLine" id="cb44-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb44-5" data-line-number="5"><span class="kw">def</span> read_data():</a>
+<a class="sourceLine" id="cb44-6" data-line-number="6">    <span class="cf">try</span>:</a>
+<a class="sourceLine" id="cb44-7" data-line-number="7">        plik <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;data.txt&#39;</span>)  <span class="co"># otwórz plik</span></a>
+<a class="sourceLine" id="cb44-8" data-line-number="8">        linia <span class="op">=</span> plik.readline()  <span class="co"># wczytaj linię</span></a>
+<a class="sourceLine" id="cb44-9" data-line-number="9">        dane <span class="op">=</span> <span class="bu">int</span>(linia)        <span class="co"># rzutuj linię na int</span></a>
+<a class="sourceLine" id="cb44-10" data-line-number="10">    <span class="cf">except</span> <span class="pp">IOError</span> <span class="im">as</span> err:       <span class="co"># IOError</span></a>
+<a class="sourceLine" id="cb44-11" data-line-number="11">        <span class="bu">print</span>(<span class="st">&quot;Błąd I/O:&quot;</span>, err)</a>
+<a class="sourceLine" id="cb44-12" data-line-number="12">    <span class="cf">except</span> <span class="pp">ValueError</span> <span class="im">as</span> err:    <span class="co"># ValueError</span></a>
+<a class="sourceLine" id="cb44-13" data-line-number="13">        <span class="bu">print</span>(<span class="st">&quot;Złe dane:&quot;</span>, err)</a>
+<a class="sourceLine" id="cb44-14" data-line-number="14">    <span class="cf">except</span>:                      <span class="co"># InnyError</span></a>
+<a class="sourceLine" id="cb44-15" data-line-number="15">        <span class="bu">print</span>(<span class="st">&quot;Coś poszło nie tak...&quot;</span>)</a>
+<a class="sourceLine" id="cb44-16" data-line-number="16">        sys.exit(<span class="dv">0</span>)</a></code></pre></div>
+</section>
+<section id="tryfinally" class="level2">
+<h2><em>try…finally</em></h2>
+<hr />
+<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">def</span> iloraz(a, b):</a>
+<a class="sourceLine" id="cb45-2" data-line-number="2">    <span class="co">&quot;&quot;&quot;Zwraca a / b.&quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb45-3" data-line-number="3">    <span class="cf">try</span>:</a>
+<a class="sourceLine" id="cb45-4" data-line-number="4">        <span class="cf">return</span> a <span class="op">/</span> b</a>
+<a class="sourceLine" id="cb45-5" data-line-number="5">    <span class="cf">finally</span>:  <span class="co"># wykonaj mimo zgłoszonego wyjątku</span></a>
+<a class="sourceLine" id="cb45-6" data-line-number="6">        <span class="bu">print</span>(<span class="st">&quot;Posprzątam bez względu na wyjątki.&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb46-1" data-line-number="1">iloraz(<span class="dv">10</span>, <span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="ex">Posprz</span>ątam bez względu na wyjątki.</a></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb48-1" data-line-number="1">iloraz(<span class="dv">10</span>, <span class="dv">0</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="ex">Posprz</span>ątam bez względu na wyjątki.</a>
+<a class="sourceLine" id="cb49-2" data-line-number="2"><span class="ex">...</span></a>
+<a class="sourceLine" id="cb49-3" data-line-number="3"><span class="ex">ZeroDivisionError</span>: division by zero</a></code></pre></div>
+</section>
+<section id="tryexceptfinally" class="level2">
+<h2><em>try…except…finally</em></h2>
+<hr />
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="kw">def</span> iloraz(a, b):</a>
+<a class="sourceLine" id="cb50-2" data-line-number="2">    <span class="co">&quot;&quot;&quot;Zwraca a / b lub zero, jeśli b = 0.&quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb50-3" data-line-number="3">    <span class="cf">try</span>:</a>
+<a class="sourceLine" id="cb50-4" data-line-number="4">        <span class="cf">return</span> a <span class="op">/</span> b</a>
+<a class="sourceLine" id="cb50-5" data-line-number="5">    <span class="cf">except</span>:</a>
+<a class="sourceLine" id="cb50-6" data-line-number="6">        <span class="bu">print</span>(<span class="st">&quot;Użytkownik nie zna matematyki.&quot;</span>)</a>
+<a class="sourceLine" id="cb50-7" data-line-number="7">    <span class="cf">finally</span>:  <span class="co"># wykona zawsze bez względu na wyni try</span></a>
+<a class="sourceLine" id="cb50-8" data-line-number="8">        <span class="bu">print</span>(<span class="st">&quot;Posprzątam bez względu na wyjątki.&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb51-1" data-line-number="1">iloraz(<span class="dv">10</span>, <span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="ex">Posprz</span>ątam bez względu na wyjątki.</a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb53-1" data-line-number="1">iloraz(<span class="dv">10</span>, <span class="dv">0</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="ex">U</span>żytkownik nie zna matematyki.</a>
+<a class="sourceLine" id="cb54-2" data-line-number="2"><span class="ex">Posprz</span>ątam bez względu na wyjątki.</a></code></pre></div>
+</section>
+</section>
+<section id="section-3" class="level1">
+<h1></h1>
+<section id="zgłaszanie-wyjątków" class="level2">
+<h2>Zgłaszanie wyjątków</h2>
+<hr />
+<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="kw">def</span> iloraz(a, b):</a>
+<a class="sourceLine" id="cb55-2" data-line-number="2">    <span class="co">&quot;&quot;&quot;Zwraca a / b.&quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb55-3" data-line-number="3">    <span class="cf">if</span> b <span class="op">==</span> <span class="dv">0</span>:</a>
+<a class="sourceLine" id="cb55-4" data-line-number="4">        <span class="cf">raise</span> <span class="pp">NameError</span>(<span class="st">&quot;Dzielenie przez zero.&quot;</span>)</a>
+<a class="sourceLine" id="cb55-5" data-line-number="5">    <span class="cf">return</span> a <span class="op">/</span> b</a></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb56-1" data-line-number="1">iloraz(<span class="dv">10</span>, <span class="dv">0</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb57-1" data-line-number="1"><span class="ex">NameError</span>: Dzielenie przez zero.</a></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb58-1" data-line-number="1"><span class="cf">try</span>:</a>
+<a class="sourceLine" id="cb58-2" data-line-number="2">    iloraz(<span class="dv">10</span>, <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb58-3" data-line-number="3"><span class="cf">except</span> <span class="pp">NameError</span> <span class="im">as</span> err:</a>
+<a class="sourceLine" id="cb58-4" data-line-number="4">    <span class="bu">print</span>(<span class="st">&quot;Błąd:&quot;</span>, err)</a></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb59-1" data-line-number="1"><span class="ex">B</span>łąd: Dzielenie przez zero.</a></code></pre></div>
+</section>
+<section id="własne-wyjątki" class="level2">
+<h2>Własne wyjątki</h2>
+<hr />
+<ul>
+<li>możliwe jest definiowanie własnych wyjątków</li>
+<li>o tym w przyszłości, jak już poznamy klasy</li>
+</ul>
+</section>
+<section id="assert" class="level2">
+<h2><em>assert</em></h2>
+<hr />
+<div class="sourceCode" id="cb60"><pre class="sourceCode py"><code class="sourceCode python"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="co"># assert expression jest równoważne</span></a>
+<a class="sourceLine" id="cb60-2" data-line-number="2"><span class="cf">if</span> <span class="va">__debug__</span>:</a>
+<a class="sourceLine" id="cb60-3" data-line-number="3">    <span class="cf">if</span> <span class="kw">not</span> expression: <span class="cf">raise</span> <span class="pp">AssertionError</span></a></code></pre></div>
+<p><code>assert_test.py</code></p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb61-1" data-line-number="1"><span class="im">import</span> sys</a>
+<a class="sourceLine" id="cb61-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb61-3" data-line-number="3"><span class="cf">assert</span> sys.argv[<span class="dv">1</span>] <span class="op">!=</span> <span class="st">&quot;Python&quot;</span></a>
+<a class="sourceLine" id="cb61-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb61-5" data-line-number="5"><span class="bu">print</span>(<span class="st">&quot;Assert test.&quot;</span>)</a></code></pre></div>
+</section>
+<section id="assert_test" class="level2">
+<h2><em>assert_test</em></h2>
+<hr />
+<div class="sourceCode" id="cb62"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="ex">python</span> assert.py 1           # warunek spełniony</a></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="ex">Assert</span> test.</a></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="ex">python</span> assert.py Python      # warunek spełniony</a></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb65-1" data-line-number="1"><span class="ex">AssertionError</span></a></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="ex">python</span> -O assert.py Python  # warunek spełniony w trybie -O</a></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb67-1" data-line-number="1"><span class="ex">Assert</span> test.</a></code></pre></div>
+</section>
+</section>
+<section id="section-4" class="level1">
+<h1></h1>
+<section id="operacje-na-plikach" class="level2">
+<h2>Operacje na plikach</h2>
+<hr />
+<ul>
+<li>do otwierania plików służy funkcja wbudowana <em>open</em></li>
+<li>przyjmuje wiele argumentów, przy czym dwa najważniejsze to: <em>file</em> i <em>mode</em></li>
+</ul>
+<div class="sourceCode" id="cb68"><pre class="sourceCode py"><code class="sourceCode python"><a class="sourceLine" id="cb68-1" data-line-number="1"><span class="bu">open</span>(<span class="bu">file</span>, mode)</a></code></pre></div>
+<ul>
+<li><em>file</em> - nazwa pliku (lub pełna ścieżka, jeśli nie w katalogu roboczym)</li>
+<li><em>mode</em> - tryb</li>
+</ul>
+</section>
+<section id="section-5" class="level2">
+<h2></h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Tryb</th>
+<th style="text-align: center;">Opis</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">r</td>
+<td style="text-align: center;">tylko do oczytu (domyślnie)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">w</td>
+<td style="text-align: center;">tylko do zapisu (istniejący plik zostanie nadpisany)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">tylko do zapisu (plik nie może istnieć)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">a</td>
+<td style="text-align: center;">tylko do zapisu (od końca pliku)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">aktualizowanie pliku (odczyt i zapis)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">t</td>
+<td style="text-align: center;">tryb tekstowy (domyślnie)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">b</td>
+<td style="text-align: center;">tryb binarny</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>np. <code>open(file, r+b)</code> otwiera plik do odczytu, z możliwością zapisu, w trybie binarnym</li>
+</ul>
+</section>
+<section id="zapis-do-pliku" class="level2">
+<h2>Zapis do pliku</h2>
+<hr />
+<div class="sourceCode" id="cb69"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb69-1" data-line-number="1"><span class="co"># otwórz plik do zapisu</span></a>
+<a class="sourceLine" id="cb69-2" data-line-number="2"><span class="co"># usuń zawartość jeśli plik istnieje</span></a>
+<a class="sourceLine" id="cb69-3" data-line-number="3"><span class="bu">file</span> <span class="op">=</span> <span class="bu">open</span>(<span class="st">&quot;test&quot;</span>, <span class="st">&#39;w&#39;</span>)</a>
+<a class="sourceLine" id="cb69-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb69-5" data-line-number="5"><span class="bu">file</span>.write(<span class="st">&quot;0123456789&quot;</span>)  <span class="co"># zapisz do pliku</span></a>
+<a class="sourceLine" id="cb69-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb69-7" data-line-number="7"><span class="bu">file</span>.close()              <span class="co"># zamknij plik</span></a></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb70-1" data-line-number="1"><span class="bu">file</span>.write(<span class="st">&quot;jeszcze coś&quot;</span>) <span class="co"># plik już jest zamknięty</span></a></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb71-1" data-line-number="1"><span class="ex">ValueError</span>: I/O operation on closed file.</a></code></pre></div>
+</section>
+<section id="dopisywanie-do-pliku" class="level2">
+<h2>Dopisywanie do pliku</h2>
+<hr />
+<div class="sourceCode" id="cb72"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb72-1" data-line-number="1"><span class="co"># otwórz plik do zapisu</span></a>
+<a class="sourceLine" id="cb72-2" data-line-number="2"><span class="co"># ustaw się na końcu pliku</span></a>
+<a class="sourceLine" id="cb72-3" data-line-number="3"><span class="bu">file</span> <span class="op">=</span> <span class="bu">open</span>(<span class="st">&quot;test&quot;</span>, <span class="st">&#39;a&#39;</span>)</a>
+<a class="sourceLine" id="cb72-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb72-5" data-line-number="5"><span class="bu">file</span>.write(<span class="st">&quot;abcdefghij&quot;</span>)  <span class="co"># zapisz do pliku</span></a>
+<a class="sourceLine" id="cb72-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb72-7" data-line-number="7"><span class="bu">file</span>.close()              <span class="co"># zamknij plik</span></a></code></pre></div>
+</section>
+<section id="odczyt-pliku" class="level2">
+<h2>Odczyt pliku</h2>
+<hr />
+<div class="sourceCode" id="cb73"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb73-1" data-line-number="1"><span class="bu">file</span> <span class="op">=</span> <span class="bu">open</span>(<span class="st">&quot;test&quot;</span>, <span class="st">&quot;r&quot;</span>)  <span class="co"># otwórz tylko do odczytu</span></a>
+<a class="sourceLine" id="cb73-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb73-3" data-line-number="3">zawartosc <span class="op">=</span> <span class="bu">file</span>.read()   <span class="co"># wczytaj całą zawartość pliku</span></a>
+<a class="sourceLine" id="cb73-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb73-5" data-line-number="5"><span class="bu">file</span>.close()</a>
+<a class="sourceLine" id="cb73-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb73-7" data-line-number="7"><span class="bu">print</span>(zawartosc)</a></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb74-1" data-line-number="1"><span class="ex">0123456789abcdefghij</span></a></code></pre></div>
+</section>
+<section id="r-vs-a" class="level2">
+<h2><em>r+</em> vs <em>a</em></h2>
+<hr />
+<div class="sourceCode" id="cb75"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb75-1" data-line-number="1"><span class="co"># a (append) - zaczyna dopisywać na koniec pliku</span></a>
+<a class="sourceLine" id="cb75-2" data-line-number="2"><span class="co"># r+ - zaczyna zapisywać od początku (nadpisując dane)</span></a>
+<a class="sourceLine" id="cb75-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb75-4" data-line-number="4"><span class="bu">file</span> <span class="op">=</span> <span class="bu">open</span>(<span class="st">&quot;test&quot;</span>, <span class="st">&quot;r+&quot;</span>)  <span class="co"># odczyt z możliwością zapisu</span></a>
+<a class="sourceLine" id="cb75-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb75-6" data-line-number="6"><span class="bu">file</span>.write(<span class="st">&quot;.&quot;</span> <span class="op">*</span> <span class="dv">5</span>)        <span class="co"># zapisz 5 kropek</span></a>
+<a class="sourceLine" id="cb75-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb75-8" data-line-number="8"><span class="bu">file</span>.close()</a></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb76-1" data-line-number="1"><span class="fu">cat</span> test</a></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb77-1" data-line-number="1"><span class="ex">.....56789abcdefghij</span></a></code></pre></div>
+</section>
+<section id="w-vs-r" class="level2">
+<h2><em>w+</em> vs <em>r+</em></h2>
+<hr />
+<div class="sourceCode" id="cb78"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb78-1" data-line-number="1"><span class="co"># r+ - zaczyna zapisywać od początku (nadpisując dane)</span></a>
+<a class="sourceLine" id="cb78-2" data-line-number="2"><span class="co"># w+ - najpierw czyści plik (jeśli istnieje)</span></a>
+<a class="sourceLine" id="cb78-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb78-4" data-line-number="4"><span class="bu">file</span> <span class="op">=</span> <span class="bu">open</span>(<span class="st">&quot;test&quot;</span>, <span class="st">&quot;w+&quot;</span>)  <span class="co"># zapis z możliwością odczytu</span></a>
+<a class="sourceLine" id="cb78-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb78-6" data-line-number="6"><span class="bu">file</span>.write(<span class="st">&quot;.&quot;</span> <span class="op">*</span> <span class="dv">5</span>)        <span class="co"># zapisz 5 kropek</span></a>
+<a class="sourceLine" id="cb78-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb78-8" data-line-number="8"><span class="bu">file</span>.close()</a></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb79-1" data-line-number="1"><span class="fu">cat</span> test</a></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb80-1" data-line-number="1"><span class="ex">.....</span></a></code></pre></div>
+</section>
+<section id="w-vs-w" class="level2">
+<h2><em>w</em> vs <em>w+</em></h2>
+<hr />
+<div class="sourceCode" id="cb81"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb81-1" data-line-number="1"><span class="bu">file</span> <span class="op">=</span> <span class="bu">open</span>(<span class="st">&quot;test&quot;</span>, <span class="st">&quot;w&quot;</span>)  <span class="co"># tylko zapis</span></a>
+<a class="sourceLine" id="cb81-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb81-3" data-line-number="3"><span class="bu">file</span>.write(<span class="st">&quot;.&quot;</span> <span class="op">*</span> <span class="dv">5</span>)       <span class="co"># zapisz 5 kropek</span></a>
+<a class="sourceLine" id="cb81-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb81-5" data-line-number="5">zawartosc <span class="op">=</span> <span class="bu">file</span>.read()</a>
+<a class="sourceLine" id="cb81-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb81-7" data-line-number="7"><span class="bu">file</span>.close()</a>
+<a class="sourceLine" id="cb81-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb81-9" data-line-number="9"><span class="bu">print</span>(zawartosc)</a></code></pre></div>
+<pre><code>UnsupportedOperation: not readable</code></pre>
+</section>
+<section id="w-vs-w-1" class="level2">
+<h2><em>w</em> vs <em>w+</em></h2>
+<hr />
+<div class="sourceCode" id="cb83"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb83-1" data-line-number="1"><span class="bu">file</span> <span class="op">=</span> <span class="bu">open</span>(<span class="st">&quot;test&quot;</span>, <span class="st">&quot;w+&quot;</span>)  <span class="co"># zapis z możliwościa odczytu</span></a>
+<a class="sourceLine" id="cb83-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb83-3" data-line-number="3"><span class="bu">file</span>.write(<span class="st">&quot;.&quot;</span> <span class="op">*</span> <span class="dv">5</span>)        <span class="co"># zapisz 5 kropek</span></a>
+<a class="sourceLine" id="cb83-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb83-5" data-line-number="5">zawartosc <span class="op">=</span> <span class="bu">file</span>.read()</a>
+<a class="sourceLine" id="cb83-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb83-7" data-line-number="7"><span class="bu">file</span>.close()</a>
+<a class="sourceLine" id="cb83-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb83-9" data-line-number="9"><span class="bu">print</span>(zawartosc) <span class="co"># nie wydrukuje bo jesteśmy na końcu pliku</span></a></code></pre></div>
+</section>
+<section id="seek" class="level2">
+<h2><em>seek</em></h2>
+<hr />
+<div class="sourceCode" id="cb84"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb84-1" data-line-number="1"><span class="bu">file</span> <span class="op">=</span> <span class="bu">open</span>(<span class="st">&quot;test&quot;</span>, <span class="st">&quot;w+&quot;</span>)  <span class="co"># zapis z możliwościa odczytu</span></a>
+<a class="sourceLine" id="cb84-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb84-3" data-line-number="3"><span class="bu">file</span>.write(<span class="st">&quot;.&quot;</span> <span class="op">*</span> <span class="dv">5</span>)        <span class="co"># zapisz 5 kropek</span></a>
+<a class="sourceLine" id="cb84-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb84-5" data-line-number="5"><span class="bu">file</span>.seek(<span class="dv">0</span>)               <span class="co"># ustaw położenie</span></a>
+<a class="sourceLine" id="cb84-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb84-7" data-line-number="7">zawartosc <span class="op">=</span> <span class="bu">file</span>.read()</a>
+<a class="sourceLine" id="cb84-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb84-9" data-line-number="9"><span class="bu">file</span>.close()</a>
+<a class="sourceLine" id="cb84-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb84-11" data-line-number="11"><span class="bu">print</span>(zawartosc)</a></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb85-1" data-line-number="1"><span class="ex">.....</span></a></code></pre></div>
+</section>
+<section id="tell" class="level2">
+<h2><em>tell</em></h2>
+<hr />
+<div class="sourceCode" id="cb86"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="fu">cat</span> test</a></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb87-1" data-line-number="1"><span class="ex">.....</span></a></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb88-1" data-line-number="1"><span class="bu">file</span> <span class="op">=</span> <span class="bu">open</span>(<span class="st">&quot;test&quot;</span>, <span class="st">&quot;a+&quot;</span>)  <span class="co"># dodawanie z możliwością odczytu</span></a>
+<a class="sourceLine" id="cb88-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb88-3" data-line-number="3"><span class="bu">file</span>.tell()                <span class="co"># pozycja w pliku</span></a></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb89-1" data-line-number="1"><span class="ex">5</span></a></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb90-1" data-line-number="1"><span class="bu">file</span>.write(<span class="st">&quot;12345&quot;</span>)  <span class="co"># dopisz 12345</span></a>
+<a class="sourceLine" id="cb90-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb90-3" data-line-number="3"><span class="bu">file</span>.tell()</a></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb91-1" data-line-number="1"><span class="ex">10</span></a></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb92-1" data-line-number="1"><span class="fu">cat</span> test</a></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb93-1" data-line-number="1"><span class="ex">.....12345</span></a></code></pre></div>
+</section>
+<section id="seek-and-read" class="level2">
+<h2><em>seek</em> and <em>read</em></h2>
+<hr />
+<div class="sourceCode" id="cb94"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb94-1" data-line-number="1"><span class="fu">cat</span> test</a></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb95-1" data-line-number="1"><span class="ex">.....12345</span></a></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb96-1" data-line-number="1"><span class="co"># seek(offset, punkt_odniesienia)</span></a>
+<a class="sourceLine" id="cb96-2" data-line-number="2"><span class="co"># po = 0, 1, 2 (początek pliku, bieżąca pozycja, koniec pliku)</span></a>
+<a class="sourceLine" id="cb96-3" data-line-number="3"><span class="co"># w trybie tekstowym tylko 0 jest dozwolone</span></a>
+<a class="sourceLine" id="cb96-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb96-5" data-line-number="5"><span class="bu">file</span>.seek(<span class="dv">6</span>, <span class="dv">0</span>)  <span class="co"># o 6 znaków od początku </span></a>
+<a class="sourceLine" id="cb96-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb96-7" data-line-number="7"><span class="bu">file</span>.read(<span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb97-1" data-line-number="1"><span class="st">&#39;2&#39;</span></a></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb98-1" data-line-number="1"><span class="bu">file</span>.tell()  <span class="co"># read(n) przesuwa o n</span></a></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb99-1" data-line-number="1"><span class="ex">7</span></a></code></pre></div>
+</section>
+<section id="uwaga" class="level2">
+<h2>Uwaga</h2>
+<hr />
+<ul>
+<li>wygodnie jest wczytać cały plik do pamięci
+<ul>
+<li><em>read()</em> - zawartość jako pojedynczy string</li>
+<li><em>readlines()</em> - zawartość jako lista (linia -&gt; element)</li>
+</ul></li>
+<li>jednak w przypadku dużych plików może to byś katastrofalne, wtedy lepiej
+<ul>
+<li><em>read(n)</em> - wczytaj <em>n</em> bajtów</li>
+<li><em>readline()</em> - wczytaj linię</li>
+</ul></li>
+</ul>
+</section>
+<section id="otwieranie-plików-a-wyjątki" class="level2">
+<h2>Otwieranie plików a wyjątki</h2>
+<hr />
+<div class="sourceCode" id="cb100"><pre class="sourceCode py"><code class="sourceCode python"><a class="sourceLine" id="cb100-1" data-line-number="1"><span class="cf">try</span>:</a>
+<a class="sourceLine" id="cb100-2" data-line-number="2">    <span class="bu">file</span> <span class="op">=</span> <span class="bu">open</span>(<span class="st">&quot;złe_dane&quot;</span>)</a>
+<a class="sourceLine" id="cb100-3" data-line-number="3">    data <span class="op">=</span> <span class="bu">file</span>.read() <span class="co"># zgłasza wyjątek</span></a>
+<a class="sourceLine" id="cb100-4" data-line-number="4"><span class="cf">finally</span>:               <span class="co"># porządek nawet w przypadku wyjątku</span></a>
+<a class="sourceLine" id="cb100-5" data-line-number="5">    <span class="bu">print</span>(<span class="st">&quot;Czyszczę śmieci.&quot;</span>)</a>
+<a class="sourceLine" id="cb100-6" data-line-number="6">    <span class="bu">file</span>.close()</a></code></pre></div>
+</section>
+<section id="with-statement" class="level2">
+<h2><em>with</em> statement</h2>
+<hr />
+<ul>
+<li>gwarantuje, że jeśli wywołane zostało <code>__enter__()</code> (np. otwarcie pliku)</li>
+<li>to zostanie wywołane <code>__exit()__</code> (np. zamknięcie pliku)</li>
+<li>nawet jeśli po drodze wystąpi wyjątek</li>
+</ul>
+</section>
+<section id="with-open" class="level2">
+<h2><em>with open</em></h2>
+<hr />
+<div class="sourceCode" id="cb101"><pre class="sourceCode py"><code class="sourceCode python"><a class="sourceLine" id="cb101-1" data-line-number="1"><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&quot;plik_z_danymi&quot;</span>) <span class="im">as</span> <span class="bu">file</span>:</a>
+<a class="sourceLine" id="cb101-2" data-line-number="2">    data <span class="op">=</span> <span class="bu">file</span>.read()</a></code></pre></div>
+<ul>
+<li>gwarantuje, że plik zostanie zawsze poprawnie zamknięty</li>
+<li>wygodniejsze niż <em>try…finally…</em></li>
+</ul>
+</section>
+</section>
+    </div>
+
+    <script src="../reveal.js/lib/js/head.min.js"></script>
+    <script src="../reveal.js/js/reveal.js"></script>
+
+    <script>
+
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        slideNumber: true,
+        width: 1280,
+        height: 720,
+
+                  theme: Reveal.getQueryHash().theme || 'white',
+        
+                  transition: Reveal.getQueryHash().transition || 'convex',
+        
+                  transitionSpeed: Reveal.getQueryHash().transitionSpeed || 'fast',
+        
+        dependencies: [{
+            src: '../reveal.js/lib/js/classList.js',
+            condition: function() {
+              return !document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/markdown/showdown.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          }, {
+            src: '../reveal.js/plugin/markdown/markdown.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          }, {
+            src: '../reveal.js/plugin/highlight/highlight.js',
+            async: true,
+            callback: function() {
+              hljs.initHighlightingOnLoad();
+            }
+          }, {
+            src: '../reveal.js/plugin/zoom-js/zoom.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/notes/notes.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/math/math.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          },
+          // { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+    </script>
+
+    <script>
+    // displayed upon load, hides when slide changes
+      Reveal.addEventListener('slidechanged', function(event) {
+        document.querySelector('.reveal .footer').style.display = 'none';
+      });
+   </script>
+
+</body>
+
+</html>
