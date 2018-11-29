@@ -74,6 +74,8 @@ Wykłady dla studentów Wydziału Fizyki i Astronomii z "Języki skryptowe - Pyt
 
 * Lista 8: [markdown](listy/lista_08.md), [pdf](listy/lista_08.pdf)
 
+* Lista 9: [markdown](listy/lista_09.md), [pdf](listy/lista_09.pdf)
+
 ---
 
 ## Zasady zaliczenia ćwiczeń
