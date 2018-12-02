@@ -56,6 +56,11 @@ Wykłady dla studentów Wydziału Fizyki i Astronomii z "Języki skryptowe - Pyt
     * błędy i wyjątki
     * operacje na plikach
 
+*  [Wykład 10](https://tomaszgolan.github.io/wfia_python/html/python_w10.html)
+
+    * liczby pseudolosowe
+    * typy sekwencyjne: set i frozenset
+
 ## Listy
 
 * Lista 1: [markdown](listy/lista_01.md), [pdf](listy/lista_01.pdf)

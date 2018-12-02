@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <title>Języki skryptowe Python</title>
+
+  <meta name="description" content="Języki skryptowe Python">
+
+   <meta name="author" content="Wykład 10" /> 
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="stylesheet" href="../reveal.js/css/reveal.css">
+
+      <link rel="stylesheet" href="../reveal.js/css/theme/white.css" id="theme">
+  
+      <link rel="stylesheet" href="../template/a11y-light.css">
+  
+  <link rel="stylesheet" href="../template/extra.css">
+
+  <script>
+    document.write('<link rel="stylesheet" href="../reveal.js/css/print/' +
+      (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') +
+      '.css" type="text/css" media="print">');
+  </script>
+
+  <script src="../template/snap.svg-min.js"></script>
+  <script src="../template/plotly-latest.min.js"></script>
+
+  <!--[if lt IE 9]>
+  <script src="../reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+
+  
+
+</head>
+
+<body>
+
+  
+
+  <div class="reveal">
+
+    <div class="slides">
+
+      <section>
+        <h1>Języki skryptowe Python</h1>
+         <h3>Wykład 10</h3> 
+        <p>
+          <h4></h4>
+        </p>
+      </section>
+
+       <div class="footer">
+<p>Sterowanie: spacja + shift-spacja || page down + page up || strzałki || esc</p>
+</div>
+<section id="section" class="level1">
+<h1></h1>
+<section id="generatory-liczb-pseudolosowych" class="level2">
+<h2>Generatory liczb pseudolosowych</h2>
+<hr />
+<ul>
+<li>nie jest możliwe wygenerowanie liczby prawdziwie losowej</li>
+<li>możliwe jest wygenerowanie (na bazie liczby wejściowej, <em>seed</em>) ciągu liczb pseudolosowych
+<ul>
+<li>ten sam <em>seed</em> = ten sam ciąg</li>
+<li>maksymalna ilość ciągów = możliwe <em>seedy</em></li>
+<li>okresowość</li>
+</ul></li>
+</ul>
+</section>
+<section id="middle-square-method" class="level2">
+<h2><em>Middle square method</em></h2>
+<hr />
+<img src="../img/Eniac.jpg" class="right"/>
+<div class="left">
+<p><br></p>
+<ul>
+<li>stworzony przez Johna von Neumanna</li>
+<li>Wykorzystany w
+<ul>
+<li>ENIAC (jeden z pierwszych komputerów na świecie)</li>
+<li>Projekt Manhattan</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="middle-square-method---algorytm" class="level2">
+<h2><em>Middle square method</em> - algorytm</h2>
+<hr />
+<ul>
+<li>weź liczbę 4-cyfrową jako <em>seed</em> (w ogólności można wziać <em>n</em>-cyfrową liczbę)</li>
+<li>podnieś do kwadratu, aby otrzymać liczbę 8-cyfrową (dodaj zera, jeśli trzeba)</li>
+<li>4 środkowe cyfry są wynikiem i <em>seedem</em> dla następnej liczby</li>
+</ul>
+<p><span class="math display">\[1111^2 = 01234321 \rightarrow 2343\]</span> <span class="math display">\[2343^2 = 05489649 \rightarrow 4896\]</span> <span class="math display">\[4896^2 = 23970816 \rightarrow 9708\]</span></p>
+</section>
+<section id="middle-square-method---implementacja" class="level2">
+<h2><em>Middle square method</em> - implementacja</h2>
+<hr />
+<p><code>middle2.py</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;PRNG using middle-square method.&quot;&quot;&quot;</span>
+
+<span class="kw">def</span> _middle2(n):
+    <span class="co">&quot;&quot;&quot;Return next random number.&quot;&quot;&quot;</span>
+    <span class="cf">return</span> <span class="bu">int</span>(<span class="bu">str</span>(n<span class="op">*</span>n).zfill(<span class="dv">8</span>)[<span class="dv">2</span>:<span class="dv">6</span>])
+
+<span class="kw">def</span> generate(n, seed<span class="op">=</span><span class="dv">1111</span>):
+    <span class="co">&quot;&quot;&quot;Generate n numbers starting with seed.&quot;&quot;&quot;</span>
+    numbers <span class="op">=</span> []
+    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n):
+        numbers.append(seed)
+        seed <span class="op">=</span> _middle2(seed)
+    <span class="cf">return</span> numbers</code></pre></div>
+</section>
+<section id="middle-square-method---wyniki" class="level2">
+<h2><em>Middle square method</em> - wyniki</h2>
+<hr />
+<div class="left">
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
+<span class="im">import</span> middle2
+
+size, seed <span class="op">=</span> <span class="dv">100</span>, <span class="dv">1234</span>
+
+x <span class="op">=</span> <span class="bu">range</span>(size)
+y <span class="op">=</span> middle2.generate(size, seed)
+
+plt.plot(x, y)</code></pre></div>
+</div>
+<p><img src="../img/js-python_w07_109_1.png" class="right"/></p>
+</section>
+<section id="algorytm-lcg" class="level2">
+<h2>Algorytm LCG</h2>
+<hr />
+<ul>
+<li>LCG = linear congruential generator</li>
+<li>zaimplementowany w wielu językach</li>
+<li>prosty i szybki</li>
+<li>silne korelacje - nie nadaje się do symulacji Monte Carlo (i tym bardziej kryptografii)</li>
+</ul>
+<p><span class="math display">\[X_{n+1} = (aX_n + c) \text{ mod } m\]</span></p>
+</section>
+<section id="algorytm-lcg---implementacja" class="level2">
+<h2>Algorytm LCG - implementacja</h2>
+<hr />
+<div class="left">
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
+
+<span class="kw">def</span> lcg(seed, m, a, c):
+    <span class="co">&quot;&quot;&quot;Return next random number using LCG.&quot;&quot;&quot;</span>
+    <span class="cf">return</span> (seed <span class="op">*</span> a <span class="op">+</span> c) <span class="op">%</span> m
+
+size, seed <span class="op">=</span> <span class="dv">100</span>, <span class="dv">1234</span>
+a, c, m <span class="op">=</span> <span class="dv">48271</span>, <span class="dv">0</span>, <span class="dv">2</span><span class="op">**</span><span class="dv">32</span> <span class="op">-</span> <span class="dv">1</span>  <span class="co"># C++11 minst_rand</span>
+
+random_numbers <span class="op">=</span> []
+
+<span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(size):
+    seed <span class="op">=</span> lcg(seed, m, a, c)
+    random_numbers.append(seed)
+
+x <span class="op">=</span> <span class="bu">range</span>(size)
+
+plt.plot(x, random_numbers)</code></pre></div>
+</div>
+<p><img src="../img/js-python_w07_114_1.png" class="right"/></p>
+</section>
+<section id="algorytm-lcg---korelacje" class="level2">
+<h2>Algorytm LCG - korelacje</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Mathematics and Computers in Simulations 46 (1998) 485-505</span>
+seed <span class="op">=</span> <span class="dv">1</span>
+a <span class="op">=</span> <span class="dv">65539</span>
+c <span class="op">=</span> <span class="dv">0</span>
+m <span class="op">=</span> <span class="dv">2</span><span class="op">**</span><span class="dv">31</span>
+
+punkty <span class="op">=</span> []  <span class="co"># losowe punkty</span>
+
+<span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">9600</span>):
+    seed <span class="op">=</span> lcg(seed, m, a, c)
+    punkty.append(seed)
+    
+x <span class="op">=</span> punkty[::<span class="dv">3</span>]   <span class="co"># współrzędne x</span>
+y <span class="op">=</span> punkty[<span class="dv">1</span>::<span class="dv">3</span>]  <span class="co"># współrzędne y</span>
+z <span class="op">=</span> punkty[<span class="dv">2</span>::<span class="dv">3</span>]  <span class="co"># współrzędne z</span></code></pre></div>
+</section>
+<section id="algorytm-lcg---punkty-3d" class="level2">
+<h2>Algorytm LCG - punkty 3D</h2>
+<hr />
+<div class="left">
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
+<span class="im">from</span> mpl_toolkits.mplot3d <span class="im">import</span> Axes3D
+<span class="im">from</span> time <span class="im">import</span> sleep
+
+fig <span class="op">=</span> plt.figure()
+ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">&#39;3d&#39;</span>)
+
+ax.scatter(x, y, z, marker<span class="op">=</span><span class="st">&#39;.&#39;</span>)</code></pre></div>
+</div>
+<p><img src="../img/js-python_w07_118_1.png" class="right"/></p>
+</section>
+<section id="algorytm-lcg---punkty-3d-1" class="level2">
+<h2>Algorytm LCG - punkty 3D</h2>
+<hr />
+<div class="left">
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
+<span class="im">from</span> mpl_toolkits.mplot3d <span class="im">import</span> Axes3D
+
+fig <span class="op">=</span> plt.figure()
+ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">&#39;3d&#39;</span>)
+
+ax.view_init(<span class="dv">30</span>, <span class="dv">60</span>)
+
+ax.scatter(x,y,z, marker<span class="op">=</span><span class="st">&#39;.&#39;</span>)</code></pre></div>
+</div>
+<p><img src="../img/js-python_w07_120_1.png" class="right"/></p>
+</section>
+</section>
+<section id="section-1" class="level1">
+<h1></h1>
+<section id="moduł-random" class="level2">
+<h2>Moduł <em>random</em></h2>
+<hr />
+<ul>
+<li>generator Mersenne Twister</li>
+<li>zaniedbywalna korelacja między kolejnymi liczbami (dobry do symulacji Monte Carlo)</li>
+<li>przewidywalność (nie nadaje się do kryptografii)</li>
+<li>szybki, ale &quot;nieelegancki&quot;</li>
+</ul>
+</section>
+<section id="losowe-liczby-zmiennoprzecinkowe" class="level2">
+<h2>Losowe liczby zmiennoprzecinkowe</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> random
+
+<span class="co"># random.random() -&gt; losowa liczba z [0, 1)</span>
+
+losowe <span class="op">=</span> [random.random() <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>)]
+
+<span class="bu">print</span>(losowe)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="ex">0.2698846730753022</span>, 0.39646893011652196, 0.3569316622351202, 0.7422356288778353, 0.9872672338526717, 0.8037923911064603, 0.8702317548225692, 0.4956627050929412, 0.3254081126694237, 0.3929978024317329]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># random.uniform(a, b) -&gt; losowa z przedziału [a, b]</span>
+
+losowe <span class="op">=</span> [random.uniform(<span class="dv">99</span>, <span class="dv">100</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>)]
+
+<span class="bu">print</span>(losowe)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="ex">99.99533728109901</span>, 99.59952026049403, 99.42567811786209, 99.78233290994207, 99.84681728147966, 99.53305937003043, 99.47972787766165, 99.94064273021912, 99.8788743089142, 99.76186755697995]</code></pre></div>
+</section>
+<section id="losowe-liczby-całkowite" class="level2">
+<h2>Losowe liczby całkowite</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> random
+
+<span class="co"># random.randint(a, b) - losowa całkowita z [a, b]</span>
+
+losowe <span class="op">=</span> [random.randint(<span class="dv">1</span>, <span class="dv">10</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>)]
+
+<span class="bu">print</span>(losowe)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="ex">4</span>, 3, 7, 2, 5, 3, 6, 6, 5, 1]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># random.randrange(stop) -&gt; losowa &lt; stop</span>
+<span class="co"># random.randrange(start, stop[, step])</span>
+
+losowe <span class="op">=</span> [random.randrange(<span class="dv">10</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>)]
+
+<span class="bu">print</span>(losowe)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="ex">7</span>, 5, 0, 2, 4, 5, 1, 1, 1, 4]</code></pre></div>
+</section>
+<section id="losowe-z-sekwencji" class="level2">
+<h2>Losowe z sekwencji</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> random
+
+x <span class="op">=</span> <span class="st">&quot;Python&quot;</span>
+y <span class="op">=</span> [<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">random.choice(x)     <span class="co"># losowa litera z str</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="st">&#39;o&#39;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">random.choice(y)     <span class="co"># losowy element listy</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">2</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">random.sample(y, <span class="dv">3</span>)  <span class="co"># losowy podzbiór</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="ex">1</span>, 3, <span class="st">&#39;b&#39;</span>]</code></pre></div>
+</section>
+<section id="seed" class="level2">
+<h2>Seed</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> random
+
+<span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):
+    <span class="bu">print</span>(random.random())</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">0.5943111012611626</span>
+<span class="ex">0.7799061974116444</span>
+<span class="ex">0.9688698425524694</span>
+<span class="ex">0.09623949574155088</span>
+<span class="ex">0.7030765207216848</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):
+    random.seed(<span class="dv">1234</span>)  <span class="co"># stały seed -&gt; stała wartość</span>
+    <span class="bu">print</span>(random.random())</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">0.9664535356921388</span>
+<span class="ex">0.9664535356921388</span>
+<span class="ex">0.9664535356921388</span>
+<span class="ex">0.9664535356921388</span>
+<span class="ex">0.9664535356921388</span></code></pre></div>
+</section>
+</section>
+<section id="section-2" class="level1">
+<h1></h1>
+<section id="przykład-totolotek" class="level2">
+<h2>Przykład: Totolotek</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> random <span class="im">import</span> randint
+
+<span class="kw">def</span> losowanie():
+    <span class="co">&quot;&quot;&quot;Losuje 6 liczb od 1 do 49.&quot;&quot;&quot;</span>
+    <span class="co"># </span><span class="al">TODO</span><span class="co">: liczby nie mogą się powtarzać</span>
+    <span class="cf">return</span> <span class="bu">sorted</span>([randint(<span class="dv">1</span>, <span class="dv">49</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>)])
+
+<span class="kw">def</span> check(a, b):
+    <span class="co">&quot;&quot;&quot;Sprawdza ilość takich samych elementów.&quot;&quot;&quot;</span>
+    <span class="cf">return</span> <span class="bu">len</span>([n <span class="cf">for</span> n <span class="kw">in</span> a <span class="cf">if</span> n <span class="kw">in</span> b])
+
+<span class="kw">def</span> play():
+    <span class="co">&quot;&quot;&quot;Gra w lotka.&quot;&quot;&quot;</span>
+    lotto <span class="op">=</span> losowanie()  <span class="co"># losowanie lotto</span>
+    kupon <span class="op">=</span> losowanie()  <span class="co"># kupon chybił-trafił</span>
+    <span class="cf">return</span> check(kupon, lotto)</code></pre></div>
+</section>
+<section id="totolotek---symulacja" class="level2">
+<h2>Totolotek - symulacja</h2>
+<hr />
+<div class="left">
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
+
+n <span class="op">=</span> <span class="dv">10000</span>  <span class="co"># ilość gier</span>
+
+wyniki <span class="op">=</span> [play() <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n)] 
+    
+plt.hist(wyniki, <span class="dv">6</span>)</code></pre></div>
+</div>
+<p><img src="../img/js-python_w07_139_1.png" class="right"/></p>
+</section>
+</section>
+<section id="section-3" class="level1">
+<h1></h1>
+<section id="typy-sekwencyjne" class="level2">
+<h2>Typy sekwencyjne</h2>
+<hr />
+<ul>
+<li>do tej pory poznaliśmy cztery typy sekwencyjne:
+<ul>
+<li><em>str</em> - typ tekstowy</li>
+<li><em>list</em> - <em>mutowalna</em> sekwencja</li>
+<li><em>tuple</em> - <em>niemutowalna</em> sekwencja</li>
+<li><em>range</em> - <em>niemutowalna</em> sekwencja liczb</li>
+</ul></li>
+</ul>
+</section>
+<section id="sekwencja-set" class="level2">
+<h2>Sekwencja <em>set</em></h2>
+<hr />
+<ul>
+<li><em>set</em> jest <em>mutowalną</em> sekwencją</li>
+<li>różnice względem <em>list</em>
+<ul>
+<li>nie może zawierać duplikatów</li>
+<li>jest nieuporządkowana</li>
+<li>może zawierać tylko <em>hashowalne</em> obiekty</li>
+</ul></li>
+</ul>
+</section>
+<section id="definiowanie-set" class="level2">
+<h2>Definiowanie <em>set</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">zbior <span class="op">=</span> {<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">1</span>}  <span class="co"># nawiasy klamrowe</span>
+
+<span class="bu">print</span>(<span class="bu">type</span>(zbior))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">set</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(zbior)  <span class="co"># tylko jedna 1</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">{<span class="ex">1</span>, 2, 4, 6}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">zbior[<span class="dv">0</span>]  <span class="co"># nie ma indeksowania zbiorów</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">TypeError</span>: <span class="st">&#39;set&#39;</span> object does not support indexing</code></pre></div>
+</section>
+<section id="set-z-list" class="level2">
+<h2><em>set</em> z <em>list</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">lista <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">1</span>]
+
+zbior <span class="op">=</span> <span class="bu">set</span>(lista)  <span class="co"># stwórz zbiór na bazie listy</span>
+
+<span class="bu">print</span>(zbior)        <span class="co"># duplikaty zostaną usunięte</span></code></pre></div>
+<pre><code>{1, 2, 4, 6}</code></pre>
+</section>
+<section id="dodawanie-elementów-do-zbioru" class="level2">
+<h2>Dodawanie elementów do zbioru</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">zbior <span class="op">=</span> {<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>}
+
+<span class="bu">print</span>(zbior)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">{<span class="ex">1</span>, 2, 3}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">zbior.add(<span class="dv">4</span>)  <span class="co"># dodaj 4</span>
+
+<span class="bu">print</span>(zbior)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">{<span class="ex">1</span>, 2, 3, 4}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">zbior.add(<span class="dv">4</span>)  <span class="co"># jeszcze raz dodaj 4</span>
+
+<span class="bu">print</span>(zbior)  <span class="co"># nie ma duplikatów</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">{<span class="ex">1</span>, 2, 3, 4}</code></pre></div>
+</section>
+<section id="elementy-niehashowalne" class="level2">
+<h2>Elementy <em>niehashowalne</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">zbior <span class="op">=</span> {<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>}
+
+lista <span class="op">=</span> [<span class="dv">4</span>, <span class="dv">5</span>]  <span class="co"># lista jest niehashowalna</span>
+
+<span class="co"># zbiór nie może przechowywać elementów niehashowalnych</span>
+zbior.add(lista)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">TypeError</span>: unhashable type: <span class="st">&#39;list&#39;</span></code></pre></div>
+</section>
+<section id="sekwencje-hashowalne" class="level2">
+<h2>Sekwencje hashowalne</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">zbior <span class="op">=</span> {<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>}
+
+krotka <span class="op">=</span> (<span class="dv">4</span>, <span class="dv">5</span>)  <span class="co"># krotka jest hashowalna</span>
+
+<span class="co"># więc można dodać krotkę do zbioru</span>
+zbior.add(krotka)
+
+<span class="bu">print</span>(zbior)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">{<span class="kw">(</span><span class="ex">4</span>, 5<span class="kw">)</span>, <span class="ex">1</span>, 2, 3}</code></pre></div>
+</section>
+<section id="usuwanie-elementów-ze-zbioru" class="level2">
+<h2>Usuwanie elementów ze zbioru</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">zbior <span class="op">=</span> {<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>}
+
+zbior.remove(<span class="dv">1</span>)  <span class="co"># usuń 1</span>
+
+<span class="bu">print</span>(zbior)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">{<span class="ex">2</span>, 3}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># zwróci błąd jeśli element nie istnieje</span>
+zbior.remove(<span class="dv">1</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">KeyError</span>: 1</code></pre></div>
+</section>
+<section id="bezpieczne-usuwanie" class="level2">
+<h2>Bezpieczne usuwanie?</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">zbior <span class="op">=</span> {<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>}
+
+<span class="co"># aby uniknąć błędów i przerwania programu</span>
+<span class="co"># można sprawdzić, czy na pewno element znajduje się w zbiorze</span>
+<span class="cf">if</span> <span class="dv">1</span> <span class="kw">in</span> zbior:
+    zbior.remove(<span class="dv">1</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># lub skorzystać z try...except</span>
+<span class="cf">try</span>:
+    zbior.remove(<span class="dv">1</span>)
+<span class="cf">except</span>:
+    <span class="cf">pass</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># lub skorzystać z discard</span>
+zbior.discard(<span class="dv">1</span>)</code></pre></div>
+</section>
+<section id="zastosowanie-zbiorów" class="level2">
+<h2>Zastosowanie zbiorów</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># usuwanie duplikatów z listy</span>
+
+lista <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">2</span>]
+
+lista <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(lista))
+
+<span class="co"># uwaga - tracimy kolejność</span>
+<span class="bu">print</span>(lista)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="ex">1</span>, 2, 3, 4, 5]</code></pre></div>
+</section>
+<section id="część-wspólna-zbiorów" class="level2">
+<h2>Część wspólna zbiorów</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">A <span class="op">=</span> {<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>}
+B <span class="op">=</span> {<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>}
+
+<span class="bu">print</span>(A.intersection(B))  <span class="co"># część wspólna A i B</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">{<span class="ex">3</span>, 4, 5}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># lub krócej</span>
+<span class="bu">print</span>(A <span class="op">&amp;</span> B)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">{<span class="ex">3</span>, 4, 5}</code></pre></div>
+</section>
+<section id="część-wspólna-list" class="level2">
+<h2>Część wspólna list</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">A <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]
+B <span class="op">=</span> [<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>]
+
+<span class="co"># rzutuje A i B na zbiory</span>
+<span class="co"># wyznacza ich część wspólną</span>
+<span class="co"># rzutuje na listę</span>
+wspolna <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(A) <span class="op">&amp;</span> <span class="bu">set</span>(B))
+
+<span class="bu">print</span>(wspolna)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="ex">3</span>, 4, 5]</code></pre></div>
+</section>
+<section id="frozenset" class="level2">
+<h2><em>frozenset</em></h2>
+<hr />
+<ul>
+<li>jak <em>set</em> ale <em>niemutowalny</em>, czyli nie można modyfikować zawartości</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">zamrozony_zbior <span class="op">=</span> <span class="bu">frozenset</span>([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>])
+
+<span class="bu">type</span>(zamrozony_zbior)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">frozenset</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">zamrozony_zbior.add(<span class="dv">1</span>)  <span class="co"># nie można dodawać / usuwać</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">AttributeError</span>: <span class="st">&#39;frozenset&#39;</span> object has no attribute <span class="st">&#39;add&#39;</span></code></pre></div>
+</section>
+</section>
+<section id="section-4" class="level1">
+<h1></h1>
+<section id="przykład-totolotek-1" class="level2">
+<h2>Przykład: Totolotek</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> random <span class="im">import</span> randint
+
+<span class="kw">def</span> losowanie():
+    <span class="co">&quot;&quot;&quot;Losuje 6 liczb od 1 do 49.&quot;&quot;&quot;</span>
+    <span class="co"># </span><span class="al">TODO</span><span class="co">: liczby nie mogą się powtarzać</span>
+    <span class="cf">return</span> <span class="bu">sorted</span>([randint(<span class="dv">1</span>, <span class="dv">49</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>)])
+
+<span class="kw">def</span> check(a, b):
+    <span class="co">&quot;&quot;&quot;Sprawdza ilość takich samych elementów.&quot;&quot;&quot;</span>
+    <span class="cf">return</span> <span class="bu">len</span>([n <span class="cf">for</span> n <span class="kw">in</span> a <span class="cf">if</span> n <span class="kw">in</span> b])
+
+<span class="kw">def</span> play():
+    <span class="co">&quot;&quot;&quot;Gra w lotka.&quot;&quot;&quot;</span>
+    lotto <span class="op">=</span> losowanie()  <span class="co"># losowanie lotto</span>
+    kupon <span class="op">=</span> losowanie()  <span class="co"># kupon chybił-trafił</span>
+    <span class="cf">return</span> check(kupon, lotto)</code></pre></div>
+</section>
+<section id="totolotek-z-set" class="level2">
+<h2>Totolotek z <em>set</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> random <span class="im">import</span> randint
+
+<span class="kw">def</span> losowanie():
+    <span class="co">&quot;&quot;&quot;Losuje 6 liczb od 1 do 49.&quot;&quot;&quot;</span>
+    los <span class="op">=</span> <span class="bu">set</span>()  <span class="co"># tutaj zapiszemy wyniki losowania</span>
+
+    <span class="cf">while</span> <span class="bu">len</span>(los) <span class="op">&lt;</span> <span class="dv">6</span>:  <span class="co"># dodawaj aż 6 unikatów</span>
+        los.add(randint(<span class="dv">1</span>, <span class="dv">49</span>))
+    
+    <span class="cf">return</span> los
+
+<span class="kw">def</span> check(a, b):
+    <span class="co">&quot;&quot;&quot;Sprawdza ilość takich samych elementów.&quot;&quot;&quot;</span>
+    <span class="cf">return</span> <span class="bu">len</span>(a <span class="op">&amp;</span> b)</code></pre></div>
+</section>
+<section id="totolotek---test" class="level2">
+<h2>Totolotek - test</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">lotto <span class="op">=</span> losowanie()
+kupon <span class="op">=</span> losowanie()
+
+<span class="bu">print</span>(lotto, kupon, sep<span class="op">=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">{<span class="ex">35</span>, 7, 12, 16, 48, 29}
+{<span class="ex">32</span>, 10, 13, 26, 29, 31}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">check(lotto, kupon)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">1</span></code></pre></div>
+</section>
+<section id="totolotek-z-frozenset" class="level2">
+<h2>Totolotek z <em>frozenset</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> random <span class="im">import</span> sample
+
+<span class="co"># frozenset bo losowania nie będziemy modyfikować</span>
+
+<span class="kw">def</span> losowanie():
+    <span class="co">&quot;&quot;&quot;Losuje 6 liczb od 1 do 49.&quot;&quot;&quot;</span>
+    los <span class="op">=</span> sample(<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">50</span>), <span class="dv">6</span>) <span class="co"># sample gwarantuje brak powtórzeń</span>
+    <span class="cf">return</span> <span class="bu">frozenset</span>(los)         <span class="co"># zwracamy jako zamrożony zbiór</span>
+
+<span class="kw">def</span> check(a, b):
+    <span class="co">&quot;&quot;&quot;Sprawdza ilość takich samych elementów.&quot;&quot;&quot;</span>
+    <span class="cf">return</span> <span class="bu">len</span>(a <span class="op">&amp;</span> b)</code></pre></div>
+</section>
+<section id="totolotek---test-1" class="level2">
+<h2>Totolotek - test</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">lotto <span class="op">=</span> losowanie()
+kupon <span class="op">=</span> losowanie()
+
+<span class="bu">print</span>(lotto, kupon, sep<span class="op">=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">frozenset</span>({37, 46, 48, 19, 25, 31})
+<span class="ex">frozenset</span>({38, 40, 41, 18, 19, 30})</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">check(lotto, kupon)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">1</span></code></pre></div>
+</section>
+</section>
+    </div>
+
+    <script src="../reveal.js/lib/js/head.min.js"></script>
+    <script src="../reveal.js/js/reveal.js"></script>
+
+    <script>
+
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        slideNumber: true,
+        width: 1280,
+        height: 720,
+
+                  theme: Reveal.getQueryHash().theme || 'white',
+        
+                  transition: Reveal.getQueryHash().transition || 'convex',
+        
+                  transitionSpeed: Reveal.getQueryHash().transitionSpeed || 'fast',
+        
+        dependencies: [{
+            src: '../reveal.js/lib/js/classList.js',
+            condition: function() {
+              return !document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/markdown/showdown.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          }, {
+            src: '../reveal.js/plugin/markdown/markdown.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          }, {
+            src: '../reveal.js/plugin/highlight/highlight.js',
+            async: true,
+            callback: function() {
+              hljs.initHighlightingOnLoad();
+            }
+          }, {
+            src: '../reveal.js/plugin/zoom-js/zoom.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/notes/notes.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/math/math.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          },
+          // { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+    </script>
+
+    <script>
+    // displayed upon load, hides when slide changes
+      Reveal.addEventListener('slidechanged', function(event) {
+        document.querySelector('.reveal .footer').style.display = 'none';
+      });
+   </script>
+
+</body>
+
+</html>
