@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <title>Języki skryptowe Python</title>
+
+  <meta name="description" content="Języki skryptowe Python">
+
+   <meta name="author" content="Wykład 11" /> 
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="stylesheet" href="../reveal.js/css/reveal.css">
+
+      <link rel="stylesheet" href="../reveal.js/css/theme/white.css" id="theme">
+  
+      <link rel="stylesheet" href="../template/a11y-light.css">
+  
+  <link rel="stylesheet" href="../template/extra.css">
+
+  <script>
+    document.write('<link rel="stylesheet" href="../reveal.js/css/print/' +
+      (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') +
+      '.css" type="text/css" media="print">');
+  </script>
+
+  <script src="../template/snap.svg-min.js"></script>
+  <script src="../template/plotly-latest.min.js"></script>
+
+  <!--[if lt IE 9]>
+  <script src="../reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+
+  
+
+</head>
+
+<body>
+
+  
+
+  <div class="reveal">
+
+    <div class="slides">
+
+      <section>
+        <h1>Języki skryptowe Python</h1>
+         <h3>Wykład 11</h3> 
+        <p>
+          <h4></h4>
+        </p>
+      </section>
+
+       <div class="footer">
+<p>Sterowanie: spacja + shift-spacja || page down + page up || strzałki || esc</p>
+</div>
+<section id="section" class="level1">
+<h1></h1>
+<section id="programowanie-strukturalne" class="level2">
+<h2>Programowanie strukturalne</h2>
+<hr />
+<ul>
+<li>sekwencje (ciąg instrukcji)</li>
+<li>wybór (<em>if</em>)</li>
+<li>iteracja (pętle <em>for</em> i <em>while</em>)</li>
+<li>funkcje</li>
+</ul>
+</section>
+<section id="słownik" class="level2">
+<h2>Słownik</h2>
+<hr />
+<ul>
+<li>OOP - <em>Object-Oriented Programming</em></li>
+<li>klasa - definicja obiektu</li>
+<li>instanacja (klasy) - obiekt utworzony na podstawie klasy</li>
+</ul>
+</section>
+<section id="klasy" class="level2">
+<h2>Klasy</h2>
+<hr />
+<div class="tree">
+<ul>
+<li>
+<p>
+Klasa
+</p>
+<ul>
+<li>
+<p>
+Atrybuty
+</p>
+<ul>
+<li>
+<p>
+Dane
+</p>
+<li>
+<p>
+Metody
+</p>
+</ul>
+</ul>
+</ul>
+</div>
+</section>
+<section id="przykład---klasa-complex" class="level2">
+<h2>Przykład - klasa <em>complex</em></h2>
+<hr />
+<div class="tree">
+<ul>
+<li>
+<p>
+complex
+</p>
+<ul>
+<li>
+<p>
+Dane:
+</p>
+<ul>
+<li>
+<p>
+real
+</p>
+<li>
+<p>
+imag
+</p>
+</ul>
+<li>
+<p>
+Metody:
+</p>
+<ul>
+<li>
+<p>
+conjugate
+</p>
+</ul>
+</ul>
+</ul>
+</div>
+</section>
+<section id="klasa-complex" class="level2">
+<h2>Klasa <em>complex</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">c <span class="op">=</span> <span class="dv">10</span> <span class="op">+</span><span class="ot"> 5j</span>    <span class="co"># utwórz obiekt klasy complex</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">c.real         <span class="co"># dane: real</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">10.0</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">c.imag         <span class="co"># dane: imag</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">5.0</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">c.conjugate()  <span class="co"># metody: conjugate</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">(</span><span class="ex">10-5j</span><span class="kw">)</span></code></pre></div>
+</section>
+</section>
+<section id="section-1" class="level1">
+<h1></h1>
+<section id="programowanie-obiektowe" class="level2">
+<h2>Programowanie obiektowe</h2>
+<hr />
+<ul>
+<li>tworzenie obiektów
+<ul>
+<li>mogą przechowywać dane</li>
+<li>mogą wykonywać opearacje</li>
+<li>przykład: klasa samochód
+<ul>
+<li>dane: moc, masa, moment obrotowy ...</li>
+<li>metody: jedź, skręć, ...</li>
+</ul></li>
+</ul></li>
+<li>komunikacja między obiektami
+<ul>
+<li>przykład: klasa łyżka i klasa zupa
+<ul>
+<li>łyżka.pobierz(zupa)</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="klasa-w-pythonie" class="level2">
+<h2>Klasa w Pythonie</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="kw">class</span> Nazwa:
+    instrukcje
+    ...</code></pre></div>
+<ul>
+<li>zbudujemy krok po kroku klasę trójkąt:
+<ul>
+<li>dane: boki a, b, c</li>
+<li>metody: pole, obwód, typ...</li>
+</ul></li>
+</ul>
+</section>
+<section id="pusta-klasa" class="level2">
+<h2>&quot;Pusta&quot; klasa</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Triangle:
+    <span class="cf">pass</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># na razie klasa Triangle</span>
+<span class="co"># nie zawiera ani danych ani metod</span>
+<span class="co"># ale już możemy stworzyć obiekt typu Triangle</span>
+
+t <span class="op">=</span> Triangle()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">type</span>(t)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">__main__.Triangle</span></code></pre></div>
+</section>
+<section id="uwaga" class="level2">
+<h2>Uwaga</h2>
+<hr />
+<ul>
+<li>w Pythonie można dodawać atrybuty do istniejących obiektów (choć nie jest to zalecane!)</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">t.a <span class="op">=</span> <span class="fl">3.0</span>  <span class="co"># atrybut a obiektu t</span>
+t.b <span class="op">=</span> <span class="fl">4.0</span>  <span class="co"># atrybut b obiektu t</span>
+t.c <span class="op">=</span> <span class="fl">5.0</span>  <span class="co"># atrybut c obiektu t</span>
+
+<span class="bu">print</span>(t.a, t.b, t.c)  <span class="co"># drukuj atrybuty a, b, c</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">3.0</span> 4.0 5.0</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> drukuj(triangle):  <span class="co"># każdy obiekt może być argumentem funkcji</span>
+    <span class="bu">print</span>(triangle.a, triangle.b, triangle.c)
+    
+drukuj(t)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">3.0</span> 4.0 5.0</code></pre></div>
+</section>
+<section id="inicjalizacja" class="level2">
+<h2>Inicjalizacja</h2>
+<hr />
+<ul>
+<li><code>__init__</code> - prawie jak konstruktor, ale wywoływana <strong>po</strong> utworzeniu instancji</li>
+<li><em>self</em> - odpowiednik <em>this</em> z c++</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Triangle:
+    <span class="co">&quot;&quot;&quot;Dokumentacja jak w przypadku funkcji&quot;&quot;&quot;</span>
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, a, b, c):
+        <span class="co">&quot;&quot;&quot;Prawie jak konstruktor&quot;&quot;&quot;</span>
+        <span class="va">self</span>.a <span class="op">=</span> a  <span class="co"># zmiennej obiekt.a</span>
+        <span class="va">self</span>.b <span class="op">=</span> b  <span class="co"># przypisz wartość a</span>
+        <span class="va">self</span>.c <span class="op">=</span> c  <span class="co"># itd</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">t <span class="op">=</span> Triangle(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)  <span class="co"># wywołuje funkcję __init__(3, 4, 5)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(t.a, t.b, t.c)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">3</span> 4 5</code></pre></div>
+</section>
+<section id="self" class="level2">
+<h2><em>self</em></h2>
+<hr />
+<ul>
+<li>pierwszy argument każdej metody = <em>self</em></li>
+<li>przyjęto konwencję <em>self</em>, ale może to być dowolna nazwa</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Triangle:
+    <span class="co">&quot;&quot;&quot;Dokumentacja jak w przypadku funkcji&quot;&quot;&quot;</span>
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(this, a, b, c):
+        <span class="co">&quot;&quot;&quot;Prawie jak konstruktor&quot;&quot;&quot;</span>
+        this.a <span class="op">=</span> a
+        this.b <span class="op">=</span> b
+        this.c <span class="op">=</span> c</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># wywołuje funkcję __init__(3, 4, 5)</span>
+t <span class="op">=</span> Triangle(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(t.a, t.b, t.c)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">3</span> 4 5</code></pre></div>
+</section>
+<section id="dokumentacja" class="level2">
+<h2>Dokumentacja</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">help</span>(t)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Help</span> on Triangle in module __main__ object:
+
+<span class="ex">class</span> Triangle(builtins.object)
+    <span class="kw">|</span>  <span class="ex">Dokumentacja</span> jak w przypadku funkcji
+    <span class="kw">|</span>  
+    <span class="kw">|</span>  <span class="ex">Methods</span> defined here:
+    <span class="kw">|</span>  
+    <span class="kw">|</span>  <span class="ex">__init__</span>(this, a, b, c)
+    <span class="kw">|</span>      <span class="ex">Prawie</span> jak konstruktor
+    <span class="kw">|</span>  
+    <span class="kw">|</span>  <span class="ex">----------------------------------------------------------------------</span>
+    <span class="kw">|</span>  <span class="ex">Data</span> descriptors defined here:
+    <span class="kw">|</span>  
+    <span class="kw">|</span>  <span class="ex">__dict__</span>
+    <span class="kw">|</span>      <span class="ex">dictionary</span> for instance variables (if defined)
+    <span class="kw">|</span>  
+    <span class="kw">|</span>  <span class="ex">__weakref__</span>
+    <span class="kw">|</span>      <span class="ex">list</span> of weak references to the object (if defined)</code></pre></div>
+</section>
+</section>
+<section id="section-2" class="level1">
+<h1></h1>
+<section id="metody-specjalne" class="level2">
+<h2>Metody specjalne</h2>
+<hr />
+<ul>
+<li><code>__init__</code> jest jedną z metod specjalnych klasy</li>
+<li><a href="https://docs.python.org/3/reference/datamodel.html#special-method-names">tutaj</a> znajduje się pełna lista dostępnych metod specjalnych</li>
+<li>w trakcie wykładu pojawią się kolejne (wszystkie <code>__nazwa__</code>)</li>
+</ul>
+</section>
+<section id="str-i-repr" class="level2">
+<h2><em>str</em> i <em>repr</em></h2>
+<hr />
+<ul>
+<li><code>__repr__</code> - &quot;oficjalna&quot; reprezentacja obiektu, powinna być jednoznaczna; wywołana przez <code>repr(obiekt)</code> lub w interpreterze po wpisaniu nazwy zmiennej</li>
+<li><code>__str__</code> - &quot;nieformalna&quot; reprezentacja obiektu, powinna być czytelna; wywołana przez <code>str(obiekt)</code> lub <code>print</code></li>
+</ul>
+</section>
+<section id="triangle-str-i-repr" class="level2">
+<h2><em>Triangle</em> : <em>str</em> i <em>repr</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Triangle:
+    <span class="co"># pomijamy dokumentację: oszczędność slajdu</span>
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, a, b, c):
+        <span class="va">self</span>.a <span class="op">=</span> a
+        <span class="va">self</span>.b <span class="op">=</span> b
+        <span class="va">self</span>.c <span class="op">=</span> c
+        
+    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):  <span class="co"># zwraca string</span>
+        <span class="cf">return</span> <span class="st">&quot;Trójkąt o bokach: </span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">&quot;</span>\
+                .<span class="bu">format</span>(<span class="va">self</span>.a, <span class="va">self</span>.b, <span class="va">self</span>.c)
+    
+    <span class="kw">def</span> <span class="fu">__repr__</span>(<span class="va">self</span>):  <span class="co"># zwraca string</span>
+        <span class="cf">return</span> <span class="st">&quot;Triangle(</span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">)&quot;</span>\
+                .<span class="bu">format</span>(<span class="va">self</span>.a, <span class="va">self</span>.b, <span class="va">self</span>.c)</code></pre></div>
+</section>
+<section id="triangle-str-i-repr-1" class="level2">
+<h2><em>Triangle</em> : <em>str</em> i <em>repr</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">t <span class="op">=</span> Triangle(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)
+
+<span class="bu">print</span>(t)  <span class="co"># wywołuje __str__</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Tr</span>ójkąt o bokach: 3, 4, 5</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">t  <span class="co"># (w interpreterze) wywołuje __repr__</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Triangle</span>(3, 4, 5)</code></pre></div>
+</section>
+</section>
+<section id="section-3" class="level1">
+<h1></h1>
+<section id="własne-metody---obwód" class="level2">
+<h2>Własne metody - obwód</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Triangle:
+
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, a, b, c):
+        <span class="va">self</span>.a <span class="op">=</span> a
+        <span class="va">self</span>.b <span class="op">=</span> b
+        <span class="va">self</span>.c <span class="op">=</span> c
+        
+    <span class="kw">def</span> obwod(<span class="va">self</span>):
+        <span class="co"># do zmiennych obiektu odwołujemy się przez self.zmienna</span>
+        <span class="cf">return</span> <span class="va">self</span>.a <span class="op">+</span> <span class="va">self</span>.b <span class="op">+</span> <span class="va">self</span>.c</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">t <span class="op">=</span> Triangle(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">t.obwod()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">12</span></code></pre></div>
+</section>
+<section id="własne-metody---pole" class="level2">
+<h2>Własne metody - pole</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> math <span class="im">import</span> sqrt
+
+<span class="kw">class</span> Triangle:
+
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, a, b, c):
+        <span class="va">self</span>.a <span class="op">=</span> a
+        <span class="va">self</span>.b <span class="op">=</span> b
+        <span class="va">self</span>.c <span class="op">=</span> c
+        
+    <span class="kw">def</span> obwod(<span class="va">self</span>):
+        <span class="cf">return</span> <span class="va">self</span>.a <span class="op">+</span> <span class="va">self</span>.b <span class="op">+</span> <span class="va">self</span>.c
+    
+    <span class="kw">def</span> pole(<span class="va">self</span>):
+        <span class="co"># do metod odwołujemy się przez self.metoda</span>
+        p <span class="op">=</span> <span class="va">self</span>.obwod()<span class="op">/</span><span class="dv">2</span>
+        <span class="cf">return</span> sqrt(p<span class="op">*</span>(p <span class="op">-</span> <span class="va">self</span>.a)<span class="op">*</span>(p <span class="op">-</span> <span class="va">self</span>.b)<span class="op">*</span>(p <span class="op">-</span> <span class="va">self</span>.c))</code></pre></div>
+</section>
+<section id="test" class="level2">
+<h2>Test</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">t <span class="op">=</span> Triangle(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)
+
+<span class="bu">print</span>(<span class="st">&quot;Obwód =&quot;</span>, t.obwod())
+<span class="bu">print</span>(<span class="st">&quot;Pole =&quot;</span>, t.pole())</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Obw</span>ód = 12
+<span class="ex">Pole</span> = 6.0</code></pre></div>
+</section>
+</section>
+<section id="section-4" class="level1">
+<h1></h1>
+<section id="klasa-wektor" class="level2">
+<h2>Klasa wektor</h2>
+<hr />
+<ul>
+<li>współrzędne <em>x</em>, <em>y</em>, <em>z</em></li>
+<li>długość wektora</li>
+<li>dodawanie wektorów</li>
+<li>mnożenie wektora przez liczbę</li>
+<li>iloczyn skalarny</li>
+<li>...</li>
+</ul>
+</section>
+<section id="wektor-długość" class="level2">
+<h2>Wektor: długość</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> math <span class="im">import</span> sqrt
+
+<span class="kw">class</span> Wektor:
+    <span class="co">&quot;&quot;&quot;Trójwymiarowy wektor&quot;&quot;&quot;</span>
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, x<span class="op">=</span><span class="fl">0.0</span>, y<span class="op">=</span><span class="fl">0.0</span>, z<span class="op">=</span><span class="fl">0.0</span>):
+        <span class="va">self</span>.x <span class="op">=</span> x
+        <span class="va">self</span>.y <span class="op">=</span> y
+        <span class="va">self</span>.z <span class="op">=</span> z
+        
+    <span class="kw">def</span> norm(<span class="va">self</span>):
+        <span class="co">&quot;&quot;&quot;Długość wektora&quot;&quot;&quot;</span>
+        <span class="cf">return</span> sqrt(<span class="va">self</span>.x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="va">self</span>.y<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="va">self</span>.z<span class="op">**</span><span class="dv">2</span>)</code></pre></div>
+</section>
+<section id="długość-test" class="level2">
+<h2>Długość: test</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">w <span class="op">=</span> Wektor(<span class="dv">1</span>)  <span class="co"># utwórz wektor (1, 0, 0)</span>
+
+w.norm()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">1.0</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">w.x <span class="op">=</span> <span class="dv">2</span>  <span class="co"># zmień składową x</span>
+
+w.norm()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">2.0</span></code></pre></div>
+</section>
+<section id="zmienne-prywatne" class="level2">
+<h2>Zmienne prywatne</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Wektor:
+    <span class="co">&quot;&quot;&quot;Trójwymiarowy wektor&quot;&quot;&quot;</span>
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, x<span class="op">=</span><span class="fl">0.0</span>, y<span class="op">=</span><span class="fl">0.0</span>, z<span class="op">=</span><span class="fl">0.0</span>):
+        <span class="va">self</span>._x <span class="op">=</span> x  <span class="co"># zmienne &quot;prywatne&quot;</span>
+        <span class="va">self</span>._y <span class="op">=</span> y  <span class="co"># sygnalizuje się _</span>
+        <span class="va">self</span>._z <span class="op">=</span> z
+        
+    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):
+        <span class="cf">return</span> <span class="st">&quot;[</span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">]&quot;</span>.<span class="bu">format</span>(<span class="va">self</span>._x, <span class="va">self</span>._y, <span class="va">self</span>._z)</code></pre></div>
+</section>
+<section id="wektor-prywatny" class="level2">
+<h2>Wektor prywatny</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> wektor <span class="im">import</span> Wektor
+
+w <span class="op">=</span> Wektor(<span class="dv">1</span>)  <span class="co"># utwórz wektor (1, 0, 0)</span>
+
+<span class="bu">print</span>(w)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="ex">1</span>, 0.0, 0.0]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># dostęp do _zmienna nie jest ograniczony</span>
+<span class="co"># jest to tylko wskazówka, żeby nie ruszać</span>
+w._x <span class="op">=</span> <span class="fl">2.0</span>
+
+<span class="bu">print</span>(w)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="ex">2.0</span>, 0.0, 0.0]</code></pre></div>
+</section>
+<section id="zmienne-bardziej-prywatne" class="level2">
+<h2>Zmienne bardziej prywatne</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Wektor:
+    <span class="co">&quot;&quot;&quot;Trójwymiarowy wektor&quot;&quot;&quot;</span>
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, x<span class="op">=</span><span class="fl">0.0</span>, y<span class="op">=</span><span class="fl">0.0</span>, z<span class="op">=</span><span class="fl">0.0</span>):
+        <span class="va">self</span>.__x <span class="op">=</span> x  <span class="co"># zmienne zaczynające się __</span>
+        <span class="va">self</span>.__y <span class="op">=</span> y  <span class="co"># zamieniane są na</span>
+        <span class="va">self</span>.__z <span class="op">=</span> z  <span class="co"># _nazwa_klasy__zmienna</span>
+        
+    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):
+        <span class="cf">return</span> <span class="st">&quot;[</span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">]&quot;</span>.<span class="bu">format</span>(<span class="va">self</span>.__x, <span class="va">self</span>.__y, <span class="va">self</span>.__z)</code></pre></div>
+</section>
+<section id="wektor-bardziej-prywatny" class="level2">
+<h2>Wektor bardziej prywatny</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">w <span class="op">=</span> Wektor(<span class="dv">1</span>)  <span class="co"># [1, 0, 0]</span>
+
+<span class="bu">print</span>(w)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="ex">1</span>, 0.0, 0.0]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">w.__x <span class="op">=</span> <span class="dv">2</span>  <span class="co"># nie zmienia skladowej __x</span>
+
+<span class="bu">print</span>(w)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="ex">1</span>, 0.0, 0.0]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">w._Wektor__x <span class="op">=</span> <span class="dv">2</span>  <span class="co"># zmienia składową __x</span>
+
+<span class="bu">print</span>(w)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="ex">2</span>, 0.0, 0.0]</code></pre></div>
+</section>
+</section>
+<section id="section-5" class="level1">
+<h1></h1>
+<section id="dodawanie-wektorów" class="level2">
+<h2>Dodawanie wektorów</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Wektor:
+    <span class="co">&quot;&quot;&quot;Trójwymiarowy wektor&quot;&quot;&quot;</span>
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, x<span class="op">=</span><span class="fl">0.0</span>, y<span class="op">=</span><span class="fl">0.0</span>, z<span class="op">=</span><span class="fl">0.0</span>):
+        <span class="va">self</span>.x <span class="op">=</span> x
+        <span class="va">self</span>.y <span class="op">=</span> y
+        <span class="va">self</span>.z <span class="op">=</span> z
+        
+    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):
+        <span class="cf">return</span> <span class="st">&quot;[</span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">]&quot;</span>.<span class="bu">format</span>(<span class="va">self</span>.x, <span class="va">self</span>.y, <span class="va">self</span>.z)
+        
+    <span class="kw">def</span> <span class="fu">__add__</span>(<span class="va">self</span>, w):  <span class="co"># operator dodawania</span>
+        <span class="cf">return</span> Wektor(<span class="va">self</span>.x <span class="op">+</span> w.x, <span class="va">self</span>.y <span class="op">+</span> w.y, <span class="va">self</span>.z <span class="op">+</span> w.z)</code></pre></div>
+</section>
+<section id="dodawanie-test" class="level2">
+<h2>Dodawanie: test</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> Wektor(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)
+y <span class="op">=</span> Wektor(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>)
+
+<span class="bu">print</span>(x <span class="op">+</span> y)  <span class="co"># wywołuje x.__add__(y)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="ex">3</span>, 6, 9]</code></pre></div>
+</section>
+<section id="wektor-iloczyn-skalarny" class="level2">
+<h2>Wektor: iloczyn skalarny</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Wektor:
+    <span class="co">&quot;&quot;&quot;Trójwymiarowy wektor&quot;&quot;&quot;</span>
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, x<span class="op">=</span><span class="fl">0.0</span>, y<span class="op">=</span><span class="fl">0.0</span>, z<span class="op">=</span><span class="fl">0.0</span>):
+        <span class="va">self</span>.x <span class="op">=</span> x
+        <span class="va">self</span>.y <span class="op">=</span> y
+        <span class="va">self</span>.z <span class="op">=</span> z
+        
+    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):
+        <span class="cf">return</span> <span class="st">&quot;[</span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">]&quot;</span>.<span class="bu">format</span>(<span class="va">self</span>.x, <span class="va">self</span>.y, <span class="va">self</span>.z)
+        
+    <span class="kw">def</span> <span class="fu">__mul__</span>(<span class="va">self</span>, w):  <span class="co"># operator mnożenia</span>
+        <span class="cf">return</span> <span class="va">self</span>.x<span class="op">*</span>w.x <span class="op">+</span> <span class="va">self</span>.y<span class="op">*</span>w.y <span class="op">+</span> <span class="va">self</span>.z<span class="op">*</span>w.z</code></pre></div>
+</section>
+<section id="iloczyn-skalarny-test" class="level2">
+<h2>Iloczyn skalarny: test</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> Wektor(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)
+y <span class="op">=</span> Wektor(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>)
+
+<span class="bu">print</span>(x<span class="op">*</span>y)  <span class="co"># wywołuje x.__mul__(y)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">28</span></code></pre></div>
+</section>
+<section id="mnożenie-przez-liczbę" class="level2">
+<h2>Mnożenie przez liczbę</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Wektor:
+    <span class="co">&quot;&quot;&quot;Trójwymiarowy wektor&quot;&quot;&quot;</span>
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, x<span class="op">=</span><span class="fl">0.0</span>, y<span class="op">=</span><span class="fl">0.0</span>, z<span class="op">=</span><span class="fl">0.0</span>):
+        <span class="va">self</span>.x <span class="op">=</span> x
+        <span class="va">self</span>.y <span class="op">=</span> y
+        <span class="va">self</span>.z <span class="op">=</span> z
+        
+    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):
+        <span class="cf">return</span> <span class="st">&quot;[</span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">]&quot;</span>.<span class="bu">format</span>(<span class="va">self</span>.x, <span class="va">self</span>.y, <span class="va">self</span>.z)
+        
+    <span class="kw">def</span> <span class="fu">__mul__</span>(<span class="va">self</span>, w):          <span class="co"># operator mnożenia</span>
+        <span class="cf">if</span> <span class="bu">type</span>(w) <span class="op">==</span> <span class="bu">type</span>(<span class="va">self</span>):  <span class="co"># dla wektora - iloczyn skalarny</span>
+            <span class="cf">return</span> <span class="va">self</span>.x<span class="op">*</span>w.x <span class="op">+</span> <span class="va">self</span>.y<span class="op">*</span>w.y <span class="op">+</span> <span class="va">self</span>.z<span class="op">*</span>w.z
+        <span class="cf">else</span>:                      <span class="co"># dla liczby - mnożenie składowych</span>
+            <span class="cf">return</span> Wektor(w<span class="op">*</span><span class="va">self</span>.x, w<span class="op">*</span><span class="va">self</span>.y, w<span class="op">*</span><span class="va">self</span>.z)</code></pre></div>
+</section>
+<section id="mnożenie-test" class="level2">
+<h2>Mnożenie: test</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> Wektor(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)
+y <span class="op">=</span> Wektor(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>)
+
+<span class="bu">print</span>(x<span class="op">*</span>y)  <span class="co"># wywołuje x.__mul__(y)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">28</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(x<span class="op">*</span><span class="dv">10</span>)  <span class="co"># mnoży wektor z przez 10</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="ex">10</span>, 20, 30]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(<span class="dv">10</span><span class="op">*</span>x)  <span class="co"># nie działa...</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">TypeError</span>: unsupported operand type(s) <span class="kw">for</span> <span class="ex">*</span>: <span class="st">&#39;int&#39;</span> and <span class="st">&#39;Wektor&#39;</span></code></pre></div>
+</section>
+<section id="mnożenie-z-prawej" class="level2">
+<h2>Mnożenie z prawej</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Wektor:
+    <span class="co">&quot;&quot;&quot;Trójwymiarowy wektor&quot;&quot;&quot;</span>
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, x<span class="op">=</span><span class="fl">0.0</span>, y<span class="op">=</span><span class="fl">0.0</span>, z<span class="op">=</span><span class="fl">0.0</span>):
+        <span class="va">self</span>.x <span class="op">=</span> x
+        <span class="va">self</span>.y <span class="op">=</span> y
+        <span class="va">self</span>.z <span class="op">=</span> z
+        
+    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):
+        <span class="cf">return</span> <span class="st">&quot;[</span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">]&quot;</span>.<span class="bu">format</span>(<span class="va">self</span>.x, <span class="va">self</span>.y, <span class="va">self</span>.z)
+        
+    <span class="kw">def</span> <span class="fu">__mul__</span>(<span class="va">self</span>, w):          <span class="co"># operator mnożenia</span>
+        <span class="cf">if</span> <span class="bu">type</span>(w) <span class="op">==</span> <span class="bu">type</span>(<span class="va">self</span>):  <span class="co"># dla wektora - iloczyn skalarny</span>
+            <span class="cf">return</span> <span class="va">self</span>.x<span class="op">*</span>w.x <span class="op">+</span> <span class="va">self</span>.y<span class="op">*</span>w.y <span class="op">+</span> <span class="va">self</span>.z<span class="op">*</span>w.z
+        <span class="cf">else</span>:                      <span class="co"># dla liczby - mnożenie składowych</span>
+            <span class="cf">return</span> Wektor(w<span class="op">*</span><span class="va">self</span>.x, w<span class="op">*</span><span class="va">self</span>.y, w<span class="op">*</span><span class="va">self</span>.z)
+        
+    <span class="kw">def</span> <span class="fu">__rmul__</span>(<span class="va">self</span>, w):  <span class="co"># mnożenie z prawej</span>
+        <span class="cf">return</span> <span class="va">self</span>.<span class="fu">__mul__</span>(w)</code></pre></div>
+</section>
+<section id="mnożenie-z-prawej-test" class="level2">
+<h2>Mnożenie z prawej: test</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> Wektor(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)
+
+<span class="bu">print</span>(x<span class="op">*</span><span class="dv">10</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="ex">10</span>, 20, 30]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(<span class="dv">10</span><span class="op">*</span>x)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="ex">10</span>, 20, 30]</code></pre></div>
+</section>
+</section>
+    </div>
+
+    <script src="../reveal.js/lib/js/head.min.js"></script>
+    <script src="../reveal.js/js/reveal.js"></script>
+
+    <script>
+
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        slideNumber: true,
+        width: 1280,
+        height: 720,
+
+                  theme: Reveal.getQueryHash().theme || 'white',
+        
+                  transition: Reveal.getQueryHash().transition || 'convex',
+        
+                  transitionSpeed: Reveal.getQueryHash().transitionSpeed || 'fast',
+        
+        dependencies: [{
+            src: '../reveal.js/lib/js/classList.js',
+            condition: function() {
+              return !document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/markdown/showdown.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          }, {
+            src: '../reveal.js/plugin/markdown/markdown.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          }, {
+            src: '../reveal.js/plugin/highlight/highlight.js',
+            async: true,
+            callback: function() {
+              hljs.initHighlightingOnLoad();
+            }
+          }, {
+            src: '../reveal.js/plugin/zoom-js/zoom.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/notes/notes.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/math/math.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          },
+          // { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+    </script>
+
+    <script>
+    // displayed upon load, hides when slide changes
+      Reveal.addEventListener('slidechanged', function(event) {
+        document.querySelector('.reveal .footer').style.display = 'none';
+      });
+   </script>
+
+</body>
+
+</html>

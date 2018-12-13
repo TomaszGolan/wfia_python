@@ -61,6 +61,10 @@ Wykłady dla studentów Wydziału Fizyki i Astronomii z "Języki skryptowe - Pyt
     * liczby pseudolosowe
     * typy sekwencyjne: set i frozenset
 
+*  [Wykład 11](https://tomaszgolan.github.io/wfia_python/html/python_w11.html)
+
+    * wstęp do programowania obiektowego
+
 ## Listy
 
 * Lista 1: [markdown](listy/lista_01.md), [pdf](listy/lista_01.pdf)
