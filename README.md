@@ -100,11 +100,11 @@ Wykłady dla studentów Wydziału Fizyki i Astronomii z "Języki skryptowe - Pyt
     * Zadania należy wysyłać w osobnych plikach nazwanych zgodnie z konwencją: `imie.nazwisko.XX.YY.py`, gdzie `XX` - numer listy, `YY` - numer zadania.
     * Na koniec semestru wystawiana jest zbiorcza ocena za wszystkie listy (x = suma zdobytych punktów / liczba punktów do zdobycia):
 
-        *  bdb: x >= 0.9
-        *  db+: x >= 0.8
-        *   db: x >= 0.7
-        * dst+: x >= 0.6
-        *  dst: x >= 0.5
+        *  bdb: x >= 0.8
+        *  db+: x >= 0.7
+        *   db: x >= 0.6
+        * dst+: x >= 0.5
+        *  dst: x >= 0.4
 
 * Na początku każdych zajęć (poza pierwszymi i ostatnimi) odbędzie się krótka kartkówa, zwana dalej wejściówką. Dotyczyć będzie zagadnień z ostatniej listy zadań. Na koniec semestru wystawiona jest zbiorcza ocena za wszystkie wejściówki (wg takich samych reguł jak w przypadku list zadań).
 
