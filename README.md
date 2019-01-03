@@ -65,6 +65,10 @@ Wykłady dla studentów Wydziału Fizyki i Astronomii z "Języki skryptowe - Pyt
 
     * wstęp do programowania obiektowego
 
+*  [Wykład 12](https://tomaszgolan.github.io/wfia_python/html/python_w12.html)
+
+    * programowania obiektowego ciąg dalszy
+
 ## Listy
 
 * Lista 1: [markdown](listy/lista_01.md), [pdf](listy/lista_01.pdf)

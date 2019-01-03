@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <title>Języki skryptowe Python</title>
+
+  <meta name="description" content="Języki skryptowe Python">
+
+   <meta name="author" content="Wykład 12" /> 
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="stylesheet" href="../reveal.js/css/reveal.css">
+
+      <link rel="stylesheet" href="../reveal.js/css/theme/white.css" id="theme">
+  
+      <link rel="stylesheet" href="../template/a11y-light.css">
+  
+  <link rel="stylesheet" href="../template/extra.css">
+
+  <script>
+    document.write('<link rel="stylesheet" href="../reveal.js/css/print/' +
+      (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') +
+      '.css" type="text/css" media="print">');
+  </script>
+
+  <script src="../template/snap.svg-min.js"></script>
+  <script src="../template/plotly-latest.min.js"></script>
+
+  <!--[if lt IE 9]>
+  <script src="../reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+
+  
+
+</head>
+
+<body>
+
+  
+
+  <div class="reveal">
+
+    <div class="slides">
+
+      <section>
+        <h1>Języki skryptowe Python</h1>
+         <h3>Wykład 12</h3> 
+        <p>
+          <h4></h4>
+        </p>
+      </section>
+
+       <div class="footer">
+<p>Sterowanie: spacja + shift-spacja || page down + page up || strzałki || esc</p>
+</div>
+<section id="section" class="level1">
+<h1></h1>
+<section id="na-ostatnim-wykładzie" class="level2">
+<h2>Na ostatnim wykładzie</h2>
+<hr />
+<ul>
+<li>klasy pozwalają na definiowanie własnych typów</li>
+<li>funkcje specjalne - definiowanie działania operatorów lub wywołań funkcji wbudowanych (<em>print</em>, <em>len</em>...)</li>
+<li>nie ma &quot;pełnej prywatności&quot;</li>
+</ul>
+</section>
+<section id="konwencja-self" class="level2">
+<h2>Konwencja <em>self</em></h2>
+<hr />
+<ul>
+<li>pierwszym argumentem każdej metody jest wskaźnik na obiekt</li>
+<li>przyjęto nazywać ten argument <em>self</em> (choć nic nie stoi na przeszkodzie, żeby używać innej nazwy)</li>
+</ul>
+</section>
+<section id="self-test" class="level2">
+<h2><em>self</em> test</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Foo:
+    
+    <span class="kw">def</span> moja_metoda():  <span class="co"># błąd</span>
+        <span class="cf">pass</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> Foo()
+x.moja_metoda()
+<span class="co"># bo x jest pierwszym argumentem pozycyjnym!</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">TypeError</span>: moja_metoda() <span class="ex">takes</span> 0 positional arguments but 1 was given</code></pre></div>
+</section>
+<section id="funkcja-globalna" class="level2">
+<h2>Funkcja globalna</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Foo:
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):  <span class="co"># &quot;konstruktor&quot;</span>
+        <span class="va">self</span>.bar <span class="op">=</span> <span class="va">False</span>
+        
+    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):   <span class="co"># print</span>
+        <span class="cf">return</span> <span class="st">&quot;Foobar = </span><span class="sc">{}</span><span class="st">&quot;</span>.<span class="bu">format</span>(<span class="va">self</span>.bar)
+    
+<span class="kw">def</span> funkcja(obiekt):     <span class="co"># funkcja globalna</span>
+    obiekt.bar <span class="op">=</span> <span class="va">True</span>    <span class="co"># ustaw flagę bar</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> Foo()   <span class="co"># stwórz obiekt typu Foo</span>
+
+<span class="bu">print</span>(x)
+
+funkcja(x)  <span class="co"># globalna na x</span>
+
+<span class="bu">print</span>(x)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Foobar</span> = False
+<span class="ex">Foobar</span> = True</code></pre></div>
+</section>
+<section id="metoda-z-funkcji-globalnej" class="level2">
+<h2>Metoda z funkcji globalnej</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Foo:
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):    <span class="co"># &quot;konstruktor&quot;</span>
+        <span class="va">self</span>.bar <span class="op">=</span> <span class="va">False</span>
+        
+    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):     <span class="co"># print</span>
+        <span class="cf">return</span> <span class="st">&quot;Foobar = </span><span class="sc">{}</span><span class="st">&quot;</span>.<span class="bu">format</span>(<span class="va">self</span>.bar)
+    
+    <span class="kw">def</span> funkcja(obiekt):   <span class="co"># metoda</span>
+        obiekt.bar <span class="op">=</span> <span class="va">True</span>  <span class="co"># ustaw flagę bar</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> Foo()    <span class="co"># stwórz obiekt typu Foo</span>
+
+<span class="bu">print</span>(x)
+
+x.funkcja()  <span class="co"># metoda (x jest arg pozycyjnym)</span>
+
+<span class="bu">print</span>(x)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Foobar</span> = False
+<span class="ex">Foobar</span> = True</code></pre></div>
+</section>
+</section>
+<section id="section-1" class="level1">
+<h1></h1>
+<section id="klasa-student" class="level2">
+<h2>Klasa student</h2>
+<hr />
+<ul>
+<li>imię, nazwisko, nr indeksu</li>
+<li>zliczanie studentów (wspólna zmienna dla wszystkich obiektów danej klasy)</li>
+</ul>
+</section>
+<section id="atrybuty-klasy" class="level2">
+<h2>Atrybuty klasy</h2>
+<hr />
+<ul>
+<li>zmienne wprowadzane poza <code>__init__</code> są traktowane jako atrybuty klasy, a nie obiektu</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Student:
+    counter <span class="op">=</span> <span class="dv">0</span>  <span class="co"># licznik studentów</span>
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, imie, nazwisko, indeks):
+        <span class="va">self</span>.__class__.counter <span class="op">+=</span> <span class="dv">1</span>
+        <span class="va">self</span>.imie <span class="op">=</span> imie
+        <span class="va">self</span>.naziwsko <span class="op">=</span> nazwisko
+        <span class="va">self</span>.indeks <span class="op">=</span> indeks</code></pre></div>
+</section>
+<section id="studenci" class="level2">
+<h2>Studenci</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">student1 <span class="op">=</span> Student(<span class="st">&quot;Jan&quot;</span>, <span class="st">&quot;Kowalski&quot;</span>, <span class="dv">1234</span>)
+student2 <span class="op">=</span> Student(<span class="st">&quot;Anna&quot;</span>, <span class="st">&quot;Nowak&quot;</span>, <span class="dv">1234</span>)
+
+<span class="co"># każdy student ma swoje imię</span>
+<span class="bu">print</span>(student1.imie, student2.imie)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Jan</span> Anna</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># ale licznik jest wspólny</span>
+<span class="co"># dla wszystkich obiektów klasy Student</span>
+<span class="bu">print</span>(student1.counter, student2.counter)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">2</span> 2</code></pre></div>
+</section>
+</section>
+<section id="section-2" class="level1">
+<h1></h1>
+<section id="punkt" class="level2">
+<h2>Punkt</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Punkt:
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, x<span class="op">=</span><span class="fl">0.0</span>, y<span class="op">=</span><span class="fl">0.0</span>):
+        <span class="va">self</span>.x <span class="op">=</span> x  <span class="co"># odcięta </span>
+        <span class="va">self</span>.y <span class="op">=</span> y  <span class="co"># rzędna</span>
+        
+    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):  <span class="co"># (x, y)</span>
+        <span class="cf">return</span> <span class="st">&quot;(</span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">)&quot;</span>.<span class="bu">format</span>(<span class="va">self</span>.x, <span class="va">self</span>.y)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> Punkt(<span class="fl">1.0</span>, <span class="fl">2.0</span>) 
+
+<span class="bu">print</span>(x)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">(</span><span class="ex">1.0</span>, 2.0<span class="kw">)</span></code></pre></div>
+</section>
+<section id="odcinek" class="level2">
+<h2>Odcinek</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> math <span class="im">import</span> sqrt
+
+<span class="kw">class</span> Odcinek:
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, start, end):
+        <span class="va">self</span>.poczatek <span class="op">=</span> start  <span class="co"># Punkt</span>
+        <span class="va">self</span>.koniec <span class="op">=</span> end      <span class="co"># Punkt</span>
+        
+    <span class="kw">def</span> dlugosc(<span class="va">self</span>):
+        <span class="co"># Odcinek.Punkt.Wspolrzedna</span>
+        x <span class="op">=</span> <span class="va">self</span>.koniec.x <span class="op">-</span> <span class="va">self</span>.poczatek.x
+        y <span class="op">=</span> <span class="va">self</span>.koniec.y <span class="op">-</span> <span class="va">self</span>.poczatek.y
+        <span class="cf">return</span> sqrt(x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">2</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">a <span class="op">=</span> Punkt()   <span class="co"># (0, 0)</span>
+b <span class="op">=</span> Punkt(<span class="dv">2</span>)  <span class="co"># (2, 0)</span>
+o <span class="op">=</span> Odcinek(a, b)
+
+o.dlugosc()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">2.0</span></code></pre></div>
+</section>
+</section>
+<section id="section-3" class="level1">
+<h1></h1>
+<section id="enkapsulacja" class="level2">
+<h2>Enkapsulacja</h2>
+<hr />
+<ul>
+<li>enkapsulacja - ukrywanie implementacji</li>
+<li>brak bezpośredniego dostępu do danych</li>
+<li>tylko własne metody moga zmienić stan</li>
+<li>w Pythonie jest to umowne, bo nie ma zmiennych prywatnych</li>
+</ul>
+</section>
+<section id="przykład---cząstka" class="level2">
+<h2>Przykład - cząstka</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Particle:
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, mass, velocity<span class="op">=</span><span class="fl">0.0</span>):
+        <span class="va">self</span>.m <span class="op">=</span> mass      <span class="co"># masa</span>
+        <span class="va">self</span>.v <span class="op">=</span> velocity  <span class="co"># prędkość</span>
+        <span class="va">self</span>.ped()         <span class="co"># ustala pęd</span>
+
+    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):
+        <span class="cf">return</span> <span class="st">&quot;m = </span><span class="sc">{m}</span><span class="st">, v = </span><span class="sc">{v}</span><span class="st">, p = </span><span class="sc">{p}</span><span class="st">&quot;</span>\
+                .<span class="bu">format</span>(m<span class="op">=</span><span class="va">self</span>.m, v<span class="op">=</span><span class="va">self</span>.v, p<span class="op">=</span><span class="va">self</span>.p)
+        
+    <span class="kw">def</span> ped(<span class="va">self</span>):         <span class="co"># liczy pęd cząstki</span>
+        <span class="va">self</span>.p <span class="op">=</span> <span class="va">self</span>.m<span class="op">*</span><span class="va">self</span>.v</code></pre></div>
+</section>
+<section id="cząstka---test" class="level2">
+<h2>Cząstka - test</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> Particle(<span class="dv">10</span>, <span class="dv">10</span>)  <span class="co"># masa = 10, prędkość = 10</span>
+
+<span class="bu">print</span>(x)              <span class="co"># pęd = masa * prędkość</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">m</span> = 10, v = 10, p = 100</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x.v <span class="op">=</span> <span class="dv">0</span>   <span class="co"># zmień prędkość</span>
+
+<span class="bu">print</span>(x)  <span class="co"># pęd nie został uaktulaniony</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">m</span> = 10, v = 0, p = 100</code></pre></div>
+</section>
+<section id="gettery-i-settery" class="level2">
+<h2><em>Gettery</em> i <em>settery</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Particle:
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, mass, velocity<span class="op">=</span><span class="fl">0.0</span>):
+        <span class="va">self</span>.__m <span class="op">=</span> mass      <span class="co"># masa</span>
+        <span class="va">self</span>.__v <span class="op">=</span> velocity  <span class="co"># prędkość</span>
+        <span class="va">self</span>.ped()           <span class="co"># ustala pęd</span>
+        
+    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):
+        <span class="cf">return</span> <span class="st">&quot;m = </span><span class="sc">{m}</span><span class="st">, v = </span><span class="sc">{v}</span><span class="st">, p = </span><span class="sc">{p}</span><span class="st">&quot;</span>\
+                .<span class="bu">format</span>(m<span class="op">=</span><span class="va">self</span>.__m, v<span class="op">=</span><span class="va">self</span>.__v, p<span class="op">=</span><span class="va">self</span>.__p)
+        
+    <span class="kw">def</span> ped(<span class="va">self</span>):       <span class="co"># liczy pęd cząstki</span>
+        <span class="va">self</span>.__p <span class="op">=</span> <span class="va">self</span>.__m<span class="op">*</span><span class="va">self</span>.__v
+        
+    <span class="kw">def</span> get_v(<span class="va">self</span>):     <span class="co"># pobierz prędkośc</span>
+        <span class="cf">return</span> <span class="va">self</span>.__v
+    
+    <span class="kw">def</span> set_v(<span class="va">self</span>, v):  <span class="co"># ustaw prędkość</span>
+        <span class="va">self</span>.__v <span class="op">=</span> v
+        <span class="va">self</span>.ped()       <span class="co"># aktualizuj pęd</span></code></pre></div>
+</section>
+<section id="get-set---test" class="level2">
+<h2><em>get</em>, <em>set</em> - test</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> Particle(<span class="dv">10</span>, <span class="dv">10</span>)  <span class="co"># masa = 10, prędkość = 10</span>
+
+<span class="bu">print</span>(x)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">m</span> = 10, v = 10, p = 100</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x.set_v(<span class="dv">0</span>)  <span class="co"># zmień prędkość</span>
+
+<span class="bu">print</span>(x)    <span class="co"># pęd został uaktulaniony</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">m</span> = 10, v = 0, p = 0</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x.get_v()  <span class="co"># pobierz prędkość</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">0</span></code></pre></div>
+</section>
+</section>
+<section id="section-4" class="level1">
+<h1></h1>
+<section id="ciąg-arytmetyczny" class="level2">
+<h2>Ciąg arytmetyczny</h2>
+<hr />
+<ul>
+<li>zadany przez pierwszy wyraz ciągu i różnicę</li>
+<li>przechowuje <em>n</em> pierwszych wyrazów ciągu</li>
+<li><em>len(ciąg)</em> zwraca <em>n</em></li>
+<li><em>sum(ciąg)</em> zwraca sumę <em>n</em> wyrazów</li>
+</ul>
+</section>
+<section id="ciąg-arytmetyczny-init" class="level2">
+<h2>Ciąg arytmetyczny: <em>init</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># arciag.py</span>
+
+<span class="kw">class</span> ArCiag:
+    <span class="co">&quot;&quot;&quot;Ciąg arytmetyczny&quot;&quot;&quot;</span>
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, a1, r, n<span class="op">=</span><span class="dv">1</span>):
+        <span class="co">&quot;&quot;&quot;Inicjuje ciąg arytmetyczny</span>
+<span class="co">        </span>
+<span class="co">        a1 -- pierwszy wyraz ciągu</span>
+<span class="co">        r -- różnica</span>
+<span class="co">        n -- początkowa liczba wyrazów</span>
+<span class="co">        &quot;&quot;&quot;</span>
+        
+        <span class="va">self</span>.__a1 <span class="op">=</span> a1
+        <span class="va">self</span>.__r <span class="op">=</span> r
+        <span class="va">self</span>.__wyrazy <span class="op">=</span> [a1]
+        
+        <span class="cf">if</span> n <span class="op">&gt;</span> <span class="dv">1</span>:
+            <span class="va">self</span>.generate(n <span class="op">-</span> <span class="dv">1</span>)</code></pre></div>
+</section>
+<section id="ciąg-arytmetyczny-str" class="level2">
+<h2>Ciąg arytmetyczny: <em>str</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):
+        s <span class="op">=</span> <span class="st">&quot;Ciąg arytmetyczny (</span><span class="sc">{a1}</span><span class="st">, </span><span class="sc">{r}</span><span class="st">):&quot;</span>.<span class="bu">format</span>(a1<span class="op">=</span><span class="va">self</span>.__a1, r<span class="op">=</span><span class="va">self</span>.__r)
+        
+        <span class="cf">for</span> wyraz <span class="kw">in</span> <span class="va">self</span>:  <span class="co"># skąd wie, jak po sobie iterować?</span>
+            s <span class="op">+=</span> <span class="st">&quot; &quot;</span> <span class="op">+</span> <span class="bu">str</span>(wyraz)
+            
+        <span class="cf">return</span> s</code></pre></div>
+</section>
+<section id="ciąg-arytmetyczny-iter" class="level2">
+<h2>Ciąg arytmetyczny: <em>iter</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+    <span class="kw">def</span> <span class="fu">__iter__</span>(<span class="va">self</span>):  <span class="co"># iterator ciągu</span>
+        <span class="co">&quot;&quot;&quot;Umożliwia iterację po ciągu&quot;&quot;&quot;</span>
+        
+        <span class="cf">for</span> a <span class="kw">in</span> <span class="va">self</span>.__wyrazy:
+            <span class="cf">yield</span> a</code></pre></div>
+</section>
+<section id="ciąg-arytmetyczny-len" class="level2">
+<h2>Ciąg arytmetyczny: <em>len</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+    <span class="kw">def</span> <span class="fu">__len__</span>(<span class="va">self</span>):  <span class="co"># wywoływana przez len()</span>
+        <span class="co">&quot;&quot;&quot;Zwraca ilość wyrazów ciągu&quot;&quot;&quot;</span>
+        
+        <span class="cf">return</span> <span class="bu">len</span>(<span class="va">self</span>.__wyrazy)</code></pre></div>
+</section>
+<section id="ciąg-arytmetyczny-generate" class="level2">
+<h2>Ciąg arytmetyczny: <em>generate</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+    <span class="kw">def</span> generate(<span class="va">self</span>, n):
+        <span class="co">&quot;&quot;&quot;Generuje kolejne wyrazy ciągu&quot;&quot;&quot;</span>
+        
+        <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n):
+            <span class="va">self</span>.__wyrazy.append(<span class="va">self</span>.__wyrazy[<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> <span class="va">self</span>.__r)</code></pre></div>
+</section>
+<section id="ciąg-arytmetyczny-save" class="level2">
+<h2>Ciąg arytmetyczny: <em>save</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+    <span class="kw">def</span> save(<span class="va">self</span>, filename):
+        <span class="co">&quot;&quot;&quot;Zapisuje ciąg do pliku&quot;&quot;&quot;</span>
+        
+        <span class="cf">with</span> <span class="bu">open</span>(filename, <span class="st">&#39;w&#39;</span>) <span class="im">as</span> f:
+            f.write(<span class="va">self</span>.<span class="fu">__str__</span>())</code></pre></div>
+</section>
+<section id="ciąg-arytmeytczny-dokumentacja" class="level2">
+<h2>Ciąg arytmeytczny: dokumentacja</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> arciag <span class="im">import</span> ArCiag
+
+<span class="bu">help</span>(ArCiag)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Help</span> on class ArCiag in module arciag:
+
+<span class="ex">class</span> ArCiag(builtins.object)
+    <span class="kw">|</span>  <span class="ex">Ci</span>ąg arytmetyczny
+    <span class="kw">|</span>  
+    <span class="kw">|</span>  <span class="ex">Methods</span> defined here:
+    <span class="kw">|</span>  
+    <span class="kw">|</span>  <span class="ex">__init__</span>(self, a1, r, n=1)
+    <span class="kw">|</span>      <span class="ex">Inicjuje</span> ciąg arytmetyczny
+    <span class="kw">|</span>      
+    <span class="kw">|</span>      <span class="ex">a1</span> -- pierwszy wyraz ciągu
+    <span class="kw">|</span>      <span class="ex">r</span> -- różnica
+    <span class="kw">|</span>      <span class="ex">n</span> -- początkowa liczba wyrazów
+    <span class="kw">|</span>  
+    <span class="kw">|</span>  <span class="ex">__iter__</span>(self)
+    <span class="kw">|</span>      <span class="ex">Umo</span>żliwia iterację po ciągu
+    <span class="kw">|</span>  
+    <span class="kw">|</span>  <span class="ex">__len__</span>(self)
+    <span class="kw">|</span>      <span class="ex">Zwraca</span> ilość wyrazów ciągu
+    <span class="kw">|</span>  
+    <span class="kw">|</span>  <span class="ex">__str__</span>(self)
+    <span class="kw">|</span>      <span class="ex">Return</span> str(self)<span class="ex">.</span>
+    <span class="kw">|</span>  
+    <span class="kw">|</span>  <span class="ex">generate</span>(self, n)
+    <span class="kw">|</span>      <span class="ex">Generuje</span> kolejne wyrazy ciągu
+    <span class="kw">|</span>  
+    <span class="kw">|</span>  <span class="ex">save</span>(self, filename)
+    <span class="kw">|</span>      <span class="ex">Zapisuje</span> ciąg do pliku
+    <span class="kw">|</span>  
+    <span class="kw">|</span>  <span class="ex">----------------------------------------------------------------------</span>
+    <span class="kw">|</span>  <span class="ex">Data</span> descriptors defined here:
+    <span class="kw">|</span>  
+    <span class="kw">|</span>  <span class="ex">__dict__</span>
+    <span class="kw">|</span>      <span class="ex">dictionary</span> for instance variables (if defined)
+    <span class="kw">|</span>  
+    <span class="kw">|</span>  <span class="ex">__weakref__</span>
+    <span class="kw">|</span>      <span class="ex">list</span> of weak references to the object (if defined)</code></pre></div>
+</section>
+<section id="ciąg-arytmetyczny-test" class="level2">
+<h2>Ciąg arytmetyczny: test</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> arciag <span class="im">import</span> ArCiag
+
+x <span class="op">=</span> ArCiag(<span class="dv">1</span>, <span class="dv">2</span>)      <span class="co"># domyślnie jeden wyraz</span>
+y <span class="op">=</span> ArCiag(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">10</span>)  <span class="co"># zacznij od 10 wyrazów</span>
+
+<span class="bu">print</span>(x)
+<span class="bu">print</span>(y)</code></pre></div>
+<pre><code>Ciąg arytmetyczny (1, 2): 1
+Ciąg arytmetyczny (2, 3): 2 5 8 11 14 17 20 23 26 29</code></pre>
+</section>
+<section id="ciąg-arytmetyczny-len-i-sum" class="level2">
+<h2>Ciąg arytmetyczny: <em>len</em> i <em>sum</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> arciag <span class="im">import</span> ArCiag
+
+x <span class="op">=</span> ArCiag(<span class="dv">1</span>, <span class="dv">2</span>)  <span class="co"># domyślnie 1 wyraz</span>
+
+x.generate(<span class="dv">10</span>)    <span class="co"># generuj kolejne 10</span>
+
+<span class="bu">print</span>(x)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Ci</span>ąg arytmetyczny (1, 2)<span class="bu">:</span> 1 3 5 7 9 11 13 15 17 19 21</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">len</span>(x)  <span class="co"># ilość wyrazów (dzięki __len__)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">11</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">sum</span>(x)  <span class="co"># suma wyrazów (dzięki __iter__)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">121</span></code></pre></div>
+</section>
+<section id="ciąg-arytmetyczny-zapis" class="level2">
+<h2>Ciąg arytmetyczny: zapis</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> arciag <span class="im">import</span> ArCiag
+
+x <span class="op">=</span> ArCiag(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">10</span>)    <span class="co"># generuj 10 wyrazów</span>
+
+x.save(<span class="st">&#39;moj_ciag.txt&#39;</span>)  <span class="co"># i zapisz do pliku</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">cat</span> moj_ciag.txt</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Ci</span>ąg arytmetyczny (1, 2)<span class="bu">:</span> 1 3 5 7 9 11 13 15 17 19</code></pre></div>
+</section>
+<section id="ciąg-geometryczny" class="level2">
+<h2>Ciąg geometryczny</h2>
+<hr />
+<ul>
+<li>gdybyśmy chcieli stworzyć analogiczną klasę dla ciągu geometrycznego, to różnica pojawiłaby się tylko w funkcji <code>generate</code></li>
+<li>istnieje mechanizm, który umożliwia klasom posiadanie wspólnych metod</li>
+</ul>
+</section>
+</section>
+<section id="section-5" class="level1">
+<h1></h1>
+<section id="dziedziczenie" class="level2">
+<h2>Dziedziczenie</h2>
+<hr />
+<ul>
+<li>umożliwia ponowne wykorzystanie funkcjonalności <em>klas bazowych</em> w <em>klasach pochodnych</em></li>
+<li>przykład:
+<ul>
+<li>klasa pojazd: jedz, hamuj...</li>
+<li>klasa samochód: to co pojazd + otwórz bagażnik...</li>
+<li>klasa motor: to co pojazd + jedz na jednym kole...</li>
+</ul></li>
+</ul>
+</section>
+<section id="przykład" class="level2">
+<h2>Przykład</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Baza:
+    
+    <span class="kw">def</span> whoami(<span class="va">self</span>):
+        <span class="bu">print</span>(<span class="st">&quot;Jestem obiektem klasy Baza.&quot;</span>)
+        
+<span class="kw">class</span> Pochodna(Baza):  <span class="co"># dziedziczy z Baza</span>
+    
+    <span class="kw">def</span> sayhi(<span class="va">self</span>):
+        <span class="bu">print</span>(<span class="st">&quot;Hello!&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> Pochodna()
+
+x.sayhi()   <span class="co"># zdefiniowane w Pochodna</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Hello</span>!</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x.whoami()  <span class="co"># zdefiinowane w Baza</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Jestem</span> obiektem klasy Baza.</code></pre></div>
+</section>
+<section id="konstruktor-klasy-bazowej" class="level2">
+<h2>Konstruktor klasy bazowej</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Foo:
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):
+        <span class="bu">print</span>(<span class="st">&quot;Tworzę Foo&quot;</span>)
+        
+<span class="kw">class</span> Bar(Foo):
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):
+        <span class="bu">print</span>(<span class="st">&quot;Tworzę Bar&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> Bar()  <span class="co"># __init__ z Foo nie jest wywołany</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Tworz</span>ę Bar</code></pre></div>
+</section>
+<section id="wywołanie-konstruktora-bazy" class="level2">
+<h2>Wywołanie konstruktora bazy</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Foo:
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):
+        <span class="bu">print</span>(<span class="st">&quot;Tworzę Foo&quot;</span>)
+        
+<span class="kw">class</span> Bar(Foo):
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):
+        <span class="bu">super</span>().<span class="fu">__init__</span>()  <span class="co"># wywołaj konstruktor klasy nadrzędnej</span>
+        <span class="bu">print</span>(<span class="st">&quot;Tworzę Bar&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> Bar()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Tworz</span>ę Foo
+<span class="ex">Tworz</span>ę Bar</code></pre></div>
+</section>
+</section>
+<section id="section-6" class="level1">
+<h1></h1>
+<section id="przykład---student" class="level2">
+<h2>Przykład - Student</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Student:
+    
+    last_index <span class="op">=</span> <span class="dv">1234</span>  <span class="co"># atrybut klasy</span>
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name):
+        <span class="co"># aktualizuj numer indeksu</span>
+        <span class="va">self</span>.__class__.last_index <span class="op">+=</span> <span class="dv">1</span>
+        <span class="co"># przypisz studentowi imię i numer indeksu</span>
+        <span class="va">self</span>.name <span class="op">=</span> name
+        <span class="va">self</span>.index <span class="op">=</span> <span class="va">self</span>.__class__.last_index
+        
+    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):  <span class="co"># Student [imię] (nr indeksu)</span>
+        <span class="cf">return</span> <span class="st">&quot;Student </span><span class="sc">{}</span><span class="st"> (nr </span><span class="sc">{}</span><span class="st">)&quot;</span>.<span class="bu">format</span>(<span class="va">self</span>.name, <span class="va">self</span>.index)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">student <span class="op">=</span> Student(<span class="st">&quot;Anna&quot;</span>)
+
+<span class="bu">print</span>(student)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Student</span> Anna (nr 1235)</code></pre></div>
+</section>
+<section id="przykład---studentissp" class="level2">
+<h2>Przykład - StudentISSP</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> StudentISSP(Student):  <span class="co"># też Student</span>
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, przedmioty):
+        
+        <span class="bu">super</span>().<span class="fu">__init__</span>(name)  <span class="co"># wywołaj Student.__init__</span>
+        
+        <span class="va">self</span>.przedmioty <span class="op">=</span> przedmioty
+        
+    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):
+        <span class="cf">return</span> <span class="bu">super</span>().<span class="fu">__str__</span>() <span class="op">+</span> <span class="op">\</span>
+                <span class="co">&quot;: &quot;</span> <span class="op">+</span> <span class="st">&quot;, &quot;</span>.join(<span class="va">self</span>.przedmioty)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">studentISSP <span class="op">=</span> StudentISSP(<span class="st">&quot;Jan&quot;</span>, [<span class="st">&quot;programowanie&quot;</span>, <span class="st">&quot;fizyka&quot;</span>])
+
+<span class="bu">print</span>(studentISSP)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Student</span> Jan (nr 1236)<span class="bu">:</span> programowanie, fizyka</code></pre></div>
+</section>
+</section>
+    </div>
+
+    <script src="../reveal.js/lib/js/head.min.js"></script>
+    <script src="../reveal.js/js/reveal.js"></script>
+
+    <script>
+
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        slideNumber: true,
+        width: 1280,
+        height: 720,
+
+                  theme: Reveal.getQueryHash().theme || 'white',
+        
+                  transition: Reveal.getQueryHash().transition || 'convex',
+        
+                  transitionSpeed: Reveal.getQueryHash().transitionSpeed || 'fast',
+        
+        dependencies: [{
+            src: '../reveal.js/lib/js/classList.js',
+            condition: function() {
+              return !document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/markdown/showdown.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          }, {
+            src: '../reveal.js/plugin/markdown/markdown.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          }, {
+            src: '../reveal.js/plugin/highlight/highlight.js',
+            async: true,
+            callback: function() {
+              hljs.initHighlightingOnLoad();
+            }
+          }, {
+            src: '../reveal.js/plugin/zoom-js/zoom.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/notes/notes.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/math/math.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          },
+          // { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+    </script>
+
+    <script>
+    // displayed upon load, hides when slide changes
+      Reveal.addEventListener('slidechanged', function(event) {
+        document.querySelector('.reveal .footer').style.display = 'none';
+      });
+   </script>
+
+</body>
+
+</html>
