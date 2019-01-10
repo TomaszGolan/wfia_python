@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <title>Języki skryptowe Python</title>
+
+  <meta name="description" content="Języki skryptowe Python">
+
+   <meta name="author" content="Wykład 13" /> 
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="stylesheet" href="../reveal.js/css/reveal.css">
+
+      <link rel="stylesheet" href="../reveal.js/css/theme/white.css" id="theme">
+  
+      <link rel="stylesheet" href="../template/a11y-light.css">
+  
+  <link rel="stylesheet" href="../template/extra.css">
+
+  <script>
+    document.write('<link rel="stylesheet" href="../reveal.js/css/print/' +
+      (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') +
+      '.css" type="text/css" media="print">');
+  </script>
+
+  <script src="../template/snap.svg-min.js"></script>
+  <script src="../template/plotly-latest.min.js"></script>
+
+  <!--[if lt IE 9]>
+  <script src="../reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+
+  
+
+</head>
+
+<body>
+
+  
+
+  <div class="reveal">
+
+    <div class="slides">
+
+      <section>
+        <h1>Języki skryptowe Python</h1>
+         <h3>Wykład 13</h3> 
+        <p>
+          <h4></h4>
+        </p>
+      </section>
+
+       <div class="footer">
+<p>Sterowanie: spacja + shift-spacja || page down + page up || strzałki || esc</p>
+</div>
+<section id="section" class="level1">
+<h1></h1>
+<section id="polimorfizm" class="level2">
+<h2>Polimorfizm</h2>
+<hr />
+<ul>
+<li>współdzielenie <em>interfejsu</em> przez różne typy</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Kot:
+    <span class="kw">def</span> glos(<span class="va">self</span>):
+        <span class="bu">print</span>(<span class="st">&quot;Miau&quot;</span>)
+
+<span class="kw">class</span> Pies:
+    <span class="kw">def</span> glos(<span class="va">self</span>):
+        <span class="bu">print</span>(<span class="st">&quot;Hau&quot;</span>)
+
+<span class="kw">class</span> Krowa:
+    <span class="kw">def</span> glos(<span class="va">self</span>):
+        <span class="bu">print</span>(<span class="st">&quot;Muu&quot;</span>) </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">for</span> zwierze <span class="kw">in</span> [Kot(), Pies(), Krowa()]:
+    zwierze.glos()  <span class="co"># za każdym razem inny typ</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Miau</span>
+<span class="ex">Hau</span>
+<span class="ex">Muu</span></code></pre></div>
+</section>
+<section id="ryby-głosu-nie-mają" class="level2">
+<h2>Ryby głosu nie mają</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Ryba:
+    <span class="cf">pass</span>  <span class="co"># brak definicji glos</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">for</span> zwierze <span class="kw">in</span> [Kot(), Pies(), Krowa(), Ryba()]:
+    zwierze.glos()  <span class="co"># Ryba nie ma zdefiniowanej metody glos</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Miau</span>
+<span class="ex">Hau</span>
+<span class="ex">Muu</span>
+<span class="ex">...</span>
+<span class="ex">AttributeError</span>: <span class="st">&#39;Ryba&#39;</span> object has no attribute <span class="st">&#39;glos&#39;</span></code></pre></div>
+</section>
+<section id="wymuszanie-interfejsu" class="level2">
+<h2>Wymuszanie interfejsu</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Zwierze:
+    <span class="kw">def</span> glos(<span class="va">self</span>):
+        <span class="cf">pass</span>
+    
+<span class="kw">class</span> Kot(Zwierze):
+    <span class="kw">def</span> glos(<span class="va">self</span>):  <span class="co"># nadpisuje Zwierze.glos</span>
+        <span class="bu">print</span>(<span class="st">&quot;Miau&quot;</span>)
+        
+<span class="kw">class</span> Ryba(Zwierze):
+    <span class="cf">pass</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">for</span> zwierze <span class="kw">in</span> [Kot(), Ryba()]:
+    zwierze.glos()  <span class="co"># Ryba siedzi cicho</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Miau</span></code></pre></div>
+</section>
+<section id="większe-wymuszanie-interfejsu" class="level2">
+<h2>Większe wymuszanie interfejsu</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Zwierze:
+    <span class="kw">def</span> glos(<span class="va">self</span>):
+        <span class="cf">raise</span> <span class="pp">NotImplementedError</span>(<span class="st">&quot;Każde zwiesze musi mieć głos.&quot;</span>)
+    
+<span class="kw">class</span> Kot(Zwierze):
+    <span class="kw">def</span> glos(<span class="va">self</span>):  <span class="co"># nadpisuje Zwierze.glos</span>
+        <span class="bu">print</span>(<span class="st">&quot;Miau&quot;</span>)
+        
+<span class="kw">class</span> Ryba(Zwierze):
+    <span class="cf">pass</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">for</span> zwierze <span class="kw">in</span> [Kot(), Ryba()]:
+    zwierze.glos() <span class="co"># Ryba zwróci błąd</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Miau</span>
+<span class="ex">...</span>
+<span class="ex">NotImplementedError</span>: Każde zwiesze musi mieć głos.</code></pre></div>
+</section>
+</section>
+<section id="section-1" class="level1">
+<h1></h1>
+<section id="przykład---wielokąt" class="level2">
+<h2>Przykład - Wielokąt</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Wielokat:
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, <span class="op">*</span>boki):
+        <span class="va">self</span>.boki <span class="op">=</span> boki       <span class="co"># krotka</span>
+        
+    <span class="kw">def</span> obwod(<span class="va">self</span>):           <span class="co"># suma długości</span>
+        <span class="cf">return</span> <span class="bu">sum</span>(<span class="va">self</span>.boki)  <span class="co"># boków</span>
+        
+    <span class="kw">def</span> pole(<span class="va">self</span>): <span class="cf">raise</span> <span class="pp">NotImplementedError</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">w <span class="op">=</span> Wielokat(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)    <span class="co"># pięciokąt</span>
+
+w.obwod()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">15</span></code></pre></div>
+</section>
+<section id="przykład---trójkąt" class="level2">
+<h2>Przykład - Trójkąt</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Trojkat(Wielokat):
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, <span class="op">*</span>boki):
+        <span class="bu">super</span>().<span class="fu">__init__</span>(<span class="op">*</span>boki)    <span class="co"># utwórz wielokąt</span>
+        
+    <span class="kw">def</span> pole(<span class="va">self</span>):
+        pole <span class="op">=</span> p <span class="op">=</span> <span class="va">self</span>.obwod()<span class="op">/</span><span class="dv">2</span>  <span class="co"># obwod zdefiniowane w Wielokat</span>
+        
+        <span class="cf">for</span> bok <span class="kw">in</span> <span class="va">self</span>.boki:      <span class="co"># wzór Herona</span>
+            pole <span class="op">*=</span> (p <span class="op">-</span> bok)      <span class="co"># p(p - a)(p - b)(p - c)</span>
+            
+        <span class="cf">return</span> pole<span class="op">**</span><span class="fl">0.5</span> <span class="co"># pierwiastek</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">t <span class="op">=</span> Trojkat(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)
+
+t.obwod()  <span class="co"># z Wielokat</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">12</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">t.pole()  <span class="co"># z Trójkat</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">6.0</span></code></pre></div>
+</section>
+<section id="przykład---trójkąt-równoboczny" class="level2">
+<h2>Przykład - Trójkąt Równoboczny</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> TrojkatR(Trojkat):
+    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, bok):
+        <span class="bu">super</span>().<span class="fu">__init__</span>(bok, bok, bok)  <span class="co"># Trójkąt -&gt; Wielokąt</span>
+        
+    <span class="kw">def</span> pole(<span class="va">self</span>):
+        <span class="cf">return</span> (<span class="va">self</span>.boki[<span class="dv">0</span>]<span class="op">**</span><span class="dv">2</span>)<span class="op">*</span>(<span class="dv">3</span><span class="op">**</span><span class="fl">0.5</span>)<span class="op">/</span><span class="dv">4</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">t <span class="op">=</span> TrojkatR(<span class="dv">3</span>)  <span class="co"># (3, 3, 3)</span>
+
+t.pole()  <span class="co"># TrojkatR.pole()</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">3.8971143170299736</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">t <span class="op">=</span> Trojkat(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>)
+
+t.pole()  <span class="co"># Trojkat.pole() </span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">3.897114317029974</span></code></pre></div>
+</section>
+</section>
+<section id="section-2" class="level1">
+<h1></h1>
+<section id="wielokrotne-dziedziczenie" class="level2">
+<h2>Wielokrotne dziedziczenie</h2>
+<hr />
+<ul>
+<li>klasa może posiadać kilka klas bazowych</li>
+<li>posiada wtedy wszystkie dane i metody</li>
+<li>a co jeśli się powtarzają?</li>
+</ul>
+</section>
+<section id="przykład---amifibia" class="level2">
+<h2>Przykład - amifibia</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Samochod:
+    
+    <span class="kw">def</span> jedz(<span class="va">self</span>):
+        <span class="bu">print</span>(<span class="st">&quot;Jadę...&quot;</span>)
+        
+<span class="kw">class</span> Lodz:
+    
+    <span class="kw">def</span> plyn(<span class="va">self</span>):
+        <span class="bu">print</span>(<span class="st">&quot;Płynę...&quot;</span>)
+        
+<span class="kw">class</span> Amfibia(Samochod, Lodz): <span class="cf">pass</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">amfibia <span class="op">=</span> Amfibia()
+
+amfibia.jedz()  <span class="co"># Samochod</span>
+amfibia.plyn()  <span class="co"># Lodz</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Jad</span>ę...
+<span class="ex">P</span>łynę...</code></pre></div>
+</section>
+<section id="przykład---amifibia-v2" class="level2">
+<h2>Przykład - amifibia v2</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Samochod:
+    <span class="kw">def</span> run(<span class="va">self</span>):
+        <span class="bu">print</span>(<span class="st">&quot;Jadę...&quot;</span>)
+        
+<span class="kw">class</span> Lodz:
+    <span class="kw">def</span> run(<span class="va">self</span>):
+        <span class="bu">print</span>(<span class="st">&quot;Płynę...&quot;</span>)
+        
+<span class="kw">class</span> Amfibia1(Samochod, Lodz): <span class="cf">pass</span>
+<span class="kw">class</span> Amfibia2(Lodz, Samochod): <span class="cf">pass</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">amifibia1 <span class="op">=</span> Amfibia1()
+amifibia1.run()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Jad</span>ę...</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">amifibia2 <span class="op">=</span> Amfibia2()
+amifibia2.run()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">P</span>łynę...</code></pre></div>
+</section>
+</section>
+<section id="section-3" class="level1">
+<h1></h1>
+<section id="generatory" class="level2">
+<h2>Generatory</h2>
+<hr />
+<ul>
+<li>funkcja, która zachowuje się jak iterator (czyli można np. wykorzystać ją w pętli)</li>
+<li>zamiast tworzyć całą listę obiektów, które będą przechowywane w pamięci</li>
+<li>oszczędza czas i pamięć</li>
+</ul>
+</section>
+<section id="dygresja-range" class="level2">
+<h2>Dygresja: <em>range</em></h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">%</span>timeit <span class="op">-</span>n1 <span class="bu">range</span>(<span class="dv">1000000</span>)  <span class="co"># tworzy obiekt range</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">1</span> loop, best of 3: 1.68 µs per loop</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># kolejne elementy range</span>
+<span class="co"># muszą zostać zapisane w pamięci</span>
+<span class="op">%</span>timeit <span class="op">-</span>n1 <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1000000</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">1</span> loop, best of 3: 53.3 ms per loop</code></pre></div>
+</section>
+<section id="ciąg-geometryczny" class="level2">
+<h2>Ciąg geometryczny</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> geometryczny(a1, q, n):
+    <span class="co">&quot;&quot;&quot;Generuje n wyrazów ciągu geometrycznego.&quot;&quot;&quot;</span>
+    
+    ciag <span class="op">=</span> [a1]
+    
+    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n<span class="op">-</span><span class="dv">1</span>):         <span class="co"># n-1 bo pierwszy już jest</span>
+        ciag.append(ciag[<span class="op">-</span><span class="dv">1</span>]<span class="op">*</span>q)  <span class="co"># następny = poprzedni * iloraz</span>
+        
+    <span class="cf">return</span> ciag</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">ciag <span class="op">=</span> geometryczny(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">10</span>)
+
+<span class="bu">print</span>(ciag)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="ex">1</span>, 3, 9, 27, 81, 243, 729, 2187, 6561, 19683]</code></pre></div>
+</section>
+<section id="ciąg-geometryczny---generator" class="level2">
+<h2>Ciąg geometryczny - generator</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> gen_geometryczny(a1, q, n):
+    <span class="co">&quot;&quot;&quot;Generuje n wyrazów ciągu geometrycznego.&quot;&quot;&quot;</span>
+    
+    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n):
+        <span class="cf">yield</span> a1 <span class="co"># zwróć obecną wartość a1</span>
+        a1 <span class="op">*=</span> q  <span class="co"># i czekaj na kolejną iterację</span></code></pre></div>
+</section>
+<section id="generator-a-lista" class="level2">
+<h2>Generator a lista</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">ciag1 <span class="op">=</span> geometryczny(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">10</span>)      <span class="co"># zwraca listę </span>
+ciag2 <span class="op">=</span> gen_geometryczny(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">10</span>)  <span class="co"># zwraca generator</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(ciag1)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="ex">1</span>, 3, 9, 27, 81, 243, 729, 2187, 6561, 19683]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(ciag2)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="op">&lt;</span><span class="ex">generator</span> object gen_geometryczny at 0x7f9bac1ec678<span class="op">&gt;</span></code></pre></div>
+</section>
+<section id="generator-jak-iterator" class="level2">
+<h2>Generator jak iterator</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">next</span>(ciag2)  <span class="co"># pierwszy element</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">1</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">next</span>(ciag2)  <span class="co"># kolejny element itd</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">3</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># a najczęściej w pętli</span>
+<span class="cf">for</span> i <span class="kw">in</span> gen_geometryczny(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">10</span>):
+    <span class="bu">print</span>(i, end<span class="op">=</span><span class="st">&#39;, &#39;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">1</span>, 3, 9, 27, 81, 243, 729, 2187, 6561, 19683, </code></pre></div>
+</section>
+<section id="czas" class="level2">
+<h2>Czas</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">%</span>timeit <span class="op">-</span>n3 geometryczny(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">10000</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">3</span> loops, best of 3: 12.8 ms per loop</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">%</span>timeit <span class="op">-</span>n3 gen_geometryczny(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">10000</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">3</span> loops, best of 3: 978 ns per loop</code></pre></div>
+</section>
+<section id="czas-dokładniej" class="level2">
+<h2>Czas dokładniej</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> test_lista():
+    <span class="co">&quot;&quot;&quot;Pętla po liście&quot;&quot;&quot;</span>
+    <span class="cf">for</span> element <span class="kw">in</span> geometryczny(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">10000</span>):
+        <span class="cf">pass</span>
+    
+<span class="kw">def</span> test_generator():
+    <span class="co">&quot;&quot;&quot;Pętla po generatorze&quot;&quot;&quot;</span>
+    <span class="cf">for</span> element <span class="kw">in</span> gen_geometryczny(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">10000</span>):
+        <span class="cf">pass</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">%</span>timeit <span class="op">-</span>n3 test_lista()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">3</span> loops, best of 3: 13.6 ms per loop</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">%</span>timeit <span class="op">-</span>n3 test_generator()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">3</span> loops, best of 3: 12.1 ms per loop</code></pre></div>
+</section>
+<section id="lista-czy-generator" class="level2">
+<h2>Lista czy generator</h2>
+<hr />
+<ul>
+<li>generator będzie z reguły szybszy</li>
+<li>generator może być nieskończony</li>
+<li>jednak nie można wykonywać operacji na &quot;elementach&quot;, np. sortowania</li>
+<li>lista może być efektywniejsza, jeśli planujemy więcej pętli</li>
+</ul>
+</section>
+<section id="wyczerpanie-generatora" class="level2">
+<h2>&quot;Wyczerpanie&quot; generatora</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">ciag <span class="op">=</span> gen_geometryczny(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">20</span>)  <span class="co"># generuje 20 wyrazów</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):   <span class="co"># wydrukuj 10 pierwszych</span>
+    <span class="bu">print</span>(<span class="bu">next</span>(ciag), end<span class="op">=</span><span class="st">&#39; &#39;</span>)</code></pre></div>
+<pre><code>1 3 9 27 81 243 729 2187 6561 19683 </code></pre>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">for</span> element <span class="kw">in</span> ciag:  <span class="co"># nie zaczyna od pierwszego!</span>
+    <span class="bu">print</span>(element, end<span class="op">=</span><span class="st">&#39; &#39;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">59049</span> 177147 531441 1594323 4782969 14348907 43046721 129140163 387420489 1162261467 </code></pre></div>
+</section>
+<section id="wielekrotne-użycie" class="level2">
+<h2>Wielekrotne użycie</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> lista_loop(n<span class="op">=</span><span class="dv">10</span>):
+    <span class="co">&quot;&quot;&quot;Wykonuje n pętli po liście&quot;&quot;&quot;</span>
+    ciag <span class="op">=</span> geometryczny(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">10000</span>)
+    
+    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n):
+        <span class="cf">for</span> element <span class="kw">in</span> ciag:
+            <span class="cf">pass</span>
+    
+<span class="kw">def</span> gen_loop(n<span class="op">=</span><span class="dv">10</span>):
+    <span class="co">&quot;&quot;&quot;Wykonuje n pętli po generatorze&quot;&quot;&quot;</span>
+    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n):
+        <span class="cf">for</span> element <span class="kw">in</span> gen_geometryczny(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">10000</span>):
+            <span class="cf">pass</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">%</span>timeit <span class="op">-</span>n3 lista_loop()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">3</span> loops, best of 3: 14.2 ms per loop</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">%</span>timeit <span class="op">-</span>n3 gen_loop()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">3</span> loops, best of 3: 77.4 ms per loop</code></pre></div>
+</section>
+</section>
+<section id="section-4" class="level1">
+<h1></h1>
+<section id="powtórka-listy-składane-list-comprehensions" class="level2">
+<h2>Powtórka: listy składane (<em>list comprehensions</em>)</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># chcemy stworzyć listę zawierającą</span>
+<span class="co"># kwadraty wszystkich cyfr</span>
+
+kwadraty <span class="op">=</span> []
+
+<span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):
+    kwadraty.append(x<span class="op">**</span><span class="dv">2</span>)
+    
+<span class="bu">print</span>(kwadraty)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="ex">0</span>, 1, 4, 9, 16, 25, 36, 49, 64, 81]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># a korzystając z listy skladanej</span>
+
+kwadraty <span class="op">=</span> [x<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>)]
+
+<span class="bu">print</span>(kwadraty)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="ex">0</span>, 1, 4, 9, 16, 25, 36, 49, 64, 81]</code></pre></div>
+</section>
+<section id="append-vs-lista-składana" class="level2">
+<h2>Append vs lista składana</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> create_list(n<span class="op">=</span><span class="dv">100000</span>):
+    <span class="co">&quot;&quot;&quot;Tworzy listę kwadratów pierwszych n liczb naturalnych&quot;&quot;&quot;</span>
+    
+    kwadraty <span class="op">=</span> []
+    
+    <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(n):
+        kwadraty.append(x<span class="op">**</span><span class="dv">2</span>)
+        
+    <span class="cf">return</span> kwadraty
+
+<span class="kw">def</span> list_comprehension(n<span class="op">=</span><span class="dv">100000</span>):
+    <span class="co">&quot;&quot;&quot;Tworzy listę kwadratów pierwszych n liczb naturalnych&quot;&quot;&quot;</span>
+    
+    <span class="cf">return</span> [x<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(n)]</code></pre></div>
+</section>
+<section id="czas-1" class="level2">
+<h2>Czas</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">%</span>timeit <span class="op">-</span>n3 x <span class="op">=</span> create_list()  <span class="co"># lista tworzona przez append</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">3</span> loops, best of 3: 48.3 ms per loop</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">%</span>timeit <span class="op">-</span>n3 y <span class="op">=</span> list_comprehension()  <span class="co"># lista składana</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">3</span> loops, best of 3: 42.5 ms per loop</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">create_list() <span class="op">==</span> list_comprehension()  <span class="co"># wynik ten sam</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">True</span></code></pre></div>
+</section>
+<section id="przykład" class="level2">
+<h2>Przykład</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> force(m, a):
+    <span class="co">&quot;&quot;&quot;Zwraca wartość siły [N].</span>
+<span class="co">    </span>
+<span class="co">    Liczy siłę jaką należy zadziałać na ciało</span>
+<span class="co">    o masie m [kg], aby nadać mu przyspieszenie a [m/s^2].</span>
+<span class="co">    &quot;&quot;&quot;</span>
+    <span class="cf">return</span> m<span class="op">*</span>a
+
+wagi <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>]       <span class="co"># kg</span>
+przyspieszenia <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]  <span class="co"># m/s^2</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># stwórz tablicę z wartościami sił </span>
+
+sily <span class="op">=</span> [force(m, a) <span class="cf">for</span> m, a <span class="kw">in</span> <span class="bu">zip</span>(wagi, przyspieszenia)]
+
+<span class="bu">print</span>(sily)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="ex">10</span>, 40, 90, 160, 250]</code></pre></div>
+</section>
+<section id="generator-jak-lista-składana" class="level2">
+<h2>Generator &quot;jak lista składana&quot;</h2>
+<hr />
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># lista składana</span>
+list_comprehension <span class="op">=</span> [x<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>)]
+
+<span class="co"># generator expression</span>
+generator <span class="op">=</span> (x<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">for</span> x <span class="kw">in</span> generator:
+    <span class="bu">print</span>(x, end<span class="op">=</span><span class="st">&#39; &#39;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">0</span> 1 4 9 16 25 36 49 64 81 </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># lub prościej</span>
+
+<span class="cf">for</span> x <span class="kw">in</span> (x<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>)):
+    <span class="bu">print</span>(x, end<span class="op">=</span><span class="st">&#39; &#39;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">0</span> 1 4 9 16 25 36 49 64 81 </code></pre></div>
+</section>
+<section id="uwagi-na-koniec" class="level2">
+<h2>Uwagi na koniec</h2>
+<hr />
+<ul>
+<li>unikaj tworzenia list przez <em>append</em>, jeśli można wykorzystać <em>list comprehension</em></li>
+<li>unikaj tworzenia list jeśli jest to zbędne (użyj generatorów)</li>
+<li>unikaj <em>generator function</em> na rzecz <em>generator expression</em></li>
+<li>jest też <em>tuple comprehension</em>:</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">krotka <span class="op">=</span> <span class="op">*</span>(x<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>)),
+<span class="bu">print</span>(krotka)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">(</span><span class="ex">0</span>, 1, 4, 9, 16, 25, 36, 49, 64, 81<span class="kw">)</span></code></pre></div>
+</section>
+</section>
+    </div>
+
+    <script src="../reveal.js/lib/js/head.min.js"></script>
+    <script src="../reveal.js/js/reveal.js"></script>
+
+    <script>
+
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        slideNumber: true,
+        width: 1280,
+        height: 720,
+
+                  theme: Reveal.getQueryHash().theme || 'white',
+        
+                  transition: Reveal.getQueryHash().transition || 'convex',
+        
+                  transitionSpeed: Reveal.getQueryHash().transitionSpeed || 'fast',
+        
+        dependencies: [{
+            src: '../reveal.js/lib/js/classList.js',
+            condition: function() {
+              return !document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/markdown/showdown.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          }, {
+            src: '../reveal.js/plugin/markdown/markdown.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          }, {
+            src: '../reveal.js/plugin/highlight/highlight.js',
+            async: true,
+            callback: function() {
+              hljs.initHighlightingOnLoad();
+            }
+          }, {
+            src: '../reveal.js/plugin/zoom-js/zoom.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/notes/notes.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          }, {
+            src: '../reveal.js/plugin/math/math.js',
+            async: true,
+            condition: function() {
+              return !!document.body.classList;
+            }
+          },
+          // { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+    </script>
+
+    <script>
+    // displayed upon load, hides when slide changes
+      Reveal.addEventListener('slidechanged', function(event) {
+        document.querySelector('.reveal .footer').style.display = 'none';
+      });
+   </script>
+
+</body>
+
+</html>

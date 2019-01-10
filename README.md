@@ -69,6 +69,11 @@ Wykłady dla studentów Wydziału Fizyki i Astronomii z "Języki skryptowe - Pyt
 
     * programowania obiektowego ciąg dalszy
 
+*  [Wykład 13](https://tomaszgolan.github.io/wfia_python/html/python_w13.html)
+
+    * programowania obiektowego ciąg dalszy
+    * generatory
+
 ## Listy
 
 * Lista 1: [markdown](listy/lista_01.md), [pdf](listy/lista_01.pdf)
