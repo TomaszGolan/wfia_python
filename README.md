@@ -74,6 +74,8 @@ Wykłady dla studentów Wydziału Fizyki i Astronomii z "Języki skryptowe - Pyt
     * programowania obiektowego ciąg dalszy
     * generatory
 
+* Wykłady powtórkowe: [cz. I](http://tomaszgolan.github.io/reveal_talks/html/js-python_w13.html), [cz. II](http://tomaszgolan.github.io/reveal_talks/html/js-python_w14.html)
+
 ## Listy
 
 * Lista 1: [markdown](listy/lista_01.md), [pdf](listy/lista_01.pdf)
