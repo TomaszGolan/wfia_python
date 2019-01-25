@@ -11,8 +11,8 @@ Wykłady dla studentów Wydziału Fizyki i Astronomii z "Języki skryptowe - Pyt
 * [Wykłady](#wykłady)
 * [Listy](#listy)
 * [Kolokwia](#kolokwia)
-* [Wejściówki](#wejsciówki)
-* [Zasady zaliczenia ćwiczeń](#zasady-zaliczania-cwiczeń)
+* [Wejściówki](#wejściówki)
+* [Zasady zaliczenia ćwiczeń](#zasady-zaliczenia-ćwiczeń)
 
 ---
 
@@ -122,6 +122,10 @@ Wykłady dla studentów Wydziału Fizyki i Astronomii z "Języki skryptowe - Pyt
 ## Wejściówki
 
 * Grupy I i II: [1](wejsciowki/wejsciowka.01.grupa.1-2.pdf), [2](wejsciowki/wejsciowka.02.grupa.1-2.pdf), [3](wejsciowki/wejsciowka.03.grupa.1-2.pdf), [4](wejsciowki/wejsciowka.04.grupa.1-2.pdf), [5](wejsciowki/wejsciowka.05.grupa.1-2.pdf), [6](wejsciowki/wejsciowka.06.grupa.1-2.pdf), [7](wejsciowki/wejsciowka.07.grupa.1-2.pdf), [8](wejsciowki/wejsciowka.08.grupa.1-2.pdf), [9](wejsciowki/wejsciowka.09.grupa.1-2.pdf), [10](wejsciowki/wejsciowka.10.grupa.1-2.pdf)
+
+* Grupa III: [1](wejsciowki/wejsciowka.01.grupa.3.pdf), [2](wejsciowki/wejsciowka.02.grupa.3.pdf), [3](wejsciowki/wejsciowka.03.grupa.3.pdf), [4](wejsciowki/wejsciowka.04.grupa.3.pdf), [5](wejsciowki/wejsciowka.05.grupa.3.pdf), [6](wejsciowki/wejsciowka.06.grupa.3.pdf), [7](wejsciowki/wejsciowka.07.grupa.3.pdf), [8](wejsciowki/wejsciowka.08.grupa.3.pdf), [9](wejsciowki/wejsciowka.09.grupa.3.pdf), [10](wejsciowki/wejsciowka.10.grupa.3.pdf)
+
+* Grupa IV: [1](wejsciowki/wejsciowka.01.grupa.4.pdf), [2](wejsciowki/wejsciowka.02.grupa.4.pdf), [3](wejsciowki/wejsciowka.03.grupa.4.pdf), [4](wejsciowki/wejsciowka.04.grupa.4.pdf), [5](wejsciowki/wejsciowka.05.grupa.4.pdf), [6](wejsciowki/wejsciowka.06.grupa.4.pdf), [7](wejsciowki/wejsciowka.07.grupa.4.pdf), [8](wejsciowki/wejsciowka.08.grupa.4.pdf), [9](wejsciowki/wejsciowka.09.grupa.4.pdf), [10](wejsciowki/wejsciowka.10.grupa.4.pdf)
 
 ## Zasady zaliczenia ćwiczeń
 
