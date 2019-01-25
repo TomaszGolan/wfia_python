@@ -8,6 +8,14 @@ Wykłady dla studentów Wydziału Fizyki i Astronomii z "Języki skryptowe - Pyt
 
 ---
 
+* [Wykłady](#wyklady)
+* [Listy](#listy)
+* [Kolokwia](#kolokwia)
+* [Wejściówki](#wejsciowki)
+* [Zasady zaliczenia ćwiczeń](#zasady-zaliczania-cwiczen)
+
+---
+
 ## Wykłady
 
 *  [Wykład 1](https://tomaszgolan.github.io/wfia_python/html/python_w01.html)
@@ -103,6 +111,15 @@ Wykłady dla studentów Wydziału Fizyki i Astronomii z "Języki skryptowe - Pyt
 * Lista 12: [markdown](listy/lista_12.md), [pdf](listy/lista_12.pdf)
 
 * Lista 13: [markdown](listy/lista_13.md), [pdf](listy/lista_13.pdf)
+
+---
+
+## Kolokwia
+
+* Grupy I i II: [markdown](kolokwia/kolokwium.01.grupa.1-2.md), [pdf](kolokwia/kolokwium.01.grupa.1-2.pdf)
+* Grupy III: [markdown](kolokwia/kolokwium.01.grupa.3.md), [pdf](kolokwia/kolokwium.01.grupa.3.pdf)
+* Grupy IV: [markdown](kolokwia/kolokwium.01.grupa.4.md), [pdf](kolokwia/kolokwium.01.grupa.4.pdf)
+* Poprawkowe: [markdown](kolokwia/kolo.poprawa.md), [pdf](kolokwia/kolo.poprawa.pdf)
 
 ---
 
