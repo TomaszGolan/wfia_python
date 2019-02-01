@@ -119,6 +119,10 @@ Wykłady dla studentów Wydziału Fizyki i Astronomii z "Języki skryptowe - Pyt
 * Grupa IV: [markdown](kolokwia/kolokwium.01.grupa.4.md), [pdf](kolokwia/kolokwium.01.grupa.4.pdf)
 * Poprawkowe: [markdown](kolokwia/kolo.poprawa.md), [pdf](kolokwia/kolo.poprawa.pdf)
 
+---
+
+* Egzamin: [markdown](kolokwia/egzamin.md), [pdf](kolokwia/egzamin.pdf)
+
 ## Wejściówki
 
 * Grupy I i II: [1](wejsciowki/wejsciowka.01.grupa.1-2.pdf), [2](wejsciowki/wejsciowka.02.grupa.1-2.pdf), [3](wejsciowki/wejsciowka.03.grupa.1-2.pdf), [4](wejsciowki/wejsciowka.04.grupa.1-2.pdf), [5](wejsciowki/wejsciowka.05.grupa.1-2.pdf), [6](wejsciowki/wejsciowka.06.grupa.1-2.pdf), [7](wejsciowki/wejsciowka.07.grupa.1-2.pdf), [8](wejsciowki/wejsciowka.08.grupa.1-2.pdf), [9](wejsciowki/wejsciowka.09.grupa.1-2.pdf), [10](wejsciowki/wejsciowka.10.grupa.1-2.pdf)
