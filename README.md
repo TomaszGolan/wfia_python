@@ -121,7 +121,8 @@ Wykłady dla studentów Wydziału Fizyki i Astronomii z "Języki skryptowe - Pyt
 
 ---
 
-* Egzamin: [markdown](kolokwia/egzamin.md), [pdf](kolokwia/egzamin.pdf)
+* Egzamin I termin: [markdown](kolokwia/egzamin.md), [pdf](kolokwia/egzamin.pdf)
+* Egzamin II termin: [markdown](kolokwia/egzamin.poprawa.md), [pdf](kolokwia/egzamin.poprawa.pdf)
 
 ## Wejściówki
 
