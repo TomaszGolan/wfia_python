@@ -56,4 +56,4 @@ Napisz program, który drukuje *n* pierwszych wyrazów ciągu $a_k$ (jak powyże
 
 Dodatkowo program powinien rysować wykres $(k, a_k)$ - przykład dla $n = 100$:
 
-![*Wskazówka: matplotlib.pyplot.plot*](zad3.png)
+![*Wskazówka: matplotlib.pyplot.plot*](/zad3.png)
